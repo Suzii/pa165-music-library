@@ -17,13 +17,10 @@ public class Song {
     @NotNull
     private String title;
 
-    @NotNull
     private String commentary;
 
-    @NotNull
     private int positionInAlbum;
-
-    @NotNull
+    
     private double bitrate;
 
 //    @ManyToOne
