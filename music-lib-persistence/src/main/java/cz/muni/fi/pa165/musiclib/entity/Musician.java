@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.musiclib.entity;
 
-import cz.muni.fi.pa165.enums.Sex;
+import cz.muni.fi.pa165.musiclib.enums.Sex;
 import java.util.Objects;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
@@ -24,7 +24,7 @@ public class Musician {
     @NotNull
     @Enumerated
     private Sex sex;
-    
+
     private int age;
 
     public Long getId() {
@@ -47,6 +47,14 @@ public class Musician {
         this.age = age;
     }
 
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;
