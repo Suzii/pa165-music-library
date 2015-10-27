@@ -30,11 +30,15 @@ public class ContainerManagedEMTest extends AbstractTransactionalTestNGSpringCon
     @Test
     public void entityMangerTest() {
         Song song = new Song();
-//        song.setAlbum(new Album());
+        Album a = new Album();
+        Genre g = new Genre();
+        Musician m = new Musician();
+        
+        //song.setAlbum(a);
         song.setBitrate(2.56);
         song.setCommentary("best song ever");
-//        song.setGenre(new Genre());
-//        song.setMusician(new Musician());
+        //song.setGenre(g);
+        //song.setMusician(m);
         song.setPositionInAlbum(1);
         song.setTitle("The best song in the world");
 

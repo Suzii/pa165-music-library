@@ -26,12 +26,12 @@ public class Song {
     @ManyToOne
     private Album album;
 
+    //@NotNull
     @ManyToOne
-    @NotNull
     private Musician musician;
 
     @ManyToOne
-    @NotNull
+    //@NotNull
     private Genre genre;
 
     public Song() {
