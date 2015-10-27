@@ -23,8 +23,8 @@ public class Song {
     
     private double bitrate;
 
-//    @ManyToOne
-//    private Album album;
+    @ManyToOne
+    private Album album;
 //
 //    @ManyToOne
 //    @NotNull
@@ -75,14 +75,14 @@ public class Song {
         this.bitrate = bitrate;
     }
 
-//    public Album getAlbum() {
-//        return album;
-//    }
-//
-//    public void setAlbum(Album album) {
-//        this.album = album;
-//    }
-//
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
+
 //    public Musician getMusician() {
 //        return musician;
 //    }
