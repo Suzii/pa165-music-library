@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.musiclib.entity;
 
+import cz.muni.fi.pa165.enums.Sex;
 import java.util.Objects;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,11 @@ public class Musician {
     
     @NotNull
     private String artistName;
+    
+    @NotNull
+    @Enumerated
+    private Sex sex;
+    
     private int age;
 
     public Long getId() {
