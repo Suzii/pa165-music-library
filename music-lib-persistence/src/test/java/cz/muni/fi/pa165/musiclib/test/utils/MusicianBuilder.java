@@ -45,9 +45,7 @@ public class MusicianBuilder {
             m.setSex(sex);
             m.setDateOfBirth(dateOfBirth);
             
-            List<Song> copy = new ArrayList<>();
-            Collections.copy(copy, this.songs);
-            m.setSongs(copy);
+            m.setSongs(songs);
             
             clear();
             

@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.entity.Musician;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -32,6 +33,11 @@ public class MusicianDaoImpl implements MusicianDao {
 
     @Override
     public Musician findByArtistName(String artistName) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Musician> findAll() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

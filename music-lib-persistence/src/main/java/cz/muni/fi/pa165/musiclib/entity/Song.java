@@ -83,6 +83,9 @@ public class Song {
 
     public void setAlbum(Album album) {
         this.album = album;
+        if(album != null) {
+            album.addSong(this);
+        }
     }
 
     public Musician getMusician() {

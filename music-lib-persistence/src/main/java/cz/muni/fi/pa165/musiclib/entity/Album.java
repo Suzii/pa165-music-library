@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.musiclib.entity;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -40,7 +41,11 @@ public class Album {
     
     @OneToMany(mappedBy = "album")
     private List<Song> songs;
-
+   
+    public void addSong(Song song) {
+        this.songs.add(song);
+    }
+    
     public Long getId() {
         return id;
     }
@@ -86,13 +91,13 @@ public class Album {
     }
 
     public List<Song> getSongs() {
-        return songs;
+        return Collections.unmodifiableList(songs);
     }
 
     public void setSongs(List<Song> songs) {
-        this.songs = songs;
+        Collections.copy(this.songs, songs);
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 5;

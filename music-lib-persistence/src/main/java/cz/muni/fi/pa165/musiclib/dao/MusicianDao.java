@@ -19,5 +19,7 @@ public interface MusicianDao {
     Musician findById(Long id);
     
     Musician findByArtistName(String artistName);
+    
+    List<Musician> findAll();
         
 }

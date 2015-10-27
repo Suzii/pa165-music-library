@@ -22,7 +22,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses={SongDao.class})
+@ComponentScan(basePackages = "cz.muni.fi.pa165.musiclib.dao")
 public class PersistenceSampleApplicationContext {
 	
 	@Bean 

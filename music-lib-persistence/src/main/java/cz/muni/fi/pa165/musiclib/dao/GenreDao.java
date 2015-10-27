@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.entity.Genre;
+import java.util.List;
 
 /**
  *
@@ -17,5 +18,7 @@ public interface GenreDao {
     Genre findById(Long id);
     
     Genre findByTitle (String title);
+    
+    List<Genre> findAll();
         
 }
