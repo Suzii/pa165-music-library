@@ -25,14 +25,14 @@ public class Song {
 
     @ManyToOne
     private Album album;
-//
-//    @ManyToOne
-//    @NotNull
-//    private Musician musician;
-//
-//    @ManyToOne
-//    @NotNull
-//    private Genre genre;
+
+    @ManyToOne
+    @NotNull
+    private Musician musician;
+
+    @ManyToOne
+    @NotNull
+    private Genre genre;
 
     public Song() {
     }
@@ -41,7 +41,9 @@ public class Song {
         this.id = id;
     }
 
-    public Long getId() { return this.id; }
+    public Long getId() { 
+        return this.id; 
+    }
 
     public String getTitle() {
         return title;
@@ -83,21 +85,21 @@ public class Song {
         this.album = album;
     }
 
-//    public Musician getMusician() {
-//        return musician;
-//    }
-//
-//    public void setMusician(Musician musician) {
-//        this.musician = musician;
-//    }
-//
-//    public Genre getGenre() {
-//        return genre;
-//    }
-//
-//    public void setGenre(Genre genre) {
-//        this.genre = genre;
-//    }
+    public Musician getMusician() {
+        return musician;
+    }
+
+    public void setMusician(Musician musician) {
+        this.musician = musician;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -1,11 +1,17 @@
 package cz.muni.fi.pa165.musiclib.entity;
 
 import cz.muni.fi.pa165.musiclib.enums.Sex;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -19,13 +25,26 @@ public class Musician {
     private Long id;
     
     @NotNull
+    @Column(nullable = false, unique = true)
     private String artistName;
     
     @NotNull
     @Enumerated
     private Sex sex;
 
-    private int age;
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBirth;
+    
+    @OneToMany(mappedBy = "musician")
+    private List<Song> songs;
+
+    public List<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(List<Song> songs) {
+        this.songs = songs;
+    }
 
     public Long getId() {
         return id;
@@ -39,12 +58,12 @@ public class Musician {
         this.artistName = artistName;
     }
 
-    public int getAge() {
-        return age;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public Sex getSex() {
@@ -59,7 +78,7 @@ public class Musician {
     public int hashCode() {
         int hash = 3;
         hash = 23 * hash + Objects.hashCode(this.artistName);
-        hash = 23 * hash + this.age;
+        hash = 23 * hash + this.dateOfBirth.hashCode();
         return hash;
     }
 
@@ -68,14 +87,14 @@ public class Musician {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if (!(obj instanceof Musician)) {
             return false;
         }
         final Musician other = (Musician) obj;
-        if (!Objects.equals(this.artistName, other.artistName)) {
+        if (!Objects.equals(this.artistName, other.getArtistName())) {
             return false;
         }
-        if (this.age != other.age) {
+        if (this.dateOfBirth != other.getDateOfBirth()) {
             return false;
         }
         return true;
