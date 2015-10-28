@@ -22,7 +22,7 @@ public class SongBuilder {
     }
     
     public SongBuilder commentary(String commentary) {
-        this.title = title;
+        this.commentary = commentary;
         return this;
     }
     
