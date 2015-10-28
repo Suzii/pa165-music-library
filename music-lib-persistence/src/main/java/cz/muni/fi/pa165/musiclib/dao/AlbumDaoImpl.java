@@ -37,10 +37,10 @@ public class AlbumDaoImpl implements AlbumDao {
     }
 
     @Override
-    public Album findByTitle(String title) {
+    public List<Album> findByTitle(String title) {
         return em.createQuery("SELECT a FROM Album a WHERE a.title = :title", Album.class)
                 .setParameter("title", title)
-                .getSingleResult();
+                .getResultList();
     }
 
     @Override

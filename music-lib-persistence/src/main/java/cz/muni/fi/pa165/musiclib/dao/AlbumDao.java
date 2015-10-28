@@ -13,6 +13,6 @@ public interface AlbumDao {
     Album update(Album album);
     void remove(Album album) throws IllegalArgumentException;
     Album findById(Long id);
-    Album findByTitle(String title);
+    List<Album> findByTitle(String title);
     List<Album> findAll();
 }
