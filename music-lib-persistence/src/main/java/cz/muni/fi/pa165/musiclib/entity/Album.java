@@ -103,6 +103,9 @@ public class Album {
     public int hashCode() {
         int hash = 5;
         hash = 53 * hash + ((title == null) ? 0 : title.hashCode());
+        hash = 53 * hash + ((commentary == null) ? 0 : commentary.hashCode());
+        hash = 53 * hash + ((dateOfRelease == null) ? 0 : dateOfRelease.hashCode());
+        hash = 53 * hash + ((albumArtMimeType == null) ? 0 : albumArtMimeType.hashCode());
         return hash;
     }
 
@@ -118,7 +121,23 @@ public class Album {
             return false;
         }
         final Album other = (Album) obj;
-        if (! title.equals(other.title)) {
+        if((title != null) ? !title.equals(other.getTitle()): other.getTitle()!= null){
+            return false;
+        }
+        
+        if((commentary != null) ? !commentary.equals(other.getCommentary()): other.getCommentary() != null){
+            return false;
+        }
+        
+        if((dateOfRelease != null) ? !dateOfRelease.equals(other.getDateOfRelease()): other.getDateOfRelease()!= null){
+            return false;
+        }
+        
+        if((albumArt != null) ? !albumArt.equals(other.getAlbumArt()): other.getAlbumArt()!= null){
+            return false;
+        }
+        
+        if((albumArtMimeType != null) ? !albumArtMimeType.equals(other.getAlbumArtMimeType()): other.getAlbumArtMimeType()!= null){
             return false;
         }
         return true;
