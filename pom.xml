@@ -45,6 +45,7 @@
                 <configuration>
                     <useFile>false</useFile>
                     <detail>true</detail>
+                    <!--<trimStackTrace>false</trimStackTrace>-->
                 </configuration>
             </plugin>
         </plugins>

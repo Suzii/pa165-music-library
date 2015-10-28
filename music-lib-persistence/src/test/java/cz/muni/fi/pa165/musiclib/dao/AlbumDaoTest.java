@@ -15,6 +15,7 @@ import org.springframework.test.context.testng.AbstractTransactionalTestNGSpring
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -27,6 +28,8 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import static org.testng.Assert.assertNotNull;
 
 /**
  * @author xstefank
@@ -43,14 +46,17 @@ public class AlbumDaoTest extends AbstractTransactionalTestNGSpringContextTests 
     @Inject
     private AlbumDao albumDao;
 
+    @Inject
+    private SongDao songDao;
+
     private Album album01;
 
     private Musician metallica;
     private Genre metal;
     private Song song01;
 
-    @BeforeClass
-    public void initTesting() {
+    @BeforeMethod
+    public void initTest() {
         metallica = new Musician();
         metallica.setArtistName("Metallica");
         metallica.setSex(Sex.MALE);
@@ -67,10 +73,9 @@ public class AlbumDaoTest extends AbstractTransactionalTestNGSpringContextTests 
                 .musician(metallica)
                 .genre(metal)
                 .build();
-    }
 
-    @BeforeTest
-    public void initTest() {
+        songDao.create(song01);
+
         album01 = getDefaultAlbum01();
         album01.addSong(song01);
 

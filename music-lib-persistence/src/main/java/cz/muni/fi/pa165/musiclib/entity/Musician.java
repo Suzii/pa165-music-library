@@ -42,6 +42,10 @@ public class Musician {
     @OneToMany(mappedBy = "musician")
     private List<Song> songs = new ArrayList<>();
 
+    public Musician() {
+        this.songs = new ArrayList<>();
+    }
+    
     public List<Song> getSongs() {
         return songs;
     }
@@ -86,7 +90,7 @@ public class Musician {
     public int hashCode() {
         int hash = 3;
         hash = 23 * hash + Objects.hashCode(this.artistName);
-        hash = 23 * hash + this.dateOfBirth.hashCode();
+        //hash = 23 * hash + this.dateOfBirth.hashCode();
         return hash;
     }
 
@@ -102,9 +106,9 @@ public class Musician {
         if (!Objects.equals(this.artistName, other.getArtistName())) {
             return false;
         }
-        if (this.dateOfBirth != other.getDateOfBirth()) {
-            return false;
-        }
+//        if (this.dateOfBirth != other.getDateOfBirth()) {
+//            return false;
+//        }
         return true;
     }
     
