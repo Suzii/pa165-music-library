@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 /**
@@ -51,6 +52,10 @@ public class SongDaoImpl implements SongDao {
 
     @Override
     public List<Song> findByMusician(Musician musician) {
+        if (musician == null) {
+            throw new IllegalArgumentException("musician cannot be null");
+        }
+
         TypedQuery<Song> q = em.createQuery("SELECT s FROM Song s WHERE s.musician = :musicianId",
                 Song.class).setParameter("musicianId", musician);
         return q.getResultList();
@@ -58,6 +63,10 @@ public class SongDaoImpl implements SongDao {
 
     @Override
     public List<Song> findByGenre(Genre genre) {
+        if (genre == null) {
+            throw new IllegalArgumentException("genre cannot be null");
+        }
+
         TypedQuery<Song> q = em.createQuery("SELECT s FROM Song s WHERE s.genre = :genreId",
                 Song.class).setParameter("genreId", genre);
         return q.getResultList();
