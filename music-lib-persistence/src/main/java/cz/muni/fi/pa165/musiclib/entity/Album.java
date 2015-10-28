@@ -41,11 +41,7 @@ public class Album {
     private String albumArtMimeType;
     
     @OneToMany(mappedBy = "album")
-        private List<Song> songs;
-
-    public Album() {
-    songs = new ArrayList<>();
-    }
+        private List<Song> songs = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -127,7 +123,4 @@ public class Album {
         }
         return true;
     }
-    
-    
-    
 }
