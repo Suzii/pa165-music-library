@@ -14,10 +14,16 @@ import java.util.List;
  */
 public class MusicianBuilder {
 
+        private Long id;
         private String artistName;
         private List<Song> songs = new ArrayList<>();
         private Sex sex;
         private Date dateOfBirth;
+        
+        public MusicianBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
         
         public MusicianBuilder artistName(String artistName) {
             this.artistName = artistName;
@@ -40,19 +46,17 @@ public class MusicianBuilder {
         }
 
         public Musician build() {
-            Musician m = new Musician();
+            Musician m = new Musician(id);
             m.setArtistName(artistName);
             m.setSex(sex);
             m.setDateOfBirth(dateOfBirth);
-            
             m.setSongs(songs);
-            
             clear();
-            
             return m;
         }
         
         private void clear() {
+            this.id = null;
             this.artistName = null;
             this.dateOfBirth = null;
             this.sex = null;

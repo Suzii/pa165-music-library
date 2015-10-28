@@ -46,6 +46,11 @@ public class Musician {
         this.songs = new ArrayList<>();
     }
     
+    public Musician(Long id) {
+        this();
+        this.id = id;
+    }
+    
     public List<Song> getSongs() {
         return songs;
     }

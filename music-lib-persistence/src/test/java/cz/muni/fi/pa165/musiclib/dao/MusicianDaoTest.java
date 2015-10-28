@@ -110,13 +110,22 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void findByArtistName() {
+    public void findByArtistNameTest() {
         musicianDao.create(musician1);
         musicianDao.create(musician2);
         
         Musician m = musicianDao.findByArtistName(musician1.getArtistName());
         Assert.assertEquals(m, musician1);
         assertDeepEquals(m, musician1);
+    }
+    
+    @Test
+    public void findByNonExistingArtistNameTest() {
+        musicianDao.create(musician1);
+        musicianDao.create(musician2);
+        //throws NoResult ex
+//        Musician m = musicianDao.findByArtistName("Madonna");
+//        Assert.assertNull(m);
     }
     
     @Test
@@ -133,7 +142,12 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
         Musician m = musicianDao.findById(musician1.getId());        
         Assert.assertEquals(m, musician1);
         assertDeepEquals(m, musician1);
-
+    }
+    
+    @Test(expectedExceptions = PersistenceException.class)
+    public void createWithIdSetTest() {
+        Musician badMusician = musicianBuilder.id(new Long(1)).artistName("Sting").build();
+        musicianDao.create(badMusician);
     }
 
     @Test(expectedExceptions=PersistenceException.class)
@@ -157,7 +171,7 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void createWithSongs() {
+    public void createWithSongsTest() {
         
         musicianDao.create(musician1);
         musicianDao.create(musician2);
@@ -176,6 +190,51 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
         
         assertDeepEquals(m1, musician1);
         assertDeepEquals(m2, musician2);
+    }
+    
+    @Test
+    public void updateTest() {
+        musicianDao.create(musician1);
+        Musician clonedMusician = musicianBuilder
+                .id(musician1.getId())
+                .artistName(musician1.getArtistName())
+                .sex(musician1.getSex())
+                .dateOfBirth(musician1.getDateOfBirth())
+                .songs(musician1.getSongs())
+                .build();
+
+        //just to make sure
+        Assert.assertEquals(musician1, clonedMusician);
+        clonedMusician.setArtistName("Bruno Copy");
+
+        Musician updated = musicianDao.update(clonedMusician);
+        Assert.assertEquals(updated, clonedMusician);
+        assertDeepEquals(updated, clonedMusician);
+    }
+    
+    @Test
+    public void removeTest() {
+        musicianDao.create(musician1);
+        musicianDao.create(musician2);
+        Assert.assertEquals(musicianDao.findAll().size(), 2);
+        
+        musicianDao.remove(musician1);
+        Assert.assertEquals(musicianDao.findAll().size(), 1);
+        
+        Musician m1 = musicianDao.findById(musician1.getId());
+        Musician m2 = musicianDao.findById(musician2.getId());
+        
+        Assert.assertNull(m1);
+        Assert.assertEquals(m2, musician2);
+        assertDeepEquals(m2, musician2);
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void removeNonExistingTest() {
+        musicianDao.create(musician2);
+        Assert.assertEquals(musicianDao.findAll().size(), 1);
+        
+        musicianDao.remove(musician1);
     }
     
     private void assertDeepEquals(Musician actual, Musician expected){
