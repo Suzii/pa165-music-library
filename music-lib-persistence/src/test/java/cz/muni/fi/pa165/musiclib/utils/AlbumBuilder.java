@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.musiclib.test.utils;
+package cz.muni.fi.pa165.musiclib.utils;
 
 /**
  *
  * @author zdank
  */
-public class GenreBuilder {
+public class AlbumBuilder {
     
 }

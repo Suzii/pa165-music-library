@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.musiclib.test.utils;
+package cz.muni.fi.pa165.musiclib.utils;
 
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;

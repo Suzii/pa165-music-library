@@ -10,5 +10,5 @@ package cz.muni.fi.pa165.musiclib.enums;
  * @author zdank
  */
 public enum Sex {
-    Male, Female
+    MALE, FEMALE
 }

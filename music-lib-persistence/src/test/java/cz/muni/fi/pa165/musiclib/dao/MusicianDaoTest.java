@@ -2,15 +2,14 @@ package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.musiclib.entity.*;
-import cz.muni.fi.pa165.musiclib.test.utils.MusicianBuilder;
-import cz.muni.fi.pa165.musiclib.test.utils.SongBuilder;
+import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
+import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
 import javax.inject.Inject;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
