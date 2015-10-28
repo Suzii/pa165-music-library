@@ -26,12 +26,12 @@ public class Song {
     @ManyToOne
     private Album album;
 
-    //@NotNull
+    @NotNull
     @ManyToOne
     private Musician musician;
 
+    @NotNull
     @ManyToOne
-    //@NotNull
     private Genre genre;
 
     public Song() {
@@ -41,12 +41,12 @@ public class Song {
         this.id = id;
     }
 
-    public Long getId() { 
-        return this.id; 
-    }
-
     public String getTitle() {
         return title;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setTitle(String title) {
@@ -94,6 +94,9 @@ public class Song {
 
     public void setMusician(Musician musician) {
         this.musician = musician;
+        if(musician != null) {
+            musician.addSong(this);
+        }
     }
 
     public Genre getGenre() {
@@ -111,14 +114,12 @@ public class Song {
 
         Song song = (Song) o;
 
-        if (positionInAlbum != song.positionInAlbum) return false;
-        if (Double.compare(song.bitrate, bitrate) != 0) return false;
-        if (!title.equals(song.title)) return false;
-        return (!commentary.equals(song.commentary)) /*return false*/;
-//        if (album != null ? !album.equals(song.album) : song.album != null) return false;
-//        if (!musician.equals(song.musician)) return false;
-//        return genre.equals(song.genre);
-
+        if (positionInAlbum != song.getPositionInAlbum()) return false;
+        if (Double.compare(song.getBitrate(), bitrate) != 0) return false;
+        if (!title.equals(song.getTitle())) return false;
+        if (commentary != null ? !commentary.equals(song.getCommentary()) : song.getCommentary() != null) return false;
+        if (album != null ? !album.equals(song.getAlbum()) : song.getAlbum() != null) return false;
+        return musician.equals(song.getMusician()) && genre.equals(song.getGenre());
     }
 
     @Override
@@ -126,13 +127,13 @@ public class Song {
         int result;
         long temp;
         result = title.hashCode();
-        result = 31 * result + commentary.hashCode();
+        result = 31 * result + (commentary != null ? commentary.hashCode() : 0);
         result = 31 * result + positionInAlbum;
         temp = Double.doubleToLongBits(bitrate);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-//        result = 31 * result + (album != null ? album.hashCode() : 0);
-//        result = 31 * result + musician.hashCode();
-//        result = 31 * result + genre.hashCode();
+        result = 31 * result + (album != null ? album.hashCode() : 0);
+        result = 31 * result + (musician != null ? musician.hashCode() : 0);
+        result = 31 * result + (genre != null ? genre.hashCode() : 0);
         return result;
     }
 }

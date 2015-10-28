@@ -41,12 +41,8 @@ public class Album {
     private String albumArtMimeType;
     
     @OneToMany(mappedBy = "album")
-    private List<Song> songs = new ArrayList<>();
-   
-    public void addSong(Song song) {
-        this.songs.add(song);
-    }
-    
+        private List<Song> songs = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
@@ -97,6 +93,10 @@ public class Album {
 
     public void setSongs(List<Song> songs) {
         Collections.copy(this.songs, songs);
+    }
+
+    public void addSong(Song song) {
+        this.songs.add(song);
     }
     
     @Override

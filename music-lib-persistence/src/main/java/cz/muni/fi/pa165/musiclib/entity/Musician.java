@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.musiclib.entity;
 
 import cz.muni.fi.pa165.musiclib.enums.Sex;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -40,6 +41,14 @@ public class Musician {
     @OneToMany(mappedBy = "musician")
     private List<Song> songs;
 
+    public Musician() {
+        this.songs = new ArrayList<>();
+    }
+    
+    public void addSong(Song song) {
+        this.songs.add(song);
+    }
+    
     public List<Song> getSongs() {
         return songs;
     }
@@ -80,7 +89,7 @@ public class Musician {
     public int hashCode() {
         int hash = 3;
         hash = 23 * hash + Objects.hashCode(this.artistName);
-        hash = 23 * hash + this.dateOfBirth.hashCode();
+        //hash = 23 * hash + this.dateOfBirth.hashCode();
         return hash;
     }
 
@@ -96,9 +105,9 @@ public class Musician {
         if (!Objects.equals(this.artistName, other.getArtistName())) {
             return false;
         }
-        if (this.dateOfBirth != other.getDateOfBirth()) {
-            return false;
-        }
+//        if (this.dateOfBirth != other.getDateOfBirth()) {
+//            return false;
+//        }
         return true;
     }
     
