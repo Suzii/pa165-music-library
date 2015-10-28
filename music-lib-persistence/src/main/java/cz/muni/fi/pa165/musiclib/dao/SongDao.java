@@ -15,6 +15,8 @@ public interface SongDao {
 
     void create(Song song);
 
+    Song update(Song song);
+
     Song findById(Long id);
 
     List<Song> findAll();
