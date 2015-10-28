@@ -113,24 +113,26 @@ public class Song {
 
         if (positionInAlbum != song.getPositionInAlbum()) return false;
         if (Double.compare(song.getBitrate(), bitrate) != 0) return false;
-        if (!title.equals(song.getTitle())) return false;
+        if (title != null ? !title.equals(song.getTitle()) : song.getTitle() != null) return false;
         if (commentary != null ? !commentary.equals(song.getCommentary()) : song.getCommentary() != null) return false;
         if (album != null ? !album.equals(song.getAlbum()) : song.getAlbum() != null) return false;
-        return musician.equals(song.getMusician()) && genre.equals(song.getGenre());
+        if (musician != null ? !musician.equals(song.getMusician()) : song.getMusician() != null) return false;
+        return !(genre != null ? !genre.equals(song.getGenre()) : song.getGenre() != null);
+
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        result = title.hashCode();
+        result = title != null ? title.hashCode() : 0;
         result = 31 * result + (commentary != null ? commentary.hashCode() : 0);
         result = 31 * result + positionInAlbum;
         temp = Double.doubleToLongBits(bitrate);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         result = 31 * result + (album != null ? album.hashCode() : 0);
-        result = 31 * result + musician.hashCode();
-        result = 31 * result + genre.hashCode();
+        result = 31 * result + (musician != null ? musician.hashCode() : 0);
+        result = 31 * result + (genre != null ? genre.hashCode() : 0);
         return result;
     }
 }
