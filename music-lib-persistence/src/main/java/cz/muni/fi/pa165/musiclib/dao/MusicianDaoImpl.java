@@ -2,43 +2,50 @@ package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author zdank
+ * @author Milan
  */
 @Repository
 public class MusicianDaoImpl implements MusicianDao {
 
+    @PersistenceContext
+    private  EntityManager em;
+    
+    
     @Override
     public void create(Musician musician) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.persist(musician);
     }
 
     @Override
     public Musician update(Musician musician) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return em.merge(musician);
     }
 
     @Override
     public void remove(Musician musician) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.remove(findById(musician.getId()));
     }
 
     @Override
     public Musician findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.find(Musician.class, id);
     }
 
     @Override
     public Musician findByArtistName(String artistName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.createNamedQuery("SELECT m From Musician m WHERE m.artistName = :artistName", Musician.class)
+                .setParameter("artistName", artistName).getSingleResult();
     }
 
     @Override
     public List<Musician> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.createQuery("SELECT m FROM Musician m", Musician.class).getResultList();
     }
     
 }
