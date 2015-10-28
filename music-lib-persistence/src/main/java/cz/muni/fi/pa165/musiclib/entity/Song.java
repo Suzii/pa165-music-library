@@ -94,6 +94,9 @@ public class Song {
 
     public void setMusician(Musician musician) {
         this.musician = musician;
+        if (musician != null) {
+            musician.addSong(this);
+        }
     }
 
     public Genre getGenre() {

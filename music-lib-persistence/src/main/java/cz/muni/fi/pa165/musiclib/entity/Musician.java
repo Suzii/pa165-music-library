@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.musiclib.entity;
 
 import cz.muni.fi.pa165.musiclib.enums.Sex;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -38,7 +40,7 @@ public class Musician {
     private Date dateOfBirth;
     
     @OneToMany(mappedBy = "musician")
-    private List<Song> songs;
+    private List<Song> songs = new ArrayList<>();
 
     public List<Song> getSongs() {
         return songs;
@@ -74,6 +76,10 @@ public class Musician {
 
     public void setSex(Sex sex) {
         this.sex = sex;
+    }
+
+    public void addSong(Song song) {
+        this.songs.add(song);
     }
     
     @Override
