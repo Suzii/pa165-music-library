@@ -56,6 +56,6 @@ public class MusicianBuilder {
             this.artistName = null;
             this.dateOfBirth = null;
             this.sex = null;
-            this.songs = null;
+            this.songs = new ArrayList<>();
         }
     }

@@ -140,19 +140,19 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void createWithSongs() {
         
-//        musicianDao.create(musician1);
-//        musicianDao.create(musician2);
-//        song1A.setMusician(musician1);
-//        song1B.setMusician(musician1);
-//        song2A.setMusician(musician2);
-//        
-//        songDao.create(song1A);
-//        songDao.create(song1B);
-//        songDao.create(song2A);
-//        
-//        List<Song> songs = musicianDao.findById(musician1.getId()).getSongs();
-//        
-//        Assert.assertEquals(songs.size(), 2);
+        musicianDao.create(musician1);
+        musicianDao.create(musician2);
+        song1A.setMusician(musician1);
+        song1B.setMusician(musician1);
+        song2A.setMusician(musician2);
+        
+        songDao.create(song1A);
+        songDao.create(song1B);
+        songDao.create(song2A);
+        
+        List<Song> songs = musicianDao.findById(musician1.getId()).getSongs();
+        
+        Assert.assertEquals(songs.size(), 2);
     }
     
 }
