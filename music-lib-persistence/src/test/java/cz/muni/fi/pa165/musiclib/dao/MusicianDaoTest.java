@@ -6,6 +6,8 @@ import cz.muni.fi.pa165.musiclib.enums.Sex;
 import cz.muni.fi.pa165.musiclib.utils.*;
 import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
 import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -61,7 +63,12 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     private void init() {
-        musician1 = musicianBuilder.artistName("Bruno Mars").sex(Sex.MALE).build();
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(1985, 9, 7);
+        Date date1 = cal.getTime();
+                
+        musician1 = musicianBuilder.artistName("Bruno Mars").sex(Sex.MALE).dateOfBirth(date1).build();
         musician2 = musicianBuilder.artistName("Adelle").sex(Sex.FEMALE).build();
         
         song1A = songBuilder.title("Uptown funk").build();
@@ -91,12 +98,25 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findByIdTest() {
         musicianDao.create(musician1);
-        Assert.assertEquals(musicianDao.findById(musician1.getId()), musician1);
+        musicianDao.create(musician2);
+        Musician m = musicianDao.findById(musician1.getId());
+        Assert.assertEquals(m, musician1);
+        assertDeepEquals(m, musician1);
     }
     
     @Test
     public void findByIdNonexistingTest() {
         Assert.assertNull(musicianDao.findById(new Long(1)));
+    }
+    
+    @Test
+    public void findByArtistName() {
+        musicianDao.create(musician1);
+        musicianDao.create(musician2);
+        
+        Musician m = musicianDao.findByArtistName(musician1.getArtistName());
+        Assert.assertEquals(m, musician1);
+        assertDeepEquals(m, musician1);
     }
     
     @Test
@@ -111,10 +131,8 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
         musicianDao.create(musician1);        
         Assert.assertNotNull(musician1.getId());
         Musician m = musicianDao.findById(musician1.getId());        
-        Assert.assertEquals(musician1, m);
-        Assert.assertEquals(m.getArtistName(), musician1.getArtistName());
-        Assert.assertEquals(m.getSex(), musician1.getSex());
-        Assert.assertEquals(m.getDateOfBirth(), musician1.getDateOfBirth());
+        Assert.assertEquals(m, musician1);
+        assertDeepEquals(m, musician1);
     }
     
     @Test(expectedExceptions=PersistenceException.class)
@@ -149,10 +167,22 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
         songDao.create(song1A);
         songDao.create(song1B);
         songDao.create(song2A);
+        final Musician m1 = musicianDao.findById(musician1.getId());
+        final Musician m2 = musicianDao.findById(musician2.getId());
         
-        List<Song> songs = musicianDao.findById(musician1.getId()).getSongs();
+        Assert.assertEquals(m1.getSongs().size(), 2);
+        Assert.assertEquals(m2.getSongs().size(), 1);
         
-        Assert.assertEquals(songs.size(), 2);
+        assertDeepEquals(m1, musician1);
+        assertDeepEquals(m2, musician2);
+    }
+    
+    private void assertDeepEquals(Musician actual, Musician expected){
+        Assert.assertEquals(actual.getId(), expected.getId());
+        Assert.assertEquals(actual.getArtistName(), expected.getArtistName());
+        Assert.assertEquals(actual.getSex(), expected.getSex());
+        Assert.assertEquals(actual.getDateOfBirth(), expected.getDateOfBirth());
+        Assert.assertEquals(actual.getSongs(), expected.getSongs());
     }
     
 }
