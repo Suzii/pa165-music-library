@@ -2,43 +2,52 @@ package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author zdank
+ * @author David Boron
  */
 @Repository
 public class GenreDaoImpl implements GenreDao {
 
+    @PersistenceContext
+    private EntityManager em;
+
     @Override
     public void create(Genre genre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.persist(genre);
     }
 
     @Override
     public Genre update(Genre genre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.merge(genre);
     }
 
     @Override
     public void remove(Genre genre) throws IllegalArgumentException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        em.remove(genre);
     }
 
     @Override
     public Genre findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.find(Genre.class, id);
     }
 
     @Override
     public Genre findByTitle(String title) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Genre> q = em.createQuery("SELECT g FROM Genre g WHERE g.title = :title", Genre.class)
+                .setParameter("title", title);
+        return q.getSingleResult();
     }
 
     @Override
     public List<Genre> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        TypedQuery<Genre> q = em.createQuery("SELECT g FROM Genre g", Genre.class);
+        return q.getResultList();
     }
-    
+
 }

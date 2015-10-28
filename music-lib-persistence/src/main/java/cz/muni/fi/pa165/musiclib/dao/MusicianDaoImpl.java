@@ -37,9 +37,9 @@ public class MusicianDaoImpl implements MusicianDao {
         return em.find(Musician.class, id);
     }
 
-    @Override
+    @Override   
     public Musician findByArtistName(String artistName) {
-        return em.createNamedQuery("SELECT m From Musician m WHERE m.artistName = :artistName", Musician.class)
+        return em.createQuery("SELECT m FROM Musician m WHERE m.artistName = :artistName", Musician.class)
                 .setParameter("artistName", artistName).getSingleResult();
     }
 
