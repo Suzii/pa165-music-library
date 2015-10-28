@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.musiclib.entity;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -40,7 +41,7 @@ public class Album {
     private String albumArtMimeType;
     
     @OneToMany(mappedBy = "album")
-    private List<Song> songs;
+    private List<Song> songs = new ArrayList<>();
    
     public void addSong(Song song) {
         this.songs.add(song);
@@ -122,7 +123,4 @@ public class Album {
         }
         return true;
     }
-    
-    
-    
 }
