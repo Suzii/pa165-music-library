@@ -201,6 +201,8 @@ public class AlbumDaoTest extends AbstractTransactionalTestNGSpringContextTests 
     public void removeAlreadyRemovedTest() {
         albumDao.create(album01);
         albumDao.remove(album01);
+        em.flush();
+        
         assertNotNull(album01);
         albumDao.remove(album01);
     }
