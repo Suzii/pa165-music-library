@@ -94,8 +94,8 @@ public class Musician {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 23 * hash + Objects.hashCode(this.artistName);
-        //hash = 23 * hash + this.dateOfBirth.hashCode();
+        hash = 23 * hash + ((artistName == null) ? 0 : artistName.hashCode());
+        hash = 23 * hash + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
         return hash;
     }
 
@@ -108,12 +108,13 @@ public class Musician {
             return false;
         }
         final Musician other = (Musician) obj;
-        if (!Objects.equals(this.artistName, other.getArtistName())) {
+        if ((artistName != null) ? !artistName.equals(other.getArtistName()): other.getArtistName()!= null){
             return false;
         }
-//        if (this.dateOfBirth != other.getDateOfBirth()) {
-//            return false;
-//        }
+        if ((dateOfBirth != null) ? !dateOfBirth.equals(other.getDateOfBirth()): other.getDateOfBirth()!= null){
+            return false;
+        }
+
         return true;
     }
     
