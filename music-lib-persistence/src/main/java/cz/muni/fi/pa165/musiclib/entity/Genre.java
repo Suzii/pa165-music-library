@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.musiclib.entity;
 
-import java.util.Objects;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +15,7 @@ public class Genre {
     private Long id;
     
     @NotNull
+    @Column(nullable = false, unique = true)
     private String title;
 
     public Long getId() {
@@ -33,8 +33,7 @@ public class Genre {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.title);
+        hash = 97 * hash + ((title == null) ? 0 : title.hashCode());
         return hash;
     }
 
@@ -43,16 +42,19 @@ public class Genre {
         if (obj == null) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
+        if(this == obj){
+            return true;
+        }
+        if (!(obj instanceof Album)) {
             return false;
         }
+       
         final Genre other = (Genre) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        
+        if((title != null) ? !title.equals(other.getTitle()): other.getTitle()!= null){
             return false;
         }
-        if (!Objects.equals(this.title, other.title)) {
-            return false;
-        }
+        
         return true;
     }
     
