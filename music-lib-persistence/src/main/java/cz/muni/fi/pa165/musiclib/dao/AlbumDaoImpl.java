@@ -1,4 +1,4 @@
-    package cz.muni.fi.pa165.musiclib.dao;
+package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import java.util.List;
@@ -48,5 +48,4 @@ public class AlbumDaoImpl implements AlbumDao {
         return em.createQuery("SELECT a FROM Album a", Album.class)
                 .getResultList();
     }
-    
 }
