@@ -5,20 +5,53 @@ import java.util.List;
 
 /**
  *
- * @author Dido
+ * @author David Boron
  */
 public interface GenreDao {
-    
+
+    /**
+     * Creates genre and persists it to database
+     * 
+     * @param genre entity to be persisted
+     */
     void create(Genre genre);
-    
-    Genre update (Genre genre);
-    
-    void remove(Genre genre) throws IllegalArgumentException;
-    
+
+    /**
+     * Updates genre in database
+     * 
+     * @param genre entity to be updated
+     * @return updated persisted entity 
+     */
+    Genre update(Genre genre);
+
+    /**
+     * Removes entity from persistance
+     * 
+     * @param genre entity to be removed
+     */
+    void remove(Genre genre);
+
+    /**
+     * Get genre by unique id
+     * 
+     * @param id of entity
+     * @return object with given id
+     */
     Genre findById(Long id);
-    
-    Genre findByTitle (String title);
-    
+
+    /**
+     * Get songs with given name
+     * 
+     * @param title of song to be found
+     * @return list of song with given title
+     */
+    List<Genre> findByTitle(String title);
+
+    /**
+     * Get all genres
+     * 
+     * @return list of all genres
+     */
     List<Genre> findAll();
-        
+
 }
