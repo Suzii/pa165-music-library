@@ -38,10 +38,10 @@ public class GenreDaoImpl implements GenreDao {
     }
 
     @Override
-    public Genre findByTitle(String title) {
+    public List<Genre> findByTitle(String title) {
         TypedQuery<Genre> q = em.createQuery("SELECT g FROM Genre g WHERE g.title = :title", Genre.class)
                 .setParameter("title", title);
-        return q.getSingleResult();
+        return q.getResultList();
     }
 
     @Override
