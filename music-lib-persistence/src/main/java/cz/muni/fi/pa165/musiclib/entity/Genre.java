@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author Dido
+ * @author David Boron
  * @version 10/24/15
  */
 @Entity
@@ -18,6 +18,13 @@ public class Genre {
     @Column(nullable = false, unique = true)
     private String title;
 
+    public Genre(){
+    }
+    
+    public Genre(Long id){
+        this.id = id;
+    }
+    
     public Long getId() {
         return id;
     }

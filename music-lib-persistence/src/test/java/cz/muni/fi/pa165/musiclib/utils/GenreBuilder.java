@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.musiclib.entity.Genre;
  */
 public class GenreBuilder {
 
+    private Long id;
     private String title;
 
     public GenreBuilder title(String title) {
@@ -23,6 +24,7 @@ public class GenreBuilder {
     }
 
     private void clear() {
+        this.id = null;
         this.title = null;
     }
 }
