@@ -19,7 +19,7 @@ public class MusicianBuilder {
         private List<Song> songs = new ArrayList<>();
         private Sex sex;
         private Date dateOfBirth;
-        
+                
         public MusicianBuilder id(Long id) {
             this.id = id;
             return this;
