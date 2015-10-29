@@ -11,6 +11,14 @@ public class GenreBuilder {
     private Long id;
     private String title;
 
+    public GenreBuilder() {
+    }
+    
+    public GenreBuilder id(Long id) {
+        this.id = id;
+        return this;
+    }
+    
     public GenreBuilder title(String title) {
         this.title = title;
         return this;
