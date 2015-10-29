@@ -148,12 +148,10 @@ public class GenreDaoTest extends AbstractTestNGSpringContextTests {
     
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void removeNonExistingTest() {
-        
-        genreDao.create(acidJazz);
+        genreDao.create(chillWave);
         Assert.assertEquals(genreDao.findAll().size(), 1);
         
-        genreDao.remove(chillWave); 
-
+        genreDao.remove(acidJazz);
     }
     
     
