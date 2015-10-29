@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.musiclib.dao;
+    package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import java.util.List;
@@ -28,7 +28,7 @@ public class AlbumDaoImpl implements AlbumDao {
 
     @Override
     public void remove(Album album) throws IllegalArgumentException {
-        em.remove(findById(album.getId()));
+        em.remove(album);
     }
 
     @Override
