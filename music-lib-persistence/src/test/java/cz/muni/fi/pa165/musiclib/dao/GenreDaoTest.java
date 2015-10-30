@@ -67,10 +67,10 @@ public class GenreDaoTest extends AbstractTestNGSpringContextTests {
     public void findByTitle(){
         genreDao.create(chillWave);
         genreDao.create(acidJazz);
-//        List<Genre> genres = genreDao.findByTitle(chillWave.getTitle());
-//        Assert.assertEquals(genres.size(), 1);
-//        Assert.assertEquals(genres.get(0), chillWave);
-//        assertDeepEquals(genres.get(0), chillWave);
+        List<Genre> genres = genreDao.findByTitle(chillWave.getTitle());
+        Assert.assertEquals(genres.size(), 1);
+        Assert.assertEquals(genres.get(0), chillWave);
+        assertDeepEquals(genres.get(0), chillWave);
 
     }
     
@@ -78,8 +78,8 @@ public class GenreDaoTest extends AbstractTestNGSpringContextTests {
     public void findByNonExistingTitle(){ 
         genreDao.create(chillWave);
         genreDao.create(acidJazz);
-//       List<Genre> genres = genreDao.findByTitle("Trip Hop");
-//       Assert.assertEquals(genres.size(), 0);
+        List<Genre> genres = genreDao.findByTitle("Trip Hop");
+        Assert.assertEquals(genres.size(), 0);
 
     }
        
@@ -93,15 +93,21 @@ public class GenreDaoTest extends AbstractTestNGSpringContextTests {
     
     @Test 
     public void createTest(){
-    genreDao.create(chillWave);
-    Assert.assertNotNull(chillWave.getId());
-    Genre g = genreDao.findById(chillWave.getId());
-    Assert.assertEquals(g, chillWave);
+        genreDao.create(chillWave);
+        Assert.assertNotNull(chillWave.getId());
+        Genre g = genreDao.findById(chillWave.getId());
+        Assert.assertEquals(g, chillWave);
 
     }
 
+    @Test(expectedExceptions = PersistenceException.class)
+    public void createWithIdSetTest() {
+        Genre badGenre = genreBuilder.id(new Long(1)).title("Electro").build();
+        genreDao.create(badGenre);
+    }
+    
     @Test(expectedExceptions=PersistenceException.class)
-    public void createGenreWithSameName() {
+    public void createGenreWithSameTitle() {
         Genre downTempo1 = genreBuilder.title("Down Tempo").build();
         Genre downTempo2 = genreBuilder.title("Down Tempo").build();
         genreDao.create(downTempo1);
@@ -127,6 +133,19 @@ public class GenreDaoTest extends AbstractTestNGSpringContextTests {
 
     }
     
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void updateNullTest() {
+        genreDao.update(null);
+    }
+        
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void updateTitleNullTest() {
+        genreDao.create(chillWave);
+        chillWave.setTitle(null);
+        genreDao.update(chillWave);
+        em.flush();
+    }
+    
     @Test
     public void removeTest(){
         genreDao.create(chillWave);
@@ -145,16 +164,31 @@ public class GenreDaoTest extends AbstractTestNGSpringContextTests {
 
     }
     
-    
-    @Test(expectedExceptions = IllegalArgumentException.class)
     public void removeNonExistingTest() {
+        em.flush();
         genreDao.create(chillWave);
         Assert.assertEquals(genreDao.findAll().size(), 1);
         
         genreDao.remove(acidJazz);
     }
     
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void removeNullTest() {
+        genreDao.remove(null);
+    }
     
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void removeAlreadyRemovedTest() {
+        genreDao.create(chillWave);
+        Assert.assertEquals(genreDao.findById(chillWave.getId()), chillWave);
+        
+        genreDao.remove(chillWave);
+        em.flush();
+        Assert.assertEquals(genreDao.findAll().size(), 0);
+        
+        genreDao.remove(chillWave);
+    }
+            
     private void assertDeepEquals(Genre actual, Genre expected){
         Assert.assertEquals(actual.getId(), expected.getId());
         Assert.assertEquals(actual.getTitle(), expected.getTitle());
