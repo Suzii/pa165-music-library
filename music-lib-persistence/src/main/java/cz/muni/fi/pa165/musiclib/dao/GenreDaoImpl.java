@@ -29,7 +29,7 @@ public class GenreDaoImpl implements GenreDao {
 
     @Override
     public void remove(Genre genre) throws IllegalArgumentException {
-        em.remove(findById(genre.getId()));
+        em.remove(genre);
     }
 
     @Override
