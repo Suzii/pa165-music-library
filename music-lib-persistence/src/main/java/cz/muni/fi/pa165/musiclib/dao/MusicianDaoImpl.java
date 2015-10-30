@@ -29,7 +29,7 @@ public class MusicianDaoImpl implements MusicianDao {
 
     @Override
     public void remove(Musician musician) throws IllegalArgumentException {
-        em.remove(findById(musician.getId()));
+        em.remove(musician);
     }
 
     @Override
