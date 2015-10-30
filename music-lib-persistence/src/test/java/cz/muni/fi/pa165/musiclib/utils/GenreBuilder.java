@@ -25,7 +25,7 @@ public class GenreBuilder {
     }
 
     public Genre build() {
-        Genre s = new Genre();
+        Genre s = new Genre(id);
         s.setTitle(title);
         clear();
         return s;
