@@ -11,10 +11,12 @@ import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
 import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
 import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -22,6 +24,8 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -111,10 +115,26 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    public void findByIdNonexistingTest() {
+        Assert.assertNull(songDao.findById(1L));
+    }
+    
+    @Test
+    public void findDeletedEntityTest() {
+        songDao.create(song1A);
+        songDao.create(song1B);
+        Song m = songDao.findById(song1A.getId());
+        assertDeepEquals(m, song1A);
+        
+        songDao.remove(song1A);
+        Assert.assertNull(songDao.findById(song1A.getId()));
+    }
+    
+    @Test
     public void findAllTest() {
         songDao.create(song1A);
         songDao.create(song1B);
-        Assert.assertEquals(songDao.findAll().size(), 2);
+        assertEquals(songDao.findAll().size(), 2);
     }
 
     @Test
@@ -123,7 +143,16 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
         songDao.create(song1B);
         List<Song> albumSongs = album1.getSongs();
         List<Song> songs = songDao.findByAlbum(album1);
-        Assert.assertEquals(albumSongs, songs);
+        assertEquals(albumSongs, songs);
+    }
+    
+    @Test
+    public void findByNullAlbumTest() {
+        songDao.create(song1A);
+        songDao.create(song1B);
+
+        List<Song> result = songDao.findByAlbum(null);
+        assertEquals(result, Collections.emptyList());
     }
 
     @Test
@@ -132,9 +161,14 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
         songDao.create(song2A);
         List<Song> musicianSongs = musician1.getSongs();
         List<Song> songs = songDao.findByMusician(musician1);
-        Assert.assertEquals(musicianSongs, songs);
+        assertEquals(musicianSongs, songs);
     }
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullMusicianTest() {
+        songDao.findByMusician(null);
+    }
+        
     @Test
     public void findByGenreTest() {
         songDao.create(song1A);
@@ -147,9 +181,88 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
         songs.add(song2A);
         songs.add(song2B);
         List<Song> songsByGenre = songDao.findByGenre(genre);
-        Assert.assertEquals(songsByGenre, songs);
+        assertEquals(songsByGenre, songs);
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void findByNullGenreTest() {
+        songDao.findByGenre(null);
+    }
+    
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createNullTest() {
+        songDao.create(null);
     }
 
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void createNullTitleTest() {
+        song1A.setTitle(null);
+        songDao.create(song1A);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void createNullMusicianTest() {
+        song1A.setMusician(null);
+        songDao.create(song1A);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void createNullGenreTest() {
+        song1A.setGenre(null);
+        songDao.create(song1A);
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void updateNullTest() {
+        songDao.update(null);
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void updateNullTitleTest() {
+        songDao.create(song1A);
+        song1A.setTitle(null);
+        songDao.update(song1A);
+        em.flush();
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void updateNullMusicianTest() {
+        songDao.create(song1A);
+        song1A.setMusician(null);
+        songDao.update(song1A);
+        em.flush();
+    }
+
+    @Test(expectedExceptions = ConstraintViolationException.class)
+    public void updateNullGenreTest() {
+        songDao.create(song1A);
+        song1A.setGenre(null);
+        songDao.update(song1A);
+        em.flush();
+    }
+    
+    @Test
+    public void removeSuccessTest() {
+        songDao.create(song1A);
+        songDao.remove(song1A);
+        assertNull(songDao.findById(song1A.getId()));
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void removeNullTest() {
+        songDao.remove(null);
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void removeRemovedTest() {
+        songDao.create(song1A);
+        songDao.remove(song1A);
+        em.flush();
+        assertNotNull(song1A);
+        songDao.remove(song1A);
+    }
+    
     private void assertDeepEquals(Song song1, Song song2) {
         assertEquals(song1.getId(), song2.getId());
         assertEquals(song1.getTitle(), song2.getTitle());
