@@ -28,7 +28,10 @@ public class AlbumDaoImpl implements AlbumDao {
 
     @Override
     public void remove(Album album) throws IllegalArgumentException {
-        em.remove(album);
+        if(album == null){
+            throw new IllegalArgumentException("Attempted to delete null entity.");
+        }
+        em.remove(findById(album.getId()));
     }
 
     @Override

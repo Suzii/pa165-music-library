@@ -290,13 +290,12 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
         assertDeepEquals(m2, musician2);
     }
     
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void removeNonExistingTest() {
         musicianDao.create(musician2);
         Assert.assertEquals(musicianDao.findAll().size(), 1);
         
         musicianDao.remove(musician1);
-        Assert.assertEquals(musicianDao.findAll().size(), 1);
     }
     
     @Test(expectedExceptions = IllegalArgumentException.class)

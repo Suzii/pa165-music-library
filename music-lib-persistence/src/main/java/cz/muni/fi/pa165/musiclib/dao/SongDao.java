@@ -77,7 +77,8 @@ public interface SongDao {
     /**
      * Removes the Song entity from persistence context
      *
-     * @param song song to be removed
+     * @param song song to be removed     
+     * @throws IllegalArgumentException if passed song is null or is not stored in DB 
      */
     void remove(Song song);
 }

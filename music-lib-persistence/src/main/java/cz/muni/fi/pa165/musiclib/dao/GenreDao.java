@@ -25,9 +25,10 @@ public interface GenreDao {
     Genre update(Genre genre);
 
     /**
-     * Removes entity from persistance
+     * Removes entity from persistence
      * 
      * @param genre entity to be removed
+     * @throws IllegalArgumentException if passed genre is null or is not stored in DB
      */
     void remove(Genre genre);
 

@@ -29,7 +29,10 @@ public class MusicianDaoImpl implements MusicianDao {
 
     @Override
     public void remove(Musician musician) throws IllegalArgumentException {
-        em.remove(musician);
+        if(musician == null){
+            throw new IllegalArgumentException("Attempted to delete null entity.");
+        }
+        em.remove(findById(musician.getId()));
     }
 
     @Override

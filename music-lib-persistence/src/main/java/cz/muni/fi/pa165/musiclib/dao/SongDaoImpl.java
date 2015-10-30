@@ -73,6 +73,9 @@ public class SongDaoImpl implements SongDao {
 
     @Override
     public void remove(Song song) {
-        em.remove(song);
+        if(song == null){
+            throw new IllegalArgumentException("Attempted to delete null entity.");
+        }
+        em.remove(findById(song.getId()));
     }
 }
