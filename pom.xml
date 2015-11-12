@@ -58,6 +58,7 @@
     <modules>
         <module>music-lib-persistence</module>
         <module>music-lib-api</module>
+        <module>music-lib-service</module>
     </modules>
 
     <dependencies>
