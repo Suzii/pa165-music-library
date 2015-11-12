@@ -17,6 +17,11 @@
             <artifactId>music-lib-api</artifactId>
             <version>1.0</version>
         </dependency>
+        <dependency>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>music-lib-persistence</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
 
 </project>
