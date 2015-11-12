@@ -13,8 +13,6 @@
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>Persistence Layer</name>
-
     <build>
         <plugins>
             <plugin>
