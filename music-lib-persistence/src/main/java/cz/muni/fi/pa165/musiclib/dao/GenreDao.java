@@ -41,10 +41,10 @@ public interface GenreDao {
     Genre findById(Long id);
 
     /**
-     * Get songs with given name
+     * Get genres with given name
      * 
-     * @param title of song to be found
-     * @return list of song with given title
+     * @param title of genre to be found
+     * @return list of genre with given title
      */
     List<Genre> findByTitle(String title);
 
