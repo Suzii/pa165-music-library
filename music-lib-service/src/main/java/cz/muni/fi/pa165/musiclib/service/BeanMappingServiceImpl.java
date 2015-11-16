@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.musiclib.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.inject.Inject;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BeanMappingServiceImpl implements BeanMappingService {
 
-    @Autowired
+    @Inject
     private Mapper mapper;
     
     @Override

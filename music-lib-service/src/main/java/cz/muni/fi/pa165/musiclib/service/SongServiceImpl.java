@@ -6,7 +6,7 @@ import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import java.util.List;
-import org.dozer.inject.Inject;
+import javax.inject.Inject;
 
 /**
  *

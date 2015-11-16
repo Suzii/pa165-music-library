@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.musiclib.service;
 import cz.muni.fi.pa165.musiclib.dao.MusicianDao;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import java.util.List;
-import org.dozer.inject.Inject;
+import javax.inject.Inject;
 
 /**
  *
