@@ -4,7 +4,7 @@ import cz.muni.fi.pa165.musiclib.entity.Genre;
 import java.util.List;
 
 /**
- * Genre service provides all business logic for genre entities. 
+ * Genre service that provides all business logic for genre entities. 
  * 
  * @author zdank
  * @version 16/11/2015
