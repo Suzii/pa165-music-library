@@ -53,7 +53,7 @@ public interface UserService {
      * @param email email of the user
      * @return found user if the the email is valid, null otherwise
      */
-    User findUserByEmail(String email);
+    List<User> findUserByEmail(String email);
 
     /**
      * Returns all registered users
