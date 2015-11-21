@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.musiclib.facade;
 
 /**
- * @author Martin Stefanko (mstefank@redhat.com)
+ * @author
  */
 public interface SongFacade {
 }

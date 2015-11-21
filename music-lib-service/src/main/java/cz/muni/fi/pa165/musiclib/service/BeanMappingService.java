@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public interface BeanMappingService {
     
-    public <T> List<T> mappTo(Collection<?> source, Class<T> mapToClass);
+    public <T> List<T> mapTo(Collection<?> source, Class<T> mapToClass);
     
     public <T> T mapTo(Object source, Class<T> mapToClass);
     
