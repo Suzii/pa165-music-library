@@ -20,7 +20,7 @@ public class BeanMappingServiceImpl implements BeanMappingService {
     private Mapper mapper;
     
     @Override
-    public <T> List<T> mappTo(Collection<?> source, Class<T> mapToClass) {
+    public <T> List<T> mapTo(Collection<?> source, Class<T> mapToClass) {
         List<T> result = new ArrayList<>();
         for(Object o : source){
             result.add(mapTo(o, mapToClass));
