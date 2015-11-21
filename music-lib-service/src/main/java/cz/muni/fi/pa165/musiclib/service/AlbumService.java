@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.entity.Album;
+import cz.muni.fi.pa165.musiclib.entity.Song;
+
 import java.util.List;
 
 /**
@@ -56,4 +58,28 @@ public interface AlbumService {
      * @return list of all albums
      */
     List<Album> findAll();
+
+    /**
+     * Adds a new song to the album
+     *
+     * @param album album to which the song is to be added
+     * @param song song to be added
+     */
+    void addSong(Album album, Song song);
+
+    /**
+     * Removes the song from the album
+     *
+     * @param album album from to which the song belongs
+     * @param song song to be removed
+     */
+    void removeSong(Album album, Song song);
+
+    /**
+     * Changes the title of the album
+     *
+     * @param album of which the title will be changed
+     * @param title new title
+     */
+    void changeTitle(Album album, String title);
 }

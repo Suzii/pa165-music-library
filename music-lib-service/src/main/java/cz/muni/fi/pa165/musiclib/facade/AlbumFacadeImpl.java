@@ -1,7 +1,8 @@
 package cz.muni.fi.pa165.musiclib.facade;
 
-import cz.muni.fi.pa165.musiclib.dao.AlbumDao;
+import cz.muni.fi.pa165.musiclib.dto.AlbumChangeAlbumArtDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
+import cz.muni.fi.pa165.musiclib.dto.AlbumNewTitleDTO;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.service.AlbumService;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
@@ -29,46 +30,61 @@ public class AlbumFacadeImpl implements AlbumFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public void createAlbum(AlbumDTO album) {
+    public Long createAlbum(AlbumDTO a) {
+        Album album = new Album();
+        album.setTitle(a.getTitle());
+        album.setCommentary(a.getCommentary());
+        album.setDateOfRelease(a.getDateOfRelease());
+        album.setAlbumArt(a.getAlbumArt());
+        album.setAlbumArtMimeType(a.getAlbumArtMimeType());
+        albumService.create(album);
+
+        return album.getId();
     }
 
     @Override
     public void addSong(Long albumId, Long songId) {
-
+        albumService.addSong(albumService.findById(albumId),
+                songService.findById(songId));
     }
 
     @Override
     public void removeSong(Long albumId, Long songId) {
-
+        albumService.removeSong(albumService.findById(albumId),
+                songService.findById(songId));
     }
 
     @Override
-    public void changeTitle(String title) {
-
+    public void changeAlbumArt(AlbumChangeAlbumArtDTO dto) {
+        Album album = albumService.findById(dto.getAlbumId());
+        album.setAlbumArt(dto.getImage());
+        album.setAlbumArtMimeType(dto.getMimeType());
+        albumService.update(album);
     }
 
     @Override
-    public void changeImage(byte[] image) {
-
+    public void changeTitle(AlbumNewTitleDTO newTitle) {
+        albumService.changeTitle(albumService.findById(newTitle.getAlbumId()),
+                newTitle.getValue());
     }
 
     @Override
     public void deleteAlbum(Long albumId) {
-
+        albumService.remove(albumService.findById(albumId));
     }
 
     @Override
     public List<AlbumDTO> getAllAlbums() {
-        return null;
+        return beanMappingService.mapTo(albumService.findAll(), AlbumDTO.class);
     }
 
     @Override
     public AlbumDTO getAlbumById(Long id) {
-        return null;
+        return beanMappingService.mapTo(albumService.findById(id), AlbumDTO.class);
     }
 
     @Override
-    public AlbumDTO getAlbumByTitle(String title) {
-        return null;
+    public List<AlbumDTO> getAlbumByTitle(String title) {
+        return beanMappingService.mapTo(albumService.findByTitle(title), AlbumDTO.class);
     }
 }
