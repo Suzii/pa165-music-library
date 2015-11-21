@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * Album service that provides all business logic for album entities. 
  * 
- * @author zdank
- * @version 16/11/2015
+ * @author Martin Stefanko (mstefank@redhat.com)
+ * @version 21/11/2015
  */
 public interface AlbumService {
     
