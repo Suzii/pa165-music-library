@@ -41,6 +41,8 @@ public class User {
     @NotNull
     private String lastName;
 
+    private boolean admin;
+
     public Long getId() {
         return id;
     }
@@ -75,6 +77,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     @Override
