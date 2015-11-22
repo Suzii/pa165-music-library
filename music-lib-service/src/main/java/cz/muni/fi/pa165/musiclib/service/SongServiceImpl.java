@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import java.util.List;
 import javax.inject.Inject;
+import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -19,42 +20,43 @@ public class SongServiceImpl implements SongService {
     
     @Override
     public void create(Song song) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        songDao.create(song);
     }
 
     @Override
     public Song update(Song song) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return songDao.update(song);
     }
 
     @Override
     public Song findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return songDao.findById(id);
     }
 
     @Override
     public List<Song> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return songDao.findAll();
     }
 
     @Override
     public List<Song> findByAlbum(Album album) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return songDao.findByAlbum(album);
     }
 
     @Override
     public List<Song> findByMusician(Musician musician) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return songDao.findByMusician(musician);
     }
 
     @Override
     public List<Song> findByGenre(Genre genre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return songDao.findByGenre(genre);
     }
 
     @Override
     public void remove(Song song) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        songDao.remove(song);
     }
+    
     
 }
