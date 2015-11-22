@@ -7,7 +7,6 @@ import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import java.util.List;
 import javax.inject.Inject;
-import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -57,6 +56,4 @@ public class SongServiceImpl implements SongService {
     public void remove(Song song) {
         songDao.remove(song);
     }
-    
-    
 }
