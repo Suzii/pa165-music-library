@@ -45,10 +45,10 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findByEmail(String email) {
+    public User findByEmail(String email) {
         TypedQuery<User> q = em.createQuery("SELECT u FROM User u WHERE u.email = :email",
                 User.class).setParameter("email", email);
-        return q.getResultList();
+        return q.getSingleResult();
     }
 
     @Override

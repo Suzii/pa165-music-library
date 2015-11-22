@@ -53,7 +53,7 @@ public interface UserDao {
      *
      * @return all persisted User with given email entities
      */
-    List<User> findByEmail(String email);
+    User findByEmail(String email);
     /**
      * Removes the User entity from persistence context
      *
