@@ -22,6 +22,8 @@ public class Song {
     private int positionInAlbum;
     
     private double bitrate;
+    
+    private String youtubeLink;
 
     @ManyToOne
     private Album album;
@@ -77,6 +79,14 @@ public class Song {
         this.bitrate = bitrate;
     }
 
+    public String getYoutubeLink() {
+        return youtubeLink;
+    }
+
+    public void setYoutubeLink(String youtubeLink) {
+        this.youtubeLink = youtubeLink;
+    }
+    
     public Album getAlbum() {
         return album;
     }
@@ -118,6 +128,7 @@ public class Song {
         if (Double.compare(song.getBitrate(), bitrate) != 0) return false;
         if (title != null ? !title.equals(song.getTitle()) : song.getTitle() != null) return false;
         if (commentary != null ? !commentary.equals(song.getCommentary()) : song.getCommentary() != null) return false;
+        if (youtubeLink != null ? !youtubeLink.equals(song.getYoutubeLink()) : song.getYoutubeLink()!= null) return false;
         if (album != null ? !album.equals(song.getAlbum()) : song.getAlbum() != null) return false;
         if (musician != null ? !musician.equals(song.getMusician()) : song.getMusician() != null) return false;
         return !(genre != null ? !genre.equals(song.getGenre()) : song.getGenre() != null);
@@ -130,6 +141,7 @@ public class Song {
         long temp;
         result = title != null ? title.hashCode() : 0;
         result = 31 * result + (commentary != null ? commentary.hashCode() : 0);
+        result = 31 * result + (youtubeLink != null ? youtubeLink.hashCode() : 0);
         result = 31 * result + positionInAlbum;
         temp = Double.doubleToLongBits(bitrate);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
