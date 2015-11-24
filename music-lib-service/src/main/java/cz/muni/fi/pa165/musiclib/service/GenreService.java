@@ -4,31 +4,31 @@ import cz.muni.fi.pa165.musiclib.entity.Genre;
 import java.util.List;
 
 /**
- * Genre service that provides all business logic for genre entities. 
- * 
+ * Genre service that provides all business logic for genre entities.
+ *
  * @author zdank
  * @version 16/11/2015
  */
 public interface GenreService {
-    
+
     /**
      * Creates genre new genre.
-     * 
+     *
      * @param genre entity to be created
      */
     void create(Genre genre);
 
     /**
      * Updates genre.
-     * 
+     *
      * @param genre entity to be updated
-     * @return updated entity 
+     * @return updated entity
      */
     Genre update(Genre genre);
 
     /**
      * Removes genre.
-     * 
+     *
      * @param genre entity to be removed
      * @throws IllegalArgumentException if passed genre is null or is not stored
      */
@@ -36,7 +36,7 @@ public interface GenreService {
 
     /**
      * Get genre by unique id
-     * 
+     *
      * @param id of entity
      * @return entity with given id
      */
@@ -44,7 +44,7 @@ public interface GenreService {
 
     /**
      * Get genre with given name
-     * 
+     *
      * @param title of genre to be found
      * @return list of genre with given title
      */
@@ -52,8 +52,16 @@ public interface GenreService {
 
     /**
      * Get all genres
-     * 
+     *
      * @return list of all genres
      */
     List<Genre> findAll();
+
+    /**
+     * Changes title of given genre
+     *
+     * @param genre object to have title changed
+     * @param title new title
+     */
+    void changeTitle(Genre genre, String title);
 }

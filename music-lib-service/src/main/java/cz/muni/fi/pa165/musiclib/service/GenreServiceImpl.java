@@ -44,4 +44,9 @@ public class GenreServiceImpl implements GenreService {
         return genreDao.findAll();
     }
     
+    @Override
+    public void changeTitle(Genre genre, String title) {
+        genre.setTitle(title);
+    }
+    
 }

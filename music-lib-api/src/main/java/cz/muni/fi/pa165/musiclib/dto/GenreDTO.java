@@ -5,18 +5,18 @@ package cz.muni.fi.pa165.musiclib.dto;
  * @version 16/11/2015
  */
 public class GenreDTO {
-   
+
     private Long id;
-    
+
     private String title;
 
-    public GenreDTO(){
+    public GenreDTO() {
     }
-    
-    public GenreDTO(Long id){
+
+    public GenreDTO(Long id) {
         this.id = id;
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -41,21 +41,20 @@ public class GenreDTO {
         if (obj == null) {
             return false;
         }
-        if(this == obj){
+        if (this == obj) {
             return true;
         }
         if (!(obj instanceof AlbumDTO)) {
             return false;
         }
-       
+
         final GenreDTO other = (GenreDTO) obj;
-        
-        if((title != null) ? !title.equals(other.getTitle()): other.getTitle()!= null){
+
+        if ((title != null) ? !title.equals(other.getTitle()) : other.getTitle() != null) {
             return false;
         }
-        
+
         return true;
     }
-    
-    
+
 }
