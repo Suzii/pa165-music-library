@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author zdank
+ * @author milan
  */
 public class MusicianServiceImpl implements MusicianService {
 
@@ -16,32 +16,32 @@ public class MusicianServiceImpl implements MusicianService {
     
     @Override
     public void create(Musician musician) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        musicianDao.create(musician);
     }
 
     @Override
     public Musician update(Musician musician) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return musicianDao.update(musician);
     }
 
     @Override
     public void remove(Musician musician) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        musicianDao.remove(musician);
     }
 
     @Override
     public Musician findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return musicianDao.findById(id);
     }
 
     @Override
     public List<Musician> findByArtistName(String artistName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return musicianDao.findByArtistName(artistName);
     }
 
     @Override
     public List<Musician> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return musicianDao.findAll();
     }
     
 }

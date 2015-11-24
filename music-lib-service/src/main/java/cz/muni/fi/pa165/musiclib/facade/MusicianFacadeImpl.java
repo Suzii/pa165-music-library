@@ -1,7 +1,8 @@
 package cz.muni.fi.pa165.musiclib.facade;
 
 /**
- * @author Martin Stefanko (mstefank@redhat.com)
+ * @author Milan
  */
 public class MusicianFacadeImpl implements MusicianFacade {
+    
 }
