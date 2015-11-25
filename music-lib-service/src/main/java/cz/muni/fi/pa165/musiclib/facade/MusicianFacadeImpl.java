@@ -29,29 +29,29 @@ public class MusicianFacadeImpl implements MusicianFacade {
         return musician.getId();
     }
 
-    @Override
+ /*   @Override
     public void updateMusician(MusicianDTO musician) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
-
+*/
     @Override
     public void removeMusician(Long musicianId) {
-        
+        musicianService.remove(musicianService.findById(musicianId));
     }
 
     @Override
     public List<MusicianDTO> getAllMusicians() {
-        return null;
+        return beanMappingService.mapTo(musicianService.findAll(), MusicianDTO.class);
     }
 
     @Override
     public MusicianDTO getMusicianById(Long musicianId) {
-        return null;
+        return beanMappingService.mapTo(musicianService.findById(musicianId), MusicianDTO.class);
     }
 
     @Override
     public List<MusicianDTO> getMusicianByArtistName(String artistName) {
-        return null;
+        return beanMappingService.mapTo(musicianService.findByArtistName(artistName), MusicianDTO.class);
     }
 
 }

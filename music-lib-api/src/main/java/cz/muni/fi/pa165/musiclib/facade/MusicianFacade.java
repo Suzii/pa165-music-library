@@ -15,14 +15,14 @@ public interface MusicianFacade {
     * @return id of newly created song
     */    
     Long createMusician(MusicianDTO musician);
-    
+
     /**
      * Updates musician 
      * 
      * @param musician
      */
-    void updateMusician (MusicianDTO musician);
-    
+    //void updateMusician (MusicianDTO musician);
+
     /**
      * Deletes musician 
      * 
