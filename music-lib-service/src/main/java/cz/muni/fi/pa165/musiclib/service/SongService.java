@@ -14,14 +14,16 @@ import java.util.List;
  */
 public interface SongService {
     /**
-     * Creates new song.
+     * Creates new song and assigns it first free position on album.
+     * If song is not part of the album yet, position will be set to 0.
      *
      * @param song entity to be created
      */
     void create(Song song);
 
     /**
-     * Updates song.
+     * Updates song, checks if the positionInAlbum is really free on Album
+     * and if not finds first assignable position.
      *
      * @param song entity to be updated
      * @return updated song entity
