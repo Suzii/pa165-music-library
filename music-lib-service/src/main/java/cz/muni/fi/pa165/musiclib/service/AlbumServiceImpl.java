@@ -126,11 +126,19 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public void removeSong(Album album, Song song) {
+        if (album == null) {
+            throw new IllegalArgumentException("album cannot be null");
+        }
+        if (song == null) {
+            throw new IllegalArgumentException("song cannot be null");
+        }
+
         if (!album.getSongs().contains(song)) {
             throw new MusicLibServiceException("Album does not contains the desired song; Album: "
                     + album.getId() + ", song: " + song.getId());
         }
         album.removeSong(song);
+        song.setAlbum(null);
     }
 
     @Override
