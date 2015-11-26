@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
-import cz.muni.fi.pa165.musiclib.dto.GenreNewTitleDTO;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ public interface GenreFacade {
 
     List<GenreDTO> getGenreByTitle(String title);
 
-    void changeTitle(GenreNewTitleDTO genre);
+    void changeTitle(GenreDTO genre);
 
     void deleteGenre(Long genreId);
 }
