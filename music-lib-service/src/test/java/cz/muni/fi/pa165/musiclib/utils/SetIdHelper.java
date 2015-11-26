@@ -5,7 +5,7 @@
  */
 package cz.muni.fi.pa165.musiclib.utils;
 
-import cz.muni.fi.pa165.musiclib.entity.Album;
+//import cz.muni.fi.pa165.musiclib.entity.Album;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -15,7 +15,7 @@ import java.lang.reflect.Method;
  */
 public class SetIdHelper {
   
-    public static void setId(Album persistentObject, Long id) {
+    public static void setId(Object persistentObject, Long id) {
         try {
             Method setIdMethod = findMethod(persistentObject.getClass(),"setId");
             setIdMethod.setAccessible(true);
