@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
+import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import java.util.List;
 
@@ -10,12 +11,13 @@ import java.util.List;
  */
 public interface SongFacade {
     /**
-     * Creates new song.
+     * Creates new song as part of given album.
      *
      * @param song entity to be created
+     * @param albumId id of an album to which song belong
      * @return id of newly created song
      */
-    Long create(SongDTO song);
+    Long create(SongCreateDTO song, Long albumId);
     
     void addYoutubeLink(SongAddYoutubeLinkDTO addYoutubeLinkDTO);
 

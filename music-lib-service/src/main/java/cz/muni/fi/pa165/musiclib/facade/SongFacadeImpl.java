@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
+import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
@@ -38,9 +39,17 @@ public class SongFacadeImpl implements SongFacade {
     private MusicianService musicianService; 
     
     @Override
-    public Long create(SongDTO song) {
-        songService.create(beanMappingService.mapTo(song, Song.class));
-        return song.getId();
+    public Long create(SongCreateDTO song, Long albumId) {
+        Song newSong = new Song();
+        newSong.setTitle(song.getTitle());
+        newSong.setCommentary(song.getCommentary());
+        newSong.setBitrate(song.getBitrate());
+        newSong.setGenre(genreService.findById(song.getGenreId()));
+        newSong.setMusician(musicianService.findById(song.getMusicianId()));
+        newSong.setAlbum(albumService.findById(albumId));
+        
+        songService.create(newSong);
+        return newSong.getId();
     }    
     
     @Override
