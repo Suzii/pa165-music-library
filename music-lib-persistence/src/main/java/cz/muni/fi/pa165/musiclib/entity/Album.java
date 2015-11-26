@@ -104,7 +104,8 @@ public class Album {
     }
 
     public void setSongs(List<Song> songs) {
-        Collections.copy(this.songs, songs);
+        //Collections.copy(this.songs, songs);
+        this.songs = new ArrayList<>(songs);
     }
 
     public void addSong(Song song) {

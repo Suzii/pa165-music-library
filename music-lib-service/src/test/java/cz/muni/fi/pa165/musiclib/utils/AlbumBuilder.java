@@ -62,7 +62,7 @@ public class AlbumBuilder {
     }
 
     public AlbumBuilder songs(List<Song> songs) {
-        this.songs = new ArrayList<>(songs);
+        this.songs = (songs != null) ? songs : new ArrayList<Song>();
         return this;
     }
 
