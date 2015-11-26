@@ -5,9 +5,7 @@ import cz.muni.fi.pa165.musiclib.dao.AlbumDao;
 import cz.muni.fi.pa165.musiclib.dao.SongDao;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
-import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
-import cz.muni.fi.pa165.musiclib.enums.Sex;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
 import cz.muni.fi.pa165.musiclib.utils.AlbumBuilder;
@@ -19,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.hibernate.service.spi.ServiceException;
-import static org.mockito.AdditionalAnswers.returnsFirstArg;
 import org.mockito.InjectMocks;
 import static org.mockito.Matchers.any;
 import org.mockito.Mock;
@@ -48,13 +45,13 @@ import org.testng.annotations.Test;
 public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
     @Mock
-    public SongDao songDao;
+    private SongDao songDao;
 
     @Mock
-    public AlbumDao albumDao;
+    private AlbumDao albumDao;
 
     @InjectMocks
-    public AlbumService albumService = new AlbumServiceImpl();
+    private AlbumService albumService = new AlbumServiceImpl();
 
     AlbumBuilder albumBuilder = new AlbumBuilder();
     SongBuilder songBuilder = new SongBuilder();
