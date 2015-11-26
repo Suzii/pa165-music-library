@@ -32,7 +32,7 @@ public class AlbumServiceImpl implements AlbumService {
     public void create(Album album) {
         try {
             albumDao.create(album);
-        } catch(ConstraintViolationException | PersistenceException ex) {
+        } catch(IllegalArgumentException | ConstraintViolationException | PersistenceException ex) {
             throw new MusicLibDataAccessException("album create error", ex);
         }
     }
@@ -41,7 +41,7 @@ public class AlbumServiceImpl implements AlbumService {
     public Album update(Album album) {
         try {
             return albumDao.update(album);
-        } catch (ConstraintViolationException | PersistenceException ex) {
+        } catch (IllegalArgumentException | ConstraintViolationException | PersistenceException ex) {
             throw new MusicLibDataAccessException("album update error", ex);
         }
     }
