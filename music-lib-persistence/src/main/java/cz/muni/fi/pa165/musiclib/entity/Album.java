@@ -43,6 +43,14 @@ public class Album {
     @OneToMany(mappedBy = "album")
         private List<Song> songs = new ArrayList<>();
 
+    public Album() {
+    }
+
+    public Album(Long id) {
+        this();
+        this.id = id;
+    }
+    
     public Long getId() {
         return id;
     }
