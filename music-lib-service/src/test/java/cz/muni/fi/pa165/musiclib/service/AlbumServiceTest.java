@@ -61,8 +61,6 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     MusicianBuilder musicianBuilder = new MusicianBuilder();
     GenreBuilder genreBuilder = new GenreBuilder();
 
-    private Musician musician1;
-    private Musician musician2;
     private Song song1A;
     private Song song1B;
     private Song song2A;
@@ -80,10 +78,6 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void init() {
-
-        musician1 = musicianBuilder.artistName("Bruno Mars").sex(Sex.MALE).build();
-        musician2 = musicianBuilder.artistName("Adelle").sex(Sex.FEMALE).build();
-
         song1A = songBuilder.title("Uptown funk").build();
         song1B = songBuilder.title("Locked out of heaven").build();
         song2A = songBuilder.title("Someone like you").build();
@@ -116,72 +110,70 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         when(albumDao.findById(1l)).thenReturn(album1);
         when(albumDao.findById(2l)).thenReturn(album2);
         when(albumDao.findById(0l)).thenReturn(null);
-        
+
         //create
         doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
                 Object argument = invocation.getArguments()[0];
-                if(argument == null) {
+                if (argument == null) {
                     throw new IllegalArgumentException();
                 }
 
                 Album album = (Album) argument;
-                if(album.getId() != null){
+                if (album.getId() != null) {
                     throw new IllegalArgumentException();
                 }
-                if(album.getTitle() == "Dupe"){
+                if ("Dupe".equals(album.getTitle())) {
                     throw new IllegalArgumentException();
                 }
-                                
-                SetIdHelper.setId(album, 42l);                
+
+                SetIdHelper.setId(album, 42l);
                 return null;
             }
         }).when(albumDao).create(any(Album.class));
-        
+
         //update
         doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
                 Object argument = invocation.getArguments()[0];
-                if(argument == null) {
+                if (argument == null) {
                     throw new IllegalArgumentException();
                 }
-                
+
                 Album album = (Album) argument;
-                if(album.getId() == null){
+                if (album.getId() == null) {
                     throw new IllegalArgumentException();
                 }
-                if(album.getTitle() == "Dupe"){
+                if ("Dupe".equals(album.getTitle())) {
                     throw new IllegalArgumentException();
-                }                                
-                
+                }
+
                 return cloneAlbum(album);
             }
         }).when(albumDao).update(any(Album.class));
-        
+
         //remove
         doAnswer(new Answer<Object>() {
             @Override
             public Object answer(InvocationOnMock invocation) throws Throwable {
                 Object argument = invocation.getArguments()[0];
-                if(argument == null) {
+                if (argument == null) {
                     throw new IllegalArgumentException();
                 }
-                
+
                 Album album = (Album) argument;
-                if(album.getId() == null){
+                if (album.getId() == null) {
                     throw new IllegalArgumentException();
                 }
-                
+
                 when(albumDao.findById(album.getId())).thenThrow(IllegalArgumentException.class);
-                
+
                 return null;
             }
         }).when(albumDao).remove(any(Album.class));
     }
-    
-
 
     @Test
     public void testClassInitializationTest() {
@@ -193,27 +185,27 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void createTest() {
         Album newAlbum = albumBuilder.id(null).title("Fresh picks").build();
-        
+
         albumService.create(newAlbum);
-        
+
         assertNotNull(newAlbum);
         assertNotNull(newAlbum.getId());
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createIdAlreadySetTest() {
         Album newAlbum = albumBuilder.id(1l).title("Fresh picks").build();
-        
+
         albumService.create(newAlbum);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createWithDuplicateTitleTest() {
         Album newAlbum = albumBuilder.id(1l).title("Dupe").build();
-        
+
         albumService.create(newAlbum);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createNullTest() {
         albumService.create(null);
@@ -222,58 +214,58 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void updateTest() {
         album1.setTitle("New title");
-        
+
         Album updated = albumService.update(album1);
-        
+
         assertNotNull(updated);
         assertNotNull(updated.getId());
         assertEquals(updated.getTitle(), "New title");
         assertDeepEquals(updated, album1);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateWithIdNullTest() {
         Album newAlbum = albumBuilder.id(null).title("Fresh picks").build();
-        
+
         albumService.update(newAlbum);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateWithDuplicateTitleTest() {
         Album newAlbum = albumBuilder.id(1l).title("Dupe").build();
-        
+
         albumService.update(newAlbum);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateNullTest() {
         albumService.update(null);
-    }    
+    }
 
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void removeTest() {
         Album toBeRemoved = albumBuilder.id(666l).title("Corny stuff").build();
-       
+
         when(albumDao.findById(toBeRemoved.getId())).thenReturn(toBeRemoved);
 
         assertNotNull(albumService.findById(toBeRemoved.getId()));
         assertEquals(albumService.findById(toBeRemoved.getId()), toBeRemoved);
-        
+
         albumService.remove(toBeRemoved);
         albumService.findById(toBeRemoved.getId());
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void removeWithIdNullTest() {
         Album newAlbum = albumBuilder.id(null).title("Corny stuff").build();
-        
+
         albumService.remove(newAlbum);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void removeNullTest() {
         albumService.remove(null);
-    }    
+    }
 
     @Test
     public void findByIdTest() {
@@ -335,7 +327,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void removeSongSuccessTest() {
         assertEquals(album1.getSongs().size(), 2);
-        
+
         albumService.removeSong(album1, song1A);
         assertEquals(album1.getSongs().size(), 1);
         assertFalse(album1.getSongs().contains(song1A));
@@ -346,46 +338,46 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     public void removeNullSongTest() {
         albumService.removeSong(album1, null);
     }
-    
+
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void removeNullAlbumTest() {
         albumService.removeSong(null, song1A);
     }
-    
+
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void removeNullAlbumNullSongTest() {
         albumService.removeSong(null, null);
     }
-    
+
     @Test(expectedExceptions = MusicLibServiceException.class)
     public void removeWrongSongTest() {
         assertFalse(album1.getSongs().contains(song2A));
-        
+
         albumService.removeSong(album1, song2A);
-    }    
+    }
 
     // 0 : 1
     @Test
-    public void addSongFirstSongTest(){
+    public void addSongFirstSongTest() {
         Album blankAlbum = albumBuilder.title("Brand new album").songs(null).build();
         Song firstSong = songBuilder.title("First song").build();
         albumService.addSong(blankAlbum, firstSong);
-        
+
         assertNotNull(blankAlbum.getSongs());
         assertEquals(blankAlbum.getSongs().size(), 1);
         assertTrue(blankAlbum.getSongs().contains(firstSong));
         assertEquals(firstSong.getAlbum(), blankAlbum);
     }
-    
+
     // 0 : 1
     @Test
-    public void addSongSecondSongTest(){
+    public void addSongSecondSongTest() {
         Album blankAlbum = albumBuilder.title("Brand new album").songs(null).build();
         Song firstSong = songBuilder.title("First song").album(null).build();
         Song secondSong = songBuilder.title("Second song").album(null).build();
         albumService.addSong(blankAlbum, firstSong);
         albumService.addSong(blankAlbum, secondSong);
-        
+
         assertNotNull(blankAlbum.getSongs());
         assertEquals(blankAlbum.getSongs().size(), 1);
         assertTrue(blankAlbum.getSongs().contains(firstSong));
@@ -393,28 +385,28 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         assertTrue(blankAlbum.getSongs().contains(secondSong));
         assertEquals(secondSong.getAlbum(), blankAlbum);
     }
-    
+
     // 3 : 0
     @Test
-    public void addSongWithOkGenreTest(){
+    public void addSongWithOkGenreTest() {
         Song okSong = songBuilder.title("Ok song").album(null).genre(genrePop).build();
         albumService.addSong(album1, okSong);
-        
+
         assertNotNull(album1.getSongs());
         assertEquals(album1.getSongs().size(), 3);
         assertTrue(album1.getSongs().contains(okSong));
         assertEquals(okSong.getAlbum(), album1);
     }
-    
+
     // 3 : 1 should allow to add song that results in 75% ratio for majority genre
     @Test
-    public void addSongWithMinorityGenreGenreTest(){
+    public void addSongWithMinorityGenreGenreTest() {
         Song okSong = songBuilder.title("Ok song").album(null).genre(genrePop).build();
         Song minorityGenreSong = songBuilder.title("Poor folk song").album(null).genre(genreFolk).build();
         albumService.addSong(album1, okSong);
         assertNotNull(album1.getSongs());
         assertTrue(album1.getSongs().contains(okSong));
-        
+
         albumService.addSong(album1, minorityGenreSong);
         assertNotNull(album1.getSongs());
         assertEquals(album1.getSongs().size(), 4);
@@ -427,27 +419,27 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     public void addSongWithWrongGenreTest() {
         albumService.addSong(album1, creepySongWithoutAlbum);
     }
-    
+
     @Test(expectedExceptions = MusicLibServiceException.class)
     public void addSongDuplicateTest() {
         albumService.addSong(album1, song1A);
     }
-    
+
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void addSongAlbumNullTest() {
         albumService.addSong(null, song1A);
     }
-    
+
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void addSongSongNullTest() {
         albumService.addSong(album1, null);
     }
-    
+
     @Test(expectedExceptions = IllegalArgumentException.class)
     public void addSongAlbumNullSongNullTest() {
         albumService.addSong(null, null);
     }
-    
+
     private void assertDeepEquals(Album album01, Album album02) {
         assertEquals(album01.getId(), album02.getId());
         assertEquals(album01.getTitle(), album02.getTitle());
@@ -457,7 +449,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         assertEquals(album01.getAlbumArtMimeType(), album02.getAlbumArtMimeType());
         assertEquals(album01.getSongs(), album02.getSongs());
     }
-    
+
     private Album cloneAlbum(Album album, Long id) {
         return albumBuilder.id(id) //set new id
                 .title(album.getTitle())
@@ -470,7 +462,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
                 .build();
     }
 
-    private Album cloneAlbum(Album album){
+    private Album cloneAlbum(Album album) {
         return cloneAlbum(album, album.getId());
     }
 }
