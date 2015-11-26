@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
-import cz.muni.fi.pa165.musiclib.dto.GenreNewTitleDTO;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.GenreService;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
@@ -26,8 +25,8 @@ public class GenreFacadeimpl implements GenreFacade {
     }
 
     @Override
-    public void changeTitle(GenreNewTitleDTO newGenreTitle) {
-        genreService.changeTitle(genreService.findById(newGenreTitle.getGenreId()),
+    public void changeTitle(GenreDTO newGenreTitle) {
+        genreService.changeTitle(genreService.findById(newGenreTitle.getId()),
                 newGenreTitle.getTitle());
     }
 
