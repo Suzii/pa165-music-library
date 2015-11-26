@@ -47,12 +47,12 @@ public class AlbumBuilder {
     }
 
     public AlbumBuilder dateOfRelease(Date dateOfRelease) {
-        this.dateOfRelease = new Date(dateOfRelease.getTime());
+        this.dateOfRelease = (dateOfRelease != null) ? new Date(dateOfRelease.getTime()) : null;
         return this;
     }
 
     public AlbumBuilder albumArt(byte[] albumArt) {
-        this.albumArt = Arrays.copyOf(albumArt, albumArt.length);
+        this.albumArt = (albumArt != null) ? Arrays.copyOf(albumArt, albumArt.length) : null;
         return this;
     }
 
