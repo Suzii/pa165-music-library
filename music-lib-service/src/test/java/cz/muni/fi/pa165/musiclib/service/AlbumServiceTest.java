@@ -67,7 +67,9 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     private Song song1B;
     private Song song2A;
     private Song song2B;
-    private Genre genre;
+    private Song creepySongWithoutAlbum;
+    private Genre genrePop;
+    private Genre genreFolk;
     private Album album1;
     private Album album2;
 
@@ -86,8 +88,14 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         song1B = songBuilder.title("Locked out of heaven").build();
         song2A = songBuilder.title("Someone like you").build();
         song2B = songBuilder.title("Rolling in the deep").build();
+        creepySongWithoutAlbum = songBuilder
+                .title("Creepy song")
+                .commentary("Does anyone really listenes to folk genre tody?!")
+                .genre(genreFolk)
+                .build();
 
-        genre = genreBuilder.id(1l).title("Pop").build();
+        genrePop = genreBuilder.id(1l).title("Pop").build();
+        genreFolk = genreBuilder.id(2l).title("Folk").build();
         album1 = albumBuilder.id(1l).title("Hooligans").build();
         album2 = albumBuilder.id(2l).title("MDN").build();
 
@@ -96,10 +104,10 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         song2A.setAlbum(album2);
         song2B.setAlbum(album2);
 
-        song1A.setGenre(genre);
-        song1B.setGenre(genre);
-        song2A.setGenre(genre);
-        song2B.setGenre(genre);
+        song1A.setGenre(genrePop);
+        song1B.setGenre(genrePop);
+        song2A.setGenre(genrePop);
+        song2B.setGenre(genrePop);
     }
 
     @BeforeMethod
@@ -324,12 +332,6 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         assertEquals(actual.size(), 0);
     }
 
-    
-    @Test
-    public void addSongTest() {
-
-    }
-
     @Test
     public void removeSongSuccessTest() {
         assertEquals(album1.getSongs().size(), 2);
@@ -360,6 +362,90 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         assertFalse(album1.getSongs().contains(song2A));
         
         albumService.removeSong(album1, song2A);
+    }    
+
+    // 0 : 1
+    @Test
+    public void addSongFirstSongTest(){
+        Album blankAlbum = albumBuilder.title("Brand new album").songs(null).build();
+        Song firstSong = songBuilder.title("First song").build();
+        albumService.addSong(blankAlbum, firstSong);
+        
+        assertNotNull(blankAlbum.getSongs());
+        assertEquals(blankAlbum.getSongs().size(), 1);
+        assertTrue(blankAlbum.getSongs().contains(firstSong));
+        assertEquals(firstSong.getAlbum(), blankAlbum);
+    }
+    
+    // 0 : 1
+    @Test
+    public void addSongSecondSongTest(){
+        Album blankAlbum = albumBuilder.title("Brand new album").songs(null).build();
+        Song firstSong = songBuilder.title("First song").album(null).build();
+        Song secondSong = songBuilder.title("Second song").album(null).build();
+        albumService.addSong(blankAlbum, firstSong);
+        albumService.addSong(blankAlbum, secondSong);
+        
+        assertNotNull(blankAlbum.getSongs());
+        assertEquals(blankAlbum.getSongs().size(), 1);
+        assertTrue(blankAlbum.getSongs().contains(firstSong));
+        assertEquals(firstSong.getAlbum(), blankAlbum);
+        assertTrue(blankAlbum.getSongs().contains(secondSong));
+        assertEquals(secondSong.getAlbum(), blankAlbum);
+    }
+    
+    // 3 : 0
+    @Test
+    public void addSongWithOkGenreTest(){
+        Song okSong = songBuilder.title("Ok song").album(null).genre(genrePop).build();
+        albumService.addSong(album1, okSong);
+        
+        assertNotNull(album1.getSongs());
+        assertEquals(album1.getSongs().size(), 3);
+        assertTrue(album1.getSongs().contains(okSong));
+        assertEquals(okSong.getAlbum(), album1);
+    }
+    
+    // 3 : 1 should allow to add song that results in 75% ratio for majority genre
+    @Test
+    public void addSongWithMinorityGenreGenreTest(){
+        Song okSong = songBuilder.title("Ok song").album(null).genre(genrePop).build();
+        Song minorityGenreSong = songBuilder.title("Poor folk song").album(null).genre(genreFolk).build();
+        albumService.addSong(album1, okSong);
+        assertNotNull(album1.getSongs());
+        assertTrue(album1.getSongs().contains(okSong));
+        
+        albumService.addSong(album1, minorityGenreSong);
+        assertNotNull(album1.getSongs());
+        assertEquals(album1.getSongs().size(), 4);
+        assertTrue(album1.getSongs().contains(minorityGenreSong));
+        assertEquals(minorityGenreSong.getAlbum(), album1);
+    }
+
+    // 2 : 1
+    @Test(expectedExceptions = MusicLibServiceException.class)
+    public void addSongWithWrongGenreTest() {
+        albumService.addSong(album1, creepySongWithoutAlbum);
+    }
+    
+    @Test(expectedExceptions = MusicLibServiceException.class)
+    public void addSongDuplicateTest() {
+        albumService.addSong(album1, song1A);
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void addSongAlbumNullTest() {
+        albumService.addSong(null, song1A);
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void addSongSongNullTest() {
+        albumService.addSong(album1, null);
+    }
+    
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void addSongAlbumNullSongNullTest() {
+        albumService.addSong(null, null);
     }
     
     private void assertDeepEquals(Album album01, Album album02) {

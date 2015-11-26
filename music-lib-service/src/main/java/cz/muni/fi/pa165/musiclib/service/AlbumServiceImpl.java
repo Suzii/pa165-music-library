@@ -109,9 +109,10 @@ public class AlbumServiceImpl implements AlbumService {
                 }
             }
 
+            // TODO : should consider state AFTER addition of new song -> size() + 1
             //compare if the song is suitable for this album
             double albumMajorGenreRatio = genreCountMap.get(majorAlbumGenre) / currSongs.size();
-            if (!song.getGenre().equals(majorAlbumGenre) && albumMajorGenreRatio < 0.2) {
+            if (!song.getGenre().equals(majorAlbumGenre) && albumMajorGenreRatio < 0.4) {
                 throw new MusicLibServiceException("Cannot add song to album, album contains majority "
                     + "of songs in different genre");
             }
@@ -121,6 +122,9 @@ public class AlbumServiceImpl implements AlbumService {
             throw new MusicLibServiceException("Album already contains this song; Album: "
                 + album.getId() + ", song: " + song.getId());
         }
+        
+        //TODO : should call song.setAlbum, which internally calls album.addSong.
+        //but it would be better to somehow also handle position in album which is currently sone in SongService 
         album.addSong(song);
     }
 
