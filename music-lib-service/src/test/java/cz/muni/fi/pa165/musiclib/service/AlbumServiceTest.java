@@ -97,9 +97,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void findByIdTest() {
-        logger.info("Find album by id test...");
-        
-        when(albumService.findById(1l)).thenReturn(album1);
+        when(albumDao.findById(1l)).thenReturn(album1);
         Album actual = albumService.findById(1l);
         
         assertNotNull(actual);
