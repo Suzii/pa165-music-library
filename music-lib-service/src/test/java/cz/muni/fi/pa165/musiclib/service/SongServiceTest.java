@@ -478,19 +478,57 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
     
     // UPDATE bussiness logic
     
-        /*
+/*
     @Test
     public void createWithPositionTest() {
         Song newSong = songBuilder.id(54l).title("Song1").album(album1)
-                       .musician(musician1).genre(genre).build();
+                       .musician(musician1).genre(genre).positionInAlbum(1).build();
         Song newSong2 = songBuilder.id(87l).title("Song2").album(album1)
-                       .musician(musician1).genre(genre).build();
+                       .musician(musician1).genre(genre).positionInAlbum(2).build();
         songService.create(newSong);
         songService.create(newSong2);
         
-        assertEquals(song1B.getPositionInAlbum(), 1);
+        assertEquals(newSong2.getPositionInAlbum(), 2);
     }
     */
+    
+    @Test
+    public void createAlbumSetAndPositionIsZetoTest(){
+        Album blankAlbum = albumBuilder.id(5l).title("BlankAlbum").build();
+        Song song = songBuilder.id(null).title("Poor song").album(blankAlbum).positionInAlbum(0).build();
+        
+        songService.create(song);
+        assertNotNull(song);
+        assertNotNull(song.getAlbum());
+        assertEquals(song.getPositionInAlbum(), 1);
+    }
+   
+    
+    @Test
+    public void createCorrectlySetsPositionTest(){
+        Album albumWithSong = albumBuilder.id(5l).title("BlankAlbum").build();
+        Song oldSong = songBuilder.id(42l).title("Old song").album(albumWithSong).positionInAlbum(1).build();
+        Song newSong = songBuilder.id(null).title("New song").album(albumWithSong).positionInAlbum(0).build();
+        
+        songService.create(newSong);
+        assertNotNull(newSong);
+        assertNotNull(newSong.getAlbum());
+        assertEquals(newSong.getPositionInAlbum(), 2);
+    }
+
+    
+    
+    @Test
+    public void createPositionIsAlreadyTakenButFirstIsAssignedTest(){
+        Album albumWithSong = albumBuilder.id(5l).title("BlankAlbum").build();
+        Song oldSong = songBuilder.id(42l).title("Old song").album(albumWithSong).positionInAlbum(1).build();
+        Song newSong = songBuilder.id(null).title("New song").album(albumWithSong).positionInAlbum(1).build();
+        
+        songService.create(newSong);
+        assertNotNull(newSong);
+        assertNotNull(newSong.getAlbum());
+        assertEquals(newSong.getPositionInAlbum(), 2);
+    }
     
     @Test
     public void updateAlbumSetToNullTest(){
