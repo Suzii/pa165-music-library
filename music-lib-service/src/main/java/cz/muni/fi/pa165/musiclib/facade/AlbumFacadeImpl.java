@@ -9,17 +9,13 @@ import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.SongService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * @author Martin Stefanko (mstefank@redhat.com)
  */
-@Service
-@Transactional
 public class AlbumFacadeImpl implements AlbumFacade {
 
     private final static Logger log = LoggerFactory.getLogger(AlbumFacadeImpl.class);
