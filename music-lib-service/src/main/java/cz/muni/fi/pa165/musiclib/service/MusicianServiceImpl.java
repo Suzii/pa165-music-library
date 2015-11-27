@@ -21,7 +21,7 @@ public class MusicianServiceImpl implements MusicianService {
     public void create(Musician musician) {
         try {
             musicianDao.create(musician);
-        } catch(ConstraintViolationException | PersistenceException ex) {
+        } catch(IllegalArgumentException | ConstraintViolationException | PersistenceException ex) {
             throw new MusicLibDataAccessException("musician create error", ex);
         }
     }
@@ -30,7 +30,7 @@ public class MusicianServiceImpl implements MusicianService {
     public Musician update(Musician musician) {
         try {
         return musicianDao.update(musician);
-        } catch(ConstraintViolationException | PersistenceException ex) {
+        } catch(IllegalArgumentException | ConstraintViolationException | PersistenceException ex) {
            throw new MusicLibDataAccessException("musician update error", ex);
         }
     }
