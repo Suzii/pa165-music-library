@@ -50,8 +50,12 @@ public class SongServiceImpl implements SongService {
         }
 
         try {
-            if(song.getPositionInAlbum() == 0){
-                song.setPositionInAlbum(getFirstFreePositionInAlbum(song));
+            if(song.getAlbum() == null){
+                song.setPositionInAlbum(0);
+            }
+            else if(song.getPositionInAlbum() == 0){
+                int newPosition = getFirstFreePositionInAlbum(song);
+                song.setPositionInAlbum(newPosition);
             }
             else if(!isDesiredPositionFreeOnAlbum(song)){
                 throw new MusicLibServiceException("position on album is not free");
@@ -122,7 +126,7 @@ public class SongServiceImpl implements SongService {
             return 0;
         }
         
-        Album album = albumDao.findById(song.getAlbum().getId());
+        Album album = song.getAlbum();//albumDao.findById(song.getAlbum().getId());
         if (album == null) {
             return 0;
         }
@@ -144,7 +148,7 @@ public class SongServiceImpl implements SongService {
     }
 
     private boolean isDesiredPositionFreeOnAlbum(Song song) {
-        Album album = albumDao.findById(song.getAlbum().getId());
+        Album album = song.getAlbum();//albumDao.findById(song.getAlbum().getId());
         for(Song s : album.getSongs()){
             if(!s.equals(song) && s.getPositionInAlbum() == song.getPositionInAlbum()){
                 return false;
