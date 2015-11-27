@@ -144,7 +144,7 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
         albumNewTitleDTO.setValue("New title");
 
         albumFacade.changeTitle(albumNewTitleDTO);
-        verify(albumService).changeTitle(album1, albumNewTitleDTO.getValue());
+        assertEquals(album1.getTitle(), albumNewTitleDTO.getValue());
     }
     
     @Test
