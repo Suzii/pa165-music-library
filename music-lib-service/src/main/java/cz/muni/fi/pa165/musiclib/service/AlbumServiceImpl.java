@@ -24,9 +24,6 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Inject
     private AlbumDao albumDao;
-
-    @Inject
-    private SongDao songDao;
     
     @Override
     public void create(Album album) {
@@ -96,6 +93,7 @@ public class AlbumServiceImpl implements AlbumService {
         if (song.getMusician() == null) {
             throw new MusicLibServiceException("musician of song cannot be null");
         }
+
         //business method #1
         List<Song> currSongs = album.getSongs();
         Map<Genre, Integer> genreCountMap = new HashMap<>();

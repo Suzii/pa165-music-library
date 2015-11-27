@@ -5,8 +5,10 @@ import cz.muni.fi.pa165.musiclib.dto.UserDTO;
 import cz.muni.fi.pa165.musiclib.entity.User;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.UserService;
+import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,6 +16,8 @@ import java.util.List;
  * @author xstefank (422697@mail.muni.cz)
  * @version 11/21/15
  */
+@Service
+@Transactional
 public class UserFacadeImpl implements UserFacade {
 
     @Inject
