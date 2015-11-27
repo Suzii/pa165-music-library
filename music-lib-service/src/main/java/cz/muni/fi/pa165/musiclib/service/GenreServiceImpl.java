@@ -21,7 +21,7 @@ public class GenreServiceImpl implements GenreService {
     public void create(Genre genre) {
         try {
             genreDao.create(genre);
-        } catch (EntityExistsException | IllegalArgumentException | TransactionRequiredException e) {
+        } catch (EntityExistsException | IllegalArgumentException | TransactionRequiredException | NullPointerException e) {
             throw new MusicLibDataAccessException("genre create error", e);
         }
     }
@@ -30,7 +30,7 @@ public class GenreServiceImpl implements GenreService {
     public Genre update(Genre genre) {
         try {
             return genreDao.update(genre);
-        } catch (IllegalArgumentException | TransactionRequiredException e) {
+        } catch (IllegalArgumentException | TransactionRequiredException | NullPointerException e) {
             throw new MusicLibDataAccessException("genre update error", e);
         }
     }
@@ -39,7 +39,7 @@ public class GenreServiceImpl implements GenreService {
     public void remove(Genre genre) {
         try {
             genreDao.remove(genre);
-        } catch (IllegalArgumentException | TransactionRequiredException e) {
+        } catch (IllegalArgumentException | TransactionRequiredException | NullPointerException e) {
             throw new MusicLibDataAccessException("genre remove error", e);
         }
     }
@@ -48,7 +48,7 @@ public class GenreServiceImpl implements GenreService {
     public Genre findById(Long id) {
         try {
             return genreDao.findById(id);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | NullPointerException e) {
             throw new MusicLibDataAccessException("genre findById error", e);
         }
     }
@@ -57,7 +57,7 @@ public class GenreServiceImpl implements GenreService {
     public List<Genre> findByTitle(String title) {
         try {
             return genreDao.findByTitle(title);
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | NullPointerException e) {
             throw new MusicLibDataAccessException("genre findByTitle error", e);
         }
     }
@@ -66,7 +66,7 @@ public class GenreServiceImpl implements GenreService {
     public List<Genre> findAll() {
         try {
             return genreDao.findAll();
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | NullPointerException e) {
             throw new MusicLibDataAccessException("genre findAll error", e);
         }
     }
@@ -76,7 +76,7 @@ public class GenreServiceImpl implements GenreService {
         try {
             genre.setTitle(title);
             genreDao.update(genre);
-        } catch (IllegalArgumentException | TransactionRequiredException e) {
+        } catch (IllegalArgumentException | TransactionRequiredException | NullPointerException e) {
             throw new MusicLibDataAccessException("genre changeTitle error", e);
         }
     }
