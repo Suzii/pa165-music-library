@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  * Musician service that provides all business logic for musician entities. 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author zdank
  * @version 16/11/2015
  */
+@Service
 public interface MusicianService {
     /**
      * Creates new musician.

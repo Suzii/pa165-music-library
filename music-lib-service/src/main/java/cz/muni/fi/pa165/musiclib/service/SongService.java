@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  * Song service that provides all business logic for song entities. 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author zdank
  * @version 16/11/2015
  */
+@Service
 public interface SongService {
     /**
      * Creates new song and assigns it first free position on album.

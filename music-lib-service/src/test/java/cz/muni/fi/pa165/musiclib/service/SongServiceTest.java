@@ -48,54 +48,64 @@ import org.testng.annotations.Test;
 
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class SongServiceTest extends AbstractTestNGSpringContextTests{
+
+    @Mock
+    public MusicianDao musicianDao;
     
     @Mock
-    private  SongDao songDao;
-    
+    public SongDao songDao;
+
     @Mock
-    private AlbumDao albumDao;
-    
+    public GenreDao genreDao;
+
     @Mock
-    private MusicianDao musicianDao;
+    public AlbumDao albumDao;
     
     @InjectMocks
     private SongService songService = new SongServiceImpl();
-    
-    AlbumBuilder albumBuilder = new AlbumBuilder();
-    SongBuilder songBuilder = new SongBuilder();
+
     MusicianBuilder musicianBuilder = new MusicianBuilder();
+    SongBuilder songBuilder = new SongBuilder();
     GenreBuilder genreBuilder = new GenreBuilder();
+    AlbumBuilder albumBuilder = new AlbumBuilder();
 
     private Musician musician1;
     private Musician musician2;
+    private Genre genre;
+    private Album album1;
+    private Album album2;
     private Song song1A;
     private Song song1B;
     private Song song2A;
     private Song song2B;
-    private Genre genre;
-    private Album album1;
-    private Album album2;
-    
+
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
     
     @BeforeMethod
-    public void init() {
+    private void init() {
 
-        musician1 = musicianBuilder.artistName("Jon Hopkins").sex(Sex.MALE).build();
-        musician2 = musicianBuilder.artistName("John Talabot").sex(Sex.MALE).build();
+        genre = genreBuilder.title("genre title").build();
+        genreDao.create(genre);
 
-        song1A = songBuilder.id(1L).title("Open eye signal").build();
-        song1B = songBuilder.id(2L).title("Collider").build();
-        song2A = songBuilder.id(3L).title("Oro y sangre").build();
-        song2B = songBuilder.id(4L).title("So will be now").build();
+        musician1 = musicianBuilder.artistName("artist1").sex(Sex.MALE).build();
+        musician2 = musicianBuilder.artistName("artist2").sex(Sex.FEMALE).build();
 
-        genre = genreBuilder.id(1l).title("Electronica").build();
-        
-        album1 = albumBuilder.id(1l).title("Domino").build();
-        album2 = albumBuilder.id(2l).title("Fin").build();
+        musicianDao.create(musician1);
+        musicianDao.create(musician2);
+
+        album1 = albumBuilder.title("album1").build();
+        album2 = albumBuilder.title("album2").build();
+
+        albumDao.create(album1);
+        albumDao.create(album2);
+
+        song1A = songBuilder.title("song1").build();
+        song1B = songBuilder.title("song2").build();
+        song2A = songBuilder.title("song3").build();
+        song2B = songBuilder.title("song4").build();
 
         song1A.setAlbum(album1);
         song1B.setAlbum(album1);
@@ -106,13 +116,13 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         song1B.setGenre(genre);
         song2A.setGenre(genre);
         song2B.setGenre(genre);
-        
+
         song1A.setMusician(musician1);
         song1B.setMusician(musician2);
         song2A.setMusician(musician1);
         song2B.setMusician(musician2);
     }
-
+    
     @BeforeMethod
     public void initMockBehaviour(){
         when(songDao.findById(1l)).thenReturn(song1A);
@@ -138,6 +148,43 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
             }
         }).when(songDao).create(any(Song.class));
         
+        //update
+        doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                Object argument = invocation.getArguments()[0];
+                if (argument == null) {
+                    throw new IllegalArgumentException();
+                }
+
+                Song song = (Song) argument;
+                if (song.getId() == null) {
+                    throw new IllegalArgumentException();
+                }
+
+                return cloneSong(song);
+            }
+        }).when(songDao).update(any(Song.class));
+
+        //remove
+        doAnswer(new Answer<Object>() {
+            @Override
+            public Object answer(InvocationOnMock invocation) throws Throwable {
+                Object argument = invocation.getArguments()[0];
+                if (argument == null) {
+                    throw new IllegalArgumentException();
+                }
+
+                Song song = (Song) argument;
+                if (song.getId() == null) {
+                    throw new IllegalArgumentException();
+                }
+
+                when(songDao.findById(song.getId())).thenThrow(IllegalArgumentException.class);
+
+                return null;
+            }
+        }).when(songDao).remove(any(Song.class));
         
         
         when(songDao.findById(1L)).thenReturn(song1A);
@@ -243,8 +290,8 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
     }
     
     
-    
     /*
+    
     @Test
     public void createValidTest(){
         Song song = songBuilder.title("Subtitle").album(album1).musician(musician1).genre(genre).build();
@@ -281,6 +328,22 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
     @Test(expectedExceptions = NullPointerException.class)
     public void createNullTest(){
         songService.create(null);
+    }
+    
+    private Song cloneSong(Song song, Long id) {
+        return songBuilder.id(id) //set new id
+                .title(song.getTitle())
+                .commentary(song.getCommentary())
+                .positionInAlbum(song.getPositionInAlbum())
+                .bitrate(song.getBitrate())
+                .album(song.getAlbum())
+                .musician(song.getMusician())
+                .genre(song.getGenre())
+                .build();
+    }
+
+    private Song cloneSong(Song song) {
+        return cloneSong(song, song.getId());
     }
     
 }
