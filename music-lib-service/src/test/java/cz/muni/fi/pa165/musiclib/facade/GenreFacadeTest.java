@@ -106,14 +106,14 @@ public class GenreFacadeTest extends AbstractTestNGSpringContextTests {
         verify(genreService).findAll();
         assertNotNull(result);
         assertFalse(result.isEmpty());
-        assertEquals(result.get(0).getTitle(), genre01.getTitle());
+        assertEquals(result.get(0).getId(), genre01.getId());
     }
 
     @Test
     public void findByIdValidTest() {
         GenreDTO result = genreFacade.getGenreById(genre01.getId());
         assertNotNull(result);
-        assertEquals(genre01.getTitle(), result.getTitle());
+        assertEquals(genre01.getId(), result.getId());
     }
 
     @Test
@@ -121,6 +121,6 @@ public class GenreFacadeTest extends AbstractTestNGSpringContextTests {
         List<GenreDTO> result = genreFacade.getGenreByTitle(genre01.getTitle());
         assertNotNull(result);
         assertFalse(result.isEmpty());
-        assertEquals(genre01.getTitle(), result.get(0).getTitle());
+        assertEquals(genre01.getId(), result.get(0).getId());
     }
 }
