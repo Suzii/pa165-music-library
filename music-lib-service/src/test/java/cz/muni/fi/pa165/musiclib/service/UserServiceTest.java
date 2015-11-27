@@ -2,11 +2,10 @@ package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.config.ServiceConfiguration;
 import cz.muni.fi.pa165.musiclib.dao.UserDao;
-import cz.muni.fi.pa165.musiclib.entity.*;
-import cz.muni.fi.pa165.musiclib.enums.Sex;
+import cz.muni.fi.pa165.musiclib.entity.User;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
-import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
-import cz.muni.fi.pa165.musiclib.utils.*;
+import cz.muni.fi.pa165.musiclib.utils.SetIdHelper;
+import cz.muni.fi.pa165.musiclib.utils.UserBuilder;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -18,7 +17,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doAnswer;
@@ -41,25 +42,10 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService = new UserServiceImpl();
 
-    AlbumBuilder albumBuilder = new AlbumBuilder();
-    SongBuilder songBuilder = new SongBuilder();
-    MusicianBuilder musicianBuilder = new MusicianBuilder();
-    GenreBuilder genreBuilder = new GenreBuilder();
     UserBuilder userBuilder = new UserBuilder();
 
     private User user01;
     private User user02;
-
-    private Song song1A;
-    private Song song1B;
-    private Song song2A;
-    private Song song2B;
-    private Song creepySongWithoutAlbum;
-    private Genre genrePop;
-    private Genre genreFolk;
-    private Musician musician;
-    private Album album1;
-    private Album album2;
 
     @BeforeClass
     public void setup() throws ServiceException {
@@ -73,33 +59,6 @@ public class UserServiceTest {
 
         user02 = userBuilder.id(2L).email("nolol@gmail.com").passwordHash("qwe")
                 .firstName("Janko").lastName("Mrkvicka").admin(false).build();
-
-        musician = new MusicianBuilder().id(1l).artistName("Random musician").dateOfBirth(new Date(42)).sex(Sex.MALE).build();
-        song1A = songBuilder.title("Uptown funk").musician(musician).build();
-        song1B = songBuilder.title("Locked out of heaven").musician(musician).build();
-        song2A = songBuilder.title("Someone like you").musician(musician).build();
-        song2B = songBuilder.title("Rolling in the deep").musician(musician).build();
-        creepySongWithoutAlbum = songBuilder
-                .title("Creepy song")
-                .commentary("Does anyone really listenes to folk genre tody?!")
-                .genre(genreFolk)
-                .build();
-
-        genrePop = genreBuilder.id(1l).title("Pop").build();
-        genreFolk = genreBuilder.id(2l).title("Folk").build();
-
-        album1 = albumBuilder.id(1l).title("Hooligans").build();
-        album2 = albumBuilder.id(2l).title("MDN").build();
-
-        song1A.setAlbum(album1);
-        song1B.setAlbum(album1);
-        song2A.setAlbum(album2);
-        song2B.setAlbum(album2);
-
-        song1A.setGenre(genrePop);
-        song1B.setGenre(genrePop);
-        song2A.setGenre(genrePop);
-        song2B.setGenre(genrePop);
     }
 
     @BeforeMethod
