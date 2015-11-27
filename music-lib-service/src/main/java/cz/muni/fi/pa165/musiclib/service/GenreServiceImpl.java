@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.dao.GenreDao;
+import cz.muni.fi.pa165.musiclib.dao.SongDao;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
+import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
 import java.util.List;
 import javax.inject.Inject;
@@ -16,6 +18,9 @@ public class GenreServiceImpl implements GenreService {
 
     @Inject
     private GenreDao genreDao;
+    
+    @Inject
+    private SongDao songDao;
 
     @Override
     public void create(Genre genre) {
@@ -38,6 +43,9 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public void remove(Genre genre) {
         try {
+            for(Song song : songDao.findByGenre(genre)) {
+                songDao.remove(song);
+            }
             genreDao.remove(genre);
         } catch (IllegalArgumentException | TransactionRequiredException | NullPointerException e) {
             throw new MusicLibDataAccessException("genre remove error", e);

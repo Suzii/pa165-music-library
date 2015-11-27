@@ -27,16 +27,9 @@ public interface MusicianService {
      */
     Musician update (Musician musician);
     
-    
+   
     /**
-     * Update artist name
-     * 
-     * @param artistName 
-     */
-//    void changeArtistName(String artistName);           Not sure whether to implement
-    
-    /**
-     * Removes musician.
+     * Removes musician and all songs associated with him.
      * 
      * @param musician to be removed
      */

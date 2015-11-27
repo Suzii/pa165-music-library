@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.dao.MusicianDao;
+import cz.muni.fi.pa165.musiclib.dao.SongDao;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
+import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
 import java.util.List;
 import javax.inject.Inject;
@@ -17,6 +19,9 @@ public class MusicianServiceImpl implements MusicianService {
     @Inject
     private MusicianDao musicianDao;
     
+    @Inject
+    private SongDao songDao;
+    
     @Override
     public void create(Musician musician) {
         try {
@@ -29,7 +34,7 @@ public class MusicianServiceImpl implements MusicianService {
     @Override
     public Musician update(Musician musician) {
         try {
-        return musicianDao.update(musician);
+            return musicianDao.update(musician);
         } catch(ConstraintViolationException | PersistenceException ex) {
            throw new MusicLibDataAccessException("musician update error", ex);
         }
@@ -39,7 +44,10 @@ public class MusicianServiceImpl implements MusicianService {
     @Override
     public void remove(Musician musician) {
         try {
-        musicianDao.remove(musician);
+            for(Song song : musician.getSongs()) {
+                songDao.remove(song);
+            }
+            musicianDao.remove(musician);
         } catch(IllegalArgumentException | PersistenceException ex) {
             throw new MusicLibDataAccessException("musician remove error", ex);
         }

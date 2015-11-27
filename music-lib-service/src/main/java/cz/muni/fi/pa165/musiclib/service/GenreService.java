@@ -29,7 +29,7 @@ public interface GenreService {
     Genre update(Genre genre);
 
     /**
-     * Removes genre.
+     * Removes genre and all songs associated with it.
      *
      * @param genre entity to be removed
      * @throws IllegalArgumentException if passed genre is null or is not stored
