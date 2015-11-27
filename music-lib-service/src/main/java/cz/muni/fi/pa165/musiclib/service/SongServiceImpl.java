@@ -148,7 +148,7 @@ public class SongServiceImpl implements SongService {
     }
 
     private boolean isDesiredPositionFreeOnAlbum(Song song) {
-        Album album = albumDao.findById(song.getAlbum().getId());
+        Album album = song.getAlbum();//albumDao.findById(song.getAlbum().getId());
         for(Song s : album.getSongs()){
             if(!s.equals(song) && s.getPositionInAlbum() == song.getPositionInAlbum()){
                 return false;
