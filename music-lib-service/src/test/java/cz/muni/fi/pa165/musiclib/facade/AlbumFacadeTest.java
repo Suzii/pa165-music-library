@@ -1,8 +1,6 @@
-package cz.muni.fi.pa165.musiclib.facede;
+package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.config.ServiceConfiguration;
-import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
-import cz.muni.fi.pa165.musiclib.facade.AlbumFacadeImpl;
 import cz.muni.fi.pa165.musiclib.service.AlbumService;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.SongService;
@@ -52,7 +50,7 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
         assertNotNull(albumFacade);
     }
     
-     @BeforeMethod
+    @BeforeMethod
     public void initMocksBehaviour() {
         // findById
         when(albumService.findById(1l)).thenReturn(null);
