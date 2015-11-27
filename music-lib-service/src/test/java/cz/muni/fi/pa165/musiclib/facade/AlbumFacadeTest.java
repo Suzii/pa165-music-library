@@ -20,8 +20,12 @@ import java.util.Arrays;
 import javax.inject.Inject;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import static org.mockito.Matchers.any;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
@@ -175,7 +179,7 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
     @Test
     public void getAlbumByIdTest() {
         albumFacade.getAlbumById(1l);
-        verify(albumService).findById(1l);
+        verify(albumService, atLeastOnce()).findById(1l);
     }
     
     @Test

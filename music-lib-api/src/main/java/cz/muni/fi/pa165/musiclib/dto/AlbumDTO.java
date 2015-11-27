@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.musiclib.dto;
 
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -70,11 +71,11 @@ public class AlbumDTO {
     }
 
     public List<SongDTO> getSongs() {
-        return Collections.unmodifiableList(songs);
+        return songs;
     }
 
     public void setSongs(List<SongDTO> songs) {
-        Collections.copy(this.songs, songs);
+        this.songs = new ArrayList<>(songs);
     }
 
     public void addSong(SongDTO song) {
