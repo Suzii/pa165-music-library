@@ -43,6 +43,13 @@ public class User {
 
     private boolean admin;
 
+    public User() {
+    }
+
+    public User(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }
@@ -125,5 +132,9 @@ public class User {
             return false;
         }
         return true;
+    }
+
+    private void setId(Long id) {
+        this.id = id;
     }
 }

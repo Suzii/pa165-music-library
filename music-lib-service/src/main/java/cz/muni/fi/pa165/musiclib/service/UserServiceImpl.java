@@ -26,6 +26,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(User user, String encryptedPass) {
+        if(user == null) {
+            throw new IllegalArgumentException("user cannot be null");
+        }
+        if(encryptedPass == null) {
+            throw new IllegalArgumentException("password cannot be null");
+        }
+
         user.setPasswordHash(createHash(encryptedPass));
         try {
             userDao.create(user);
@@ -36,6 +43,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean authenticate(User user, String pass) {
+        if(user == null) {
+            throw new IllegalArgumentException("user cannot be null");
+        }
         return validatePassword(pass, user.getPasswordHash());
     }
 
