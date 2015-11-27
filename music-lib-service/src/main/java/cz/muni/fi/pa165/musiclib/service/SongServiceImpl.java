@@ -104,6 +104,10 @@ public class SongServiceImpl implements SongService {
     }
     
     private int getFirstFreePositionInAlbum(Song song) {
+        if (song.getAlbum() == null) {
+            return 0;
+        }
+        
         Album album = albumDao.findById(song.getAlbum().getId());
         if (album == null) {
             return 0;

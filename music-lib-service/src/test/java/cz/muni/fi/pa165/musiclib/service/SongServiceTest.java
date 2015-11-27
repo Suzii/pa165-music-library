@@ -289,28 +289,9 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         assertNull(song);
     }
     
-    
-    /*
-    
-    @Test
-    public void createValidTest(){
-        Song song = songBuilder.title("Subtitle").album(album1).musician(musician1).genre(genre).build();
-                
-        songService.create(song);
-        assertNotNull(song);
-        assertNotNull(song.getId());
-        assertNotNull(song.getGenre());
-        assertNotNull(song.getAlbum());
-        assertNotNull(song.getMusician());
-        assertEquals(song.getTitle(),"Subtitle");               
-        }
-    
     @Test
     public void createTest() {
         Song newSong = songBuilder.id(null).title("Subtitle").album(album1).musician(musician1).genre(genre).build();
-        //newSong.setAlbum(album1);
-       // newSong.setGenre(genre);
-       // newSong.setMusician(musician1);
         
         songService.create(newSong);
         
@@ -324,7 +305,7 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         
         songService.create(newSong);
     }
-    */
+    
     @Test(expectedExceptions = NullPointerException.class)
     public void createNullTest(){
         songService.create(null);
