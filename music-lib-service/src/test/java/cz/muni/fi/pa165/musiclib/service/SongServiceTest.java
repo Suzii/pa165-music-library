@@ -11,6 +11,7 @@ import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.enums.Sex;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
+import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
 import cz.muni.fi.pa165.musiclib.utils.AlbumBuilder;
 import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
 import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
@@ -365,7 +366,6 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
 
         assertNull(song);
     }
-
     
     @Test
     public void createTest() {
@@ -378,6 +378,7 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         assertNotNull(newSong);
         assertNotNull(newSong.getId());
     }
+    
     
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createIdAlreadySetTest() {
@@ -475,4 +476,85 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         return cloneSong(song, song.getId());
     }
     
+    // UPDATE bussiness logic
+    
+        /*
+    @Test
+    public void createWithPositionTest() {
+        Song newSong = songBuilder.id(54l).title("Song1").album(album1)
+                       .musician(musician1).genre(genre).build();
+        Song newSong2 = songBuilder.id(87l).title("Song2").album(album1)
+                       .musician(musician1).genre(genre).build();
+        songService.create(newSong);
+        songService.create(newSong2);
+        
+        assertEquals(song1B.getPositionInAlbum(), 1);
+    }
+    */
+    
+    @Test
+    public void updateAlbumSetToNullTest(){
+        Song song = songBuilder.id(42l).title("Poor song").album(null).positionInAlbum(3).build();
+        
+        songService.update(song);
+        assertNotNull(song);
+        assertNull(song.getAlbum());
+        assertEquals(song.getPositionInAlbum(), 0);
+    }
+    
+    @Test
+    public void updateAlbumSetAndPositionIsZetoTest(){
+        Album blankAlbum = albumBuilder.id(5l).title("BlankAlbum").build();
+        Song song = songBuilder.id(42l).title("Poor song").album(blankAlbum).positionInAlbum(0).build();
+        
+        songService.update(song);
+        assertNotNull(song);
+        assertNotNull(song.getAlbum());
+        assertEquals(song.getPositionInAlbum(), 1);
+    }
+    
+    @Test
+    public void updateAlbumSetAndPositionIsBiggerThenNumberOfSongsTest(){
+        Album blankAlbum = albumBuilder.id(5l).title("BlankAlbum").build();
+        Song song = songBuilder.id(42l).title("Poor song").album(blankAlbum).positionInAlbum(3).build();
+        
+        songService.update(song);
+        assertNotNull(song);
+        assertNotNull(song.getAlbum());
+        assertEquals(song.getPositionInAlbum(), 3);
+    }
+    
+    @Test
+    public void updateCorrectlySetsPositionTest(){
+        Album albumWithSong = albumBuilder.id(5l).title("BlankAlbum").build();
+        Song oldSong = songBuilder.id(42l).title("Old song").album(albumWithSong).positionInAlbum(1).build();
+        Song newSong = songBuilder.id(42l).title("New song").album(albumWithSong).positionInAlbum(0).build();
+        
+        songService.update(newSong);
+        assertNotNull(newSong);
+        assertNotNull(newSong.getAlbum());
+        assertEquals(newSong.getPositionInAlbum(), 2);
+    }
+    
+    @Test
+    public void updateCorrectlySetsPositionToLowestAvailableTest(){
+        Album albumWithSong = albumBuilder.id(5l).title("BlankAlbum").build();
+        Song oldSong = songBuilder.id(42l).title("Old song").album(albumWithSong).positionInAlbum(2).build();
+        Song newSong = songBuilder.id(42l).title("New song").album(albumWithSong).positionInAlbum(0).build();
+        
+        songService.update(newSong);
+        assertNotNull(newSong);
+        assertNotNull(newSong.getAlbum());
+        assertEquals(newSong.getPositionInAlbum(), 1);
+    }
+    
+    
+    @Test(expectedExceptions = MusicLibServiceException.class)
+    public void updatePositionIsAlreadyTakenTest(){
+        Album albumWithSong = albumBuilder.id(5l).title("BlankAlbum").build();
+        Song oldSong = songBuilder.id(42l).title("Old song").album(albumWithSong).positionInAlbum(1).build();
+        Song newSong = songBuilder.id(42l).title("New song").album(albumWithSong).positionInAlbum(1).build();
+        
+        songService.update(newSong);
+    }
 }
