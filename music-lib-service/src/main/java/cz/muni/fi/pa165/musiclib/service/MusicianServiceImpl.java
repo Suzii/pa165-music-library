@@ -46,7 +46,7 @@ public class MusicianServiceImpl implements MusicianService {
     @Override
     public void remove(Musician musician) {
         if(musician == null) {
-            throw new IllegalArgumentException();
+            throw new MusicLibDataAccessException("musician cannot be null");
         }
         try {
             for(Song song : musician.getSongs()) {
