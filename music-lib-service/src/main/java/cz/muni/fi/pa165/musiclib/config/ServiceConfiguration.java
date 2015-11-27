@@ -47,12 +47,6 @@ public class ServiceConfiguration {
             mapping(Musician.class, MusicianDTO.class);
             mapping(Genre.class, GenreDTO.class);
             mapping(User.class, UserDTO.class);
-
-            mapping(AlbumDTO.class, Album.class);
-            mapping(SongDTO.class, Song.class);
-            mapping(MusicianDTO.class, Musician.class);
-            mapping(GenreDTO.class, Genre.class);
-            mapping(UserDTO.class, User.class);
         }
     }
 }
