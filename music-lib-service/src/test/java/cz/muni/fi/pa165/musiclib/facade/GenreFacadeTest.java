@@ -21,11 +21,16 @@ import org.testng.annotations.Test;
 
 import javax.inject.Inject;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 
 /**
@@ -48,6 +53,7 @@ public class GenreFacadeTest extends AbstractTestNGSpringContextTests {
 
     private GenreBuilder genreBuilder = new GenreBuilder();
     private Genre genre01;
+    private Genre genre02;
 
     @BeforeClass
     public void setup() throws ServiceException {
@@ -57,8 +63,12 @@ public class GenreFacadeTest extends AbstractTestNGSpringContextTests {
     @BeforeMethod
     public void init() {
         genre01 = genreBuilder.title("Rock").id(1L).build();
+        genre02 = genreBuilder.title("Pop").id(2L).build();
 
         when(genreService.findById(1L)).thenReturn(genre01);
+        when(genreService.findByTitle(genre01.getTitle())).thenReturn(Collections.singletonList(genre01));
+        when(genreService.findById(2L)).thenReturn(genre02);
+        when(genreService.findAll()).thenReturn(Arrays.asList(genre01, genre02));
     }
 
     @Test
@@ -85,8 +95,32 @@ public class GenreFacadeTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void deleteGenreTest() {
+    public void deleteGenreValidTest() {
         genreFacade.deleteGenre(genre01.getId());
         verify(genreService).remove(genre01);
+    }
+
+    @Test
+    public void getAllGenresValidTest() {
+        List<GenreDTO> result = genreFacade.getAllGenres();
+        verify(genreService).findAll();
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+        assertEquals(result.get(0).getTitle(), genre01.getTitle());
+    }
+
+    @Test
+    public void findByIdValidTest() {
+        GenreDTO result = genreFacade.getGenreById(genre01.getId());
+        assertNotNull(result);
+        assertEquals(genre01.getTitle(), result.getTitle());
+    }
+
+    @Test
+    public void findByTitleValidTest() {
+        List<GenreDTO> result = genreFacade.getGenreByTitle(genre01.getTitle());
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+        assertEquals(genre01.getTitle(), result.get(0).getTitle());
     }
 }
