@@ -4,11 +4,18 @@ import cz.muni.fi.pa165.musiclib.config.ServiceConfiguration;
 import cz.muni.fi.pa165.musiclib.dao.MusicianDao;
 import cz.muni.fi.pa165.musiclib.dao.AlbumDao;
 import cz.muni.fi.pa165.musiclib.dao.SongDao;
+import cz.muni.fi.pa165.musiclib.entity.Album;
+import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
+import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.enums.Sex;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
+import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
+import cz.muni.fi.pa165.musiclib.utils.AlbumBuilder;
+import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
 import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
 import cz.muni.fi.pa165.musiclib.utils.SetIdHelper;
+import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -37,31 +44,24 @@ import org.testng.annotations.Test;
  * @author David Boron
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
-public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
-    
-    @Mock
-    private  SongDao songDao;
-    
+public class MusicianServiceTest extends AbstractTestNGSpringContextTests {
+
     @Mock
     private MusicianDao musicianDao;
-    
-    @Mock
-    private AlbumDao albumDao;
-    
+
     @InjectMocks
     private MusicianService musicianService = new MusicianServiceImpl();
-    
-    
+
     MusicianBuilder musicianBuilder = new MusicianBuilder();
 
     private Musician musician1;
     private Musician musician2;
-    
+
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
-    
+
     @BeforeMethod
     public void init() {
         musician1 = new MusicianBuilder().id(1l).artistName("musician1").dateOfBirth(new Date(1)).sex(Sex.MALE).build();
@@ -86,10 +86,10 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
                 if (musician.getId() != null) {
                     throw new IllegalArgumentException();
                 }
-                if (musician.getArtistName()== null) {
+                if (musician.getArtistName() == null) {
                     throw new IllegalArgumentException();
                 }
-                if (musician.getSex()== null) {
+                if (musician.getSex() == null) {
                     throw new IllegalArgumentException();
                 }
                 if ("existing musician".equals(musician.getArtistName())) {
@@ -116,7 +116,7 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
                 if (musician.getArtistName() == null) {
                     throw new IllegalArgumentException();
                 }
-                if (musician.getSex()== null) {
+                if (musician.getSex() == null) {
                     throw new IllegalArgumentException();
                 }
                 if ("existing musician".equals(musician.getArtistName())) {
@@ -147,7 +147,6 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
         }).when(musicianDao).remove(any(Musician.class));
     }
 
-
     private Musician cloneMusician(Musician musician, Long id) {
         return musicianBuilder.id(id) //set new id
                 .artistName(musician.getArtistName())
@@ -160,8 +159,7 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
     private Musician cloneMusician(Musician musician) {
         return cloneMusician(musician, musician.getId());
     }
-    
-    
+
     @Test
     public void createTest() {
         Musician musician = musicianBuilder.artistName("musician name").sex(Sex.MALE).build();
@@ -170,32 +168,32 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
         assertNotNull(musician.getId());
         assertEquals(musician.getArtistName(), "musician name");
     }
-    
+
     @Test
-    public void updateTest(){
+    public void updateTest() {
         musician1.setArtistName("changed name");
-        
+
         Musician updatedMusician = musicianService.update(musician1);
-        
+
         assertNotNull(updatedMusician);
         assertNotNull(updatedMusician.getId());
         assertEquals(updatedMusician.getArtistName(), "changed name");
         assertDeepEquals(updatedMusician, musician1);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void removeTest() {
         Musician musician = musicianBuilder.id(10l).artistName("musician name").build();
 
         when(musicianDao.findById(musician.getId())).thenReturn(musician);
-        
+
         assertNotNull(musicianService.findById(musician.getId()));
         assertEquals(musicianService.findById(musician.getId()), musician);
 
         musicianService.remove(musician);
         musicianService.findById(musician.getId());
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createNullTest() {
         musicianService.create(null);
@@ -206,13 +204,13 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
         Musician musician = musicianBuilder.artistName(null).sex(Sex.MALE).build();
         musicianService.create(musician);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createNullSexTest() {
         Musician musician = musicianBuilder.artistName("musician name").sex(null).build();
         musicianService.create(musician);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createIdSetTest() {
         Musician musician = musicianBuilder.id(1L).artistName("musician name").build();
@@ -224,13 +222,13 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
         Musician musician = musicianBuilder.artistName("existing musician").build();
         musicianService.create(musician);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateIdNullTest() {
         Musician updatedMusician = musicianBuilder.id(null).artistName("musician name").build();
         musicianService.update(updatedMusician);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateNameNullTest() {
         musician1.setArtistName(null);
@@ -242,19 +240,18 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
         Musician updatedMusician = musicianBuilder.id(1l).artistName("existing musician").build();
         musicianService.update(updatedMusician);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateSexNullTest() {
         musician1.setSex(null);
         musicianService.update(musician1);
     }
-    
 
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateNullTest() {
         musicianService.update(null);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void removeIdNullTest() {
         Musician musician = musicianBuilder.id(null).artistName("musician name").build();
@@ -265,26 +262,26 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
     public void removeNullTest() {
         musicianService.remove(null);
     }
-    
+
     @Test
     public void findTest() {
         Musician musician = musicianService.findById(1L);
         assertNotNull(musician);
         assertDeepEquals(musician, musician1);
     }
-    
+
     @Test
     public void findNotExistingIdTest() {
         Musician musician = musicianService.findById(3l);
         assertNull(musician);
     }
-    
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void findNullTest() {
         when(musicianDao.findById(null)).thenThrow(IllegalArgumentException.class);
         musicianService.findById(null);
     }
-    
+
     @Test
     public void findByNameTest() {
         List<Musician> expected = Arrays.asList(musician1);
@@ -295,13 +292,13 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
         assertEquals(current, expected);
         assertDeepEquals(current.get(0), musician1);
     }
-    
+
     @Test
     public void findNullNameTest() {
         List<Musician> musician = musicianService.findByArtistName(null);
         assertTrue(musician.isEmpty());
     }
-    
+
     @Test
     public void findWrongNameTest() {
         List<Musician> musician = musicianService.findByArtistName("not existing name");
@@ -312,7 +309,7 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
     public void findAllTest() {
         when(musicianDao.findAll()).thenReturn(Arrays.asList(musician1, musician2));
         List<Musician> current = musicianService.findAll();
-      
+
         assertNotNull(current);
         assertEquals(current.size(), 2);
         assertDeepEquals(current.get(0), musician1);
@@ -323,7 +320,7 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
     public void findAllEmptyTest() {
         when(musicianDao.findAll()).thenReturn(new ArrayList<Musician>());
         List<Musician> current = musicianService.findAll();
-       
+
         assertNotNull(current);
         assertEquals(current.size(), 0);
     }
@@ -334,6 +331,6 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests{
         assertEquals(musician1.getDateOfBirth(), musician2.getDateOfBirth());
         assertEquals(musician1.getSex(), musician2.getSex());
         assertEquals(musician1.getSongs(), musician2.getSongs());
-    }    
-        
+    }
+
 }
