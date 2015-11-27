@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import javax.validation.ConstraintViolationException;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import static org.mockito.Matchers.any;
@@ -102,10 +103,10 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         albumDao.create(album1);
         albumDao.create(album2);
 
-        song1A = songBuilder.title("song1").build();
-        song1B = songBuilder.title("song2").build();
-        song2A = songBuilder.title("song3").build();
-        song2B = songBuilder.title("song4").build();
+        song1A = songBuilder.id(1l).title("song1").build();
+        song1B = songBuilder.id(2l).title("song2").build();
+        song2A = songBuilder.id(3l).title("song3").build();
+        song2B = songBuilder.id(4l).title("song4").build();
 
         song1A.setAlbum(album1);
         song1B.setAlbum(album1);
@@ -390,7 +391,7 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
     public void createNullTest(){
         songService.create(null);
     }
- /*   
+
     @Test
     public void updateValidTest() {
         song1A.setTitle("new title");
@@ -405,16 +406,17 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         assertNotNull(newSong.getMusician());
     }
     
-    @Test(expectedExceptions = MusicLibDataAccessException.class)
-    public void updateNullTest() {
-        songService.update(null);
-    }
-    
+//    @Test(expectedExceptions = MusicLibDataAccessException.class)
+//    public void updateNullTest() {
+//        songService.update(null);
+//    }
+//    
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateNullTitleTest() {
-        song1A.setTitle(null);
+        Song song = songBuilder.id(5l).title(null).build();
+        when(songDao.update(song)).thenThrow(ConstraintViolationException.class);
 
-        songService.update(song1A);
+        songService.update(song);
     }
 
     @Test(expectedExceptions = MusicLibDataAccessException.class)
@@ -426,11 +428,12 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
 
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateInvalidGenreTest() {
-        Song song = songBuilder.title("bad song").build();
-
+        Song song = songBuilder.id(5l).title("bad song").genre(null).build();
+        when(songDao.update(song)).thenThrow(ConstraintViolationException.class);
+        
         songService.update(song);
     }
-    */
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void removeTest() {
         Song toBeRemoved = songBuilder.id(48L).title("bad song to be removed").build();
@@ -446,7 +449,7 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
 
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void removeWithIdNullTest() {
-        Song newSong = songBuilder.title("bad song to be removed").build();
+        Song newSong = songBuilder.title("bad song to be removed").id(null).build();
 
         songService.remove(newSong);
     }
