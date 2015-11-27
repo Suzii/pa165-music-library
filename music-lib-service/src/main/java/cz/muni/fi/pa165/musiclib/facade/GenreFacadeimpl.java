@@ -6,10 +6,14 @@ import cz.muni.fi.pa165.musiclib.service.GenreService;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import java.util.List;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 /**
  * @author David
  */
+@Service
+@Transactional
 public class GenreFacadeimpl implements GenreFacade {
 
     @Inject
