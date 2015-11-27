@@ -27,7 +27,7 @@ public interface SongService {
     /**
      * Updates song. 
      * If positionInAlbum is set to zero and album is not null, first free 
-     * position will be assigned. 
+     * position will be assigned. If album id null, position will be set to zero.
      *
      * @param song entity to be updated
      * @throws MusicLibServiceException if position on album is not free on album
