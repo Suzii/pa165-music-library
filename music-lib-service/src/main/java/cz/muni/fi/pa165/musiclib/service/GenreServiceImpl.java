@@ -9,11 +9,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityExistsException;
 import javax.persistence.TransactionRequiredException;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author David Boron
  */
+@Service
 public class GenreServiceImpl implements GenreService {
 
     @Inject

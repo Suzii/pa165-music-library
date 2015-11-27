@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.musiclib.service;
+ package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.dao.UserDao;
 import cz.muni.fi.pa165.musiclib.entity.User;
@@ -12,11 +12,13 @@ import javax.persistence.TransactionRequiredException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  * @author xstefank (422697@mail.muni.cz)
  * @version 11/22/15
  */
+ @Service
 public class UserServiceImpl implements UserService {
 
     @Inject

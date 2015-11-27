@@ -15,11 +15,13 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Martin Stefanko (mstefank@redhat.com)
  */
+@Service
 public class AlbumServiceImpl implements AlbumService {
 
     @Inject

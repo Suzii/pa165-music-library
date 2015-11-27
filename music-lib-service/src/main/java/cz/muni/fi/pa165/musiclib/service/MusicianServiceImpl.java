@@ -9,11 +9,13 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author milan
  */
+@Service
 public class MusicianServiceImpl implements MusicianService {
 
     @Inject
