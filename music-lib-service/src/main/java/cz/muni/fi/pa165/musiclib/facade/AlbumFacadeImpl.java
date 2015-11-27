@@ -68,8 +68,9 @@ public class AlbumFacadeImpl implements AlbumFacade {
 
     @Override
     public void changeTitle(AlbumNewTitleDTO newTitle) {
-        albumService.changeTitle(albumService.findById(newTitle.getAlbumId()),
-                newTitle.getValue());
+        Album album = albumService.findById(newTitle.getAlbumId());
+        album.setTitle(newTitle.getValue());
+        albumService.update(album);
     }
 
     @Override

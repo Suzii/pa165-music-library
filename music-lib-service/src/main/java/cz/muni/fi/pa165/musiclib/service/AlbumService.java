@@ -74,12 +74,4 @@ public interface AlbumService {
      * @param song song to be removed
      */
     void removeSong(Album album, Song song);
-
-    /**
-     * Changes the title of the album
-     *
-     * @param album of which the title will be changed
-     * @param title new title
-     */
-    void changeTitle(Album album, String title);
 }

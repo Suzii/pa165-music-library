@@ -153,10 +153,4 @@ public class AlbumServiceImpl implements AlbumService {
         album.removeSong(song);
         song.setAlbum(null);
     }
-
-    @Override
-    public void changeTitle(Album album, String title) {
-        album.setTitle(title);
-    }
-
 }
