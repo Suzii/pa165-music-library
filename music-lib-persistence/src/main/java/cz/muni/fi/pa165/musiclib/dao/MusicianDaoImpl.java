@@ -19,6 +19,9 @@ public class MusicianDaoImpl implements MusicianDao {
     
     @Override
     public void create(Musician musician) {
+        if(musician == null){
+            throw new IllegalArgumentException("Attempted to delete null entity.");
+        }
         em.persist(musician);
     }
 

@@ -62,6 +62,10 @@ public class Musician {
     public Long getId() {
         return id;
     }
+    
+    private void setId(Long id) {
+        this.id = id;
+    }
 
     public String getArtistName() {
         return artistName;
