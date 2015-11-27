@@ -7,7 +7,7 @@ import cz.muni.fi.pa165.musiclib.entity.*;
  * @author Zuzana Dankovcikova
  */
 public class SongBuilder {
-    
+
     private String title;
     private String commentary;
     private int positionInAlbum;    
@@ -15,7 +15,7 @@ public class SongBuilder {
     private Album album;
     private Musician musician;
     private Genre genre;
-    
+
     public SongBuilder title(String title) {
         this.title = title;
         return this;
@@ -53,7 +53,7 @@ public class SongBuilder {
     
     public Song build() {
         Song s = new Song();
-        
+
         s.setTitle(title);
         s.setCommentary(commentary);
         s.setPositionInAlbum(positionInAlbum);
