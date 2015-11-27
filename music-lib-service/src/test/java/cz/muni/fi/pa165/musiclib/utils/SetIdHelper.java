@@ -22,7 +22,7 @@ public class SetIdHelper {
             setIdMethod.invoke(persistentObject, id);
         }
         catch (IllegalAccessException|InvocationTargetException e) {
-            System.out.println(e);
+            System.err.println(e);
         }
     }
   
@@ -34,7 +34,7 @@ public class SetIdHelper {
                 method = entityClass.getDeclaredMethod(methodName,Long.class);
             }
             catch (NoSuchMethodException e) {
-                System.out.println(e);
+                System.err.println(e);
             }finally{
                 entityClass = entityClass.getSuperclass();
             }

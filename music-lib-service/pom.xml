@@ -22,7 +22,6 @@
             <artifactId>music-lib-persistence</artifactId>
             <version>1.0</version>
         </dependency>
-
         <!-- Dozer mapping framework -->
         <dependency>
             <groupId>net.sf.dozer</groupId>

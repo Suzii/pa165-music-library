@@ -313,7 +313,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void findAllEpmtyTest() {
+    public void findAllEmptyTest() {
         when(albumDao.findAll()).thenReturn(new ArrayList<Album>());
         List<Album> actual = albumService.findAll();
 
