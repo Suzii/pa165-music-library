@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
+import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
@@ -39,8 +40,11 @@ public class SongServiceImpl implements SongService {
     @Override
     public Song update(Song song) {
         try {
-            if(!isDesiredPositionFreeOnAlbum(song)){
+            if(song.getPositionInAlbum() == 0){
                 song.setPositionInAlbum(getFirstFreePositionInAlbum(song));
+            }
+            else if(!isDesiredPositionFreeOnAlbum(song)){
+                throw new MusicLibServiceException("position on album is not free");
             }            
             return songDao.update(song);
         } catch (IllegalArgumentException | ConstraintViolationException | PersistenceException ex) {

@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
+import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -24,13 +25,15 @@ public interface SongService {
     void create(Song song);
 
     /**
-     * Updates song, checks if the positionInAlbum is really free on Album
-     * and if not finds first assignable position.
+     * Updates song. 
+     * If positionInAlbum is set to zero and album is not null, first free 
+     * position will be assigned. 
      *
      * @param song entity to be updated
+     * @throws MusicLibServiceException if position on album is not free on album
      * @return updated song entity
      */
-    Song update(Song song);
+    Song update(Song song) throws MusicLibServiceException;
 
     /**
      * Returns the song entity attached to the given id.
