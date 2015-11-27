@@ -50,7 +50,7 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
         assertNotNull(albumFacade);
     }
     
-     @BeforeMethod
+    @BeforeMethod
     public void initMocksBehaviour() {
         // findById
         when(albumService.findById(1l)).thenReturn(null);

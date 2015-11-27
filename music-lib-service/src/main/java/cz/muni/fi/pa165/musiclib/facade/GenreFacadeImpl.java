@@ -15,7 +15,7 @@ import javax.transaction.Transactional;
  */
 @Service
 @Transactional
-public class GenreFacadeimpl implements GenreFacade {
+public class GenreFacadeImpl implements GenreFacade {
 
     @Inject
     private BeanMappingService beanMappingService;

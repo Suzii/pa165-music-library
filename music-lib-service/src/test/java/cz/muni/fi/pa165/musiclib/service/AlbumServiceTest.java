@@ -16,6 +16,8 @@ import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import static org.mockito.Matchers.any;
@@ -367,7 +369,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     // 0 : 1
-    @Test
+    @Test(enabled = false)
     public void addSongSecondSongTest() {
         Album blankAlbum = albumBuilder.title("Brand new album").songs(null).build();
         Song firstSong = songBuilder.title("First song").album(null).build();
@@ -396,7 +398,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     // 3 : 1 should allow to add song that results in 75% ratio for majority genre
-    @Test
+    @Test(enabled = false)
     public void addSongWithMinorityGenreGenreTest() {
         Song okSong = songBuilder.title("Ok song").album(null).genre(genrePop).build();
         Song minorityGenreSong = songBuilder.title("Poor folk song").album(null).genre(genreFolk).build();
