@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Song;
+import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
 
 import java.util.List;
 
@@ -60,12 +61,15 @@ public interface AlbumService {
     List<Album> findAll();
 
     /**
-     * Adds a new song to the album
+     * Adds a new song to the album if the resulting percentage of songs 
+     * with majority same genre on the album will be more than 60%.
      *
      * @param album album to which the song is to be added
+     * @throws MusicLibServiceException if addition of song to the album 
+     *  would result in less than 40% of songs with same genre on album
      * @param song song to be added
      */
-    void addSong(Album album, Song song);
+    void addSong(Album album, Song song) throws MusicLibServiceException;
 
     /**
      * Removes the song from the album
