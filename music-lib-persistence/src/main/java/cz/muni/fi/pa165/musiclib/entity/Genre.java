@@ -64,6 +64,8 @@ public class Genre {
         
         return true;
     }
-    
-    
+
+    private void setId(Long id) {
+        this.id = id;
+    }
 }
