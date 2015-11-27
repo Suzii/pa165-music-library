@@ -204,6 +204,7 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         assertNotNull(albumDao);
         assertNotNull(songDao);
         assertNotNull(musicianDao);
+        assertNotNull(genreDao);
         assertNotNull(songService);
     }
     
@@ -248,6 +249,7 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
 
         assertTrue(song.isEmpty());
     }
+    
 
     @Test
     public void findInvalidMusicianTest() {
@@ -258,6 +260,80 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         assertTrue(song.isEmpty());
     }
 
+     @Test
+    public void findByValidAlbumTest() {
+        List<Song> songs = songService.findByAlbum(album1);
+
+        assertFalse(songs.isEmpty());
+        assertEquals(songs.size(), 2);
+        assertEquals(songs.get(0).getId(), song1A.getId());
+        assertEquals(songs.get(0).getAlbum(), song1A.getAlbum());
+        assertEquals(songs.get(0).getMusician(), song1A.getMusician());
+        assertEquals(songs.get(0).getGenre(), song1A.getGenre());
+        assertEquals(songs.get(1).getId(), song1B.getId());
+        assertEquals(songs.get(1).getAlbum(), song1B.getAlbum());
+        assertEquals(songs.get(1).getMusician(), song1B.getMusician());
+        assertEquals(songs.get(1).getGenre(), song1B.getGenre());
+    }
+
+    @Test
+    public void findNullAlbumTest() {
+        List<Song> song = songService.findByAlbum(null);
+
+        assertTrue(song.isEmpty());
+    }
+    
+
+    @Test
+    public void findInvalidAlbumTest() {
+        Album albumX = albumBuilder.title("albumX").build();
+        
+        List<Song> song = songService.findByAlbum(albumX);
+
+        assertTrue(song.isEmpty());
+    }
+
+     @Test
+    public void findByValidGenreTest() {
+        List<Song> songs = songService.findByGenre(genre);
+
+        assertFalse(songs.isEmpty());
+        assertEquals(songs.size(), 4);
+        assertEquals(songs.get(0).getId(), song1A.getId());
+        assertEquals(songs.get(0).getAlbum(), song1A.getAlbum());
+        assertEquals(songs.get(0).getMusician(), song1A.getMusician());
+        assertEquals(songs.get(0).getGenre(), song1A.getGenre());
+        assertEquals(songs.get(1).getId(), song1B.getId());
+        assertEquals(songs.get(1).getAlbum(), song1B.getAlbum());
+        assertEquals(songs.get(1).getMusician(), song1B.getMusician());
+        assertEquals(songs.get(1).getGenre(), song1B.getGenre());
+        assertEquals(songs.get(2).getId(), song2A.getId());
+        assertEquals(songs.get(2).getAlbum(), song2A.getAlbum());
+        assertEquals(songs.get(2).getMusician(), song2A.getMusician());
+        assertEquals(songs.get(2).getGenre(), song2A.getGenre());
+        assertEquals(songs.get(3).getId(), song2B.getId());
+        assertEquals(songs.get(3).getAlbum(), song2B.getAlbum());
+        assertEquals(songs.get(3).getMusician(), song2B.getMusician());
+        assertEquals(songs.get(3).getGenre(), song2B.getGenre());
+    }
+
+    @Test
+    public void findNullGenreTest() {
+        List<Song> song = songService.findByGenre(null);
+
+        assertTrue(song.isEmpty());
+    }
+    
+
+    @Test
+    public void findInvalidGenreTest() {
+        Genre genreX = genreBuilder.title("another title").build();
+        
+        List<Song> song = songService.findByGenre(genreX);
+
+        assertTrue(song.isEmpty());
+    }
+    
     @Test
     public void findAllTest() {
         List<Song> songs = songService.findAll();
@@ -288,10 +364,13 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
 
         assertNull(song);
     }
+
     
     @Test
     public void createTest() {
-        Song newSong = songBuilder.id(null).title("Subtitle").album(album1).musician(musician1).genre(genre).build();
+        Song newSong = songBuilder.id(null).title("Subtitle").album(album1)
+                       .musician(musician1).genre(genre).build();
+       
         
         songService.create(newSong);
         
@@ -305,10 +384,76 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         
         songService.create(newSong);
     }
+
     
     @Test(expectedExceptions = NullPointerException.class)
     public void createNullTest(){
         songService.create(null);
+    }
+ /*   
+    @Test
+    public void updateValidTest() {
+        song1A.setTitle("new title");
+        
+        Song newSong = songService.update(song1A);
+        
+        assertNotNull(newSong);
+        assertNotNull(newSong.getId());
+        assertNotNull(newSong.getTitle());
+        assertNotNull(newSong.getGenre());
+        assertNotNull(newSong.getAlbum());
+        assertNotNull(newSong.getMusician());
+    }
+    
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
+    public void updateNullTest() {
+        songService.update(null);
+    }
+    
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
+    public void updateNullTitleTest() {
+        song1A.setTitle(null);
+
+        songService.update(song1A);
+    }
+
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
+    public void updateNullIdTest() {
+        Song song = songBuilder.id(null).build();
+
+        songService.update(song);
+    }
+
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
+    public void updateInvalidGenreTest() {
+        Song song = songBuilder.title("bad song").build();
+
+        songService.update(song);
+    }
+    */
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
+    public void removeTest() {
+        Song toBeRemoved = songBuilder.id(48L).title("bad song to be removed").build();
+
+        when(songDao.findById(toBeRemoved.getId())).thenReturn(toBeRemoved);
+
+        assertNotNull(songService.findById(toBeRemoved.getId()));
+        assertEquals(songService.findById(toBeRemoved.getId()), toBeRemoved);
+
+        songService.remove(toBeRemoved);
+        songService.findById(toBeRemoved.getId());
+    }
+
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
+    public void removeWithIdNullTest() {
+        Song newSong = songBuilder.title("bad song to be removed").build();
+
+        songService.remove(newSong);
+    }
+
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
+    public void removeNullTest() {
+        songService.remove(null);
     }
     
     private Song cloneSong(Song song, Long id) {
