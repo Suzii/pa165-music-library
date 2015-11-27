@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  * Genre service that provides all business logic for genre entities.
@@ -9,6 +10,7 @@ import java.util.List;
  * @author zdank
  * @version 16/11/2015
  */
+@Service
 public interface GenreService {
 
     /**
