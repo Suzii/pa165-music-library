@@ -23,6 +23,8 @@ public class MusicianServiceImpl implements MusicianService {
             musicianDao.create(musician);
         } catch(ConstraintViolationException | PersistenceException ex) {
             throw new MusicLibDataAccessException("musician create error", ex);
+        } catch (NullPointerException ex) {
+            throw new IllegalArgumentException("musician create nullPointerException", ex);
         }
     }
 
@@ -30,8 +32,10 @@ public class MusicianServiceImpl implements MusicianService {
     public Musician update(Musician musician) {
         try {
         return musicianDao.update(musician);
-        } catch(ConstraintViolationException | PersistenceException ex) {
-           throw new MusicLibDataAccessException("musician update error", ex);
+        }  catch(ConstraintViolationException | PersistenceException ex) {
+            throw new MusicLibDataAccessException("musician update error", ex);
+        }  catch (NullPointerException ex) {
+            throw new IllegalArgumentException("musician update nullPointerException", ex);
         }
     }
 
@@ -42,6 +46,8 @@ public class MusicianServiceImpl implements MusicianService {
         musicianDao.remove(musician);
         } catch(IllegalArgumentException | PersistenceException ex) {
             throw new MusicLibDataAccessException("musician remove error", ex);
+        }  catch (NullPointerException ex) {
+            throw new IllegalArgumentException("musician remove nullPointerException", ex);
         }
     }
 
@@ -51,6 +57,8 @@ public class MusicianServiceImpl implements MusicianService {
         return musicianDao.findById(id);
         }  catch(IllegalArgumentException ex) {
             throw new MusicLibDataAccessException("musician find error", ex);
+        }  catch (NullPointerException ex) {
+            throw new IllegalArgumentException("musician find by ID nullPointerException", ex);
         }
     }
 
@@ -60,6 +68,8 @@ public class MusicianServiceImpl implements MusicianService {
         return musicianDao.findByArtistName(artistName);
         }  catch(IllegalArgumentException ex) {
             throw new MusicLibDataAccessException("musician find by artist name error", ex);
+        }  catch (NullPointerException ex) {
+            throw new IllegalArgumentException("musician find by artist name nullPointerException", ex);
         }
     }
 
@@ -69,7 +79,11 @@ public class MusicianServiceImpl implements MusicianService {
         return musicianDao.findAll();
         } catch (IllegalArgumentException ex) {
             throw new MusicLibDataAccessException("musician find all error", ex);
+        } catch (NullPointerException ex) {
+            throw new IllegalArgumentException("musician find all nullPointerException", ex);
         }
+        
+        
     }
 
     
