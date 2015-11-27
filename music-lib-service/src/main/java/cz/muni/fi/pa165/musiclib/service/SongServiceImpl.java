@@ -30,6 +30,10 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public void create(Song song) {
+        if (song == null) {
+            throw new MusicLibDataAccessException("song cannot be null");
+        }
+
         try {
             song.setPositionInAlbum(getFirstFreePositionInAlbum(song));
             songDao.create(song);
@@ -41,6 +45,10 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public Song update(Song song) {
+        if (song == null) {
+            throw new MusicLibDataAccessException("song cannot be null");
+        }
+
         try {
             if(song.getPositionInAlbum() == 0){
                 song.setPositionInAlbum(getFirstFreePositionInAlbum(song));

@@ -387,7 +387,7 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
     }
 
     
-    @Test(expectedExceptions = NullPointerException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createNullTest(){
         songService.create(null);
     }
@@ -406,11 +406,11 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         assertNotNull(newSong.getMusician());
     }
     
-//    @Test(expectedExceptions = MusicLibDataAccessException.class)
-//    public void updateNullTest() {
-//        songService.update(null);
-//    }
-//    
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
+    public void updateNullTest() {
+        songService.update(null);
+    }
+
     @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateNullTitleTest() {
         Song song = songBuilder.id(5l).title(null).build();
