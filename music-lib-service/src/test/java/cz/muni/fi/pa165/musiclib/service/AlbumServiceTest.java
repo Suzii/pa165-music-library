@@ -5,7 +5,9 @@ import cz.muni.fi.pa165.musiclib.dao.AlbumDao;
 import cz.muni.fi.pa165.musiclib.dao.SongDao;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
+import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
+import cz.muni.fi.pa165.musiclib.enums.Sex;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
 import cz.muni.fi.pa165.musiclib.utils.AlbumBuilder;
@@ -15,6 +17,8 @@ import cz.muni.fi.pa165.musiclib.utils.SetIdHelper;
 import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import jdk.nashorn.internal.ir.annotations.Ignore;
@@ -67,6 +71,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     private Song creepySongWithoutAlbum;
     private Genre genrePop;
     private Genre genreFolk;
+    private Musician musician;
     private Album album1;
     private Album album2;
 
@@ -77,10 +82,11 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void init() {
-        song1A = songBuilder.title("Uptown funk").build();
-        song1B = songBuilder.title("Locked out of heaven").build();
-        song2A = songBuilder.title("Someone like you").build();
-        song2B = songBuilder.title("Rolling in the deep").build();
+        musician = new MusicianBuilder().id(1l).artistName("Random musician").dateOfBirth(new Date(42)).sex(Sex.MALE).build();
+        song1A = songBuilder.title("Uptown funk").musician(musician).build();
+        song1B = songBuilder.title("Locked out of heaven").musician(musician).build();
+        song2A = songBuilder.title("Someone like you").musician(musician).build();
+        song2B = songBuilder.title("Rolling in the deep").musician(musician).build();
         creepySongWithoutAlbum = songBuilder
                 .title("Creepy song")
                 .commentary("Does anyone really listenes to folk genre tody?!")
@@ -89,6 +95,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
 
         genrePop = genreBuilder.id(1l).title("Pop").build();
         genreFolk = genreBuilder.id(2l).title("Folk").build();
+        
         album1 = albumBuilder.id(1l).title("Hooligans").build();
         album2 = albumBuilder.id(2l).title("MDN").build();
 
@@ -359,7 +366,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void addSongFirstSongTest() {
         Album blankAlbum = albumBuilder.title("Brand new album").songs(null).build();
-        Song firstSong = songBuilder.title("First song").build();
+        Song firstSong = songBuilder.title("First song").genre(genrePop).musician(musician).build();
         albumService.addSong(blankAlbum, firstSong);
 
         assertNotNull(blankAlbum.getSongs());
@@ -368,19 +375,21 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         assertEquals(firstSong.getAlbum(), blankAlbum);
     }
 
-    // 0 : 1
-    @Test(enabled = false)
+    // 1 : 1
+    @Test
     public void addSongSecondSongTest() {
         Album blankAlbum = albumBuilder.title("Brand new album").songs(null).build();
-        Song firstSong = songBuilder.title("First song").album(null).build();
-        Song secondSong = songBuilder.title("Second song").album(null).build();
+        Song firstSong = songBuilder.title("First song").genre(genrePop).album(null).musician(musician).build();
+        Song secondSong = songBuilder.title("Second song").genre(genrePop).album(null).musician(musician).build();
+        
         albumService.addSong(blankAlbum, firstSong);
-        albumService.addSong(blankAlbum, secondSong);
-
         assertNotNull(blankAlbum.getSongs());
         assertEquals(blankAlbum.getSongs().size(), 1);
         assertTrue(blankAlbum.getSongs().contains(firstSong));
         assertEquals(firstSong.getAlbum(), blankAlbum);
+        
+        albumService.addSong(blankAlbum, secondSong);
+        assertEquals(blankAlbum.getSongs().size(), 2);
         assertTrue(blankAlbum.getSongs().contains(secondSong));
         assertEquals(secondSong.getAlbum(), blankAlbum);
     }
@@ -388,7 +397,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     // 3 : 0
     @Test
     public void addSongWithOkGenreTest() {
-        Song okSong = songBuilder.title("Ok song").album(null).genre(genrePop).build();
+        Song okSong = songBuilder.title("Ok song").album(null).genre(genrePop).musician(musician).build();
         albumService.addSong(album1, okSong);
 
         assertNotNull(album1.getSongs());
@@ -397,20 +406,27 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         assertEquals(okSong.getAlbum(), album1);
     }
 
+    //TODO
     // 3 : 1 should allow to add song that results in 75% ratio for majority genre
-    @Test(enabled = false)
+    @Test
     public void addSongWithMinorityGenreGenreTest() {
-        Song okSong = songBuilder.title("Ok song").album(null).genre(genrePop).build();
-        Song minorityGenreSong = songBuilder.title("Poor folk song").album(null).genre(genreFolk).build();
-        albumService.addSong(album1, okSong);
-        assertNotNull(album1.getSongs());
-        assertTrue(album1.getSongs().contains(okSong));
+        Album blankAlbum = albumBuilder.title("Brand new album").songs(null).build();
+        Song popSong1 = songBuilder.title("Pop song1").album(null).genre(genrePop).musician(musician).build();
+        Song popSong2 = songBuilder.title("Pop song2").album(null).genre(genrePop).musician(musician).build();
+        Song popSong3 = songBuilder.title("Pop song3").album(null).genre(genrePop).musician(musician).build();
+        Song minorityGenreSong = songBuilder.title("Poor folk song").album(null).genre(genreFolk).musician(musician).build();
+        
+        albumService.addSong(blankAlbum, popSong1);
+        albumService.addSong(blankAlbum, popSong2);
+        albumService.addSong(blankAlbum, popSong3);
+        assertNotNull(blankAlbum.getSongs());
+        assertEquals(blankAlbum.getSongs().size(), 3);
 
-        albumService.addSong(album1, minorityGenreSong);
-        assertNotNull(album1.getSongs());
-        assertEquals(album1.getSongs().size(), 4);
-        assertTrue(album1.getSongs().contains(minorityGenreSong));
-        assertEquals(minorityGenreSong.getAlbum(), album1);
+        albumService.addSong(blankAlbum, minorityGenreSong);
+        assertNotNull(blankAlbum.getSongs());
+        assertEquals(blankAlbum.getSongs().size(), 4);
+        assertTrue(blankAlbum.getSongs().contains(minorityGenreSong));
+        assertEquals(minorityGenreSong.getAlbum(), blankAlbum);
     }
 
     // 2 : 1
@@ -439,6 +455,18 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         albumService.addSong(null, null);
     }
 
+    @Test(expectedExceptions = MusicLibServiceException.class)
+    public void addSongSongGenreNullSongNullTest() {
+        song2A.setGenre(null);
+        albumService.addSong(album1, song2A);
+    }
+    
+    @Test(expectedExceptions = MusicLibServiceException.class)
+    public void addSongSongMusicianNullSongNullTest() {
+        song2A.setMusician(null);
+        albumService.addSong(album1, song2A);
+    }
+    
     private void assertDeepEquals(Album album01, Album album02) {
         assertEquals(album01.getId(), album02.getId());
         assertEquals(album01.getTitle(), album02.getTitle());

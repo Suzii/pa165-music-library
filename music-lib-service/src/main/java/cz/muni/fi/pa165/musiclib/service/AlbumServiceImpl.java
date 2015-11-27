@@ -90,14 +90,19 @@ public class AlbumServiceImpl implements AlbumService {
         if (song == null) {
             throw new IllegalArgumentException("song cannot be null");
         }
-
+        if (song.getGenre() == null) {
+            throw new MusicLibServiceException("genre of song cannot be null");
+        }
+        if (song.getMusician() == null) {
+            throw new MusicLibServiceException("musician of song cannot be null");
+        }
         //business method #1
         List<Song> currSongs = album.getSongs();
         Map<Genre, Integer> genreCountMap = new HashMap<>();
 
         for (Song s : currSongs) {
             if (!genreCountMap.containsKey(s.getGenre())) {
-                genreCountMap.put(s.getGenre(), 0);
+                genreCountMap.put(s.getGenre(), 1);
             } else {
                 Genre key = s.getGenre();
                 genreCountMap.put(key, genreCountMap.get(key) + 1);
@@ -117,7 +122,7 @@ public class AlbumServiceImpl implements AlbumService {
             }
 
             //compare if the song is suitable for this album
-            double albumMajorGenreRatio = genreCountMap.get(majorAlbumGenre) / (currSongs.size() + 1);
+            double albumMajorGenreRatio = (double)genreCountMap.get(majorAlbumGenre) / (currSongs.size() + 1);
             if (!song.getGenre().equals(majorAlbumGenre) && albumMajorGenreRatio < 0.4) {
                 throw new MusicLibServiceException("Cannot add song to album, album contains majority "
                     + "of songs in different genre");
