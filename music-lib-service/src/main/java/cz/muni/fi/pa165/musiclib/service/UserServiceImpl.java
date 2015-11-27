@@ -2,10 +2,13 @@ package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.dao.UserDao;
 import cz.muni.fi.pa165.musiclib.entity.User;
+import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.inject.Inject;
+import javax.persistence.EntityExistsException;
+import javax.persistence.TransactionRequiredException;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.List;
@@ -22,7 +25,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void registerUser(User user, String encryptedPass) {
         user.setPasswordHash(createHash(encryptedPass));
-        userDao.create(user);
+        try {
+            userDao.create(user);
+        } catch (EntityExistsException | IllegalArgumentException | TransactionRequiredException e) {
+            throw new MusicLibDataAccessException("user create error");
+        }
     }
 
     @Override
@@ -37,17 +44,29 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserById(Long id) {
-        return userDao.findById(id);
+        try {
+            return userDao.findById(id);
+        } catch (IllegalArgumentException ex) {
+            throw new MusicLibDataAccessException("user findById error");
+        }
     }
 
     @Override
     public User findUserByEmail(String email) {
-        return userDao.findByEmail(email);
+        try {
+            return userDao.findByEmail(email);
+        } catch (IllegalArgumentException ex) {
+            throw new MusicLibDataAccessException("user findByEmail error");
+        }
     }
 
     @Override
     public List<User> getAllusers() {
-        return userDao.findAll();
+        try {
+            return userDao.findAll();
+        } catch (IllegalArgumentException ex) {
+            throw new MusicLibDataAccessException("find all users error");
+        }
     }
 
     //see  https://crackstation.net/hashing-security.htm#javasourcecode

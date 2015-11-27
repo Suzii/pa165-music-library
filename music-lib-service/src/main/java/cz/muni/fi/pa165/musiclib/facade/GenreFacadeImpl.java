@@ -4,13 +4,18 @@ import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.GenreService;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 /**
  * @author David
  */
-public class GenreFacadeimpl implements GenreFacade {
+@Service
+@Transactional
+public class GenreFacadeImpl implements GenreFacade {
 
     @Inject
     private BeanMappingService beanMappingService;

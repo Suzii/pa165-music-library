@@ -2,51 +2,83 @@ package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.dao.GenreDao;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
+import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
 import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.EntityExistsException;
+import javax.persistence.TransactionRequiredException;
 
 /**
  *
- * @author zdank
+ * @author David Boron
  */
 public class GenreServiceImpl implements GenreService {
 
     @Inject
     private GenreDao genreDao;
-    
+
     @Override
     public void create(Genre genre) {
-        genreDao.create(genre);
+        try {
+            genreDao.create(genre);
+        } catch (EntityExistsException | IllegalArgumentException | TransactionRequiredException e) {
+            throw new MusicLibDataAccessException("genre create error", e);
+        }
     }
 
     @Override
     public Genre update(Genre genre) {
-        return genreDao.update(genre);
+        try {
+            return genreDao.update(genre);
+        } catch (IllegalArgumentException | TransactionRequiredException e) {
+            throw new MusicLibDataAccessException("genre update error", e);
+        }
     }
 
     @Override
     public void remove(Genre genre) {
-        genreDao.remove(genre);
+        try {
+            genreDao.remove(genre);
+        } catch (IllegalArgumentException | TransactionRequiredException e) {
+            throw new MusicLibDataAccessException("genre remove error", e);
+        }
     }
 
     @Override
     public Genre findById(Long id) {
-        return genreDao.findById(id);
+        try {
+            return genreDao.findById(id);
+        } catch (IllegalArgumentException e) {
+            throw new MusicLibDataAccessException("genre findById error", e);
+        }
     }
 
     @Override
     public List<Genre> findByTitle(String title) {
-        return genreDao.findByTitle(title);
+        try {
+            return genreDao.findByTitle(title);
+        } catch (IllegalArgumentException e) {
+            throw new MusicLibDataAccessException("genre findByTitle error", e);
+        }
     }
 
     @Override
     public List<Genre> findAll() {
-        return genreDao.findAll();
+        try {
+            return genreDao.findAll();
+        } catch (IllegalArgumentException e) {
+            throw new MusicLibDataAccessException("genre findAll error", e);
+        }
     }
-    
+
     @Override
     public void changeTitle(Genre genre, String title) {
-        genre.setTitle(title);
+        try {
+            genre.setTitle(title);
+            genreDao.update(genre);
+        } catch (IllegalArgumentException | TransactionRequiredException e) {
+            throw new MusicLibDataAccessException("genre changeTitle error", e);
+        }
     }
-    
+
 }

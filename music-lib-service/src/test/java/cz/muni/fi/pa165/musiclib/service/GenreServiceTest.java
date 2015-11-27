@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.musiclib.dao.GenreDao;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Song;
+import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
 import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
 import cz.muni.fi.pa165.musiclib.utils.SetIdHelper;
 import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
@@ -155,26 +156,26 @@ public class GenreServiceTest extends AbstractTestNGSpringContextTests {
         assertEquals(genre.getTitle(), "Folk");
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createNullTest() {
         genreService.create(null);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createNullTitleTest() {
         Genre genre = genreBuilder.title(null).build();
 
         genreService.create(genre);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createInvalidIdTest() {
         Genre genre = genreBuilder.title("Sth").id(1L).build();
 
         genreService.create(genre);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void createInvalidTitleTest() {
         Genre genre = genreBuilder.title("Rock").build();
 
@@ -193,33 +194,33 @@ public class GenreServiceTest extends AbstractTestNGSpringContextTests {
         assertEquals(newGenre.getTitle(), "Rockish");
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateNullTest() {
         genreService.update(null);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateNullTitleTest() {
         genre01.setTitle(null);
 
         genreService.update(genre01);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateNullIdTest() {
         Genre genre = genreBuilder.id(null).build();
 
         genreService.update(genre);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateInvalidGenreTest() {
         Genre genre = genreBuilder.title("invalid genre").build();
 
         genreService.update(genre);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void updateInvalidTitleTest() {
         genre01.setTitle("Pop");
 
@@ -227,7 +228,7 @@ public class GenreServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     //TODO look at this
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void removeValidTest() {
         Genre genre = genreBuilder.id(666l).title("Corny stuff").build();
 
@@ -240,12 +241,12 @@ public class GenreServiceTest extends AbstractTestNGSpringContextTests {
         genreService.findById(genre.getId());
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void removeNullTest() {
         genreService.remove(null);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void removeNullIdTest() {
         Genre genre = genreBuilder.id(null).build();
 
@@ -261,7 +262,7 @@ public class GenreServiceTest extends AbstractTestNGSpringContextTests {
         assertEquals(genre.getTitle(), genre01.getTitle());
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = MusicLibDataAccessException.class)
     public void findNullTest() {
         when(genreDao.findById(null)).thenThrow(IllegalArgumentException.class);
 
