@@ -75,7 +75,8 @@ public class GenreServiceImpl implements GenreService {
     public void changeTitle(Genre genre, String title) {
         try {
             genre.setTitle(title);
-        } catch (Exception e) {
+            genreDao.update(genre);
+        } catch (IllegalArgumentException | TransactionRequiredException e) {
             throw new MusicLibDataAccessException("genre changeTitle error", e);
         }
     }
