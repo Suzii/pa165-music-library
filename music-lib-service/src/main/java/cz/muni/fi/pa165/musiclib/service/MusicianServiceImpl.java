@@ -45,6 +45,9 @@ public class MusicianServiceImpl implements MusicianService {
     
     @Override
     public void remove(Musician musician) {
+        if(musician == null) {
+            throw new IllegalArgumentException();
+        }
         try {
             for(Song song : musician.getSongs()) {
                 songDao.remove(song);
