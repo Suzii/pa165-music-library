@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.config.ServiceConfiguration;
+import cz.muni.fi.pa165.musiclib.dto.UserAuthenticationDTO;
 import cz.muni.fi.pa165.musiclib.dto.UserDTO;
 import cz.muni.fi.pa165.musiclib.entity.User;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
@@ -13,6 +14,8 @@ import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import static org.mockito.Matchers.any;
 import org.mockito.Mock;
+
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -82,10 +85,15 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
         verify(userService).registerUser(any(User.class), any(String.class));
     }
 
-//    @Test
-//    public void authenticateTest() {
-//        
-//    }
+    @Test
+    public void authenticateTest() {
+        UserAuthenticationDTO dto = new UserAuthenticationDTO();
+        dto.setUserId(1L);
+        dto.setPassword("dsd5421rr4e1");
+
+        boolean result = userFacade.authenticate(dto);
+        verify(userService).authenticate(any(User.class), anyString());
+    }
 
     @Test
     public void findUserByIdTest() {
@@ -101,8 +109,12 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void isAdminTest() {
-//        Boolean result = user1.isAdmin();
-//        assertEquals(result, user1.isAdmin());
+        UserDTO userDTO = new UserDTO();
+        userDTO.setFirstName("Hanz");
+        userDTO.setAdmin(true);
+
+        boolean result = userFacade.isAdmin(userDTO);
+        verify(userService).isAdmin(any(User.class));
     }
 
     @Test
