@@ -181,17 +181,16 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
         songFacade.findByAlbum(album1.getId());
         verify(songService, atLeastOnce()).findByAlbum(album1);
     }
-    /*
+
     @Test
     public void getSongsByGenreTest() {
         songFacade.findByGenre(1L);
-        verify(songService, atLeastOnce()).findByGenre(genre);
+        verify(songService, atLeastOnce()).findByGenre(any(Genre.class));
     }
-    
+
     @Test
     public void getSongsByMusicianTest() {
         songFacade.findByMusician(2l);
-        verify(songService, atLeastOnce()).findByMusician(musician2);
+        verify(songService, atLeastOnce()).findByMusician(any(Musician.class));
     }
-   */
 }
