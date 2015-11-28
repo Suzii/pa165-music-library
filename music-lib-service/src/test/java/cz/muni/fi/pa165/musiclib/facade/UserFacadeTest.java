@@ -1,25 +1,11 @@
 package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.config.ServiceConfiguration;
-import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
-import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.UserDTO;
-import cz.muni.fi.pa165.musiclib.entity.Album;
-import cz.muni.fi.pa165.musiclib.entity.Genre;
-import cz.muni.fi.pa165.musiclib.entity.Musician;
-import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.entity.User;
-import cz.muni.fi.pa165.musiclib.service.AlbumServiceImpl;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingServiceImpl;
-import cz.muni.fi.pa165.musiclib.service.GenreServiceImpl;
-import cz.muni.fi.pa165.musiclib.service.MusicianServiceImpl;
-import cz.muni.fi.pa165.musiclib.service.SongServiceImpl;
 import cz.muni.fi.pa165.musiclib.service.UserServiceImpl;
-import cz.muni.fi.pa165.musiclib.utils.AlbumBuilder;
-import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
-import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
-import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
 import cz.muni.fi.pa165.musiclib.utils.UserBuilder;
 import java.util.Arrays;
 import javax.inject.Inject;
@@ -34,8 +20,6 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -63,7 +47,7 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
 
     private User user1;
     private User user2;
-    
+
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
@@ -79,46 +63,52 @@ public class UserFacadeTest extends AbstractTestNGSpringContextTests {
 
     @BeforeMethod
     public void initMocksBehaviour() {
-        //when(userService.registerUser(user1, null))
+        when(userService.findUserById(1L)).thenReturn(user1);
+        when(userService.findUserByEmail("456@asd.ds")).thenReturn(user2);
+        when(userService.getAllusers()).thenReturn(Arrays.asList(user1, user2));
     }
 
     @Test(enabled = false)
     public void testClassInitializationTest() {
         assertNotNull(userService);
     }
-    /*
+
     @Test
     public void registerUserTest() {
         UserDTO userDTO = new UserDTO();
         userDTO.setFirstName("Hanz");
-        
+
         userFacade.registerUser(userDTO, user1.getPasswordHash());
-        verify(userService).registerUser(any(User.class));
-        
+        verify(userService).registerUser(any(User.class), any(String.class));
     }
 
-    @Override
-    public boolean authenticate(UserAuthenticationDTO u) {
-        
+//    @Test
+//    public void authenticateTest() {
+//        
+//    }
+
+    @Test
+    public void findUserByIdTest() {
+        userFacade.findUserById(1L);
+        verify(userService, atLeastOnce()).findUserById(1L);
     }
 
-    @Override
-    public boolean isAdmin(UserDTO userDTO) {
-        
+    @Test
+    public void findUserByEmailTest() {
+        userFacade.findUserByEmail("456@asd.ds");
+        verify(userService, atLeastOnce()).findUserByEmail("456@asd.ds");
     }
 
-    @Override
-    public UserDTO findUserById(Long userId) {
-        
+    @Test
+    public void isAdminTest() {
+//        Boolean result = user1.isAdmin();
+//        assertEquals(result, user1.isAdmin());
     }
 
-    @Override
-    public UserDTO findUserByEmail(String email) {
-        
+    @Test
+    public void getAllUsersTest() {
+        userFacade.getAllUsers();
+        verify(userService, atLeastOnce()).getAllusers();
     }
 
-    @Override
-    
-    }*/
 }
-
