@@ -77,17 +77,6 @@ public class MusicianFacadeTest extends AbstractTestNGSpringContextTests {
         assertEquals(musicianDTO.getId(), createdId);
     }
 
-//    @Test
-//    public void changeTest() {
-//        GenreDTO musicianDTO = new GenreDTO(musician1.getId());
-//        musicianDTO.setTitle("Folk");
-//
-//        musicianFacade.changeTitle(musicianDTO);
-//        verify(musicianService).changeTitle(any(Genre.class), anyString());
-//        assertNotNull(musicianDTO);
-//        assertEquals(musicianDTO.getTitle(), "Folk");
-//    }
-
     @Test
     public void removeMusicianTest() {
         musicianFacade.removeMusician(musician1.getId());
