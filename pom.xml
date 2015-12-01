@@ -61,7 +61,6 @@
         <module>music-lib-service</module>
         <module>music-lib-rest</module>
         <module>music-lib-spring-mvc</module>
-        <module>music-lib-ws</module>
     </modules>
 
     <dependencies>
