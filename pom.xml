@@ -60,6 +60,7 @@
         <module>music-lib-api</module>
         <module>music-lib-service</module>
         <module>music-lib-rest</module>
+        <module>music-lib-spring-mvc</module>
     </modules>
 
     <dependencies>
