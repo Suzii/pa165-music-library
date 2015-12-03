@@ -2,7 +2,7 @@
 <%@ attribute name="title" required="false" %>
 <%@ attribute name="head" fragment="true" %>
 <%@ attribute name="body" fragment="true" required="true" %>
-<%@ taglib tagdir="/WEB-INF/tags" prefix="masterpage" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="onw" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -29,11 +29,10 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Project name</a>
+      <a class="navbar-brand" href="#">Music library</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
         <!--TODO-->
         <li><a href="#about">Songs</a></li>
         <li><a href="#contact">Albums</a></li>
@@ -45,14 +44,6 @@
 </nav>
 
 <div class="container">
-
-    <!-- page title -->
-    <c:if test="${not empty title}">
-        <div class="page-header">
-            <h1><c:out value="${title}"/></h1>
-        </div>
-    </c:if>
-
     <!-- authenticated user info -->
     <c:if test="${not empty authenticatedUser}">
     <div class="row">
@@ -84,11 +75,13 @@
     </c:if>
 
     <!-- page body -->
-    <jsp:invoke fragment="body"/>
+    <div class="container-fluid">
+        <jsp:invoke fragment="body"/>
+    </div>
 
     <!-- footer -->
     <footer class="footer">
-        <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;Masaryk University</p>
+        <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;FI MUNI PA165 - Music Library</p>
     </footer>
 </div>
 <!-- javascript libraries -->
