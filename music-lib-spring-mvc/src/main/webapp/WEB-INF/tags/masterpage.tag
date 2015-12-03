@@ -29,15 +29,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Music library</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Music library</a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <!--TODO-->
-        <li><a href="#about">Songs</a></li>
-        <li><a href="#contact">Albums</a></li>
-        <li><a href="#contact">Musicians</a></li>
-        <li><a href="#contact">Genres</a></li>
+        <li><a href="${pageContext.request.contextPath}/song">Songs</a></li>
+        <li><a href="${pageContext.request.contextPath}/album">Albums</a></li>
+        <li><a href="${pageContext.request.contextPath}/musician">Musicians</a></li>
+        <li><a href="${pageContext.request.contextPath}/genre">Genres</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>

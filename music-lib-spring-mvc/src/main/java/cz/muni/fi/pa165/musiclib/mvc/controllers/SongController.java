@@ -12,24 +12,24 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Home controller of whole application. 
+ * TODO
  *
- * @author Zuzana Dankovcikova
+ * @author
  */
 @Controller
-@RequestMapping(value = {"", "/", "/home"})
-public class HomeController {
+@RequestMapping(value = {"/song"})
+public class SongController {
 
-    final static Logger log = LoggerFactory.getLogger(HomeController.class);
+    final static Logger log = LoggerFactory.getLogger(SongController.class);
     
 //    @Inject
 //    private SongFacade songFacade;
     @Inject
-    private MessageSource messageSource; //resource bundle provided by Spring
+    private MessageSource messageSource;
 
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
-        model.addAttribute("title", "Music library");
+        model.addAttribute("title", "Songs");
         
         // create faked song
         List<SongDTO> songs = new ArrayList<>();//songFacade.findAll();
@@ -39,7 +39,6 @@ public class HomeController {
         songs.add(defaultSong);
         
         model.addAttribute("songs", songs);
-        log.debug("Adding attributes.");
-        return "home/index";
+        return "song/index";
     }
 }

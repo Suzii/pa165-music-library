@@ -9,8 +9,10 @@
 <jsp:attribute name="body">
 
     <div class="jumbotron">
-        <h1>Welcome to your Music Library !</h1>
-        <p class="lead">Do you feel like listening some music? You are at the right place! </p>
+        <h1>${title}</h1>
+        <p class="lead">Whatever dummy text! </p>
+        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/create"
+              role="button">Create new</a></p>
     </div>
     
     <div class="row">

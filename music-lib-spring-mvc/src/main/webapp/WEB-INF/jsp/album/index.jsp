@@ -9,8 +9,10 @@
 <jsp:attribute name="body">
 
     <div class="jumbotron">
-        <h1>Welcome to your Music Library !</h1>
-        <p class="lead">Do you feel like listening some music? You are at the right place! </p>
+        <h1>${title}</h1>
+        <p class="lead">Whatever dummy text! </p>
+        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/album/create"
+              role="button">Create new</a></p>
     </div>
     
     <div class="row">
@@ -22,10 +24,10 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${songs}" var="song">
+        <c:forEach items="${albums}" var="album">
             <tr>
-                <td>${song.id}</td>
-                <td><c:out value="${song.title}"/></td>
+                <td>${album.id}</td>
+                <td><c:out value="${album.title}"/></td>
             </tr>
         </c:forEach>
         </tbody>
