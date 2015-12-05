@@ -1,4 +1,4 @@
-package cd.muni.fi.pa165.musiclib.config;
+package cz.muni.fi.pa165.musiclib.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
