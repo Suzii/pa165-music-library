@@ -1,13 +1,25 @@
 package cz.muni.fi.pa165.musiclib.sampledata;
 
-import cz.muni.fi.pa165.musiclib.entity.*;
+import cz.muni.fi.pa165.musiclib.entity.Album;
+import cz.muni.fi.pa165.musiclib.entity.Genre;
+import cz.muni.fi.pa165.musiclib.entity.Musician;
+import cz.muni.fi.pa165.musiclib.entity.Song;
+import cz.muni.fi.pa165.musiclib.entity.User;
 import cz.muni.fi.pa165.musiclib.enums.Sex;
-import cz.muni.fi.pa165.musiclib.service.*;
-import cz.muni.fi.pa165.musiclib.utils.*;
+import cz.muni.fi.pa165.musiclib.service.AlbumService;
+import cz.muni.fi.pa165.musiclib.service.GenreService;
+import cz.muni.fi.pa165.musiclib.service.MusicianService;
+import cz.muni.fi.pa165.musiclib.service.SongService;
+import cz.muni.fi.pa165.musiclib.service.UserService;
+import cz.muni.fi.pa165.musiclib.utils.AlbumBuilder;
+import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
+import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
+import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
+import cz.muni.fi.pa165.musiclib.utils.UserBuilder;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import java.io.IOException;
