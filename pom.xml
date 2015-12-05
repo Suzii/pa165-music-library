@@ -59,7 +59,8 @@
         <module>music-lib-service</module>
         <module>music-lib-spring-mvc</module>
     <module>music-lib-rest</module>
-  </modules>
+        <module>music-lib-sample-data</module>
+    </modules>
 
     <dependencies>
 
