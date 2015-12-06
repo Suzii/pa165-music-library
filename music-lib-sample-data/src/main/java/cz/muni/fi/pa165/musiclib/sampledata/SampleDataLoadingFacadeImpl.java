@@ -22,7 +22,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -61,7 +63,19 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     @Override
     public void loadData() throws IOException {
+        //TODO error when trying to add second genre
+//        genre("Rock");
+//        genre("Pop");
+//        genre("Electro");
+//        log.info("Music library genres loaded.");
 
+        //TODO albums, musicians, songs
+
+        user("admin@gmail.com", "admin", "admin", "admin", true);
+        user("skywalker@gmail.com", "deathStar1", "Luke", "Skywalker", false);
+        user("gandalf@gmail.com", "YouShallNotPass", "Ganfalf", "Grey", false);
+        user("thor@gmail.com", "mjolnir123", "Thor", "Odinsson", false);
+        log.info("Music library users loaded.");
     }
 
     private Genre genre(String title) {
@@ -119,5 +133,18 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         userService.registerUser(u, u.getPasswordHash());
         return u;
+    }
+
+    private byte[] readImage(String file) throws IOException {
+        try (InputStream is = this.getClass().getResourceAsStream("/" + file)) {
+            int nRead;
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            byte[] data = new byte[1024];
+            while ((nRead = is.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+            buffer.flush();
+            return buffer.toByteArray();
+        }
     }
 }

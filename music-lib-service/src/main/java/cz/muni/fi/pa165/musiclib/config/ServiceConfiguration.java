@@ -11,6 +11,7 @@ import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.entity.User;
+import cz.muni.fi.pa165.musiclib.facade.UserFacadeImpl;
 import cz.muni.fi.pa165.musiclib.service.GenreService;
 import cz.muni.fi.pa165.musiclib.service.GenreServiceImpl;
 import org.dozer.DozerBeanMapper;
@@ -28,7 +29,7 @@ import org.springframework.context.annotation.Import;
  */
 @Configuration
 @Import(PersistenceSampleApplicationContext.class)
-@ComponentScan(basePackageClasses={GenreServiceImpl.class})
+@ComponentScan(basePackageClasses={GenreServiceImpl.class, UserFacadeImpl.class})
 public class ServiceConfiguration {
 
     @Bean
