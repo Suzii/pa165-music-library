@@ -21,12 +21,11 @@
     </properties>
 
     <dependencies>
-        <!-- dependency on eshop sample data, other eshop parts are imported by transitive dependencies of this one-->
-        <!--<dependency>-->
-            <!--<groupId>cz.muni.fi.pa165</groupId>-->
-            <!--<artifactId>eshop-sample-data</artifactId>-->
-            <!--<version>${project.parent.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>music-lib-sample-data</artifactId>
+            <version>1.0</version>
+        </dependency>
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
             <artifactId>music-lib-api</artifactId>
