@@ -1,13 +1,11 @@
 package cz.muni.fi.pa165.musiclib.config;
 
-import cz.muni.fi.pa165.musiclib.sampledata.MusicLibSampleDataConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
@@ -24,7 +22,7 @@ import javax.validation.Validator;
  */
 @EnableWebMvc
 @Configuration
-@Import({MusicLibSampleDataConfig.class})
+//@Import({MusicLibSampleDataConfig.class})
 @ComponentScan(basePackages = "cz.muni.fi.pa165.musiclib.mvc.controllers")
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 

@@ -20,13 +20,13 @@ public class UserController {
 
     final static Logger log = LoggerFactory.getLogger(UserController.class);
 
-    @Inject
-    private UserFacade userFacade;
-
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Model model) {
-        model.addAttribute("users", userFacade.getAllUsers());
-        return "user/list";
-    }
+//    @Inject
+//    private UserFacade userFacade;
+//
+//    @RequestMapping(value = "/list", method = RequestMethod.GET)
+//    public String list(Model model) {
+//        model.addAttribute("users", userFacade.getAllUsers());
+//        return "user/list";
+//    }
 
 }
