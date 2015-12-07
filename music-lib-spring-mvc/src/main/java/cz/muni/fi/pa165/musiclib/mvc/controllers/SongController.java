@@ -4,6 +4,8 @@ import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
+import cz.muni.fi.pa165.musiclib.facade.GenreFacade;
+import cz.muni.fi.pa165.musiclib.facade.MusicianFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,8 +34,15 @@ public class SongController {
 
     final static Logger log = LoggerFactory.getLogger(SongController.class);
     
-//    @Inject
-//    private SongFacade songFacade;
+    //    @Inject
+    private SongFacade songFacade;
+    
+    //    @Inject
+    private MusicianFacade musicianFacade;
+    
+    //    @Inject
+    private GenreFacade genreFacade;
+    
     @Inject
     private MessageSource messageSource;
 
@@ -63,6 +72,8 @@ public class SongController {
     @RequestMapping(value = {"/create"}, method = RequestMethod.GET)
     public String create(Model model) {
         model.addAttribute("songCreate", new SongCreateDTO());
+        model.addAttribute("musicians", null);//musicianFacade.getAllMusicians());
+        model.addAttribute("genres", null);//genreFacade.getAllGenres());
         return "song/create";
     }
     
@@ -101,7 +112,7 @@ public class SongController {
         Long id = 1l;//songFacade.create(formBean, null);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Song with id " + id + " created");
-        return "redirect:" + uriComponentsBuilder.path("/song/index").toString();
+        return "redirect:" + uriComponentsBuilder.path("/song/detail/{id}").buildAndExpand(id).encode().toUriString();
     }
     
     /**

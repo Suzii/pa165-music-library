@@ -8,7 +8,7 @@
 <own:masterpage title="Add YouTube link">
     <jsp:attribute name="body">
 
-        <form:form method="post" 
+        <form:form method="POST" 
                    action="${pageContext.request.contextPath}/song/addYoutubeLink/${songAddYoutubeLink.songId}"
                    acceptCharset=""
                    modelAttribute="songAddYoutubeLink" 
