@@ -17,6 +17,12 @@ public class SongAddYoutubeLinkDTO {
     
     private String youtubeLink;
 
+    public SongAddYoutubeLinkDTO() {
+    }
+    
+    public SongAddYoutubeLinkDTO(Long songId) {
+        this.songId = songId;
+    }
     public Long getSongId() {
         return songId;
     }

@@ -15,6 +15,8 @@ public class SongDTO {
     private int positionInAlbum;
     
     private double bitrate;
+    
+    private String youtubeLink;
 
     private AlbumDTO album;
 
@@ -97,6 +99,14 @@ public class SongDTO {
 
     public void setGenre(GenreDTO genre) {
         this.genre = genre;
+    }    
+    
+    public String getYoutubeLink() {
+        return youtubeLink;
+    }
+
+    public void setYoutubeLink(String youtubeLink) {
+        this.youtubeLink = youtubeLink;
     }
 
     @Override
