@@ -27,11 +27,18 @@
                 <dt>Bitrate: </dt>
                 <dd>${song.bitrate}</dd>
 
-                <p>
-                    <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/addYoutubeLink/${song.id}"
-                       role="button">Add YouTube link
+                <div class="col-md-2 col-md-offset-1 allow-vertical-space">
+                    <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/addYoutubeLink/${song.id}" role="button">
+                        <c:choose>
+                            <c:when test="${song.youtubeLink != null}">
+                                Edit YouTube link
+                            </c:when>
+                            <c:otherwise>
+                                Add YouTube link
+                            </c:otherwise>
+                        </c:choose>
                     </a>
-                </p>
+                </div>
             </div>
 
             <div class="col-md-8">
