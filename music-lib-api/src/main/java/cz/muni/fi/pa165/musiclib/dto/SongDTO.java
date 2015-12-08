@@ -1,13 +1,16 @@
 package cz.muni.fi.pa165.musiclib.dto;
 
+import javax.validation.constraints.NotNull;
+
 /**
- * @author zdankovc
+ * @author Zuzana Dankovcikova
  * @version 16/11/2015
  */
 public class SongDTO {
 
     private Long id;
 
+    @NotNull
     private String title;
 
     private String commentary;
@@ -20,8 +23,10 @@ public class SongDTO {
 
     private AlbumDTO album;
 
+    @NotNull
     private MusicianDTO musician;
 
+    @NotNull
     private GenreDTO genre;
 
     public SongDTO() {

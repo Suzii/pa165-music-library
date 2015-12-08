@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.musiclib.config;
+package cz.muni.fi.pa165.musiclib.mvc.config;
 
 import cz.muni.fi.pa165.musiclib.sampledata.MusicLibSampleDataConfig;
 import org.slf4j.Logger;

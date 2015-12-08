@@ -1,19 +1,19 @@
 package cz.muni.fi.pa165.musiclib.dto;
 
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
- * @author zdankovc
+ * @author Zuzana Dankovcikova
  * @version 16/11/2015
  */
 public class AlbumDTO {
     
     private Long id;
     
+    @NotNull
     private String title;
     
     private String commentary;

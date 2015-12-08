@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group ${musicianId_error?'has-error':''}">
                 <form:label path="musicianId" cssClass="col-sm-2 control-label">Artist</form:label>
                     <div class="col-sm-10">
                     <form:select path="musicianId" cssClass="form-control">
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group ${genreId_error?'has-error':''}">
                 <form:label path="genreId" cssClass="col-sm-2 control-label">Genre</form:label>
                     <div class="col-sm-10">
                     <form:select path="genreId" cssClass="form-control">

@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
  */
 public class AlbumNewTitleDTO {
 
+    @NotNull
     private Long albumId;
 
     @NotNull

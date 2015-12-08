@@ -88,9 +88,10 @@ public class SongController {
      */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(
+            //DO NOT CHANGE the order of first two parameters
             @Valid @ModelAttribute("songCreate") SongCreateDTO formBean,
-            Model model,
             BindingResult bindingResult,
+            Model model,
             RedirectAttributes redirectAttributes,
             UriComponentsBuilder uriComponentsBuilder) {
         
@@ -105,7 +106,7 @@ public class SongController {
                 model.addAttribute(fe.getField() + "_error", true);
                 log.trace("FieldError: {}", fe);
             }
-            return "song/create";
+            return "/song/create";
         }
         
         //store youtube linnk for song

@@ -5,24 +5,29 @@
  */
 package cz.muni.fi.pa165.musiclib.dto;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * DTO for creation of songs. Does not contain position on album nor songId,
  * as those will be set automatically by service. 
  * Album is not covered as well as Song creation process is always bound to specific album.
  * 
- * @author zdank
+ * @author Zuzana Dankovcikova
  * @version 26/11/2015
  */
 public class SongCreateDTO {
 
+    @NotNull
     private String title;
 
     private String commentary;
 
     private double bitrate;
 
+    @NotNull
     private Long musicianId;
 
+    @NotNull
     private Long genreId;
 
     public SongCreateDTO() {
