@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.musiclib.dto;
 
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -18,6 +19,7 @@ public class SongAddYoutubeLinkDTO {
     private Long songId;
     
     @NotNull
+    @Size(min=3, max=50)
     private String youtubeLink;
 
     public SongAddYoutubeLinkDTO() {
