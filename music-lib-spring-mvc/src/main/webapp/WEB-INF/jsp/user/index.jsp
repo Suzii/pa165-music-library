@@ -12,11 +12,11 @@
       <caption>Users</caption>
       <thead>
       <tr>
-        <th>id</th>
-        <th>first name</th>
-        <th>surname</th>
-        <th>email</th>
-        <th>admin</th>
+        <th>Id</th>
+        <th>First name</th>
+        <th>Surname</th>
+        <th>Email</th>
+        <th>Admin</th>
       </tr>
       </thead>
       <tbody>
