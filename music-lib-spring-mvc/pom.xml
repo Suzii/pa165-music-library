@@ -21,17 +21,17 @@
     </properties>
 
     <dependencies>
-        <!--<dependency>-->
-            <!--<groupId>cz.muni.fi.pa165</groupId>-->
-            <!--<artifactId>music-lib-sample-data</artifactId>-->
-            <!--<version>1.0</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>music-lib-api</artifactId>
+            <artifactId>music-lib-sample-data</artifactId>
             <version>1.0</version>
-            <type>jar</type>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>cz.muni.fi.pa165</groupId>-->
+            <!--<artifactId>music-lib-api</artifactId>-->
+            <!--<version>1.0</version>-->
+            <!--<type>jar</type>-->
+        <!--</dependency>-->
 
         <!-- servlet, JSP, JSTL -->
         <!-- must be this instead of javaee-web for the springmvc-tests to succeed -->

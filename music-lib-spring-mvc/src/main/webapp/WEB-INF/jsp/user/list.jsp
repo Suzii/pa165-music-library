@@ -24,7 +24,7 @@
         <tr>
           <td>${user.id}</td>
           <td><c:out value="${user.firstName}"/></td>
-          <td><c:out value="${user.surname}"/></td>
+          <td><c:out value="${user.lastName}"/></td>
           <td><c:out value="${user.email}"/></td>
           <td><c:out value="${user.admin}"/></td>
         </tr>

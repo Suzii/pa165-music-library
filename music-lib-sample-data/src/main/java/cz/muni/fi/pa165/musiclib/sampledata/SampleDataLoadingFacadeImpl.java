@@ -25,6 +25,7 @@ import javax.inject.Inject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,12 +65,14 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     @Override
     public void loadData() throws IOException {
         //TODO error when trying to add second genre
-//        genre("Rock");
+        Genre g = genre("Rock");
 //        genre("Pop");
 //        genre("Electro");
 //        log.info("Music library genres loaded.");
 
         //TODO albums, musicians, songs
+        Musician m = musician("Metallica", new ArrayList<Song>(), Sex.MALE, new Date());
+        song("Nothing else matters", "comment", 1, 2.0, null, m, g);
 
         user("admin@gmail.com", "admin", "admin", "admin", true);
         user("skywalker@gmail.com", "deathStar1", "Luke", "Skywalker", false);
