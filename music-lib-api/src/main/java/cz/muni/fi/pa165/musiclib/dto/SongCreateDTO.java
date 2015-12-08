@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.musiclib.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * DTO for creation of songs. Does not contain position on album nor songId,
@@ -18,6 +19,7 @@ import javax.validation.constraints.NotNull;
 public class SongCreateDTO {
 
     @NotNull
+    @Size(min=3, max=50)
     private String title;
 
     private String commentary;

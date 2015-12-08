@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author Zuzana Dankovcikova
@@ -15,6 +16,7 @@ public class MusicianDTO {
     private Long id;
     
     @NotNull
+    @Size(min=3, max=50)
     private String artistName;
     
     private Sex sex;

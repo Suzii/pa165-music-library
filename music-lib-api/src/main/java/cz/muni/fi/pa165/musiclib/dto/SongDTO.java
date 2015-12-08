@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.musiclib.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author Zuzana Dankovcikova
@@ -11,6 +12,7 @@ public class SongDTO {
     private Long id;
 
     @NotNull
+    @Size(min=3, max=50)
     private String title;
 
     private String commentary;
