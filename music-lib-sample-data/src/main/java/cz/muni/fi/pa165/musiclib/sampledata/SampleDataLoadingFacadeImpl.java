@@ -25,6 +25,7 @@ import javax.inject.Inject;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -79,6 +80,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         genre("Pop");
         genre("Electro");
         log.info("Music library genres loaded.");
+        
+        musician("Adele", new ArrayList<Song>(), Sex.FEMALE, new Date(1990, 1, 1));
+        musician("Bruno Mars", new ArrayList<Song>(), Sex.MALE, new Date(1985, 1, 1));
+        musician("Hozier", new ArrayList<Song>(), Sex.FEMALE, new Date(1980, 1, 1));
+        log.info("Music library musicians loaded.");
+        
+        album("Jubox", "", new Date(2015,1,1), null, null, new ArrayList<Song>());
     }
 
     private Genre genre(String title) {
