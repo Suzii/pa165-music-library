@@ -4,15 +4,17 @@ import cz.muni.fi.pa165.musiclib.enums.Sex;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.validation.constraints.NotNull;
 
 /**
- * @author zdankovc
+ * @author Zuzana Dankovcikova
  * @version 16/11/2015
  */
 public class MusicianDTO {
      
     private Long id;
     
+    @NotNull
     private String artistName;
     
     private Sex sex;

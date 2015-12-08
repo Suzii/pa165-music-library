@@ -1,13 +1,16 @@
 package cz.muni.fi.pa165.musiclib.dto;
 
+import javax.validation.constraints.NotNull;
+
 /**
- * @author zdankovc
+ * @author Zuzana Dankovcikova
  * @version 16/11/2015
  */
 public class UserDTO {
     
     private Long id;
     
+    @NotNull
     private String email;
     
     private String passwordHash;

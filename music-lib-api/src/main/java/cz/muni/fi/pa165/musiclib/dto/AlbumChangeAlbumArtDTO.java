@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.musiclib.dto;
 
 import java.util.Arrays;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author xstefank (422697@mail.muni.cz)
@@ -8,6 +9,7 @@ import java.util.Arrays;
  */
 public class AlbumChangeAlbumArtDTO {
 
+    @NotNull
     private Long albumId;
     private byte[] image;
     private String mimeType;

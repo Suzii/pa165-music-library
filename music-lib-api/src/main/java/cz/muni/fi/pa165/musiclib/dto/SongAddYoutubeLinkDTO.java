@@ -6,15 +6,18 @@
 package cz.muni.fi.pa165.musiclib.dto;
 
 import java.util.Objects;
+import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author zdank
+ * @author Zuzana Dankovcikova
  */
 public class SongAddYoutubeLinkDTO {
     
+    @NotNull
     private Long songId;
     
+    @NotNull
     private String youtubeLink;
 
     public SongAddYoutubeLinkDTO() {
