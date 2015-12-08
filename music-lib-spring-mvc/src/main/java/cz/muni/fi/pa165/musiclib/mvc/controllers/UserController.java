@@ -34,8 +34,9 @@ public class UserController {
     @Inject
     private UserFacade userFacade;
 
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
+        log.info("UserController.index()");
         model.addAttribute("users", userFacade.getAllUsers());
         return "user/index";
     }

@@ -35,11 +35,11 @@
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <!--TODO-->
         <li><a href="${pageContext.request.contextPath}/song">Songs</a></li>
         <li><a href="${pageContext.request.contextPath}/album">Albums</a></li>
         <li><a href="${pageContext.request.contextPath}/musician">Musicians</a></li>
         <li><a href="${pageContext.request.contextPath}/genre">Genres</a></li>
+        <li><a href="${pageContext.request.contextPath}/user">Users</a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
