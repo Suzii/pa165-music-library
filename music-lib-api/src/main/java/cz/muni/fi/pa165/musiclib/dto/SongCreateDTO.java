@@ -71,7 +71,7 @@ public class SongCreateDTO {
         return genreId;
     }
 
-    public void setGenre(Long genreId) {
+    public void setGenreId(Long genreId) {
         this.genreId = genreId;
     }
 

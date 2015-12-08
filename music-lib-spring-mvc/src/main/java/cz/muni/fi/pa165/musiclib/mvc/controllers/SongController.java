@@ -34,13 +34,13 @@ public class SongController {
 
     final static Logger log = LoggerFactory.getLogger(SongController.class);
     
-    //    @Inject
+    @Inject
     private SongFacade songFacade;
     
-    //    @Inject
+    @Inject
     private MusicianFacade musicianFacade;
     
-    //    @Inject
+    @Inject
     private GenreFacade genreFacade;
     
     @Inject
@@ -56,10 +56,8 @@ public class SongController {
         model.addAttribute("title", "Songs");
         
         // create faked song
-        List<SongDTO> songs = new ArrayList<>();//songFacade.findAll();
-        SongDTO defaultSong = getDefaultSongDTOModel();
-        songs.add(defaultSong);
-        
+        List<SongDTO> songs = songFacade.findAll();
+                
         model.addAttribute("songs", songs);
         return "song/index";
     }
@@ -72,8 +70,8 @@ public class SongController {
     @RequestMapping(value = {"/create"}, method = RequestMethod.GET)
     public String create(Model model) {
         model.addAttribute("songCreate", new SongCreateDTO());
-        model.addAttribute("musicians", null);//musicianFacade.getAllMusicians());
-        model.addAttribute("genres", null);//genreFacade.getAllGenres());
+        model.addAttribute("musicians", musicianFacade.getAllMusicians());
+        model.addAttribute("genres", genreFacade.getAllGenres());
         return "song/create";
     }
     
@@ -96,21 +94,27 @@ public class SongController {
             UriComponentsBuilder uriComponentsBuilder) {
         
         log.debug("create(formBean={})", formBean);
-        
+
         //if there are any validation errors forward back to the the form
         if (bindingResult.hasErrors()) {
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
-                log.trace("ObjectError: {}", ge);
+                log.error("ObjectError: {}", ge);
             }
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 model.addAttribute(fe.getField() + "_error", true);
-                log.trace("FieldError: {}", fe);
+                log.error("FieldError: {}", fe);
             }
+
+            model.addAttribute("musicians", musicianFacade.getAllMusicians());
+            model.addAttribute("genres", genreFacade.getAllGenres());
             return "/song/create";
         }
         
+        //TODO: handle ablumId
+        Long albumId = 1l;
+        
         //store youtube linnk for song
-        Long id = 1l;//songFacade.create(formBean, null);
+        Long id = songFacade.create(formBean, albumId);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Song with id " + id + " created");
         return "redirect:" + uriComponentsBuilder.path("/song/detail/{id}").buildAndExpand(id).encode().toUriString();
@@ -124,7 +128,7 @@ public class SongController {
     @RequestMapping(value = {"/addYoutubeLink/{id}"}, method = RequestMethod.GET)
     public String addYoutubeLink(@PathVariable long id, Model model) {
         
-        SongDTO song = getDefaultSongDTOModel();//songFacade.findById(id).getTitle();
+        SongDTO song = songFacade.findById(id);
         String title = song.getTitle();
         SongAddYoutubeLinkDTO songModel = new SongAddYoutubeLinkDTO(id);
         songModel.setYoutubeLink(song.getYoutubeLink());
@@ -155,7 +159,7 @@ public class SongController {
             return "/song/addYoutubeLink";
         }
         
-        //songFacade.addYoutubeLink(formBean);
+        songFacade.addYoutubeLink(formBean);
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Youtube link successfully added");
         return "redirect:" + uriComponentsBuilder.path("/song/detail/{id}").buildAndExpand(formBean.getSongId()).encode().toUriString();
@@ -164,7 +168,7 @@ public class SongController {
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable long id, Model model) {
         
-        SongDTO song = getDefaultSongDTOModel();//songFacade.findById(id);
+        SongDTO song = songFacade.findById(id);
         model.addAttribute("song", song);
         return "song/detail";
     }

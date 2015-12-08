@@ -13,7 +13,7 @@
 
             <div class="col-md-4">  
                 <dt>Artist: </dt>
-                <dd>${song.musician}</dd>
+                <dd>${song.musician.artistName}</dd>
 
                 <dt>Genre: </dt>
                 <dd>${song.genre.title}</dd>

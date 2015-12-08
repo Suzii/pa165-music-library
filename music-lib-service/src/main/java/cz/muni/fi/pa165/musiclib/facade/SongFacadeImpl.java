@@ -57,10 +57,7 @@ public class SongFacadeImpl implements SongFacade {
         if(addYoutubeLinkDTO.getYoutubeLink() == null){
             throw new MusicLibServiceException("Cannot add empty youtube link");
         }
-        if(!addYoutubeLinkDTO.getYoutubeLink().startsWith("https://www.youtube.com")){
-            throw new MusicLibServiceException("Only youtube links are supported."
-                    + " Wrong link format: " + addYoutubeLinkDTO.getYoutubeLink());
-        }
+
         Song song = songService.findById(addYoutubeLinkDTO.getSongId());
         song.setYoutubeLink(addYoutubeLinkDTO.getYoutubeLink());
     }

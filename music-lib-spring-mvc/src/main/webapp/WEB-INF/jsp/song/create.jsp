@@ -29,7 +29,7 @@
                     <div class="col-sm-10">
                     <form:select path="musicianId" cssClass="form-control">
                         <c:forEach items="${musicians}" var="m">
-                            <form:option value="${m.id}">${m.name}</form:option>
+                            <form:option value="${m.id}">${m.artistName}</form:option>
                         </c:forEach>
                     </form:select>
                     <p class="help-block"><form:errors path="musicianId" cssClass="error"/></p>
@@ -41,7 +41,7 @@
                     <div class="col-sm-10">
                     <form:select path="genreId" cssClass="form-control">
                         <c:forEach items="${genres}" var="g">
-                            <form:option value="${g.id}">${g.name}</form:option>
+                            <form:option value="${g.id}">${g.title}</form:option>
                         </c:forEach>
                     </form:select>
                     <p class="help-block"><form:errors path="genreId" cssClass="error"/></p>

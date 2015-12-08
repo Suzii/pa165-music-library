@@ -21,7 +21,7 @@ import java.io.IOException;
  * @author Zuzana Dankovcikova
  * @version 08/12/2015
  */
-@WebFilter(urlPatterns = {"/*/create", "/*/edit/*", "/*/delete/*"})
+//@WebFilter(urlPatterns = {"/*/create", "/*/edit/*", "/*/delete/*"})
 public class AuthorizationFilter implements Filter {
 
     final static Logger log = LoggerFactory.getLogger(AuthorizationFilter.class);
