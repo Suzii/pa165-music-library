@@ -24,7 +24,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * @author Zuzana Dankovcikova
  * @version 08/12/2015
  */
-//@WebFilter(urlPatterns = {"/*"})
+@WebFilter(urlPatterns = {"/home/*", "/song/*", "/album/*", "/musician/*", "/genre/*", "/user/*"})
 public class AuthenticationFilter implements Filter {
     
     final static Logger log = LoggerFactory.getLogger(AuthenticationFilter.class);
@@ -36,32 +36,35 @@ public class AuthenticationFilter implements Filter {
 
         String auth = request.getHeader("Authorization");
         if (auth == null) {
-            response401(response);
-            return;
+            if (!request.getRequestURI().equals(request.getContextPath() + "/login")) {
+                response.sendRedirect(request.getContextPath() + "/login");
+            }
+//            response401(response);
+//            return;
         }
-        String[] creds = parseAuthHeader(auth);
-        String logname = creds[0];
-        String password = creds[1];
-
-        UserFacade userFacade = WebApplicationContextUtils.getWebApplicationContext(req.getServletContext()).getBean(UserFacade.class);
-        UserDTO matchingUser = userFacade.findUserByEmail(logname);
-        if (matchingUser == null) {
-            log.warn("no user with email {}", logname);
-            response401(response);
-            return;
-        }
-
-        UserAuthenticationDTO userAuthenticateDTO = new UserAuthenticationDTO();
-        userAuthenticateDTO.setUserId(matchingUser.getId());
-        userAuthenticateDTO.setPassword(password);
-
-        if (!userFacade.authenticate(userAuthenticateDTO)) {
-            log.warn("invalid credentials: user={} password={}", creds[0], creds[1]);
-            response401(response);
-            return;
-        }
-        request.setAttribute("authenticatedUser", matchingUser);
-        filterChain.doFilter(request, response);
+//        String[] creds = parseAuthHeader(auth);
+//        String logname = creds[0];
+//        String password = creds[1];
+//
+//        UserFacade userFacade = WebApplicationContextUtils.getWebApplicationContext(req.getServletContext()).getBean(UserFacade.class);
+//        UserDTO matchingUser = userFacade.findUserByEmail(logname);
+//        if (matchingUser == null) {
+//            log.warn("no user with email {}", logname);
+//            response401(response);
+//            return;
+//        }
+//
+//        UserAuthenticationDTO userAuthenticateDTO = new UserAuthenticationDTO();
+//        userAuthenticateDTO.setUserId(matchingUser.getId());
+//        userAuthenticateDTO.setPassword(password);
+//
+//        if (!userFacade.authenticate(userAuthenticateDTO)) {
+//            log.warn("invalid credentials: user={} password={}", creds[0], creds[1]);
+//            response401(response);
+//            return;
+//        }
+//        request.setAttribute("authenticatedUser", matchingUser);
+//        filterChain.doFilter(request, response);
     }
 
     @Override
