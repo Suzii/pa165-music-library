@@ -8,12 +8,17 @@
 <own:masterpage>
 <jsp:attribute name="body">
 
-    <div class="jumbotron">
-        <h1>${title}</h1>
-        <p class="lead">Whatever dummy text! </p>
-        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/genre/create"
-              role="button">Create new</a></p>
-    </div>
+    <!-- title -->
+    <c:if test="${not empty title}">
+        <div class="page-header">
+            <h1><c:out value="${title}"/></h1>
+        </div>
+    </c:if>
+    
+    <my:a href="${pageContext.request.contextPath}/genre/create" class="btn btn-primary">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        New genre
+    </my:a>
     
     <div class="row">
         <table class="table">
