@@ -26,7 +26,7 @@ public class GenreController {
     private MessageSource messageSource;
 
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
-    public String index(Model model) {
+    public String getGenres(Model model) {
         model.addAttribute("title", "Genres");
         
         // create faked genre
