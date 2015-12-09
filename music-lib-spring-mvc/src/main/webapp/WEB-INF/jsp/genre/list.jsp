@@ -9,11 +9,10 @@
 <jsp:attribute name="body">
 
     <!-- title -->
-    <c:if test="${not empty title}">
-        <div class="page-header">
-            <h1><c:out value="${title}"/></h1>
-        </div>
-    </c:if>
+    <div class="page-header">
+        <h1><fmt:message key="genres.title"/></h1>
+    </div>
+    
     
     <my:a href="${pageContext.request.contextPath}/genre/create" class="btn btn-primary">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
