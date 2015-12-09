@@ -10,7 +10,7 @@
 
     <div class="jumbotron">
         <h1>Welcome to your Music Library !</h1>
-        <p class="lead">Do you feel like listening some music? You are at the right place! </p>
+        <p class="lead">Do you feel like listening to some music? You are at the right place! </p>
     </div>
     
     <div class="row">

@@ -5,11 +5,11 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<own:masterpage title="Songs">
+<own:masterpage title="Login">
     <jsp:attribute name="body">
 
         <form:form method="POST" 
-                   action="${pageContext.request.contextPath}/user/login"
+                   action="${pageContext.request.contextPath}/login"
                    acceptCharset=""
                    modelAttribute="user" 
                    cssClass="form-horizontal">

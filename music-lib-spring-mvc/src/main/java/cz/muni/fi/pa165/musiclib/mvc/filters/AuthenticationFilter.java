@@ -24,7 +24,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * @author Zuzana Dankovcikova
  * @version 08/12/2015
  */
-@WebFilter(urlPatterns = {"/home/*", "/song/*", "/album/*", "/musician/*", "/genre/*", "/user/*"})
+//@WebFilter(urlPatterns = {"/home/*", "/song/*", "/album/*", "/musician/*", "/genre/*", "/user/*"})
 public class AuthenticationFilter implements Filter {
     
     final static Logger log = LoggerFactory.getLogger(AuthenticationFilter.class);
@@ -62,7 +62,7 @@ public class AuthenticationFilter implements Filter {
 //            return;
 //        }
 //        request.setAttribute("authenticatedUser", matchingUser);
-//        filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response);
     }
 
     @Override
