@@ -36,9 +36,7 @@ public class AuthenticationFilter implements Filter {
 
         String auth = request.getHeader("Authorization");
         if (auth == null) {
-            if (!request.getRequestURI().equals(request.getContextPath() + "/login")) {
-                response.sendRedirect(request.getContextPath() + "/login");
-            }
+            response.sendRedirect(request.getContextPath() + "/login");
 //            response401(response);
 //            return;
         }
