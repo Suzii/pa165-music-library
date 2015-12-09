@@ -36,6 +36,6 @@ public class GenreController {
         genres.add(defaultGenre);
         
         model.addAttribute("genres", genres);
-        return "genre/index";
+        return "genre/list";
     }
 }
