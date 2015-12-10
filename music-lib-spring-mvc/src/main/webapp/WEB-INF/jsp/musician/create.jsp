@@ -8,17 +8,7 @@
 
 
 <own:masterpage title="Create a Musician">
-    <jsp:attribute name="head">
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <script>
-        $(function() {
-        $( "#dateOfBirth" ).datepicker();
-        });
-        </script>
-    </jsp:attribute>
     <jsp:attribute name="body">
-
         <form:form method="POST" 
                    action="${pageContext.request.contextPath}/musician/create"
                    acceptCharset=""
@@ -40,6 +30,14 @@
                     <div class="col-sm-10">
                     <form:input path="dateOfBirth" cssClass="form-control"/>
                     <form:errors path="dateOfBirth" cssClass="help-block"/>
+                </div>
+            </div>
+                
+            <div class="form-group ${sex_error?'has-error':''}">
+                <form:label path="sex" cssClass="col-sm-2 control-label">Sex</form:label>
+                    <div class="col-sm-10">
+                    <form:input path="sex" cssClass="form-control"/>
+                    <form:errors path="sex" cssClass="help-block"/>
                 </div>
             </div>
 
