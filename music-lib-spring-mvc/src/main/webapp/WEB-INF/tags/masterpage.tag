@@ -18,10 +18,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"  crossorigin="anonymous">
     <!--custom css stylesheet-->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/site.css"  crossorigin="anonymous">
-    <!-- javascript libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- javascript custom files -->
+    <!-- jquery themes -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <jsp:invoke fragment="head"/>
 </head>
 <body>
@@ -90,5 +88,11 @@
         <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;FI MUNI PA165 - Music Library</p>
     </footer>
 </div>
+     <!-- javascript libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="${pageContext.request.contextPath}/js/main.js"></script>
+    <!-- javascript custom files -->
 </body>
 </html>
