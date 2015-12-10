@@ -19,9 +19,21 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author xstefank (422697@mail.muni.cz)
@@ -56,7 +68,7 @@ public class AuthenticationController {
             Model model,
             @RequestParam(defaultValue = "/home") String redirectTo,
             RedirectAttributes redirectAttributes,
-            UriComponentsBuilder uriComponentsBuilder) {
+            UriComponentsBuilder uriComponentsBuilder) throws URISyntaxException {
 
         log.error("----------POST LOGIN");
         log.debug("create(formBean={})", formBean);
@@ -65,39 +77,49 @@ public class AuthenticationController {
         String password = formBean.getPassword();
 
         UserDTO matchingUser = userFacade.findUserByEmail(logname);
-//        if (matchingUser == null) {
-//            log.warn("no user with email {}", logname);
-////            response401(response);
-////            return;
-//        }
-//
-//        UserAuthenticationDTO userAuthenticateDTO = new UserAuthenticationDTO();
-//        userAuthenticateDTO.setUserId(matchingUser.getId());
-//        userAuthenticateDTO.setPassword(password);
-//
-//        if (!userFacade.authenticate(userAuthenticateDTO)) {
-//            log.warn("invalid credentials: user={} password={}", logname, password);
-////            response401(response);
-////            return;
-//        }
-//        request.setAttribute("authenticatedUser", matchingUser);
-        response.setHeader("Authorization", "asdasd");
+        if (matchingUser == null) {
+            log.warn("no user with email {}", logname);
+//            return "/error"
+        }
+
+        UserAuthenticationDTO userAuthenticateDTO = new UserAuthenticationDTO();
+        userAuthenticateDTO.setUserId(matchingUser.getId());
+        userAuthenticateDTO.setPassword(password);
+
+        if (!userFacade.authenticate(userAuthenticateDTO)) {
+            log.warn("invalid credentials: user={} password={}", logname, password);
+//            return "/error";
+        }
+
+        createCookie(request, response, "auth", matchingUser.getEmail());
 
 
-
-
-//        if (bindingResult.hasErrors()) {
-//            for (ObjectError ge : bindingResult.getGlobalErrors()) {
-//                log.trace("ObjectError: {}", ge);
-//            }
-//            for (FieldError fe : bindingResult.getFieldErrors()) {
-//                model.addAttribute(fe.getField() + "_error", true);
-//                log.trace("FieldError: {}", fe);
-//            }
-//            return "login";
-//        }
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.trace("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.trace("FieldError: {}", fe);
+            }
+            return "login";
+        }
 
 //        return "redirect:" + redirectTo;
-        return "/home/index";
+        return "/song/index";
+    }
+
+    private void createCookie(HttpServletRequest pHttpRequest, HttpServletResponse pHttpResponse, String pCookieName, String pCookieValue) {
+        try {
+            Cookie cookie = new Cookie(pCookieName, pCookieValue);
+            URL url = new URL(pHttpRequest.getRequestURL().toString());
+            cookie.setDomain(url.getHost());
+            cookie.setPath("/*");
+            cookie.setMaxAge(-1);
+
+            pHttpResponse.addCookie(cookie);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -3,7 +3,16 @@ package cz.muni.fi.pa165.musiclib.mvc.filters;
 import cz.muni.fi.pa165.musiclib.dto.UserAuthenticationDTO;
 import cz.muni.fi.pa165.musiclib.dto.UserDTO;
 import cz.muni.fi.pa165.musiclib.facade.UserFacade;
+
 import java.io.IOException;
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,22 +20,25 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.bind.DatatypeConverter;
+
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
  * Restricts all sites of application from unauthenticated users.
- *  
+ *
  * @author Zuzana Dankovcikova
  * @version 08/12/2015
  */
-//@WebFilter(urlPatterns = {"/home/*", "/song/*", "/album/*", "/musician/*", "/genre/*", "/user/*"})
+@WebFilter(urlPatterns = {"/song/*", "/album/*", "/musician/*", "/genre/*", "/user/*"})
 public class AuthenticationFilter implements Filter {
-    
+
     final static Logger log = LoggerFactory.getLogger(AuthenticationFilter.class);
 
     @Override
@@ -34,34 +46,16 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        String auth = request.getHeader("Authorization");
-        if (auth == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-//            response401(response);
-//            return;
+        Cookie[] cookies = request.getCookies();
+
+        if (cookies != null) {
+            if (!checkForCookie(cookies, "auth")) {
+                response.sendRedirect(request.getContextPath() + "/login");
+            }
+        } else {
+            log.error("user has disabled cookies");
         }
-//        String[] creds = parseAuthHeader(auth);
-//        String logname = creds[0];
-//        String password = creds[1];
-//
-//        UserFacade userFacade = WebApplicationContextUtils.getWebApplicationContext(req.getServletContext()).getBean(UserFacade.class);
-//        UserDTO matchingUser = userFacade.findUserByEmail(logname);
-//        if (matchingUser == null) {
-//            log.warn("no user with email {}", logname);
-//            response401(response);
-//            return;
-//        }
-//
-//        UserAuthenticationDTO userAuthenticateDTO = new UserAuthenticationDTO();
-//        userAuthenticateDTO.setUserId(matchingUser.getId());
-//        userAuthenticateDTO.setPassword(password);
-//
-//        if (!userFacade.authenticate(userAuthenticateDTO)) {
-//            log.warn("invalid credentials: user={} password={}", creds[0], creds[1]);
-//            response401(response);
-//            return;
-//        }
-//        request.setAttribute("authenticatedUser", matchingUser);
+
         filterChain.doFilter(request, response);
     }
 
@@ -73,13 +67,12 @@ public class AuthenticationFilter implements Filter {
     public void destroy() {
     }
 
-    private String[] parseAuthHeader(String auth) {
-        return new String(DatatypeConverter.parseBase64Binary(auth.split(" ")[1])).split(":", 2);
-    }
-
-    private void response401(HttpServletResponse response) throws IOException {
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.setHeader("WWW-Authenticate", "Basic realm=\"type email and password\"");
-        response.getWriter().println("<html><body><h1>401 Unauthorized access</h1>Requested web site is only accessible to admin users...</body></html>");
+    private boolean checkForCookie(Cookie[] cookies, String cookieName) {
+        for (Cookie ck : cookies) {
+            if (cookieName.equals(ck.getName())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
