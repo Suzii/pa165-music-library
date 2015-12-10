@@ -13,6 +13,16 @@ and open the template in the editor.
     margin-bottom: 1em;    
 }
 
+.allow-horizontal-space {
+    margin-left: 1em;
+    margin-right: 1em;    
+}
+
+
 .genresList .btn-primary{
     margin-bottom: 20px;
+}
+
+.genresCreate .btn-primary {
+    width: 157px;
 }
