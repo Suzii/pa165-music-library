@@ -19,11 +19,15 @@
 
             <!-- title -->
             <div class="page-header">
-                <h1><fmt:message key="genres.create"/></h1>
+                <h1>
+                    <fmt:message key="genres.create"/>
+                </h1>
             </div>
 
-            <form:form method="post" action="${pageContext.request.contextPath}/genre/create"
-                       modelAttribute="genreCreate" cssClass="form-horizontal">
+            <form:form method="post" 
+                       action="${pageContext.request.contextPath}/genre/create"
+                       modelAttribute="genreCreate" 
+                       cssClass="form-horizontal">
 
                 <div class="form-group ${title_error?'has-error':''}">
                     <form:label path="title" cssClass="col-sm-2 control-label"><fmt:message key="genres.name"/></form:label>
