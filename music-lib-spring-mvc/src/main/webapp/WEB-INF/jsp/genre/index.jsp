@@ -25,13 +25,17 @@
         <tr>
             <th>Id</th>
             <th><fmt:message key="genres.title"/></th>
+            <th class="text-center"><fmt:message key="edit"/></th>
+            <th class="text-center"><fmt:message key="remove"/></th>
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${genres}" var="genre">
             <tr>
-                <td>${genre.id}</td>
-                <td><c:out value="${genre.title}"/></td>
+                <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1">${genre.id}.</td>
+                <td class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><c:out value="${genre.title}"/></td>
+                <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></td>
+                <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></td>
             </tr>
         </c:forEach>
         </tbody>

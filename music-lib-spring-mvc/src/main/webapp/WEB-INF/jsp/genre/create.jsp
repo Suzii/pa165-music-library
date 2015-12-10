@@ -13,7 +13,7 @@
         <div class="genresCreate">
 
             <a href="${pageContext.request.contextPath}/genre" class="btn btn-default" role="button">
-                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>                
                 <fmt:message key="back"/>
             </a>
 
