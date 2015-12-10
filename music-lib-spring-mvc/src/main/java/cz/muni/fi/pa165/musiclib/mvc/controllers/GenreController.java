@@ -53,7 +53,7 @@ public class GenreController {
             BindingResult bindingResult,
             Model model,
             RedirectAttributes redirectAttributes,
-            UriComponentsBuilder uriComponentsBuilder) {
+            UriComponentsBuilder uriBuilder) {
         
         log.debug("create genre(formBean={})", genreFormBean);
 
@@ -73,6 +73,21 @@ public class GenreController {
         
         //report success
         redirectAttributes.addFlashAttribute("alert_success", "Genre with id " + id + " created");
-        return "redirect:" + uriComponentsBuilder.path("/genre").build().encode().toUriString();
+        return "redirect:" + uriBuilder.path("/genre").build().encode().toUriString();
+    }
+    
+    @RequestMapping(value="/remove/{id}", method = RequestMethod.POST)
+    public String remove(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes){
+        log.debug("remove()");
+        GenreDTO genre = new GenreDTO();
+        try{
+            genre = genreFacade.getGenreById(id);
+            genreFacade.deleteGenre(id);
+        }catch(Exception ex){
+            redirectAttributes.addFlashAttribute("alert_danger", "Genre not found.");
+            return "redirect:" + uriBuilder.path("/genre").toUriString();
+        }
+        redirectAttributes.addFlashAttribute("alert_success", "Genre \"" + genre.getTitle()+ "\" was deleted.");
+        return "redirect:" + uriBuilder.path("/genre").toUriString();
     }
 }
