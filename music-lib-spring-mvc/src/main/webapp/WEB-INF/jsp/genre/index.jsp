@@ -6,25 +6,25 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <own:masterpage>
-<jsp:attribute name="body">
-
+<jsp:attribute name="body" >
+<div class="genresList">
     <!-- title -->
     <div class="page-header">
         <h1><fmt:message key="genres.title"/></h1>
     </div>
     
     
-    <my:a href="${pageContext.request.contextPath}/genre/create" class="btn btn-primary">
+    <a href="${pageContext.request.contextPath}/genre/create" class="btn btn-primary">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        New genre
-    </my:a>
+        <fmt:message key="genres.create"/>
+    </a>
     
     <div class="row">
         <table class="table">
         <thead>
         <tr>
             <th>Id</th>
-            <th>Title</th>
+            <th><fmt:message key="genres.title"/></th>
         </tr>
         </thead>
         <tbody>
@@ -37,6 +37,6 @@
         </tbody>
     </table>
     </div>
-
+</div>
 </jsp:attribute>
 </own:masterpage>
