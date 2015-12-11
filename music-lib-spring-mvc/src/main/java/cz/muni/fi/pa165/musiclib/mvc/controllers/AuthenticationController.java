@@ -109,6 +109,17 @@ public class AuthenticationController {
         return "/song/index";
     }
 
+    @RequestMapping(value = "/error", method = RequestMethod.GET)
+    public String error(Model model) {
+        return "error";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(Model model) {
+        model.addAttribute("user", new UserAuthenticationDTO());
+        return "error";
+    }
+
     private void createCookie(HttpServletRequest pHttpRequest, HttpServletResponse pHttpResponse, String pCookieName, String pCookieValue) {
         try {
             Cookie cookie = new Cookie(pCookieName, pCookieValue);

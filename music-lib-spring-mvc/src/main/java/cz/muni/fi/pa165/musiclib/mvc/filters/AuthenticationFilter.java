@@ -46,15 +46,16 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        Cookie[] cookies = request.getCookies();
-
-        if (cookies != null) {
-            if (!checkForCookie(cookies, "auth")) {
-                response.sendRedirect(request.getContextPath() + "/login");
-            }
-        } else {
-            log.error("user has disabled cookies");
-        }
+//        Cookie[] cookies = request.getCookies();
+//
+//        if (cookies != null) {
+//            if (!checkForCookie(cookies, "auth")) {
+//                response.sendRedirect(request.getContextPath() + "/login");
+//            }
+//        } else {
+//            log.error("user has disabled cookies");
+//            response.sendRedirect(request.getContextPath() + "/logining");
+//        }
 
         filterChain.doFilter(request, response);
     }

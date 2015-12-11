@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.musiclib.mvc.config;
 
+import cz.muni.fi.pa165.musiclib.mvc.config.security.SecurityConfig;
 import cz.muni.fi.pa165.musiclib.sampledata.MusicLibSampleDataConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +25,7 @@ import javax.validation.Validator;
  */
 @EnableWebMvc
 @Configuration
-@Import({MusicLibSampleDataConfig.class})
+@Import({MusicLibSampleDataConfig.class, SecurityConfig.class})
 @ComponentScan(basePackages = "cz.muni.fi.pa165.musiclib.mvc.controllers")
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 

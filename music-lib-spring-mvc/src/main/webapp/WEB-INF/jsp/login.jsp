@@ -8,10 +8,10 @@
 <own:masterpage title="Login">
     <jsp:attribute name="body">
 
-        <form:form method="POST" 
+        <form:form method="POST"
                    action="${pageContext.request.contextPath}/login"
                    acceptCharset=""
-                   modelAttribute="user" 
+                   modelAttribute="user"
                    cssClass="form-horizontal">
 
             <h2 class="form-signin-heading">Please sign in</h2>
