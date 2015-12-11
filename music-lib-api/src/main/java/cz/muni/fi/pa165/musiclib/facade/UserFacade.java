@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.musiclib.dto.UserAuthenticationDTO;
 import cz.muni.fi.pa165.musiclib.dto.UserDTO;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author xstefank (422697@mail.muni.cz)
@@ -56,5 +57,5 @@ public interface UserFacade {
      *
      * @return all users
      */
-    Collection<UserDTO> getAllUsers();
+    List<UserDTO> getAllUsers();
 }
