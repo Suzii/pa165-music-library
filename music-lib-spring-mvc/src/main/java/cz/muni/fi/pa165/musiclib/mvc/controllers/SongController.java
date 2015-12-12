@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.musiclib.mvc.controllers;
 
-import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
@@ -14,7 +13,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -25,13 +23,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * TODO
+ * SongController class.
  *
  * @author Zuzana Dankovcikova
+ * @version 12/12/2015 
  */
 @Controller
 @RequestMapping(value = {"/song"})
-public class SongController {
+public class SongController extends BaseController{
 
     final static Logger log = LoggerFactory.getLogger(SongController.class);
     
@@ -54,11 +53,8 @@ public class SongController {
      */
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
-        model.addAttribute("title", "Songs");
         
-        // create faked song
         List<SongDTO> songs = songFacade.findAll();
-                
         model.addAttribute("songs", songs);
         return "song/index";
     }
@@ -70,9 +66,8 @@ public class SongController {
      */
     @RequestMapping(value = {"/create"}, method = RequestMethod.GET)
     public String create(Model model) {
+        
         model.addAttribute("songCreate", new SongCreateDTO());
-        model.addAttribute("musicians", musicianFacade.getAllMusicians());
-        model.addAttribute("genres", genreFacade.getAllGenres());
         return "song/create";
     }
     
@@ -98,26 +93,15 @@ public class SongController {
 
         //if there are any validation errors forward back to the the form
         if (bindingResult.hasErrors()) {
-            for (ObjectError ge : bindingResult.getGlobalErrors()) {
-                log.error("ObjectError: {}", ge);
-            }
-            for (FieldError fe : bindingResult.getFieldErrors()) {
-                model.addAttribute(fe.getField() + "_error", true);
-                log.error("FieldError: {}", fe);
-            }
-
-            model.addAttribute("musicians", musicianFacade.getAllMusicians());
-            model.addAttribute("genres", genreFacade.getAllGenres());
+            addValidationErrors(bindingResult, model);
             return "/song/create";
         }
         
         //TODO: handle ablumId
         Long albumId = 1l;
-        
-        //store youtube linnk for song
         Long id = songFacade.create(formBean, albumId);
-        //report success
         redirectAttributes.addFlashAttribute("alert_success", "Song with id " + id + " created");
+        
         return "redirect:" + uriComponentsBuilder.path("/song/detail/{id}").buildAndExpand(id).encode().toUriString();
     }
     
@@ -133,8 +117,10 @@ public class SongController {
         String title = song.getTitle();
         SongAddYoutubeLinkDTO songModel = new SongAddYoutubeLinkDTO(id);
         songModel.setYoutubeLink(song.getYoutubeLink());
+        
         model.addAttribute("songAddYoutubeLink", songModel);
         model.addAttribute("songTitle", title);
+        
         return "song/addYoutubeLink";
     }
     
@@ -150,18 +136,11 @@ public class SongController {
         
         //if there are any validation errors forward back to the the form
         if (bindingResult.hasErrors()) {
-            for (ObjectError ge : bindingResult.getGlobalErrors()) {
-                log.trace("ObjectError: {}", ge);
-            }
-            for (FieldError fe : bindingResult.getFieldErrors()) {
-                model.addAttribute(fe.getField() + "_error", true);
-                log.trace("FieldError: {}", fe);
-            }
+            addValidationErrors(bindingResult, model);
             return "/song/addYoutubeLink";
         }
         
         songFacade.addYoutubeLink(formBean);
-        //report success
         redirectAttributes.addFlashAttribute("alert_success", "Youtube link successfully added");
         return "redirect:" + uriComponentsBuilder.path("/song/detail/{id}").buildAndExpand(formBean.getSongId()).encode().toUriString();
     }
@@ -188,10 +167,11 @@ public class SongController {
             song = songFacade.findById(id);
             songFacade.remove(id);
         } catch (Exception ex) {
-            log.error("Song not found to be deleted.");
+            log.error("Song to be deleted not found");
             redirectAttributes.addFlashAttribute("alert_danger", "Song not found.");
             return "redirect:" + uriBuilder.path("/song").toUriString();
         }
+        
         redirectAttributes.addFlashAttribute("alert_success", "Song \"" + song.getTitle() + "\" was deleted.");
         return "redirect:" + uriBuilder.path("/song").toUriString();
     }
@@ -216,8 +196,6 @@ public class SongController {
         songUpdate.setGenreId(genreId);
         
         model.addAttribute("songUpdate", songUpdate);
-        model.addAttribute("musicians", musicianFacade.getAllMusicians());
-        model.addAttribute("genres", genreFacade.getAllGenres());
         return "song/update";
     }
     
@@ -242,28 +220,21 @@ public class SongController {
         
         log.debug("songController.update(formBean={})", formBean);
 
-        //if there are any validation errors forward back to the the form
         if (bindingResult.hasErrors()) {
-            for (ObjectError ge : bindingResult.getGlobalErrors()) {
-                log.error("ObjectError: {}", ge);
-            }
-            for (FieldError fe : bindingResult.getFieldErrors()) {
-                model.addAttribute(fe.getField() + "_error", true);
-                log.error("FieldError: {}", fe);
-            }
-
-            model.addAttribute("musicians", musicianFacade.getAllMusicians());
-            model.addAttribute("genres", genreFacade.getAllGenres());
+            addValidationErrors(bindingResult, model);
             return "redirect:" + uriComponentsBuilder.path("/song/update/{id}").buildAndExpand(id).encode().toUriString();
         }
         
         //TODO: handle ablumId
         Long albumId = 1l;
-        
-        //store youtube linnk for song
         songFacade.update(formBean);
-        //report success
         redirectAttributes.addFlashAttribute("alert_success", "Song " + formBean.getTitle() + " updated");
         return "redirect:" + uriComponentsBuilder.path("/song/detail/{id}").buildAndExpand(id).encode().toUriString();
+    }
+    
+    @ModelAttribute
+    public void populateDropdownValues(Model model) {
+        model.addAttribute("musicians", musicianFacade.getAllMusicians());
+        model.addAttribute("genres", genreFacade.getAllGenres());
     }
 }
