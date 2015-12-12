@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
 import cz.muni.fi.pa165.musiclib.facade.GenreFacade;
 import cz.muni.fi.pa165.musiclib.facade.MusicianFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
+import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -53,7 +54,7 @@ public class SongController extends BaseController{
      */
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
-        
+                
         List<SongDTO> songs = songFacade.findAll();
         model.addAttribute("songs", songs);
         return "song/index";
@@ -114,6 +115,7 @@ public class SongController extends BaseController{
     public String addYoutubeLink(@PathVariable long id, Model model) {
         
         SongDTO song = songFacade.findById(id);
+        
         String title = song.getTitle();
         SongAddYoutubeLinkDTO songModel = new SongAddYoutubeLinkDTO(id);
         songModel.setYoutubeLink(song.getYoutubeLink());
@@ -149,6 +151,7 @@ public class SongController extends BaseController{
     public String detail(@PathVariable long id, Model model) {
         
         SongDTO song = songFacade.findById(id);
+
         model.addAttribute("song", song);
         return "song/detail";
     }
@@ -162,17 +165,9 @@ public class SongController extends BaseController{
     public String remove(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         
         log.debug("songController.remove()");
-        SongDTO song;
-        try {
-            song = songFacade.findById(id);
-            songFacade.remove(id);
-        } catch (Exception ex) {
-            log.error("Song to be deleted not found");
-            redirectAttributes.addFlashAttribute("alert_danger", "Song not found.");
-            return "redirect:" + uriBuilder.path("/song").toUriString();
-        }
+        songFacade.remove(id);
         
-        redirectAttributes.addFlashAttribute("alert_success", "Song \"" + song.getTitle() + "\" was deleted.");
+        redirectAttributes.addFlashAttribute("alert_success", "Song successfully deleted.");
         return "redirect:" + uriBuilder.path("/song").toUriString();
     }
     
