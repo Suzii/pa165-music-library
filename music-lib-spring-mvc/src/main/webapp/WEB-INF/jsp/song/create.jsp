@@ -17,7 +17,7 @@
             <h2>Create new song</h2>
 
             <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="title" cssClass="col-sm-2 control-label">Title</form:label>
+                <form:label path="title" cssClass="col-sm-2 control-label"><fmt:message key="songs.title"/></form:label>
                     <div class="col-sm-10">
                     <form:input path="title" cssClass="form-control"/>
                     <form:errors path="title" cssClass="help-block"/>
@@ -25,7 +25,7 @@
             </div>
 
             <div class="form-group ${musicianId_error?'has-error':''}">
-                <form:label path="musicianId" cssClass="col-sm-2 control-label">Artist</form:label>
+                <form:label path="musicianId" cssClass="col-sm-2 control-label"><fmt:message key="songs.artist"/></form:label>
                     <div class="col-sm-10">
                     <form:select path="musicianId" cssClass="form-control">
                         <c:forEach items="${musicians}" var="m">
@@ -37,7 +37,7 @@
             </div>
 
             <div class="form-group ${genreId_error?'has-error':''}">
-                <form:label path="genreId" cssClass="col-sm-2 control-label">Genre</form:label>
+                <form:label path="genreId" cssClass="col-sm-2 control-label"><fmt:message key="songs.genre"/></form:label>
                     <div class="col-sm-10">
                     <form:select path="genreId" cssClass="form-control">
                         <c:forEach items="${genres}" var="g">
@@ -49,7 +49,7 @@
             </div>
 
             <div class="form-group ${commentary_error?'has-error':''}">
-                <form:label path="commentary" cssClass="col-sm-2 control-label">Description</form:label>
+                <form:label path="commentary" cssClass="col-sm-2 control-label"><fmt:message key="songs.description"/></form:label>
                     <div class="col-sm-10">
                     <form:textarea cols="80" rows="5" path="commentary" cssClass="form-control"/>
                     <form:errors path="commentary" cssClass="help-block"/>
@@ -57,14 +57,14 @@
             </div>
 
             <div class="form-group ${bitrate_error?'has-error':''}" >
-                <form:label path="bitrate" cssClass="col-sm-2 control-label">Bit-rate</form:label>
+                <form:label path="bitrate" cssClass="col-sm-2 control-label"><fmt:message key="songs.bitrate"/></form:label>
                     <div class="col-sm-10">
                     <form:input path="bitrate" cssClass="form-control"/>
                     <form:errors path="bitrate" cssClass="help-block"/>
                 </div>
             </div>
 
-            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit">Create</button>
+            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit"><fmt:message key="create"/></button>
         </form:form>
     </jsp:attribute>
 </own:masterpage>
