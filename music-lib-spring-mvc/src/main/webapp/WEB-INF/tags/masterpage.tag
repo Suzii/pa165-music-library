@@ -5,6 +5,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="onw" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="${pageContext.request.locale}">
@@ -33,15 +34,15 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/home">Music library</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><fmt:message key="nav.music_library"/></a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="${pageContext.request.contextPath}/song">Songs</a></li>
-        <li><a href="${pageContext.request.contextPath}/album">Albums</a></li>
-        <li><a href="${pageContext.request.contextPath}/musician">Musicians</a></li>
-        <li><a href="${pageContext.request.contextPath}/genre">Genres</a></li>
-        <li><a href="${pageContext.request.contextPath}/user">Users</a></li>
+        <li><a href="${pageContext.request.contextPath}/song"><fmt:message key="nav.songs"/></a></li>
+        <li><a href="${pageContext.request.contextPath}/album"><fmt:message key="nav.albums"/></a></li>
+        <li><a href="${pageContext.request.contextPath}/musician"><fmt:message key="nav.artists"/></a></li>
+        <li><a href="${pageContext.request.contextPath}/genre"><fmt:message key="nav.genres"/></a></li>
+        <li><a href="${pageContext.request.contextPath}/user"><fmt:message key="nav.users"/></a></li>
       </ul>
     </div><!--/.nav-collapse -->
   </div>
@@ -85,7 +86,7 @@
 
     <!-- footer -->
     <footer class="footer">
-        <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;FI MUNI PA165 - Music Library</p>
+        <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;<fmt:message key="nav.footer_text"/></p>
     </footer>
 </div>
      <!-- javascript libraries -->
@@ -94,5 +95,8 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script src="${pageContext.request.contextPath}/js/main.js"></script>
     <!-- javascript custom files -->
+    <script>
+        console.log('Loading custom script files...');
+    </script>
 </body>
 </html>
