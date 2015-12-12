@@ -10,48 +10,51 @@
 
     <div class="jumbotron">
         <h1>${title}</h1>
+
         <p class="lead">Whatever dummy text! </p>
+
         <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/album/create"
               role="button">Create new</a></p>
     </div>
     
     <div class="row">
         <table class="table">
-        <thead>
-        <tr>
-            <th>Num</th>
-            <th>Title</th>
-            <th>Commentary</th>
-            <th>Date of release</th>
-            <th>Album art</th>
-            <th>Album art mime type</th>
-            <th>Songs</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:set var="count" value="0" scope="page" />
-        <c:forEach items="${albums}" var="album">
-            <c:set var="count" value="${count + 1}" scope="page"/>
+            <thead>
             <tr>
-                <td>${count}.</td>
-                <td><c:out value="${album.title}"/></td>
-                <td>
-                    <c:if test="${empty album.commentary}">
-                        <c:out value="N/A" />
-                    </c:if>
-                    <c:if test="${not empty album.commentary}">
-                        <c:out value="${album.commentary}" />
-                    </c:if>
-                </td>
-                <td><fmt:formatDate value="${album.dateOfRelease}" pattern="yyyy-MM-dd"/></td>
-                <td>
-                    <%--<img class="img-responsive img-rounded"--%>
-                         <%--src="${pageContext.request.contextPath}/shopping/productImage/${product.id}">--%>
-                </td>
+                <th>Num</th>
+                <th>Album art</th>
+                <th>Title</th>
+                <th>Commentary</th>
+                <th>Date of release</th>
+                <th>Album art mime type</th>
+                <th>Songs</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <c:set var="count" value="0" scope="page"/>
+            <c:forEach items="${albums}" var="album">
+                <c:set var="count" value="${count + 1}" scope="page"/>
+                <tr>
+                    <td>${count}.</td>
+                    <td>
+                        <img src="${pageContext.request.contextPath}/album/albumImage/${album.id}"
+                             style="max-height:30%; max-width:30%">
+                    </td>
+                    <td><b><c:out value="${album.title}"/></b></td>
+                    <td>
+                        <c:if test="${empty album.commentary}">
+                            <c:out value="N/A"/>
+                        </c:if>
+                        <c:if test="${not empty album.commentary}">
+                            <c:out value="${album.commentary}"/>
+                        </c:if>
+                    </td>
+                    <td><fmt:formatDate value="${album.dateOfRelease}" pattern="yyyy-MM-dd"/></td>
+                    <td><c:out value="${album.albumArtMimeType}"/></td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
 
 </jsp:attribute>

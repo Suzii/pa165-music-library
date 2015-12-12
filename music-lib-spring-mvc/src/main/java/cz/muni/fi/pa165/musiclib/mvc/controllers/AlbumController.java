@@ -80,5 +80,17 @@ public class AlbumController  extends BaseController {
         return "redirect:" + uriComponentsBuilder.path("/album/detail/{id}").buildAndExpand(albumId).encode().toUriString();
     }
 
-
+    @RequestMapping("/albumImage/{id}")
+    public void albumImage(@PathVariable long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        AlbumDTO albumDTO = albumFacade.getAlbumById(id);
+        byte[] image = albumDTO.getAlbumArt();
+        if(image == null) {
+            response.sendRedirect(request.getContextPath()+"/no-image.png");
+        } else {
+            response.setContentType(albumDTO.getAlbumArtMimeType());
+            ServletOutputStream out = response.getOutputStream();
+            out.write(image);
+            out.flush();
+        }
+    }
 }
