@@ -29,3 +29,12 @@ and open the template in the editor.
 .genresList .glyphicon-remove {
     color: darkred;
 }
+
+th {
+    text-align: center;
+}
+
+td {
+    text-align: center;
+    vertical-align: middle;
+}

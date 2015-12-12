@@ -19,15 +19,35 @@
         <table class="table">
         <thead>
         <tr>
-            <th>Id</th>
+            <th>Num</th>
             <th>Title</th>
+            <th>Commentary</th>
+            <th>Date of release</th>
+            <th>Album art</th>
+            <th>Album art mime type</th>
+            <th>Songs</th>
         </tr>
         </thead>
         <tbody>
+        <c:set var="count" value="0" scope="page" />
         <c:forEach items="${albums}" var="album">
+            <c:set var="count" value="${count + 1}" scope="page"/>
             <tr>
-                <td>${album.id}</td>
+                <td>${count}.</td>
                 <td><c:out value="${album.title}"/></td>
+                <td>
+                    <c:if test="${empty album.commentary}">
+                        <c:out value="N/A" />
+                    </c:if>
+                    <c:if test="${not empty album.commentary}">
+                        <c:out value="${album.commentary}" />
+                    </c:if>
+                </td>
+                <td><fmt:formatDate value="${album.dateOfRelease}" pattern="yyyy-MM-dd"/></td>
+                <td>
+                    <%--<img class="img-responsive img-rounded"--%>
+                         <%--src="${pageContext.request.contextPath}/shopping/productImage/${product.id}">--%>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
