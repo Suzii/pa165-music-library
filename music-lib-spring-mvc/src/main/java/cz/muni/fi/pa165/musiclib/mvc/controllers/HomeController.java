@@ -18,7 +18,7 @@ import javax.inject.Inject;
  */
 @Controller
 @RequestMapping(value = {"", "/", "/home"})
-public class HomeController {
+public class HomeController  extends BaseController{
 
     final static Logger log = LoggerFactory.getLogger(HomeController.class);
     

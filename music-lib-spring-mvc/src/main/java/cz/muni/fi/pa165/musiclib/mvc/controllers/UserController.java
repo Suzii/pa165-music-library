@@ -27,7 +27,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController {
 
     final static Logger log = LoggerFactory.getLogger(UserController.class);
 

@@ -23,7 +23,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 @Controller
 @RequestMapping(value = {"/genre"})
-public class GenreController {
+public class GenreController  extends BaseController{
 
     final static Logger log = LoggerFactory.getLogger(GenreController.class);
 
@@ -58,13 +58,7 @@ public class GenreController {
         log.debug("create genre(formBean={})", genreFormBean);
 
         if (bindingResult.hasErrors()) {
-            for (ObjectError globalError : bindingResult.getGlobalErrors()) {
-                log.error("ObjectError: {}", globalError);
-            }
-            for (FieldError fieldError : bindingResult.getFieldErrors()) {
-                model.addAttribute(fieldError.getField() + "_error", true);
-                log.error("FieldError: {}", fieldError);
-            }
+            addValidationErrors(bindingResult, model);
 
             return "/genre/create";
         }
@@ -97,13 +91,7 @@ public class GenreController {
         GenreDTO oldGenre = genreFacade.getGenreById(genreFormBean.getId());
 
         if (bindingResult.hasErrors()) {
-            for (ObjectError globalError : bindingResult.getGlobalErrors()) {
-                log.error("ObjectError: {}", globalError);
-            }
-            for (FieldError fieldError : bindingResult.getFieldErrors()) {
-                model.addAttribute(fieldError.getField() + "_error", true);
-                log.error("FieldError: {}", fieldError);
-            }
+            addValidationErrors(bindingResult, model);
 
             return "/genre/update";
         }

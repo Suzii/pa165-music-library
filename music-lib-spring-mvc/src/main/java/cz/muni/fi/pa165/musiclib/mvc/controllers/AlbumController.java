@@ -18,7 +18,7 @@ import javax.inject.Inject;
  */
 @Controller
 @RequestMapping(value = {"/album"})
-public class AlbumController {
+public class AlbumController  extends BaseController {
 
     final static Logger log = LoggerFactory.getLogger(AlbumController.class);
     

@@ -21,7 +21,7 @@ import javax.inject.Inject;
  */
 @Controller
 @RequestMapping(value = {"/musician"})
-public class MusicianController {
+public class MusicianController  extends BaseController{
 
     final static Logger log = LoggerFactory.getLogger(MusicianController.class);
     

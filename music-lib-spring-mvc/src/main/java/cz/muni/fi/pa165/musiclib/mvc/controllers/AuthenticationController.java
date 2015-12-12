@@ -40,7 +40,7 @@ import java.util.Map;
  * @version 12/9/15
  */
 @Controller
-public class AuthenticationController {
+public class AuthenticationController extends BaseController{
 
     final static Logger log = LoggerFactory.getLogger(AuthenticationController.class);
 
@@ -95,13 +95,8 @@ public class AuthenticationController {
 
 
         if (bindingResult.hasErrors()) {
-            for (ObjectError ge : bindingResult.getGlobalErrors()) {
-                log.trace("ObjectError: {}", ge);
-            }
-            for (FieldError fe : bindingResult.getFieldErrors()) {
-                model.addAttribute(fe.getField() + "_error", true);
-                log.trace("FieldError: {}", fe);
-            }
+            addValidationErrors(bindingResult, model);
+            
             return "login";
         }
 
