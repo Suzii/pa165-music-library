@@ -11,9 +11,9 @@
     <div class="jumbotron">
         <h1>${title}</h1>
 
-        <p class="lead">Whatever dummy text! </p>
+        <p class="leDad">List of all albums registered in the library...</p>
 
-        <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/album/create"
+        <p align="right"><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/album/create"
               role="button">Create new</a></p>
     </div>
     
@@ -26,7 +26,7 @@
                 <th>Title</th>
                 <th>Commentary</th>
                 <th>Date of release</th>
-                <th>Album art mime type</th>
+                <th>Album art MIME type</th>
                 <th>Songs</th>
             </tr>
             </thead>
@@ -51,6 +51,7 @@
                     </td>
                     <td><fmt:formatDate value="${album.dateOfRelease}" pattern="yyyy-MM-dd"/></td>
                     <td><c:out value="${album.albumArtMimeType}"/></td>
+                    <td><a class="btn btn-mg btn-primary" href="${pageContext.request.contextPath}/song/index" role="button">Song list</a></td>
                 </tr>
             </c:forEach>
             </tbody>

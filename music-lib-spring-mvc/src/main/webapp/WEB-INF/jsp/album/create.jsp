@@ -8,7 +8,15 @@
 <own:masterpage title="Create Album">
     <jsp:attribute name="body">
 
-        <form:form method="POST" 
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
+
+        <form:form method="POST"
                    action="${pageContext.request.contextPath}/album/create"
                    acceptCharset=""
                    modelAttribute="albumCreate"
@@ -18,7 +26,7 @@
 
             <div class="form-group ${title_error?'has-error':''}">
                 <form:label path="title" cssClass="col-sm-2 control-label">Title</form:label>
-                    <div class="col-sm-10">
+                <div class="col-sm-10">
                     <form:input path="title" cssClass="form-control"/>
                     <form:errors path="title" cssClass="help-block"/>
                 </div>
@@ -33,14 +41,30 @@
             </div>
 
             <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="commentary" cssClass="col-sm-2 control-label">Commentary</form:label>
+                <form:label path="dateOfRelease" cssClass="col-sm-2 control-label">Date of release</form:label>
                 <div class="col-sm-10">
-                    <form:input path="commentary" cssClass="form-control"/>
-                    <form:errors path="commentary" cssClass="help-block"/>
+                    <form:input path="dateOfRelease" id="datepicker" cssClass="form-control"/>
+                    <form:errors path="dateOfRelease" cssClass="help-block"/>
                 </div>
             </div>
 
+            <div class="form-group ${title_error?'has-error':''}">
+                <form:label path="dateOfRelease" cssClass="col-sm-2 control-label">Album art</form:label>
+                <div class="col-sm-10">
+                        <%--<form path="albumArt" action="UploadServlet" method="post"--%>
+                        <%--enctype="multipart/form-data">--%>
+                    <form:input type="file" name="file" size="50" path="albumArt" cssClass="form-control"/>
+                        <%--</form>--%>
+                </div>
+            </div>
 
+            <div class="form-group ${title_error?'has-error':''}">
+                <form:label path="albumArtMimeType" cssClass="col-sm-2 control-label">Album art MIME type</form:label>
+                <div class="col-sm-10">
+                    <form:input path="albumArtMimeType" cssClass="form-control"/>
+                    <form:errors path="albumArtMimeType" cssClass="help-block"/>
+                </div>
+            </div>
 
             <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit">Create</button>
         </form:form>
