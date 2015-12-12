@@ -3,6 +3,10 @@ package cz.muni.fi.pa165.musiclib.facade;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
+import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
+import cz.muni.fi.pa165.musiclib.entity.Album;
+import cz.muni.fi.pa165.musiclib.entity.Genre;
+import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
 import cz.muni.fi.pa165.musiclib.service.AlbumService;
@@ -51,6 +55,25 @@ public class SongFacadeImpl implements SongFacade {
         songService.create(newSong);
         return newSong.getId();
     }    
+    
+    @Override
+    public void remove(Long songId) {
+        songService.remove(songService.findById(songId));
+    }
+    
+    @Override
+    public void update(SongUpdateDTO song) {
+        Song persistedSong = songService.findById(song.getId());
+        if(persistedSong == null){
+            throw new MusicLibServiceException("No such son exists");
+        }
+        
+        persistedSong.setTitle(song.getTitle());
+        persistedSong.setCommentary(song.getCommentary());
+        persistedSong.setBitrate(song.getBitrate());
+        persistedSong.setGenre(genreService.findById(song.getGenreId()));
+        persistedSong.setMusician(musicianService.findById(song.getMusicianId()));
+    }
     
     @Override
     public void addYoutubeLink(SongAddYoutubeLinkDTO addYoutubeLinkDTO) {

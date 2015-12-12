@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.musiclib.facade;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
+import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
 import java.util.List;
 
 /**
@@ -19,6 +20,25 @@ public interface SongFacade {
      */
     Long create(SongCreateDTO song, Long albumId);
     
+    /**
+     * Removes song with given id from database.
+     * 
+     * @param songId 
+     */
+    public void remove(Long songId);
+    
+    /**
+     * Edits song.
+     * 
+     * @param song
+     */
+    public void update(SongUpdateDTO song);
+        
+    /**
+     * Adds YouTube link to specific song.
+     * 
+     * @param addYoutubeLinkDTO 
+     */
     void addYoutubeLink(SongAddYoutubeLinkDTO addYoutubeLinkDTO);
 
     /**
