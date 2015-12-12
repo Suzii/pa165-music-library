@@ -8,7 +8,15 @@
 <own:masterpage title="Error">
     <jsp:attribute name="body">
 
-        <h1>Error</h1>
-
+        <h1><fmt:message key="error.heading"/></h1>
+        
+        <c:choose>
+            <c:when test="${not empty errMsg}">
+                <p>${errMsg}</p>
+            </c:when>
+            <c:otherwise>
+                <fmt:message key="error.general"/>
+            </c:otherwise>
+        </c:choose>
     </jsp:attribute>
 </own:masterpage>
