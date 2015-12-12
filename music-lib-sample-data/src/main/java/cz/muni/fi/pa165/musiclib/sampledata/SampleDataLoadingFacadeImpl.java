@@ -43,6 +43,7 @@ import java.util.List;
 public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     private static final Logger log = LoggerFactory.getLogger(SampleDataLoadingFacadeImpl.class);
+    public static final String JPEG = "image/jpeg";
 
     @Inject
     private AlbumService albumService;
@@ -85,11 +86,11 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         log.info("Music library musicians loaded.");
 
         Calendar cal = new GregorianCalendar(2015, Calendar.JANUARY, 1);
-        Album jukebox = album("Jukebox", "", cal.getTime(), null, null, new ArrayList<Song>());
+        Album jukebox = album("Jukebox", "jukebox comment", cal.getTime(), readImage("jukebox.jpg"), JPEG, new ArrayList<Song>());
         cal.set(2014, Calendar.MARCH, 24);
-        Album _21 = album("21", "", cal.getTime(), null, null, new ArrayList<Song>());
+        Album _21 = album("21", "the best comments are empty comments", cal.getTime(), readImage("21.jpg"), JPEG, new ArrayList<Song>());
         cal.set(2014, Calendar.FEBRUARY, 15);
-        Album hozierAlb = album("Hozier", "", cal.getTime(), null, null, new ArrayList<Song>());
+        Album hozierAlb = album("Hozier", "", cal.getTime(), readImage("hozier.jpg"), JPEG, new ArrayList<Song>());
         log.info("Music library albums loaded.");
         
         song("Rolling in the deep", "Best song 2013", 1, 1, _21, adele, pop);
