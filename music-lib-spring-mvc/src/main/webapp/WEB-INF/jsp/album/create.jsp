@@ -1,0 +1,48 @@
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" trimDirectiveWhitespaces="true" session="false" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="own" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<own:masterpage title="Create Album">
+    <jsp:attribute name="body">
+
+        <form:form method="POST" 
+                   action="${pageContext.request.contextPath}/album/create"
+                   acceptCharset=""
+                   modelAttribute="albumCreate"
+                   cssClass="form-horizontal">
+
+            <h2>Create Album</h2>
+
+            <div class="form-group ${title_error?'has-error':''}">
+                <form:label path="title" cssClass="col-sm-2 control-label">Title</form:label>
+                    <div class="col-sm-10">
+                    <form:input path="title" cssClass="form-control"/>
+                    <form:errors path="title" cssClass="help-block"/>
+                </div>
+            </div>
+
+            <div class="form-group ${title_error?'has-error':''}">
+                <form:label path="commentary" cssClass="col-sm-2 control-label">Commentary</form:label>
+                <div class="col-sm-10">
+                    <form:input path="commentary" cssClass="form-control"/>
+                    <form:errors path="commentary" cssClass="help-block"/>
+                </div>
+            </div>
+
+            <div class="form-group ${title_error?'has-error':''}">
+                <form:label path="commentary" cssClass="col-sm-2 control-label">Commentary</form:label>
+                <div class="col-sm-10">
+                    <form:input path="commentary" cssClass="form-control"/>
+                    <form:errors path="commentary" cssClass="help-block"/>
+                </div>
+            </div>
+
+
+
+            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit">Create</button>
+        </form:form>
+    </jsp:attribute>
+</own:masterpage>
