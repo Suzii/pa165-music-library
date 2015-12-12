@@ -122,6 +122,12 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
         when(songService.findById(1l)).thenReturn(song1A);
         when(songService.findById(2l)).thenReturn(song1B);
         
+        when(genreService.findById(1l)).thenReturn(genre);
+        when(genreService.findById(2l)).thenReturn(genre2);
+        
+        when(musicianService.findById(1l)).thenReturn(musician);
+        when(musicianService.findById(2l)).thenReturn(musician2);
+        
         //findByAlbum
         when(songService.findByAlbum(album1)).thenReturn(Arrays.asList(song1A, song1B));
         

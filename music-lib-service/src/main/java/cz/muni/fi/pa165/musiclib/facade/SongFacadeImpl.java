@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
+import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
 import cz.muni.fi.pa165.musiclib.service.AlbumService;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.GenreService;
@@ -58,14 +59,18 @@ public class SongFacadeImpl implements SongFacade {
     
     @Override
     public void remove(Long songId) {
-        songService.remove(songService.findById(songId));
+        Song song = songService.findById(songId);
+        if(song == null){
+            throw new NoSuchEntityFoundException("No such song exists");
+        }
+        songService.remove(song);
     }
     
     @Override
     public void update(SongUpdateDTO song) {
         Song persistedSong = songService.findById(song.getId());
         if(persistedSong == null){
-            throw new MusicLibServiceException("No such son exists");
+            throw new NoSuchEntityFoundException("No such song exists");
         }
         
         persistedSong.setTitle(song.getTitle());
@@ -82,12 +87,21 @@ public class SongFacadeImpl implements SongFacade {
         }
 
         Song song = songService.findById(addYoutubeLinkDTO.getSongId());
+        if(song == null){
+            throw new NoSuchEntityFoundException("No such song exists");
+        }
+        
         song.setYoutubeLink(addYoutubeLinkDTO.getYoutubeLink());
     }
 
     @Override
     public SongDTO findById(Long id) {
-        return beanMappingService.mapTo(songService.findById(id), SongDTO.class);
+        Song song = songService.findById(id);
+        if(song == null){
+            throw new NoSuchEntityFoundException("No such song exists");
+        }
+        
+        return beanMappingService.mapTo(song, SongDTO.class);
     }
 
     @Override
@@ -97,22 +111,31 @@ public class SongFacadeImpl implements SongFacade {
 
     @Override
     public List<SongDTO> findByAlbum(Long albumId) {
-        return beanMappingService.mapTo(
-                songService.findByAlbum(albumService.findById(albumId)), 
-                SongDTO.class);
+        Album album = albumService.findById(albumId);
+        if(album == null){
+            throw new NoSuchEntityFoundException("No such album exists");
+        }
+        
+        return beanMappingService.mapTo(songService.findByAlbum(album), SongDTO.class);
     }
 
     @Override
     public List<SongDTO> findByMusician(Long musicianId) {
-        return beanMappingService.mapTo(
-                songService.findByMusician(musicianService.findById(musicianId)), 
-                SongDTO.class);
+        Musician musician = musicianService.findById(musicianId);
+        if(musician == null){
+            throw new NoSuchEntityFoundException("No such musician exists");
+        }
+        
+        return beanMappingService.mapTo(songService.findByMusician(musician), SongDTO.class);
     }
 
     @Override
     public List<SongDTO> findByGenre(Long genreId) {
-        return beanMappingService.mapTo(
-                songService.findByGenre(genreService.findById(genreId)), 
-                SongDTO.class);
+        Genre genre = genreService.findById(genreId);
+        if(genre == null){
+            throw new NoSuchEntityFoundException("No such genre exists");
+        }
+        
+        return beanMappingService.mapTo(songService.findByGenre(genre), SongDTO.class);
     }
 }
