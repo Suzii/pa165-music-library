@@ -65,28 +65,31 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
     @Override
     public void loadData() throws IOException {
-        //TODO error when trying to add second genre
-
-
-        //TODO albums, musicians, songs
-
+        
         user("admin@gmail.com", "admin", "admin", "admin", true);
         user("skywalker@gmail.com", "deathStar1", "Luke", "Skywalker", false);
         user("gandalf@gmail.com", "YouShallNotPass", "Ganfalf", "Grey", false);
         user("thor@gmail.com", "mjolnir123", "Thor", "Odinsson", false);
         log.info("Music library users loaded.");
 
-        Genre g = genre("Rock");
-        genre("Pop");
-        genre("Electro");
+        Genre rock = genre("Rock");
+        Genre pop = genre("Pop");
+        Genre electro = genre("Electro");
         log.info("Music library genres loaded.");
         
-        musician("Adele", new ArrayList<Song>(), Sex.FEMALE, new Date(1990, 1, 1));
-        musician("Bruno Mars", new ArrayList<Song>(), Sex.MALE, new Date(1985, 1, 1));
-        musician("Hozier", new ArrayList<Song>(), Sex.FEMALE, new Date(1980, 1, 1));
+        Musician adele = musician("Adele", new ArrayList<Song>(), Sex.FEMALE, new Date(1990, 1, 1));
+        Musician brunoMars = musician("Bruno Mars", new ArrayList<Song>(), Sex.MALE, new Date(1985, 1, 1));
+        Musician hozier = musician("Hozier", new ArrayList<Song>(), Sex.FEMALE, new Date(1980, 1, 1));
         log.info("Music library musicians loaded.");
         
-        album("Jubox", "", new Date(2015,1,1), null, null, new ArrayList<Song>());
+        Album jukebox = album("Jukebox", "", new Date(2015,1,1), null, null, new ArrayList<Song>());
+        Album _21 = album("21", "", new Date(2014,1,1), null, null, new ArrayList<Song>());
+        Album hozierAlb = album("Hozier", "", new Date(2014,1,1), null, null, new ArrayList<Song>());
+        log.info("Music library albums loaded.");
+        
+        song("Rolling in the deep", "Best song 2013", 1, 1, _21, adele, pop);
+        song("Just the way you are", "Love song lvl.100", 1, 1, jukebox, brunoMars, pop);
+        song("Take me to church", "Totaly crazy about this song", 1, 1, hozierAlb, hozier, rock);
     }
 
     private Genre genre(String title) {
