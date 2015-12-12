@@ -14,7 +14,7 @@
                    modelAttribute="songCreate" 
                    cssClass="form-horizontal">
 
-            <h2>Create new song</h2>
+            <h2><fmt:message key="songs.create_new_song"/></h2>
 
             <div class="form-group ${title_error?'has-error':''}">
                 <form:label path="title" cssClass="col-sm-2 control-label"><fmt:message key="songs.title"/></form:label>

@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
+import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
 import cz.muni.fi.pa165.musiclib.facade.GenreFacade;
 import cz.muni.fi.pa165.musiclib.facade.MusicianFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
@@ -172,17 +173,97 @@ public class SongController {
         model.addAttribute("song", song);
         return "song/detail";
     }
+        
+    /**
+     * Removes song with given id
+     * @param model
+     * @return 
+     */
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
+    public String remove(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
+        
+        log.debug("songController.remove()");
+        SongDTO song;
+        try {
+            song = songFacade.findById(id);
+            songFacade.remove(id);
+        } catch (Exception ex) {
+            log.error("Song not found to be deleted.");
+            redirectAttributes.addFlashAttribute("alert_danger", "Song not found.");
+            return "redirect:" + uriBuilder.path("/song").toUriString();
+        }
+        redirectAttributes.addFlashAttribute("alert_success", "Song \"" + song.getTitle() + "\" was deleted.");
+        return "redirect:" + uriBuilder.path("/song").toUriString();
+    }
+    
+    /**
+     * Retrieves given song from DB and prepopulates edit form.
+     * @param model
+     * @return 
+     */
+    @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
+    public String update(@PathVariable long id, Model model ) {
+        
+        SongDTO persistedSong = songFacade.findById(id);
+        Long musicianId = (persistedSong.getMusician() != null) ? persistedSong.getMusician().getId() : null;
+        Long genreId = (persistedSong.getGenre() != null) ? persistedSong.getGenre().getId() : null;
+        
+        SongUpdateDTO songUpdate = new SongUpdateDTO();
+        songUpdate.setId(id);
+        songUpdate.setTitle(persistedSong.getTitle());
+        songUpdate.setCommentary(persistedSong.getCommentary());
+        songUpdate.setMusicianId(musicianId);
+        songUpdate.setGenreId(genreId);
+        
+        model.addAttribute("songUpdate", songUpdate);
+        model.addAttribute("musicians", musicianFacade.getAllMusicians());
+        model.addAttribute("genres", genreFacade.getAllGenres());
+        return "song/update";
+    }
+    
+    /**
+     * Handles submit of song create form.
+     * @param formBean
+     * @param model
+     * @param bindingResult
+     * @param redirectAttributes
+     * @param uriComponentsBuilder
+     * @return 
+     */
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(
+            //DO NOT CHANGE the order of first two parameters
+            @Valid @ModelAttribute("songUpdate") SongUpdateDTO formBean,
+            BindingResult bindingResult,
+            @PathVariable long id,
+            Model model,
+            RedirectAttributes redirectAttributes,
+            UriComponentsBuilder uriComponentsBuilder) {
+        
+        log.debug("songController.update(formBean={})", formBean);
 
-    private SongDTO getDefaultSongDTOModel() {
-        SongDTO defaultSong = new SongDTO(42l);
-        defaultSong.setTitle("Default song");
-        defaultSong.setCommentary("This song is created in HomeController and serves for testing purposes.");
-        defaultSong.setAlbum(null);
-        defaultSong.setMusician(null);
-        defaultSong.setBitrate(new Double("14.2"));
-        defaultSong.setGenre(new GenreDTO());
-        defaultSong.setPositionInAlbum(1);
-        defaultSong.setYoutubeLink("lp-EO5I60KA");
-        return defaultSong;
+        //if there are any validation errors forward back to the the form
+        if (bindingResult.hasErrors()) {
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.error("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                model.addAttribute(fe.getField() + "_error", true);
+                log.error("FieldError: {}", fe);
+            }
+
+            model.addAttribute("musicians", musicianFacade.getAllMusicians());
+            model.addAttribute("genres", genreFacade.getAllGenres());
+            return "redirect:" + uriComponentsBuilder.path("/song/update/{id}").buildAndExpand(id).encode().toUriString();
+        }
+        
+        //TODO: handle ablumId
+        Long albumId = 1l;
+        
+        //store youtube linnk for song
+        songFacade.update(formBean);
+        //report success
+        redirectAttributes.addFlashAttribute("alert_success", "Song " + formBean.getTitle() + " updated");
+        return "redirect:" + uriComponentsBuilder.path("/song/detail/{id}").buildAndExpand(id).encode().toUriString();
     }
 }

@@ -9,12 +9,12 @@
     <jsp:attribute name="body">
 
         <form:form method="POST" 
-                   action="${pageContext.request.contextPath}/song/create"
+                   action="${pageContext.request.contextPath}/song/update/${songUpdate.id}"
                    acceptCharset=""
-                   modelAttribute="songCreate" 
+                   modelAttribute="songUpdate" 
                    cssClass="form-horizontal">
 
-            <h2>Create new song</h2>
+            <h2><fmt:message key="songs.edit_song"/></h2>
 
             <div class="form-group ${title_error?'has-error':''}">
                 <form:label path="title" cssClass="col-sm-2 control-label"><fmt:message key="songs.title"/></form:label>
@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit"><fmt:message key="create"/></button>
+            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit"><fmt:message key="edit"/></button>
         </form:form>
     </jsp:attribute>
 </own:masterpage>
