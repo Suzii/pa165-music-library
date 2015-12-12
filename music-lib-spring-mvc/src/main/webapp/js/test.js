@@ -1,0 +1,1 @@
+console.log('Javascript tag added as jsp fragment.');
