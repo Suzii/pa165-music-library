@@ -20,6 +20,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
+
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -166,13 +168,13 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
         assertDeepEquals(m, musician1);
     }
     
-    @Test(expectedExceptions = PersistenceException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void createWithIdSetTest() {
         Musician badMusician = musicianBuilder.id(new Long(1)).artistName("Sting").build();
         musicianDao.create(badMusician);
     }
 
-    @Test(expectedExceptions=PersistenceException.class)
+    @Test(expectedExceptions=DataAccessException.class)
     public void createWithSameArtistNamesTest() {
         Musician m1 = musicianBuilder.artistName("Dupe").sex(Sex.FEMALE).build();
         Musician m2 = musicianBuilder.artistName("Dupe").sex(Sex.MALE).build();
@@ -228,7 +230,7 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
         assertDeepEquals(updated, clonedMusician);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void updateNullTest() {
         musicianDao.update(null);
     }

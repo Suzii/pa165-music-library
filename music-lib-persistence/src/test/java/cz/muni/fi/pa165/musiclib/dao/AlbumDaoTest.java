@@ -10,6 +10,7 @@ import cz.muni.fi.pa165.musiclib.utils.AlbumBuilder;
 import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
 import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
 import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -121,7 +122,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         albumDao.create(album02);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void createNullTest() {
         albumDao.create(null);
     }
@@ -143,7 +144,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         assertDeepEquals(updated, album01);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void updateNullTest() {
         albumDao.update(null);
     }
@@ -238,7 +239,7 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         assertNull(result);
     }
 
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void findNotCreatedEntityTest() {
         albumDao.create(album01);
 

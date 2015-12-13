@@ -9,6 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
+
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -100,13 +102,13 @@ public class GenreDaoTest extends AbstractTestNGSpringContextTests {
 
     }
 
-    @Test(expectedExceptions = PersistenceException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void createWithIdSetTest() {
         Genre badGenre = genreBuilder.id(new Long(1)).title("Electro").build();
         genreDao.create(badGenre);
     }
     
-    @Test(expectedExceptions=PersistenceException.class)
+    @Test(expectedExceptions=DataAccessException.class)
     public void createGenreWithSameTitle() {
         Genre downTempo1 = genreBuilder.title("Down Tempo").build();
         Genre downTempo2 = genreBuilder.title("Down Tempo").build();
@@ -133,7 +135,7 @@ public class GenreDaoTest extends AbstractTestNGSpringContextTests {
 
     }
     
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void updateNullTest() {
         genreDao.update(null);
     }
@@ -172,12 +174,12 @@ public class GenreDaoTest extends AbstractTestNGSpringContextTests {
         genreDao.remove(acidJazz);
     }
     
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void removeNullTest() {
         genreDao.remove(null);
     }
     
-    @Test(expectedExceptions = IllegalArgumentException.class)
+    @Test(expectedExceptions = DataAccessException.class)
     public void removeAlreadyRemovedTest() {
         genreDao.create(chillWave);
         Assert.assertEquals(genreDao.findById(chillWave.getId()), chillWave);
