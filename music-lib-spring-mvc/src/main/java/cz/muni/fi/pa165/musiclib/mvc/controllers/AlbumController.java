@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.musiclib.mvc.controllers;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
+import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -104,5 +105,14 @@ public class AlbumController extends BaseController {
             out.write(image);
             out.flush();
         }
+    }
+
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+    public String detail(@PathVariable long id, Model model) {
+
+        AlbumDTO albumDTO= albumFacade.getAlbumById(id);
+
+        model.addAttribute("album", albumDTO);
+        return "album/detail";
     }
 }

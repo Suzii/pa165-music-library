@@ -40,7 +40,7 @@
                     <td>${count}.</td>
                     <td>
                         <img src="${pageContext.request.contextPath}/album/albumImage/${album.id}"
-                             style="max-height:30%; max-width:30%">
+                             style="max-height:50px; max-width:500px">
                     </td>
                     <td><b><c:out value="${album.title}"/></b></td>
                     <td>
