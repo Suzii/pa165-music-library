@@ -16,7 +16,7 @@ public interface AlbumFacade {
 
     void removeSong(Long albumId, Long songId);
 
-    void changeTitle(AlbumNewTitleDTO newTitle);
+    void update(AlbumDTO newAlbum);
 
     void changeAlbumArt(AlbumChangeAlbumArtDTO dto);
 
