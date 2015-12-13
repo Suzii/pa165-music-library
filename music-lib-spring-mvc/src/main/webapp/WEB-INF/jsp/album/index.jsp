@@ -40,9 +40,10 @@
                     <td>${count}.</td>
                     <td>
                         <img src="${pageContext.request.contextPath}/album/albumImage/${album.id}"
-                             style="max-height:50px; max-width:500px">
+                             style="max-height:50px; max-width:50px">
                     </td>
-                    <td><b><c:out value="${album.title}"/></b></td>
+                    <td><b><a href="${pageContext.request.contextPath}/album/detail/${album.id}" >
+                        <c:out value="${album.title}"/></a></b></td>
                     <td>
                         <c:if test="${empty album.commentary}">
                             <fmt:message key="n_a"/>

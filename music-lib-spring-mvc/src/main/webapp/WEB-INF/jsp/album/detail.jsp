@@ -10,35 +10,45 @@
 
     <jsp:attribute name="body">
 
-        <div class="row">
-            <h1><fmt:message key="albums.detail"/><b>&nbsp;${album.title}</b></h1>
+        <div class="column">
+            <div class="row">
+                <h1><fmt:message key="albums.detail"/><b>&nbsp;${album.title}</b></h1>
 
-            <div class="col-md-3">
-                <img src="${pageContext.request.contextPath}/album/albumImage/${album.id}"
-                     style="max-height:200px; max-width:200px">
+                <div class="col-md-3">
+                    <img src="${pageContext.request.contextPath}/album/albumImage/${album.id}"
+                         style="max-height:200px; max-width:200px">
+                </div>
+
+                <div class="col-md-4">
+                    <dt><fmt:message key="albums.title"/></dt>
+                    <dd>${album.title}</dd>
+
+                    <dt><fmt:message key="albums.commentary"/></dt>
+                    <dd>${album.commentary}</dd>
+
+                    <dt><fmt:message key="albums.dateOfRelease"/></dt>
+                    <dd><fmt:formatDate value="${album.dateOfRelease}" type="date" dateStyle="long"/></dd>
+
+                    <dt><fmt:message key="albums.mimeType"/></dt>
+                    <dd>${album.albumArtMimeType}</dd>
+
+                    <dt><fmt:message key="albums.songs"/></dt>
+                    <dd><a class="btn btn-mg btn-primary"
+                           href="${pageContext.request.contextPath}/song/index"
+                           role="button"><fmt:message key="albums.songList"/></a></dd>
+
+                </div>
             </div>
 
-            <div class="col-md-4">
-                <dt><fmt:message key="albums.title"/></dt>
-                <dd>${album.title}</dd>
-
-                <dt><fmt:message key="albums.commentary"/></dt>
-                <dd>${album.commentary}</dd>
-
-                <dt><fmt:message key="albums.dateOfRelease"/></dt>
-                <dd><fmt:formatDate value="${album.dateOfRelease}" type="date" dateStyle="long"/></dd>
-
-                <dt><fmt:message key="albums.mimeType"/></dt>
-                <dd>${album.albumArtMimeType}</dd>
-
-                <dt><fmt:message key="albums.songs"/></dt>
-                <dd><a class="btn btn-mg btn-primary"
-                       href="${pageContext.request.contextPath}/song/index"
-                       role="button"><fmt:message key="albums.songList"/></a></dd>
-
-            </div>
-
-
+            <br/>
+            <form:form method="get" action="${pageContext.request.contextPath}/album" cssClass="form-horizontal">
+                <td class="col-xs-1 text-center">
+                    <button class="btn btn-default" type="submit">
+                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+                        <span class="sr-only"><fmt:message key="back"/></span>
+                    </button>
+                </td>
+            </form:form>
         </div>
 
     </jsp:attribute>
