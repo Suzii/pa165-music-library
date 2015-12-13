@@ -57,6 +57,15 @@
                     <td><a class="btn btn-mg btn-primary"
                            href="${pageContext.request.contextPath}/song/index"
                            role="button"><fmt:message key="albums.songList"/></a></td>
+
+                    <form:form method="get" action="${pageContext.request.contextPath}/album/update/${album.id}" cssClass="form-horizontal">
+                        <td class="col-xs-1 text-center">
+                            <button class="btn btn-default" type="submit">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                <span class="sr-only"><fmt:message key="edit"/></span>
+                            </button>
+                        </td>
+                    </form:form>
                 </tr>
             </c:forEach>
             </tbody>
