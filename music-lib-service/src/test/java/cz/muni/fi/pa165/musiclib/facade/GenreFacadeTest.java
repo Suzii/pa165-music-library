@@ -78,9 +78,6 @@ public class GenreFacadeTest extends AbstractTestNGSpringContextTests {
 
         Long result = genreFacade.create(genreDTO);
         verify(genreService).create(any(Genre.class));
-        assertNotNull(result);
-        assertNotNull(genreDTO);
-        assertEquals(genreDTO.getId(), result);
     }
 
     @Test
