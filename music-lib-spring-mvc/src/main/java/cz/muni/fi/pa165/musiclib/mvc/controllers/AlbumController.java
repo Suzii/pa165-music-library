@@ -1,11 +1,7 @@
 package cz.muni.fi.pa165.musiclib.mvc.controllers;
 
-import cz.muni.fi.pa165.musiclib.dao.SongDao;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
-import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
-import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
-import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
 import org.slf4j.Logger;
@@ -18,22 +14,15 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.ResourceBundle;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 import javax.validation.Valid;
 
 /**
@@ -122,6 +111,24 @@ public class AlbumController extends BaseController {
 
         model.addAttribute("album", albumDTO);
         return "album/detail";
+    }
+    
+    /**
+     * Lists all songs associated with album. 
+     * @param albumId
+     * @param model
+     * @return 
+     */
+    @RequestMapping(value = {"/songs/{albumId}"}, method = RequestMethod.GET)
+    public String songs(@PathVariable long albumId, Model model) {
+                
+        AlbumDTO albumDTO= albumFacade.getAlbumById(albumId);
+        model.addAttribute("album", albumDTO);
+        
+        List<SongDTO> songs = songFacade.findByAlbum(albumId);
+        model.addAttribute("songs", songs);
+        
+        return "album/albumSongs";
     }
 
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)

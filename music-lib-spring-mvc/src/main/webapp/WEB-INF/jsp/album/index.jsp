@@ -55,7 +55,7 @@
                     <td><fmt:formatDate value="${album.dateOfRelease}" pattern="yyyy-MM-dd"/></td>
                     <td><c:out value="${album.albumArtMimeType}"/></td>
                     <td><a class="btn btn-mg btn-primary"
-                           href="${pageContext.request.contextPath}/song/index"
+                           href="${pageContext.request.contextPath}/album/songs/${album.id}"
                            role="button"><fmt:message key="albums.songList"/></a></td>
 
                     <form:form method="get" action="${pageContext.request.contextPath}/album/update/${album.id}" cssClass="form-horizontal">

@@ -15,6 +15,10 @@
                    cssClass="form-horizontal">
 
             <h2><fmt:message key="songs.create_new_song"/></h2>
+            <c:if test="${not empty album}">
+                <p class="lead"> This song will be part of an album ${album.title}</p>
+                <form:hidden path="albumId"/>
+            </c:if>
 
             <div class="form-group ${title_error?'has-error':''}">
                 <form:label path="title" cssClass="col-sm-2 control-label"><fmt:message key="songs.title"/></form:label>

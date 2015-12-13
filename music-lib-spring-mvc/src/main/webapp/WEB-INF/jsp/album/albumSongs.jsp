@@ -5,18 +5,39 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<own:masterpage title="Songs">
+<own:masterpage>
+    <jsp:attribute name="title">${album.title}</jsp:attribute>
+    <jsp:attribute name="scripts">
+        console.log('todo');
+    </jsp:attribute>
     <jsp:attribute name="body">
 
-        <div class="jumbotron">
-            <h1><fmt:message key="songs.heading"/></h1>
-            <p class="lead"><fmt:message key="songs.subheading"/></p>
-            
+        <div class="row">
             <div class="col-md-3">
-                <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/create" role="button">Create new</a></p>
-            </div>            
+                <img src="${pageContext.request.contextPath}/album/albumImage/${album.id}"
+                     style="max-height:200px; max-width:200px">
+            </div>
+
+            <div class="col-md-6">
+                <h1>${album.title}</b></h1>
+                <dt><fmt:message key="albums.commentary"/></dt>
+                <dd>${album.commentary}</dd>
+
+                <dt><fmt:message key="albums.dateOfRelease"/></dt>
+                <dd><fmt:formatDate value="${album.dateOfRelease}" type="date" dateStyle="long"/></dd>
+
+                <dt><fmt:message key="albums.mimeType"/></dt>
+                <dd>${album.albumArtMimeType}</dd>
+
+            </div>
+            <div class="col-md-3">
+                <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/create?albumId=${album.id}" role="button">Create new</a></p>
+            </div>
         </div>
 
+        <div class="result"></div>
+
+        <!-- song table -->
         <div class="row">
             <table class="table">
                 <thead>
@@ -24,9 +45,7 @@
                         <th>Id</th>
                         <th>Title</th>
                         <th>Artist</th>
-                        <th>Album</th>
                         <th>Genre</th>            
-                        <th class="text-center"><fmt:message key="edit"/></th>
                         <th class="text-center"><fmt:message key="remove"/></th>
                     </tr>
                 </thead>
@@ -37,22 +56,23 @@
                             <td>${count}.</td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/song/detail/${song.id}">
-                                    <c:out value="${song.title}"/>
+                                    <b><c:out value="${song.title}"/></b>
                                 </a>
                             </td>
-                            <td><c:out value="${not empty song.musician ? song.musician.artistName : '-'}"/></td>
-                            <td><c:out value="${not empty song.album ? song.album.title : '-'}"/></td>
-                            <td><c:out value="${not empty song.genre ? song.genre.title : '-'}"/></td>
 
-                            <form:form method="get" action="${pageContext.request.contextPath}/song/update/${song.id}" cssClass="form-horizontal">
-                                <td class="col-xs-1 text-center">
-                                    <button class="btn btn-default" type="submit">
-                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                        <span class="sr-only"><fmt:message key="edit"/></span>
-                                    </button>
+
+                            <td>
+                                <c:if test="${not empty song.musician}">
+                                    <a href="${pageContext.request.contextPath}/musician/detail/${song.musician.id}">
+                                        <c:out value="${song.musician.artistName}"/>
+                                    </a>
                                 </td>
-                            </form:form> 
+                            </c:if>
+                            <td>
+                                <c:out value="${not empty song.genre ? song.genre.title : '-'}"/>
+                            </td>
 
+                            
                             <form:form method="post" action="${pageContext.request.contextPath}/song/remove/${song.id}" cssClass="form-horizontal">
                                 <td class="col-xs-1 text-center">
                                     <button class="btn btn-default" type="submit">
@@ -61,6 +81,8 @@
                                     </button>
                                 </td>
                             </form:form> 
+
+                            <!-- TODO changing position in album arrows-->
                         </tr>
                     </c:forEach>
                 </tbody>

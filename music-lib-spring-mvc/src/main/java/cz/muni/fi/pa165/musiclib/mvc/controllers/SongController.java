@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.musiclib.mvc.controllers;
 
+import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
@@ -8,6 +9,7 @@ import cz.muni.fi.pa165.musiclib.facade.GenreFacade;
 import cz.muni.fi.pa165.musiclib.facade.MusicianFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
 import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
+import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -31,7 +33,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 @Controller
 @RequestMapping(value = {"/song"})
-public class SongController extends BaseController{
+public class SongController extends BaseController {
 
     final static Logger log = LoggerFactory.getLogger(SongController.class);
     
@@ -43,6 +45,9 @@ public class SongController extends BaseController{
     
     @Inject
     private GenreFacade genreFacade;
+    
+    @Inject
+    private AlbumFacade albumFacade;
     
     @Inject
     private MessageSource messageSource;
@@ -66,15 +71,22 @@ public class SongController extends BaseController{
      * @return 
      */
     @RequestMapping(value = {"/create"}, method = RequestMethod.GET)
-    public String create(Model model) {
+    public String create(
+            @RequestParam(value = "albumId", required = false) Long albumId,
+            Model model) {
+        SongCreateDTO song = new SongCreateDTO();
+        AlbumDTO album = (albumId != null) ? albumFacade.getAlbumById(albumId) : null;
+        song.setAlbumId(albumId);
         
-        model.addAttribute("songCreate", new SongCreateDTO());
+        model.addAttribute("songCreate", song);
+        model.addAttribute("album", album);
         return "song/create";
     }
     
     /**
      * Handles submit of song create form.
      * @param formBean
+     * @param albumId
      * @param model
      * @param bindingResult
      * @param redirectAttributes
@@ -86,6 +98,7 @@ public class SongController extends BaseController{
             //DO NOT CHANGE the order of first two parameters
             @Valid @ModelAttribute("songCreate") SongCreateDTO formBean,
             BindingResult bindingResult,
+            @RequestParam(value = "albumId", required = false) Long albumId,
             Model model,
             RedirectAttributes redirectAttributes,
             UriComponentsBuilder uriComponentsBuilder) {
@@ -98,8 +111,6 @@ public class SongController extends BaseController{
             return "/song/create";
         }
         
-        //TODO: handle ablumId
-        Long albumId = 1l;
         Long id = songFacade.create(formBean, albumId);
         redirectAttributes.addFlashAttribute("alert_success", "Song with id " + id + " created");
         
@@ -169,7 +180,7 @@ public class SongController extends BaseController{
         
         redirectAttributes.addFlashAttribute("alert_success", "Song successfully deleted.");
         return "redirect:" + uriBuilder.path("/song").toUriString();
-    }
+    }    
     
     /**
      * Retrieves given song from DB and prepopulates edit form.
@@ -220,8 +231,6 @@ public class SongController extends BaseController{
             return "redirect:" + uriComponentsBuilder.path("/song/update/{id}").buildAndExpand(id).encode().toUriString();
         }
         
-        //TODO: handle ablumId
-        Long albumId = 1l;
         songFacade.update(formBean);
         redirectAttributes.addFlashAttribute("alert_success", "Song " + formBean.getTitle() + " updated");
         return "redirect:" + uriComponentsBuilder.path("/song/detail/{id}").buildAndExpand(id).encode().toUriString();
