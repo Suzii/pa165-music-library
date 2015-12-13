@@ -6,31 +6,38 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <own:masterpage>
-<jsp:attribute name="body">
+    <jsp:attribute name="scripts">
+        <!--    This is how you include page-specific javascript files to the page. 
+            This section will be rendered at the very bottom pg the page after script tags
+            that include Javascript libraries like jQuery and jQuery UI,
+            so there is no need to include then on every page.-->
+        <script src="${pageContext.request.contextPath}/js/test.js"></script>
+    </jsp:attribute>
+    <jsp:attribute name="body">
 
-    <div class="jumbotron">
-        <h1>Welcome to your Music Library !</h1>
-        <p class="lead">Do you feel like listening to some music? You are at the right place! </p>
-    </div>
-    
-    <div class="row">
-        <table class="table">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Title</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach items="${songs}" var="song">
-            <tr>
-                <td>${song.id}</td>
-                <td><c:out value="${song.title}"/></td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    </div>
+        <div class="jumbotron">
+            <h1>Welcome to your Music Library !</h1>
+            <p class="lead">Do you feel like listening to some music? You are at the right place! </p>
+        </div>
 
-</jsp:attribute>
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:forEach items="${songs}" var="song">
+                        <tr>
+                            <td>${song.id}</td>
+                            <td><c:out value="${song.title}"/></td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
+
+    </jsp:attribute>
 </own:masterpage>
