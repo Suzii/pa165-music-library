@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -50,7 +51,6 @@ public class AlbumController extends BaseController {
 
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
-        model.addAttribute("title", "Albums");
         List<AlbumDTO> albums = albumFacade.getAllAlbums();
         model.addAttribute("albums", albums);
 
@@ -88,7 +88,7 @@ public class AlbumController extends BaseController {
         //------------------
         log.error("AlbumArt: " + Arrays.toString(formBean.getAlbumArt()));
         log.error("21: " + Arrays.toString(albumFacade.getAlbumById(2L).getAlbumArt()));
-        
+
         return "redirect:" + uriComponentsBuilder.path("/album/detail/{id}").buildAndExpand(albumId).encode().toUriString();
     }
 

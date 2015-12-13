@@ -9,25 +9,25 @@
 <jsp:attribute name="body">
 
     <div class="jumbotron">
-        <h1>${title}</h1>
+        <h1><fmt:message key="albums.mainTitle"/></h1>
 
-        <p class="leDad">List of all albums registered in the library...</p>
+        <p class="leDad"><fmt:message key="albums.subTitle"/></p>
 
         <p align="right"><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/album/create"
-              role="button">Create new</a></p>
+              role="button"><fmt:message key="albums.create"/></a></p>
     </div>
     
     <div class="row">
         <table class="table">
             <thead>
             <tr>
-                <th>Num</th>
-                <th>Album art</th>
-                <th>Title</th>
-                <th>Commentary</th>
-                <th>Date of release</th>
-                <th>Album art MIME type</th>
-                <th>Songs</th>
+                <th><fmt:message key="albums.num"/></th>
+                <th><fmt:message key="albums.albumArt"/></th>
+                <th><fmt:message key="albums.title"/></th>
+                <th><fmt:message key="albums.commentary"/></th>
+                <th><fmt:message key="albums.dateOfRelease"/></th>
+                <th><fmt:message key="albums.mimeType"/></th>
+                <th><fmt:message key="albums.songs"/></th>
             </tr>
             </thead>
             <tbody>
@@ -51,7 +51,9 @@
                     </td>
                     <td><fmt:formatDate value="${album.dateOfRelease}" pattern="yyyy-MM-dd"/></td>
                     <td><c:out value="${album.albumArtMimeType}"/></td>
-                    <td><a class="btn btn-mg btn-primary" href="${pageContext.request.contextPath}/song/index" role="button">Song list</a></td>
+                    <td><a class="btn btn-mg btn-primary"
+                           href="${pageContext.request.contextPath}/song/index"
+                           role="button"><fmt:message key="albums.songList"/></a></td>
                 </tr>
             </c:forEach>
             </tbody>
