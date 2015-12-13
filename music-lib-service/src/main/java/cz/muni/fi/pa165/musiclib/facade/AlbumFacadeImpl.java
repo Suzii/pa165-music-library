@@ -4,6 +4,8 @@ import cz.muni.fi.pa165.musiclib.dto.AlbumChangeAlbumArtDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumNewTitleDTO;
 import cz.muni.fi.pa165.musiclib.entity.Album;
+import cz.muni.fi.pa165.musiclib.entity.Song;
+import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
 import cz.muni.fi.pa165.musiclib.service.AlbumService;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.SongService;
@@ -34,33 +36,59 @@ public class AlbumFacadeImpl implements AlbumFacade {
     private BeanMappingService beanMappingService;
 
     @Override
-    public Long createAlbum(AlbumDTO a) {
-        Album album = new Album();
-        album.setTitle(a.getTitle());
-        album.setCommentary(a.getCommentary());
-        album.setDateOfRelease(a.getDateOfRelease());
-        album.setAlbumArt(a.getAlbumArt());
-        album.setAlbumArtMimeType(a.getAlbumArtMimeType());
-        albumService.create(album);
+    public Long createAlbum(AlbumDTO albumDto) {
+        if (albumDto == null) {
+            throw new IllegalArgumentException("albumDto cannot be null");
+        }
 
+        Album album = new Album();
+        album.setTitle(album.getTitle());
+        album.setCommentary(album.getCommentary());
+        album.setDateOfRelease(album.getDateOfRelease());
+        album.setAlbumArt(album.getAlbumArt());
+        album.setAlbumArtMimeType(album.getAlbumArtMimeType());
+
+        albumService.create(album);
         return album.getId();
     }
 
     @Override
     public void addSong(Long albumId, Long songId) {
-        albumService.addSong(albumService.findById(albumId),
-                songService.findById(songId));
+        Album album = albumService.findById(albumId);
+        if (album == null) {
+            throw new NoSuchEntityFoundException("No such album exists");
+        }
+
+        Song song = songService.findById(songId);
+        if (song == null) {
+            throw new NoSuchEntityFoundException("No such song exists");
+        }
+
+        albumService.addSong(album, song);
     }
 
     @Override
     public void removeSong(Long albumId, Long songId) {
-        albumService.removeSong(albumService.findById(albumId),
-                songService.findById(songId));
+        Album album = albumService.findById(albumId);
+        if (album == null) {
+            throw new NoSuchEntityFoundException("No such album exists");
+        }
+
+        Song song = songService.findById(songId);
+        if (song == null) {
+            throw new NoSuchEntityFoundException("No such song exists");
+        }
+
+        albumService.removeSong(album, song);
     }
 
     @Override
     public void changeAlbumArt(AlbumChangeAlbumArtDTO dto) {
         Album album = albumService.findById(dto.getAlbumId());
+        if (album == null) {
+            throw new NoSuchEntityFoundException("No such album exists");
+        }
+
         album.setAlbumArt(dto.getImage());
         album.setAlbumArtMimeType(dto.getMimeType());
         albumService.update(album);
@@ -69,6 +97,10 @@ public class AlbumFacadeImpl implements AlbumFacade {
     @Override
     public void update(AlbumDTO newAlbum) {
         Album album = albumService.findById(newAlbum.getId());
+        if (album == null) {
+            throw new NoSuchEntityFoundException("No such album exists");
+        }
+
         album.setTitle(newAlbum.getTitle());
         album.setCommentary(newAlbum.getCommentary());
         album.setDateOfRelease(newAlbum.getDateOfRelease());
@@ -77,7 +109,12 @@ public class AlbumFacadeImpl implements AlbumFacade {
 
     @Override
     public void deleteAlbum(Long albumId) {
-        albumService.remove(albumService.findById(albumId));
+        Album album = albumService.findById(albumId);
+        if (album == null) {
+            throw new NoSuchEntityFoundException("No such album exists");
+        }
+
+        albumService.remove(album);
     }
 
     @Override
@@ -87,11 +124,21 @@ public class AlbumFacadeImpl implements AlbumFacade {
 
     @Override
     public AlbumDTO getAlbumById(Long id) {
-        return beanMappingService.mapTo(albumService.findById(id), AlbumDTO.class);
+        Album album = albumService.findById(id);
+        if (album == null) {
+            throw new NoSuchEntityFoundException("No such album exists");
+        }
+
+        return beanMappingService.mapTo(album, AlbumDTO.class);
     }
 
     @Override
     public List<AlbumDTO> getAlbumByTitle(String title) {
-        return beanMappingService.mapTo(albumService.findByTitle(title), AlbumDTO.class);
+        List<Album> albums = albumService.findByTitle(title);
+        if (albums == null) {
+            throw new NoSuchEntityFoundException("No such album exists");
+        }
+
+        return beanMappingService.mapTo(albums, AlbumDTO.class);
     }
 }
