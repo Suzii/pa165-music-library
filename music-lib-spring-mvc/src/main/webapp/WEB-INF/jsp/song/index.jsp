@@ -9,8 +9,8 @@
     <jsp:attribute name="body">
 
         <div class="jumbotron">
-            <h1>${title}</h1>
-            <p class="lead">Whatever dummy text! </p>
+            <h1><fmt:message key="songs.heading"/></h1>
+            <p class="lead"><fmt:message key="songs.subheading"/></p>
             <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/create" role="button">Create new</a></p>
         </div>
 
@@ -29,9 +29,14 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${songs}" var="song">
+                        <c:set var="count" value="${count + 1}" scope="page"/>
                         <tr>
-                            <td>${song.id}</td>
-                            <td><c:out value="${song.title}"/></td>
+                            <td>${count}.</td>
+                            <td>
+                                <a href="${pageContext.request.contextPath}/song/detail/${song.id}">
+                                    <c:out value="${song.title}"/>
+                                </a>
+                            </td>
                             <td><c:out value="${not empty song.musician ? song.musician.artistName : '-'}"/></td>
                             <td><c:out value="${not empty song.album ? song.album.title : '-'}"/></td>
                             <td><c:out value="${not empty song.genre ? song.genre.title : '-'}"/></td>
