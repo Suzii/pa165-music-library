@@ -30,21 +30,24 @@ public class SongFacadeImpl implements SongFacade {
 
     @Inject
     private BeanMappingService beanMappingService;
-    
+
     @Inject
-    private SongService songService; 
-    
+    private SongService songService;
+
     @Inject
     private AlbumService albumService;
-    
+
     @Inject
     private GenreService genreService;
-    
+
     @Inject
-    private MusicianService musicianService; 
-    
+    private MusicianService musicianService;
+
     @Override
     public Long create(SongCreateDTO song, Long albumId) {
+        if (song == null) {
+            throw new IllegalArgumentException("song cannot be null");
+        }
         Song newSong = new Song();
         newSong.setTitle(song.getTitle());
         newSong.setCommentary(song.getCommentary());
@@ -52,55 +55,64 @@ public class SongFacadeImpl implements SongFacade {
         newSong.setGenre(genreService.findById(song.getGenreId()));
         newSong.setMusician(musicianService.findById(song.getMusicianId()));
         newSong.setAlbum(albumService.findById(albumId));
-        
+
         songService.create(newSong);
         return newSong.getId();
-    }    
-    
+    }
+
     @Override
     public void remove(Long songId) {
         Song song = songService.findById(songId);
-        if(song == null){
+        if (song == null) {
             throw new NoSuchEntityFoundException("No such song exists");
         }
+
         songService.remove(song);
     }
-    
+
     @Override
     public void update(SongUpdateDTO song) {
+        if (song == null) {
+            throw new IllegalArgumentException("song cannot be null");
+        }
+
         Song persistedSong = songService.findById(song.getId());
-        if(persistedSong == null){
+        if (persistedSong == null) {
             throw new NoSuchEntityFoundException("No such song exists");
         }
-        
+
         persistedSong.setTitle(song.getTitle());
         persistedSong.setCommentary(song.getCommentary());
         persistedSong.setBitrate(song.getBitrate());
         persistedSong.setGenre(genreService.findById(song.getGenreId()));
         persistedSong.setMusician(musicianService.findById(song.getMusicianId()));
     }
-    
+
     @Override
     public void addYoutubeLink(SongAddYoutubeLinkDTO addYoutubeLinkDTO) {
-        if(addYoutubeLinkDTO.getYoutubeLink() == null){
+        if (addYoutubeLinkDTO == null) {
+            throw new IllegalArgumentException("addYoutubeLinkDTO cannot be null");
+        }
+
+        if (addYoutubeLinkDTO.getYoutubeLink() == null) {
             throw new MusicLibServiceException("Cannot add empty youtube link");
         }
 
         Song song = songService.findById(addYoutubeLinkDTO.getSongId());
-        if(song == null){
+        if (song == null) {
             throw new NoSuchEntityFoundException("No such song exists");
         }
-        
+
         song.setYoutubeLink(addYoutubeLinkDTO.getYoutubeLink());
     }
 
     @Override
     public SongDTO findById(Long id) {
         Song song = songService.findById(id);
-        if(song == null){
+        if (song == null) {
             throw new NoSuchEntityFoundException("No such song exists");
         }
-        
+
         return beanMappingService.mapTo(song, SongDTO.class);
     }
 
@@ -112,30 +124,30 @@ public class SongFacadeImpl implements SongFacade {
     @Override
     public List<SongDTO> findByAlbum(Long albumId) {
         Album album = albumService.findById(albumId);
-        if(album == null){
+        if (album == null) {
             throw new NoSuchEntityFoundException("No such album exists");
         }
-        
+
         return beanMappingService.mapTo(songService.findByAlbum(album), SongDTO.class);
     }
 
     @Override
     public List<SongDTO> findByMusician(Long musicianId) {
         Musician musician = musicianService.findById(musicianId);
-        if(musician == null){
+        if (musician == null) {
             throw new NoSuchEntityFoundException("No such musician exists");
         }
-        
+
         return beanMappingService.mapTo(songService.findByMusician(musician), SongDTO.class);
     }
 
     @Override
     public List<SongDTO> findByGenre(Long genreId) {
         Genre genre = genreService.findById(genreId);
-        if(genre == null){
+        if (genre == null) {
             throw new NoSuchEntityFoundException("No such genre exists");
         }
-        
+
         return beanMappingService.mapTo(songService.findByGenre(genre), SongDTO.class);
     }
 }
