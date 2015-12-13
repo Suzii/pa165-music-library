@@ -14,7 +14,6 @@
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script>
             $(function () {
-                ///TODO default format of time initial value
                 $("#datepicker").datepicker();
             });
         </script>
@@ -43,10 +42,12 @@
                 </div>
             </div>
 
-            <div class="form-group">
+            <div class="form-group ${dateOfRelease_error?'has-error':''}">
                 <form:label path="dateOfRelease" cssClass="col-sm-2 control-label"><fmt:message key="albums.dateOfRelease"/></form:label>
                 <div class="col-sm-10">
-                    <form:input path="dateOfRelease" id="datepicker" cssClass="form-control"/>
+                    <fmt:formatDate var="fmtDate" value="${albumUpdate.dateOfRelease}" pattern="MM/dd/yyyy"/>
+                    <form:input path="dateOfRelease" id="datepicker" value="${fmtDate}" cssClass="form-control"/>
+                    <form:errors path="dateOfRelease" cssClass="help-block"/>
                 </div>
             </div>
 
