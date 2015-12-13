@@ -54,7 +54,9 @@ public class SongFacadeImpl implements SongFacade {
         newSong.setBitrate(song.getBitrate());
         newSong.setGenre(genreService.findById(song.getGenreId()));
         newSong.setMusician(musicianService.findById(song.getMusicianId()));
-        newSong.setAlbum(albumService.findById(albumId));
+        if(albumId != null) {
+            newSong.setAlbum(albumService.findById(albumId));
+        }
 
         songService.create(newSong);
         return newSong.getId();

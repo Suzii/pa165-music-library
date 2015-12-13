@@ -32,6 +32,8 @@ public class SongCreateDTO {
     @NotNull
     private Long genreId;
 
+    private Long albumId;
+    
     public SongCreateDTO() {
     }
 
@@ -73,6 +75,14 @@ public class SongCreateDTO {
 
     public void setGenreId(Long genreId) {
         this.genreId = genreId;
+    }
+
+    public Long getAlbumId() {
+        return albumId;
+    }
+
+    public void setAlbumId(Long albumId) {
+        this.albumId = albumId;
     }
 
     @Override
