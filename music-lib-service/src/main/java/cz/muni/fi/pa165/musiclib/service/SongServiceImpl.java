@@ -24,7 +24,7 @@ public class SongServiceImpl implements SongService {
 
     @Inject
     private SongDao songDao;
-    
+
     @Inject
     private AlbumDao albumDao;
 
@@ -42,7 +42,6 @@ public class SongServiceImpl implements SongService {
         }
     }
 
-
     @Override
     public Song update(Song song) {
         if (song == null) {
@@ -50,16 +49,14 @@ public class SongServiceImpl implements SongService {
         }
 
         try {
-            if(song.getAlbum() == null){
+            if (song.getAlbum() == null) {
                 song.setPositionInAlbum(0);
-            }
-            else if(song.getPositionInAlbum() == 0){
+            } else if (song.getPositionInAlbum() == 0) {
                 int newPosition = getFirstFreePositionInAlbum(song);
                 song.setPositionInAlbum(newPosition);
-            }
-            else if(!isDesiredPositionFreeOnAlbum(song)){
+            } else if (!isDesiredPositionFreeOnAlbum(song)) {
                 throw new MusicLibServiceException("position on album is not free");
-            }            
+            }
             return songDao.update(song);
         } catch (IllegalArgumentException | ConstraintViolationException | PersistenceException ex) {
             throw new MusicLibDataAccessException("song update error", ex);
@@ -113,47 +110,56 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public void remove(Song song) {
+        if(song == null) {
+            throw new IllegalArgumentException("song cannot be null");
+        }
         try {
-            // TODO : when to call removeSong on album ???
+            if (song.getAlbum() != null) {
+                song.getAlbum().removeSong(song);
+            }
+            
+            if (song.getMusician()!= null) {
+                song.getMusician().removeSong(song);
+            }
             songDao.remove(song);
         } catch (IllegalArgumentException | PersistenceException ex) {
             throw new MusicLibDataAccessException("song remove error", ex);
         }
     }
-    
+
     private int getFirstFreePositionInAlbum(Song song) {
         if (song.getAlbum() == null) {
             return 0;
         }
-        
+
         Album album = song.getAlbum();//albumDao.findById(song.getAlbum().getId());
         if (album == null) {
             return 0;
         }
-        
+
         boolean[] occupiedPositions = new boolean[album.getSongs().size()];
-        
-        for(Song s : album.getSongs()){
-            if(s.getPositionInAlbum() > 0){
-                occupiedPositions[s.getPositionInAlbum()-1] = true;
+
+        for (Song s : album.getSongs()) {
+            if (s.getPositionInAlbum() > 0) {
+                occupiedPositions[s.getPositionInAlbum() - 1] = true;
             }
         }
-        
-        for(int i = 0; i < occupiedPositions.length; i++){
-            if(!occupiedPositions[i]){
-                return i+1;
+
+        for (int i = 0; i < occupiedPositions.length; i++) {
+            if (!occupiedPositions[i]) {
+                return i + 1;
             }
         }
-        return album.getSongs().size()+1;
+        return album.getSongs().size() + 1;
     }
 
     private boolean isDesiredPositionFreeOnAlbum(Song song) {
         Album album = song.getAlbum();//albumDao.findById(song.getAlbum().getId());
-        for(Song s : album.getSongs()){
-            if(!s.equals(song) && s.getPositionInAlbum() == song.getPositionInAlbum()){
+        for (Song s : album.getSongs()) {
+            if (!s.equals(song) && s.getPositionInAlbum() == song.getPositionInAlbum()) {
                 return false;
             }
-        }        
+        }
         return true;
     }
 }

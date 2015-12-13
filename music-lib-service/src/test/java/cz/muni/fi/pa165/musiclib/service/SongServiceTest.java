@@ -455,7 +455,7 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         songService.remove(newSong);
     }
 
-    @Test(expectedExceptions = MusicLibDataAccessException.class)
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void removeNullTest() {
         songService.remove(null);
     }
