@@ -25,12 +25,14 @@ public class GenreFacadeImpl implements GenreFacade {
     private GenreService genreService;
 
     @Override
-    public Long create(GenreDTO genre) {
-        if (genre == null) {
+    public Long create(GenreDTO genreDto) {
+        if (genreDto == null) {
             throw new IllegalArgumentException("genre title cannot be null");
         }
 
-        genreService.create(beanMappingService.mapTo(genre, Genre.class));
+        Genre genre = new Genre();
+        genre.setTitle(genreDto.getTitle());
+        genreService.create(genre);
         return genre.getId();
     }
 
