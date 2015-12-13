@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.GenreService;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
+import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
 
 import java.util.List;
 import javax.inject.Inject;
@@ -25,19 +26,36 @@ public class GenreFacadeImpl implements GenreFacade {
 
     @Override
     public Long create(GenreDTO genre) {
+        if (genre == null) {
+            throw new IllegalArgumentException("genre title cannot be null");
+        }
+
         genreService.create(beanMappingService.mapTo(genre, Genre.class));
         return genre.getId();
     }
 
     @Override
     public void changeTitle(GenreDTO newGenreTitle) {
-        genreService.changeTitle(genreService.findById(newGenreTitle.getId()),
-                newGenreTitle.getTitle());
+        if (newGenreTitle == null) {
+            throw new IllegalArgumentException("newGenreTitle title cannot be null");
+        }
+
+        Genre genre = genreService.findById(newGenreTitle.getId());
+        if (genre == null) {
+            throw new NoSuchEntityFoundException("No such genre exists");
+        }
+
+        genreService.changeTitle(genre, newGenreTitle.getTitle());
     }
 
     @Override
     public void deleteGenre(Long genreId) {
-        genreService.remove(genreService.findById(genreId));
+        Genre genre = genreService.findById(genreId);
+        if (genre == null) {
+            throw new NoSuchEntityFoundException("No such genre exists");
+        }
+
+        genreService.remove(genre);
     }
 
     @Override
@@ -47,12 +65,22 @@ public class GenreFacadeImpl implements GenreFacade {
 
     @Override
     public GenreDTO getGenreById(Long id) {
-        return beanMappingService.mapTo(genreService.findById(id), GenreDTO.class);
+        Genre genre = genreService.findById(id);
+        if (genre == null) {
+            throw new NoSuchEntityFoundException("No such genre exists");
+        }
+
+        return beanMappingService.mapTo(genre, GenreDTO.class);
     }
 
     @Override
     public List<GenreDTO> getGenreByTitle(String title) {
-        return beanMappingService.mapTo(genreService.findByTitle(title), GenreDTO.class);
+        List<Genre> genres = genreService.findByTitle(title);
+        if (genres == null) {
+            throw new NoSuchEntityFoundException("No such genre exists");
+        }
+
+        return beanMappingService.mapTo(genres, GenreDTO.class);
     }
 
 }
