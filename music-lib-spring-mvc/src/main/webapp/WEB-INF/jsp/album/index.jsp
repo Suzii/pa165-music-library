@@ -6,7 +6,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <own:masterpage>
-<jsp:attribute name="body">
+    <jsp:attribute name="title"><fmt:message key="albums.mainTitle"/></jsp:attribute>
+
+    <jsp:attribute name="body">
 
     <div class="jumbotron">
         <h1><fmt:message key="albums.mainTitle"/></h1>
@@ -14,7 +16,7 @@
         <p class="leDad"><fmt:message key="albums.subTitle"/></p>
 
         <p align="right"><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/album/create"
-              role="button"><fmt:message key="albums.create"/></a></p>
+                            role="button"><fmt:message key="albums.create"/></a></p>
     </div>
     
     <div class="row">
@@ -43,7 +45,7 @@
                     <td><b><c:out value="${album.title}"/></b></td>
                     <td>
                         <c:if test="${empty album.commentary}">
-                            <c:out value="N/A"/>
+                            <fmt:message key="n_a"/>
                         </c:if>
                         <c:if test="${not empty album.commentary}">
                             <c:out value="${album.commentary}"/>

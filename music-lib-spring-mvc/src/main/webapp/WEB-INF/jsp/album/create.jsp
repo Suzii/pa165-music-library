@@ -5,7 +5,9 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<own:masterpage title="Create Album">
+<own:masterpage>
+    <jsp:attribute name="title"><fmt:message key="albums.create"/></jsp:attribute>
+
     <jsp:attribute name="body">
 
         <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -22,10 +24,10 @@
                    modelAttribute="albumCreate"
                    cssClass="form-horizontal">
 
-            <h2>Create Album</h2>
+            <h2><fmt:message key="albums.create"/></h2>
 
             <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="title" cssClass="col-sm-2 control-label">Title</form:label>
+                <form:label path="title" cssClass="col-sm-2 control-label"><fmt:message key="albums.title"/></form:label>
                 <div class="col-sm-10">
                     <form:input path="title" cssClass="form-control"/>
                     <form:errors path="title" cssClass="help-block"/>
@@ -33,7 +35,7 @@
             </div>
 
             <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="commentary" cssClass="col-sm-2 control-label">Commentary</form:label>
+                <form:label path="commentary" cssClass="col-sm-2 control-label"><fmt:message key="albums.commentary"/></form:label>
                 <div class="col-sm-10">
                     <form:input path="commentary" cssClass="form-control"/>
                     <form:errors path="commentary" cssClass="help-block"/>
@@ -41,7 +43,7 @@
             </div>
 
             <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="dateOfRelease" cssClass="col-sm-2 control-label">Date of release</form:label>
+                <form:label path="dateOfRelease" cssClass="col-sm-2 control-label"><fmt:message key="albums.dateOfRelease"/></form:label>
                 <div class="col-sm-10">
                     <form:input path="dateOfRelease" id="datepicker" cssClass="form-control"/>
                     <form:errors path="dateOfRelease" cssClass="help-block"/>
@@ -49,7 +51,7 @@
             </div>
 
             <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="albumArt" cssClass="col-sm-2 control-label">Album art</form:label>
+                <form:label path="albumArt" cssClass="col-sm-2 control-label"><fmt:message key="albums.albumArt"/></form:label>
                 <div class="col-sm-10">
                         <%--<form path="albumArt" action="UploadServlet" method="post"--%>
                         <%--enctype="multipart/form-data">--%>
@@ -59,14 +61,14 @@
             </div>
 
             <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="albumArtMimeType" cssClass="col-sm-2 control-label">Album art MIME type</form:label>
+                <form:label path="albumArtMimeType" cssClass="col-sm-2 control-label"><fmt:message key="albums.mimeType"/></form:label>
                 <div class="col-sm-10">
                     <form:input path="albumArtMimeType" cssClass="form-control"/>
                     <form:errors path="albumArtMimeType" cssClass="help-block"/>
                 </div>
             </div>
 
-            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit">Create</button>
+            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit"><fmt:message key="create"/></button>
         </form:form>
     </jsp:attribute>
 </own:masterpage>
