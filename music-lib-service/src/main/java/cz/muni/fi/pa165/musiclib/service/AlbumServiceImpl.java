@@ -47,7 +47,17 @@ public class AlbumServiceImpl implements AlbumService {
 
     @Override
     public void remove(Album album) throws IllegalArgumentException {
+        if (album == null) {
+            throw new MusicLibDataAccessException("Album cannot be null");
+        }
+
         try {
+            //remove from songs
+            List<Song> songs = album.getSongs();
+            for (Song song : songs) {
+                removeSong(album, song);
+            }
+
             albumDao.remove(album);
         } catch (IllegalArgumentException | PersistenceException ex) {
             throw new MusicLibDataAccessException("album remove error", ex);

@@ -66,6 +66,15 @@
                             </button>
                         </td>
                     </form:form>
+
+                    <form:form method="post" action="${pageContext.request.contextPath}/album/remove/${album.id}" cssClass="form-horizontal">
+                        <td class="col-xs-1 text-center">
+                            <button class="btn btn-default" type="submit">
+                                <span class="sr-only"><fmt:message key="remove"/></span>
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </form:form>
                 </tr>
             </c:forEach>
             </tbody>

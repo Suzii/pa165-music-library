@@ -2,6 +2,8 @@ package cz.muni.fi.pa165.musiclib.mvc.controllers;
 
 import cz.muni.fi.pa165.musiclib.mvc.exceptions.GenericMusicLibraryException;
 import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @ControllerAdvice
 public class GenericExceptionController {
+
+    final static Logger log = LoggerFactory.getLogger(GenericExceptionController.class);
 
     @ExceptionHandler(NoSuchEntityFoundException.class)
     public ModelAndView handleCustomException(NoSuchEntityFoundException ex) {
@@ -37,7 +41,8 @@ public class GenericExceptionController {
     public ModelAndView handleAllException(Exception ex) {
 
         ModelAndView model = new ModelAndView("/error");
-        model.addObject("errMsg", "this is Exception.class");
+        model.addObject("errMsg", ex);
+        log.error(ex.getLocalizedMessage());
 
         return model;
     }

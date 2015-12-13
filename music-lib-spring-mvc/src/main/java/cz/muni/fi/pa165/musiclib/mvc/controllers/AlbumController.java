@@ -1,11 +1,13 @@
 package cz.muni.fi.pa165.musiclib.mvc.controllers;
 
+import cz.muni.fi.pa165.musiclib.dao.SongDao;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
+import cz.muni.fi.pa165.musiclib.facade.SongFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -49,6 +51,9 @@ public class AlbumController extends BaseController {
 
     @Inject
     private AlbumFacade albumFacade;
+
+    @Inject
+    private SongFacade songFacade;
 
     @Inject
     private MessageSource messageSource;
@@ -148,5 +153,18 @@ public class AlbumController extends BaseController {
         albumFacade.update(formBean);
         redirectAttributes.addFlashAttribute("alert_success", "Album " + formBean.getTitle() + " updated");
         return "redirect:" + uriComponentsBuilder.path("/album/detail/{id}").buildAndExpand(id).encode().toUriString();
+    }
+
+    @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
+    public String remove(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
+
+        log.debug("albumController.remove() with id = " + id);
+
+        AlbumDTO albumDTO = albumFacade.getAlbumById(id);
+
+        albumFacade.deleteAlbum(id);
+
+        redirectAttributes.addFlashAttribute("alert_success", "Album " + albumDTO.getTitle() + " successfully deleted.");
+        return "redirect:" + uriBuilder.path("/album").toUriString();
     }
 }
