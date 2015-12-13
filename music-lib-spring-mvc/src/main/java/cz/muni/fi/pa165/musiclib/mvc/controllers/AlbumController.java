@@ -14,13 +14,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
+import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import javax.validation.Valid;
 
 /**
@@ -31,7 +37,8 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping(value = {"/album"})
-public class AlbumController  extends BaseController {
+@MultipartConfig
+public class AlbumController extends BaseController {
 
     final static Logger log = LoggerFactory.getLogger(AlbumController.class);
 
@@ -64,7 +71,8 @@ public class AlbumController  extends BaseController {
             BindingResult bindingResult,
             Model model,
             RedirectAttributes redirectAttributes,
-            UriComponentsBuilder uriComponentsBuilder) {
+            UriComponentsBuilder uriComponentsBuilder,
+            HttpServletRequest request) throws IOException, ServletException {
 
         log.debug("create(formBean={})", formBean);
 
@@ -77,6 +85,10 @@ public class AlbumController  extends BaseController {
         Long albumId = albumFacade.createAlbum(formBean);
         redirectAttributes.addFlashAttribute("alert_success", "Album with id " + albumId + " created");
 
+        //------------------
+        log.error("AlbumArt: " + Arrays.toString(formBean.getAlbumArt()));
+        log.error("21: " + Arrays.toString(albumFacade.getAlbumById(2L).getAlbumArt()));
+        
         return "redirect:" + uriComponentsBuilder.path("/album/detail/{id}").buildAndExpand(albumId).encode().toUriString();
     }
 
@@ -84,8 +96,8 @@ public class AlbumController  extends BaseController {
     public void albumImage(@PathVariable long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
         AlbumDTO albumDTO = albumFacade.getAlbumById(id);
         byte[] image = albumDTO.getAlbumArt();
-        if(image == null) {
-            response.sendRedirect(request.getContextPath()+"/no-image.png");
+        if (image == null) {
+            response.sendRedirect(request.getContextPath() + "/no-image.png");
         } else {
             response.setContentType(albumDTO.getAlbumArtMimeType());
             ServletOutputStream out = response.getOutputStream();

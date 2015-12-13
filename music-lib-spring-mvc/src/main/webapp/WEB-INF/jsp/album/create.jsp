@@ -49,11 +49,11 @@
             </div>
 
             <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="dateOfRelease" cssClass="col-sm-2 control-label">Album art</form:label>
+                <form:label path="albumArt" cssClass="col-sm-2 control-label">Album art</form:label>
                 <div class="col-sm-10">
                         <%--<form path="albumArt" action="UploadServlet" method="post"--%>
                         <%--enctype="multipart/form-data">--%>
-                    <form:input type="file" name="file" size="50" path="albumArt" cssClass="form-control"/>
+                    <form:input type="file" name="file" path="albumArt" cssClass="form-control"/>
                         <%--</form>--%>
                 </div>
             </div>
