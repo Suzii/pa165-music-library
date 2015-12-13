@@ -50,23 +50,23 @@
                 </div>
             </div>
 
-            <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="albumArt" cssClass="col-sm-2 control-label"><fmt:message key="albums.albumArt"/></form:label>
-                <div class="col-sm-10">
-                        <%--<form path="albumArt" action="UploadServlet" method="post"--%>
-                        <%--enctype="multipart/form-data">--%>
-                    <form:input type="file" name="file" path="albumArt" cssClass="form-control"/>
-                        <%--</form>--%>
-                </div>
-            </div>
+            <%--<div class="form-group ${title_error?'has-error':''}">--%>
+                <%--<form:label path="albumArt" cssClass="col-sm-2 control-label"><fmt:message key="albums.albumArt"/></form:label>--%>
+                <%--<div class="col-sm-10">--%>
+                        <%--&lt;%&ndash;<form path="albumArt" action="UploadServlet" method="post"&ndash;%&gt;--%>
+                        <%--&lt;%&ndash;enctype="multipart/form-data">&ndash;%&gt;--%>
+                    <%--<form:input type="file" name="file" path="albumArt" cssClass="form-control"/>--%>
+                        <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
-            <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="albumArtMimeType" cssClass="col-sm-2 control-label"><fmt:message key="albums.mimeType"/></form:label>
-                <div class="col-sm-10">
-                    <form:input path="albumArtMimeType" cssClass="form-control"/>
-                    <form:errors path="albumArtMimeType" cssClass="help-block"/>
-                </div>
-            </div>
+            <%--<div class="form-group ${title_error?'has-error':''}">--%>
+                <%--<form:label path="albumArtMimeType" cssClass="col-sm-2 control-label"><fmt:message key="albums.mimeType"/></form:label>--%>
+                <%--<div class="col-sm-10">--%>
+                    <%--<form:input path="albumArtMimeType" cssClass="form-control"/>--%>
+                    <%--<form:errors path="albumArtMimeType" cssClass="help-block"/>--%>
+                <%--</div>--%>
+            <%--</div>--%>
 
             <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit"><fmt:message key="create"/></button>
         </form:form>

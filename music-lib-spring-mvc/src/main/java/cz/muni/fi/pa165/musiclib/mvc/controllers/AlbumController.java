@@ -19,6 +19,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -85,7 +87,7 @@ public class AlbumController extends BaseController {
         }
 
         Long albumId = albumFacade.createAlbum(formBean);
-        redirectAttributes.addFlashAttribute("alert_success", "Album with id " + albumId + " created");
+        redirectAttributes.addFlashAttribute("alert_success", "Album with name " + formBean.getTitle() + " created");
 
         //------------------
         log.error("AlbumArt: " + Arrays.toString(formBean.getAlbumArt()));
@@ -124,5 +126,27 @@ public class AlbumController extends BaseController {
 
         model.addAttribute("albumUpdate", album);
         return "album/update";
+    }
+
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(
+            //DO NOT CHANGE the order of first two parameters
+            @Valid @ModelAttribute("albumUpdate") AlbumDTO formBean,
+            BindingResult bindingResult,
+            @PathVariable long id,
+            Model model,
+            RedirectAttributes redirectAttributes,
+            UriComponentsBuilder uriComponentsBuilder) {
+
+        log.debug("albumController.update(formBean={})", formBean);
+
+        if (bindingResult.hasErrors()) {
+            addValidationErrors(bindingResult, model);
+            return "redirect:" + uriComponentsBuilder.path("/album/update/{id}").buildAndExpand(id).encode().toUriString();
+        }
+
+        albumFacade.update(formBean);
+        redirectAttributes.addFlashAttribute("alert_success", "Album " + formBean.getTitle() + " updated");
+        return "redirect:" + uriComponentsBuilder.path("/album/detail/{id}").buildAndExpand(id).encode().toUriString();
     }
 }

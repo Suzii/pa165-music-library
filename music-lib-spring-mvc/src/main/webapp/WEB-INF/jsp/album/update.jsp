@@ -14,12 +14,13 @@
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script>
             $(function () {
+                ///TODO default format of time initial value
                 $("#datepicker").datepicker();
             });
         </script>
 
-        <form:form method="POST" 
-                   action="${pageContext.request.contextPath}/album/update/${songUpdate.id}"
+        <form:form method="POST"
+                   action="${pageContext.request.contextPath}/album/update/${albumUpdate.id}"
                    acceptCharset=""
                    modelAttribute="albumUpdate"
                    cssClass="form-horizontal">
@@ -42,32 +43,12 @@
                 </div>
             </div>
 
-            <div class="form-group ${title_error?'has-error':''}">
+            <div class="form-group">
                 <form:label path="dateOfRelease" cssClass="col-sm-2 control-label"><fmt:message key="albums.dateOfRelease"/></form:label>
                 <div class="col-sm-10">
                     <form:input path="dateOfRelease" id="datepicker" cssClass="form-control"/>
-                    <form:errors path="dateOfRelease" cssClass="help-block"/>
                 </div>
             </div>
-
-            <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="albumArt" cssClass="col-sm-2 control-label"><fmt:message key="albums.albumArt"/></form:label>
-                <div class="col-sm-10">
-                        <%--<form path="albumArt" action="UploadServlet" method="post"--%>
-                        <%--enctype="multipart/form-data">--%>
-                    <form:input type="file" name="file" path="albumArt" cssClass="form-control"/>
-                        <%--</form>--%>
-                </div>
-            </div>
-
-            <div class="form-group ${title_error?'has-error':''}">
-                <form:label path="albumArtMimeType" cssClass="col-sm-2 control-label"><fmt:message key="albums.mimeType"/></form:label>
-                <div class="col-sm-10">
-                    <form:input path="albumArtMimeType" cssClass="form-control"/>
-                    <form:errors path="albumArtMimeType" cssClass="help-block"/>
-                </div>
-            </div>
-
 
             <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit"><fmt:message key="edit"/></button>
         </form:form>
