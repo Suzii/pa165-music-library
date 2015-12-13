@@ -1,11 +1,19 @@
 package cz.muni.fi.pa165.musiclib.mvc.config.security;
 
+import cz.muni.fi.pa165.musiclib.dto.UserDTO;
+import cz.muni.fi.pa165.musiclib.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.sql.DataSource;
+import javax.inject.Inject;
+import java.util.List;
 
 /**
  * @author xstefank (422697@mail.muni.cz)
@@ -15,9 +23,15 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+    @Inject
+    DataSource dataSource;
+
+    @Inject
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN").roles("USER");
+
+        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("USER");
+//        auth.jdbcAuthentication().dataSource(dataSource)
+//                .passwordEncoder(passwordEncoder()).usersByUsernameQuery("select email,");
     }
 
     @Override
@@ -38,5 +52,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .csrf().disable();
 
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        PasswordEncoder encoder = new PasswordEncoding();
+        return encoder;
     }
 }
