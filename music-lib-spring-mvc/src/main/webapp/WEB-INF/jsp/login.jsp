@@ -18,7 +18,7 @@
 
             <table>
                 <tr>
-                    <td>User:</td>
+                    <td>Email:</td>
                     <td><input type='text' name='user' value=''></td>
                 </tr>
                 <tr>

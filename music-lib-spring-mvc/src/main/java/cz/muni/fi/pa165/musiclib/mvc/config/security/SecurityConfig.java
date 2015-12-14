@@ -28,9 +28,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     DataSource dataSource;
 
     @Inject
+    private UserFacade userFacade;
+
+    @Inject
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("USER");
+        List<UserDTO> userDTOs = userFacade.getAllUsers();
+
+        for(UserDTO userDTO : userDTOs) {
+            auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())
+                    .withUser(userDTO.getEmail()).password(userDTO.getPasswordHash()).roles("USER");
+        }
+
+//        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("USER");
 //        auth.jdbcAuthentication().dataSource(dataSource)
 //                .passwordEncoder(passwordEncoder()).usersByUsernameQuery("select email,");
     }
