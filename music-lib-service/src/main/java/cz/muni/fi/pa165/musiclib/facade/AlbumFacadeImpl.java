@@ -42,11 +42,11 @@ public class AlbumFacadeImpl implements AlbumFacade {
         }
 
         Album album = new Album();
-        album.setTitle(album.getTitle());
-        album.setCommentary(album.getCommentary());
-        album.setDateOfRelease(album.getDateOfRelease());
-        album.setAlbumArt(album.getAlbumArt());
-        album.setAlbumArtMimeType(album.getAlbumArtMimeType());
+        album.setTitle(albumDto.getTitle());
+        album.setCommentary(albumDto.getCommentary());
+        album.setDateOfRelease(albumDto.getDateOfRelease());
+        album.setAlbumArt(albumDto.getAlbumArt());
+        album.setAlbumArtMimeType(albumDto.getAlbumArtMimeType());
 
         albumService.create(album);
         return album.getId();
