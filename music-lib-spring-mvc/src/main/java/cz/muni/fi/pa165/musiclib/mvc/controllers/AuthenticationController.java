@@ -64,44 +64,18 @@ public class AuthenticationController extends BaseController{
     public String login(
             //DO NOT CHANGE the order of first two parameters
             @Valid @ModelAttribute("user") UserAuthenticationDTO formBean,
+            @RequestParam(value = "error", required = false) String error,
             BindingResult bindingResult,
             Model model,
             @RequestParam(defaultValue = "/home") String redirectTo,
             RedirectAttributes redirectAttributes,
             UriComponentsBuilder uriComponentsBuilder) throws URISyntaxException {
 
-        log.error("----------POST LOGIN");
         log.debug("create(formBean={})", formBean);
 
-        String logname = formBean.getEmail();
-        String password = formBean.getPassword();
-
-        UserDTO matchingUser = userFacade.findUserByEmail(logname);
-        if (matchingUser == null) {
-            log.warn("no user with email {}", logname);
-//            return "/error"
-        }
-
-        UserAuthenticationDTO userAuthenticateDTO = new UserAuthenticationDTO();
-        userAuthenticateDTO.setUserId(matchingUser.getId());
-        userAuthenticateDTO.setPassword(password);
-
-        if (!userFacade.authenticate(userAuthenticateDTO)) {
-            log.warn("invalid credentials: user={} password={}", logname, password);
-//            return "/error";
-        }
-
-        createCookie(request, response, "auth", matchingUser.getEmail());
-
-
-        if (bindingResult.hasErrors()) {
-            addValidationErrors(bindingResult, model);
-            
-            return "login";
-        }
 
 //        return "redirect:" + redirectTo;
-        return "/song/index";
+        return "/login";
     }
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)

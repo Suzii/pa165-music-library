@@ -44,13 +44,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/musician/**").access("hasRole('ROLE_USER')")
                 .antMatchers("/user/**").access("hasRole('ROLE_USER')")
                 .and()
-                .formLogin();
-//                .loginPage("/login").failureUrl("/error")
-//                .usernameParameter("username").passwordParameter("password")
-//                .and()
-//                .logout().logoutSuccessUrl("/logout")
-//                .and()
-//                .csrf().disable();
+                .formLogin()
+                .loginPage("/login").loginProcessingUrl("/j_spring_security_check")
+                .failureUrl("/login?error")
+                .usernameParameter("user").passwordParameter("pass")
+                .and()
+                .logout().logoutSuccessUrl("/login?logout")
+                .and()
+                .csrf().disable();
 
     }
 

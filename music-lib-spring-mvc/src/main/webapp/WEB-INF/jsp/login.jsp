@@ -9,26 +9,24 @@
     <jsp:attribute name="body">
 
         <form:form method="POST"
-                   action="${pageContext.request.contextPath}/login"
+                   action="j_spring_security_check"
                    acceptCharset=""
                    modelAttribute="user"
                    cssClass="form-horizontal">
 
             <h2 class="form-signin-heading">Please sign in</h2>
-            <div class="form-group ${email_error?'has-error':''}">
-                <form:label path="email" cssClass="col-sm-2 control-label">Email</form:label>
-                    <div class="col-sm-10">
-                    <form:input path="email" cssClass="form-control"/>
-                    <form:errors path="email" cssClass="help-block"/>
-                </div>
-            </div>
-                <div class="form-group ${password_error?'has-error':''}">
-                <form:label path="password" cssClass="col-sm-2 control-label">Password</form:label>
-                    <div class="col-sm-10">
-                    <form:input path="password" type="password" cssClass="form-control"/>
-                    <form:errors path="password" cssClass="help-block"/>
-                </div>
-            </div>
+
+            <table>
+                <tr>
+                    <td>User:</td>
+                    <td><input type='text' name='user' value=''></td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type='password' name='pass' /></td>
+                </tr>
+
+            </table>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form:form>
 
