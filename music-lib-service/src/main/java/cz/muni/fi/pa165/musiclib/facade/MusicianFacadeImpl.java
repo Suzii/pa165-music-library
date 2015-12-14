@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.MusicianService;
+import cz.muni.fi.pa165.musiclib.service.SongService;
 import java.util.List;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -21,6 +22,9 @@ public class MusicianFacadeImpl implements MusicianFacade {
     private BeanMappingService beanMappingService;
 
     @Inject
+    private SongService songService;
+    
+    @Inject
     private MusicianService musicianService;
 
     @Override
@@ -33,11 +37,22 @@ public class MusicianFacadeImpl implements MusicianFacade {
         return musician.getId();
     }
 
-    /*   @Override
+     @Override
      public void updateMusician(MusicianDTO musician) {
-     throw new UnsupportedOperationException("Not supported yet."); 
+     if(musician == null){
+         throw new IllegalArgumentException("new update musician cannot be null");
+     } 
+     
+     Musician persistedMusician = musicianService.findById(musician.getId());
+     if (persistedMusician == null) {
+         throw new NoSuchEntityFoundException("No such musician exists");
      }
-     */
+     
+     persistedMusician.setArtistName(musician.getArtistName());
+     persistedMusician.setDateOfBirth(musician.getDateOfBirth());
+     persistedMusician.setSex(musician.getSex());     
+     }
+     
     @Override
     public void removeMusician(Long musicianId) {
         Musician musician = musicianService.findById(musicianId);
