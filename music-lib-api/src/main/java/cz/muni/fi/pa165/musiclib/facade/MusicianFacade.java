@@ -21,7 +21,7 @@ public interface MusicianFacade {
      * 
      * @param musician
      */
-    //void updateMusician (MusicianDTO musician);
+    void updateMusician (MusicianDTO musician);
 
     /**
      * Deletes musician 
