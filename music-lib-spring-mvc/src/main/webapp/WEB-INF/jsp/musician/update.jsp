@@ -5,17 +5,22 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<own:masterpage title="Create a Musician">
+<own:masterpage title="Update a Musician">
     <jsp:attribute name="scripts">
         <script>
             $(function () {
-                $("#datepicker").datepicker();
+                $("#datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-1000:+0",
+                maxDate: "+0"});
             });
         </script>
     </jsp:attribute>
     <jsp:attribute name="body">
         <a href="${pageContext.request.contextPath}/musician" class="btn btn-default" role="button">
-                <span class="glyphicon glyphicon-menu-left" aria-hidden="true">Back</span>                  
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                <span>Back</span>
         </a>
         
         <form:form method="POST" 
@@ -37,8 +42,8 @@
             <div class="form-group ${dateOfBirth_error?'has-error':''}">
                 <form:label path="dateOfBirth" cssClass="col-sm-2 control-label">Date of birth</form:label>
                     <div class="col-sm-10">
-                        <fmt:formatDate var="fmtDate" value="${musicianUpdate.dateOfBirth}" pattern="DD/mm/yyyy"/>
-                        <form:input path="dateOfBirth" id="datepicker" cssClass="form-control"/>
+                        <fmt:formatDate var="fmtDate" value="${musicianUpdate.dateOfBirth}" pattern="MM/dd/yyyy"/>
+                        <form:input path="dateOfBirth" id="datepicker" value="${fmtDate}" cssClass="form-control"/>
                         <form:errors path="dateOfBirth" cssClass="help-block"/>
                     </div>
             </div>

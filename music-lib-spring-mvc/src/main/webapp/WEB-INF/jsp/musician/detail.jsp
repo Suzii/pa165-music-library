@@ -20,7 +20,7 @@
                     <dd>${musician.sex}</dd>
 
                     <dt><fmt:message key="musician.birthdate"/></dt>
-                    <dd>${musician.dateOfBirth}</dd>
+                    <dd><fmt:formatDate value="${musician.dateOfBirth}" pattern="yyyy-MM-dd"/></dd>
                 </dl>
             </div>
         </div>

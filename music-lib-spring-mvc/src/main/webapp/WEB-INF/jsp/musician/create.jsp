@@ -11,7 +11,11 @@
     <jsp:attribute name="scripts">
         <script>
             $(function () {
-                $("#datepicker").datepicker();
+                $("#datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                yearRange: "-1000:+0",
+                maxDate: "+0"});
             });
         </script>
     </jsp:attribute>
@@ -40,6 +44,7 @@
             <div class="form-group ${dateOfBirth_error?'has-error':''}">
                 <form:label path="dateOfBirth" cssClass="col-sm-2 control-label">Date of birth</form:label>
                     <div class="col-sm-10">
+                        <fmt:formatDate value="${musician.dateOfBirth}" pattern="MM/dd/yyyy"/>
                         <form:input path="dateOfBirth" id="datepicker" cssClass="form-control"/>
                         <form:errors path="dateOfBirth" cssClass="help-block"/>
                     </div>
@@ -47,7 +52,7 @@
 
             <div class="row form-group ${sex_error?'has-error':''}">
                 <form:label path="sex" cssClass="col-sm-2 control-label">Sex</form:label>
-                    <div class="col-sm-10">                        
+                    <div>                        
                         <form:errors path="sex" cssClass="help-block"/>
                     </div>
                     <div class="col-sm-1">Male <form:radiobutton path="sex" value="${male}" class="radio-inline" /></div>
