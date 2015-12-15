@@ -68,6 +68,17 @@ public class AlbumsController {
         }
     }
     
+    @RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
+    public final void removeAlbum(@PathVariable("id") long id) throws Exception{
+        
+        log.debug("rest removeAlbum({})", id);
+        
+        try{
+            albumFacade.deleteAlbum(id);
+        }catch(Exception ex){
+            throw new ResourceNotFoundException();
+        }
+    }
     
     
 }
