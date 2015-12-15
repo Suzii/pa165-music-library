@@ -38,7 +38,7 @@ public abstract class BaseController {
         }
     }
 
-    @ModelAttribute("user")
+    @ModelAttribute("userData")
     public UserDTO user() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (!authentication.isAuthenticated()){
