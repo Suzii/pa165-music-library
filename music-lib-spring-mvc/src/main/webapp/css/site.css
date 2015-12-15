@@ -26,7 +26,7 @@ and open the template in the editor.
 .genresCreate .btn-primary, .genresUpdate .btn-primary {
     width: 157px;
 }
-.genresList .glyphicon-remove {
+.glyphicon-remove {
     color: darkred;
 }
 
