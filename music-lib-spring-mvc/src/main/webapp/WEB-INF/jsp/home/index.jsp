@@ -16,29 +16,32 @@
     <jsp:attribute name="body">
 
         <div class="jumbotron">
-            <h1>${userName}, welcome to your Music Library !</h1>
-            <p>You are <c:if test="${!isAdmin}">not</c:if> an admin.</p>
-            <p class="lead">Do you feel like listening to some music? You are at the right place! </p>
-        </div>
+            <c:choose>
+                <c:when test="${not empty userName}">
+                    <h1>
+                        <fmt:message key="home.hi">
+                            <fmt:param value="${userName}"/>
+                        </fmt:message>
+                    </h1>
+                    <!-- TODO remove this line -->
+                    <p>You are <c:if test="${!isAdmin}">not</c:if> an admin.</p>
+                    <p class="lead"><fmt:message key="home.subheading"/></p>
+                </c:when>
+                <c:otherwise>
+                    <h1><fmt:message key="home.heading"/></h1>
+                    <p class="lead"><fmt:message key="home.subheading"/></p>
+                    <p><fmt:message key="home.log_in_notice"/></p>
+            <p align="right">
+                <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/login" role="button">
+                    <fmt:message key="sign_in"/>
+                </a>
+            </p>
+                </c:otherwise>
+            </c:choose> 
 
-        <div class="row">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Title</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach items="${songs}" var="song">
-                        <tr>
-                            <td>${song.id}</td>
-                            <td><c:out value="${song.title}"/></td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
         </div>
+        
+        TODO: display songs, albums, artists...
 
     </jsp:attribute>
 </own:masterpage>

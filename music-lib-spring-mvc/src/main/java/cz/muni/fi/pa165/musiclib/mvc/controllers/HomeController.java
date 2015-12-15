@@ -22,8 +22,6 @@ public class HomeController  extends BaseController{
 
     final static Logger log = LoggerFactory.getLogger(HomeController.class);
     
-//    @Inject
-//    private SongFacade songFacade;
     @Inject
     private MessageSource messageSource; //resource bundle provided by Spring
 
@@ -31,15 +29,6 @@ public class HomeController  extends BaseController{
     public String index(Model model) {
         model.addAttribute("title", "Music library");
         
-        // create faked song
-        List<SongDTO> songs = new ArrayList<>();//songFacade.findAll();
-        SongDTO defaultSong = new SongDTO(42l);
-        defaultSong.setTitle("Default song");
-        defaultSong.setCommentary("This song is created in HomeController and serves for testing purposes.");
-        songs.add(defaultSong);
-        
-        model.addAttribute("songs", songs);
-        log.debug("Adding attributes.");
         return "home/index";
     }
 }

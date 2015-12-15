@@ -18,7 +18,9 @@ and open the template in the editor.
     margin-right: 1em;    
 }
 
-
+.btn-jumbotron {
+    margin-bottom: -1em;
+}
 .genresList .btn-primary{
     margin-bottom: 20px;
 }
