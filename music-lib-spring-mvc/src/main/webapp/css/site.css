@@ -104,3 +104,8 @@ body {
 .container .text-muted {
   margin: 20px 0;
 }
+
+.loginFormCenter{
+    margin: 0 auto;
+    float: none;
+}

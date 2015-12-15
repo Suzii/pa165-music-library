@@ -9,7 +9,7 @@
     <jsp:attribute name="body">
 
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-6 col-sm-12 ${empty param.error ? 'loginFormCenter' : ''}">
 
                 <form:form method="POST"
                            action="j_spring_security_check"
