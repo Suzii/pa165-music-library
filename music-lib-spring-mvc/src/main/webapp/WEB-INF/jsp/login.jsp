@@ -12,22 +12,16 @@
                    action="j_spring_security_check"
                    acceptCharset=""
                    modelAttribute="user"
-                   cssClass="form-horizontal">
+                   cssClass="form-horizontal form-signin">
 
-            <h2 class="form-signin-heading">Please sign in</h2>
+            <h2 class="form-signin-heading"><fmt:message key="login.signin"/></h2>
 
-            <table>
-                <tr>
-                    <td>Email:</td>
-                    <td><input type='text' name='user' value=''></td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><input type='password' name='pass' /></td>
-                </tr>
-
-            </table>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input type="email" name="user" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required="">
+            
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="login.submit"/></button>
         </form:form>
 
     </jsp:attribute>
