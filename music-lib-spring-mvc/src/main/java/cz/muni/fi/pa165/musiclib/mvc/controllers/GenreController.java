@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
+ * Genre controller
  *
- *
- * @author
+ * @author David Boron
  */
 @Controller
 @RequestMapping(value = {"/genre"})
