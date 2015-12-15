@@ -12,12 +12,12 @@
         </a>
         
         <form:form method="POST" 
-                   action="${pageContext.request.contextPath}/musician/update/${muscianUpdate.id}"
+                   action="${pageContext.request.contextPath}/musician/update/${musicianUpdate.id}"
                    acceptCharset=""
-                   modelAttribute="musicianCreate" 
+                   modelAttribute="musicianUpdate" 
                    cssClass="form-horizontal">
 
-            <h2>Create a new Artist</h2>
+            <h2>Update</h2>
 
             <div class="form-group ${artistName_error?'has-error':''}">
                 <form:label path="artistName" cssClass="col-sm-2 control-label">Artist Name</form:label>
@@ -30,6 +30,7 @@
             <div class="form-group ${dateOfBirth_error?'has-error':''}">
                 <form:label path="dateOfBirth" cssClass="col-sm-2 control-label">Date of birth</form:label>
                     <div class="col-sm-10">
+                        <fmt:formatDate var="fmtDate" value="${musicianUpdate.dateOfBirth}" pattern="DD/mm/yyyy"/>
                         <form:input path="dateOfBirth" cssClass="form-control"/>
                         <form:errors path="dateOfBirth" cssClass="help-block"/>
                     </div>
@@ -44,7 +45,7 @@
                     <div class="col-sm-1">Female <form:radiobutton path="sex" value="${female}" class="radio-inline" /></div>
             </div>
 
-            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit">Create</button>
+            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit">Update</button>
         </form:form>
     </jsp:attribute>
 </own:masterpage>
