@@ -19,6 +19,7 @@ public class MusicianDTO {
     @Size(min=3, max=50)
     private String artistName;
     
+    @NotNull
     private Sex sex;
 
     private Date dateOfBirth;
