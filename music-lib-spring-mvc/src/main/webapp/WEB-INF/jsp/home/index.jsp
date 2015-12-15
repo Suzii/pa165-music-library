@@ -17,10 +17,10 @@
 
         <div class="jumbotron">
             <c:choose>
-                <c:when test="${not empty userName}">
+                <c:when test="${not empty user}">
                     <h1>
                         <fmt:message key="home.hi">
-                            <fmt:param value="${userName}"/>
+                            <fmt:param value="${user.firstName}"/>
                         </fmt:message>
                     </h1>
                     <!-- TODO remove this line -->
