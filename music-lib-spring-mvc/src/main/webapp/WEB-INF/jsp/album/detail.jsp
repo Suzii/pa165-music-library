@@ -7,7 +7,6 @@
 
 <own:masterpage>
     <jsp:attribute name="title">${album.title}</jsp:attribute>
-
     <jsp:attribute name="body">
 
         <div class="column">

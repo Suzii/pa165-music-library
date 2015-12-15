@@ -7,7 +7,6 @@
 
 <own:masterpage title="Song detail">
     <jsp:attribute name="body">
-
         <div class="row">
             <h1>${song.title}</h1>
 

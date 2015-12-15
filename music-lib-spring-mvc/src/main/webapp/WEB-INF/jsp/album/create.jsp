@@ -7,17 +7,14 @@
 
 <own:masterpage>
     <jsp:attribute name="title"><fmt:message key="albums.create"/></jsp:attribute>
-
-    <jsp:attribute name="body">
-
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <jsp:attribute name="scripts">
         <script>
             $(function () {
                 $("#datepicker").datepicker();
             });
         </script>
-
+    </jsp:attribute>
+    <jsp:attribute name="body">
         <form:form method="POST"
                    action="${pageContext.request.contextPath}/album/create"
                    acceptCharset=""

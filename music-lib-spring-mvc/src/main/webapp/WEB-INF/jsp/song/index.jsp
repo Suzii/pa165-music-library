@@ -7,7 +7,6 @@
 
 <own:masterpage title="Songs">
     <jsp:attribute name="body">
-
         <div class="jumbotron">
             <h1><fmt:message key="songs.heading"/></h1>
             <p class="lead"><fmt:message key="songs.subheading"/></p>

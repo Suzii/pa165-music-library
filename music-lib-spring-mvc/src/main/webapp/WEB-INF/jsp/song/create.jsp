@@ -7,7 +7,6 @@
 
 <own:masterpage title="Create Song">
     <jsp:attribute name="body">
-
         <form:form method="POST" 
                    action="${pageContext.request.contextPath}/song/create"
                    acceptCharset=""

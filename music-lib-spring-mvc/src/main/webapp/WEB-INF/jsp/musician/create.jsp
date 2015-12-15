@@ -8,6 +8,13 @@
 
 
 <own:masterpage title="Create a Musician">
+    <jsp:attribute name="scripts">
+        <script>
+            $(function () {
+                $("#datepicker").datepicker();
+            });
+        </script>
+    </jsp:attribute>
     <jsp:attribute name="body">
         <a href="${pageContext.request.contextPath}/musician" class="btn btn-default" role="button">
                 <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
@@ -33,7 +40,7 @@
             <div class="form-group ${dateOfBirth_error?'has-error':''}">
                 <form:label path="dateOfBirth" cssClass="col-sm-2 control-label">Date of birth</form:label>
                     <div class="col-sm-10">
-                        <form:input path="dateOfBirth" cssClass="form-control"/>
+                        <form:input path="dateOfBirth" id="datepicker" cssClass="form-control"/>
                         <form:errors path="dateOfBirth" cssClass="help-block"/>
                     </div>
             </div>
