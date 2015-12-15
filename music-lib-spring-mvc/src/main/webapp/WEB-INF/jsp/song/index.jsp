@@ -27,9 +27,11 @@
                     <th>Title</th>
                     <th>Artist</th>
                     <th>Album</th>
-                    <th class="text-center">Genre</th>            
-                    <th class="text-center"><fmt:message key="edit"/></th>
-                    <th class="text-center"><fmt:message key="remove"/></th>
+                    <th class="text-center">Genre</th>     
+                        <c:if test="${isAdmin}">
+                        <th class="text-center"><fmt:message key="edit"/></th>
+                        <th class="text-center"><fmt:message key="remove"/></th>
+                        </c:if>
                 </tr>
             </thead>
             <tbody>
@@ -46,23 +48,25 @@
                         <td><c:out value="${not empty song.album ? song.album.title : '-'}"/></td>
                         <td class="text-center"><c:out value="${not empty song.genre ? song.genre.title : '-'}"/></td>
 
-                        <form:form method="get" action="${pageContext.request.contextPath}/song/update/${song.id}" cssClass="form-horizontal">
-                            <td class="col-xs-1 text-center">
-                                <button class="btn btn-default" type="submit">
-                                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                                    <span class="sr-only"><fmt:message key="edit"/></span>
-                                </button>
-                            </td>
-                        </form:form> 
+                        <c:if test="${isAdmin}">
+                            <form:form method="get" action="${pageContext.request.contextPath}/song/update/${song.id}" cssClass="form-horizontal">
+                                <td class="col-xs-1 text-center">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                                        <span class="sr-only"><fmt:message key="edit"/></span>
+                                    </button>
+                                </td>
+                            </form:form> 
 
-                        <form:form method="post" action="${pageContext.request.contextPath}/song/remove/${song.id}" cssClass="form-horizontal">
-                            <td class="col-xs-1 text-center">
-                                <button class="btn btn-default" type="submit">
-                                    <span class="sr-only"><fmt:message key="remove"/></span>
-                                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </form:form> 
+                            <form:form method="post" action="${pageContext.request.contextPath}/song/remove/${song.id}" cssClass="form-horizontal">
+                                <td class="col-xs-1 text-center">
+                                    <button class="btn btn-default" type="submit">
+                                        <span class="sr-only"><fmt:message key="remove"/></span>
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </form:form> 
+                        </c:if>
                     </tr>
                 </c:forEach>
             </tbody>

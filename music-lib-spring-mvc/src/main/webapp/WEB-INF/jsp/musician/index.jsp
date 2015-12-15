@@ -26,8 +26,10 @@
                         <th><fmt:message key="musician.name"/></th>
                         <th class="text-center"><fmt:message key="musician.sex"/></th>
                         <th class="text-center"><fmt:message key="musician.birthdate"/></th>
+                        <c:if test="${isAdmin}">
                         <th class="text-center"><fmt:message key="edit"/></th>
                         <th class="text-center"><fmt:message key="remove"/></th>
+                        </c:if>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,6 +40,7 @@
                             <td class="col-xs-3 text-center"><c:out value="${musician.sex}"/></td>
                             <td class="col-xs-3 text-center"><fmt:formatDate value="${musician.dateOfBirth}" pattern="yyyy-MM-dd"/></td>
 
+                            <c:if test="${isAdmin}">
                             <form:form method="get" action="${pageContext.request.contextPath}/musician/update/${musician.id}" cssClass="form-horizontal">
                                 <td class="col-xs-1 text-center">
                                     <button class="btn btn-default" type="submit">
@@ -55,7 +58,7 @@
                                     </button>
                                 </td>
                             </form:form> 
-
+                            </c:if>
                         </tr>
                     </c:forEach>
             </table>

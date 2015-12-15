@@ -33,8 +33,10 @@
                         <th class="text-center"><fmt:message key="albums.dateOfRelease"/></th>
                         <th class="text-center"><fmt:message key="albums.mimeType"/></th>
                         <th class="text-center"><fmt:message key="albums.songs"/></th>
+                        <c:if test="${isAdmin}">
                         <th class="text-center"><fmt:message key="edit"/></th>
                         <th class="text-center"><fmt:message key="remove"/></th>
+                        </c:if>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,8 +63,10 @@
                             <td class="text-center"><c:out value="${album.albumArtMimeType}"/></td>
                             <td class="text-center"><a class="btn btn-mg btn-primary"
                                                        href="${pageContext.request.contextPath}/album/songs/${album.id}"
-                                                       role="button"><fmt:message key="albums.songList"/></a></td>
+                                                       role="button"><fmt:message key="albums.songList"/></a>
+                            </td>
 
+                            <c:if test="${isAdmin}">
                             <form:form method="get" action="${pageContext.request.contextPath}/album/update/${album.id}" cssClass="form-horizontal">
                                 <td class="col-xs-1 text-center">
                                     <button class="btn btn-default" type="submit">
@@ -80,6 +84,7 @@
                                     </button>
                                 </td>
                             </form:form>
+                            </c:if>
                         </tr>
                     </c:forEach>
                 </tbody>

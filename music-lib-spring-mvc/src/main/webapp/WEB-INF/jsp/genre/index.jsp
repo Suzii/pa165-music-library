@@ -27,18 +27,21 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th><fmt:message key="genres.name"/></th>
+                        <th class=${isAdmin? "col-xs-1":"col-xs-3"}>Id</th>
+                        <th class=${isAdmin? "col-xs-3":"col-xs-9"}><fmt:message key="genres.name"/></th>
+                        <c:if test="${isAdmin}">
                         <th class="text-center"><fmt:message key="edit"/></th>
                         <th class="text-center"><fmt:message key="remove"/></th>
+                        </c:if>
                     </tr>
                 </thead>
                 <tbody>
                     <c:forEach items="${genres}" var="genre">
                         <tr>
-                            <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1">${genre.id}.</td>
-                            <td class="col-lg-9 col-md-9 col-sm-9 col-xs-9"><c:out value="${genre.title}"/></td>
+                            <td class=${isAdmin? "col-xs-1":"col-xs-3"}>${genre.id}.</td>
+                            <td class=${isAdmin? "col-xs-3":"col-xs-9"}><c:out value="${genre.title}"/></td>
 
+                            <c:if test="${isAdmin}">
                             <form:form method="get" action="${pageContext.request.contextPath}/genre/update/${genre.id}" cssClass="form-horizontal">
                                 <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
                                     <button class="btn btn-default" type="submit">
@@ -56,7 +59,7 @@
                                     </button>
                                 </td>
                             </form:form> 
-
+                            </c:if>
                         </tr>
                     </c:forEach>
                 </tbody>
