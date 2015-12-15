@@ -9,18 +9,19 @@
     <jsp:attribute name="body">
 
         <div class="row">
-            <h1><fmt:message key="musician.detail"/><b>&nbsp;${musician.artistName}</h1>
+            <h1><fmt:message key="musician.detail"/><b>&nbsp;${musician.artistName}</b></h1>
 
             <div class="col-md-4">  
-                <dt><fmt:message key="musician.name"/></dt>
-                <dd>${musician.artistName}</dd>
+                <dl class="dl-horizontal">
+                    <dt><fmt:message key="musician.name"/></dt>
+                    <dd>${musician.artistName}</dd>
 
-                <dt><fmt:message key="musician.sex"/></dt>
-                <dd>${musician.sex}</dd>
+                    <dt><fmt:message key="musician.sex"/></dt>
+                    <dd>${musician.sex}</dd>
 
-                <dt><fmt:message key="musician.birthdate"/></dt>
-                <dd>${musician.dateOfBirth}</dd>
-
+                    <dt><fmt:message key="musician.birthdate"/></dt>
+                    <dd>${musician.dateOfBirth}</dd>
+                </dl>
             </div>
         </div>
 

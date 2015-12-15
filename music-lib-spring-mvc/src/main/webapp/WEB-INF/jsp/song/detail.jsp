@@ -11,21 +11,22 @@
             <h1>${song.title}</h1>
 
             <div class="col-md-4">  
-                <dt><fmt:message key="songs.artist"/> </dt>
-                <dd>${not empty song.musician ? song.musician.artistName : '-'}</dd>
+                <dl class="dl-horizontal">
+                    <dt><fmt:message key="songs.artist"/> </dt>
+                    <dd>${not empty song.musician ? song.musician.artistName : '-'}</dd>
 
-                <dt><fmt:message key="songs.genre"/> </dt>
-                <dd>${not empty song.genre ? song.genre.title : '-'}</dd>
+                    <dt><fmt:message key="songs.genre"/> </dt>
+                    <dd>${not empty song.genre ? song.genre.title : '-'}</dd>
 
-                <dt><fmt:message key="songs.album"/> </dt>
-                <dd>${not empty song.album ? song.album.title : '-'}</dd>
+                    <dt><fmt:message key="songs.album"/> </dt>
+                    <dd>${not empty song.album ? song.album.title : '-'}</dd>
 
-                <dt><fmt:message key="songs.description"/> </dt>
-                <dd>${song.commentary}</dd>
+                    <dt><fmt:message key="songs.description"/> </dt>
+                    <dd>${song.commentary}</dd>
 
-                <dt><fmt:message key="songs.bitrate"/> </dt>
-                <dd>${song.bitrate}</dd>
-
+                    <dt><fmt:message key="songs.bitrate"/> </dt>
+                    <dd>${song.bitrate}</dd>
+                </dl>
                 <div class="col-md-2 col-md-offset-1 allow-vertical-space">
                     <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/addYoutubeLink/${song.id}" role="button">
                         <c:choose>

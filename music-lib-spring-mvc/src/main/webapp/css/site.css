@@ -29,6 +29,10 @@ and open the template in the editor.
     color: darkred;
 }
 
+dl.dl-horizontal > dd, dt{
+    line-height: 2em;
+}
+
 /* Login form styles
 -------------------------------------------------- */
 .form-signin {
