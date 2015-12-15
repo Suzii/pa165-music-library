@@ -8,23 +8,28 @@
 <own:masterpage>
 <jsp:attribute name="body" >
 <div class="genresList">
-    <!-- title -->
-    <div class="page-header">
-        <h1><fmt:message key="genres.title"/></h1>
+    
+    
+    <div class="jumbotron">
+        <!-- title -->
+        <div class="page-header">
+            <h1><fmt:message key="genres.title"/></h1>
+        </div>
+        
+        <a href="${pageContext.request.contextPath}/genre/create" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            <fmt:message key="genres.create"/>
+        </a>
+        
     </div>
     
-    
-    <a href="${pageContext.request.contextPath}/genre/create" class="btn btn-primary">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        <fmt:message key="genres.create"/>
-    </a>
     
     <div class="row">
         <table class="table">
         <thead>
         <tr>
             <th>Id</th>
-            <th><fmt:message key="genres.title"/></th>
+            <th><fmt:message key="genres.name"/></th>
             <th class="text-center"><fmt:message key="edit"/></th>
             <th class="text-center"><fmt:message key="remove"/></th>
         </tr>
