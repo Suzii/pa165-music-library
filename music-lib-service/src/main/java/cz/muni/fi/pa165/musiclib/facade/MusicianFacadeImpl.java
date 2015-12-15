@@ -33,8 +33,17 @@ public class MusicianFacadeImpl implements MusicianFacade {
             throw new IllegalArgumentException("musician cannot be null");
         }
 
-        musicianService.create(beanMappingService.mapTo(musician, Musician.class));
-        return musician.getId();
+//        musicianService.create(beanMappingService.mapTo(musician, Musician.class));
+//        return musician.getId();
+        
+        Musician newMusician = new Musician();
+        newMusician.setArtistName(musician.getArtistName());
+        newMusician.setDateOfBirth(musician.getDateOfBirth());
+        newMusician.setSex(musician.getSex());
+        //newMusician.setSongs(musician.getSongs());
+        
+        musicianService.create(newMusician);
+        return newMusician.getId();
     }
 
      @Override
