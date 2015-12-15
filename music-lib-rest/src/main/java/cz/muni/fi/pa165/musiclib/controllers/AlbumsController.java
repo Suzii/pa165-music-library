@@ -38,6 +38,22 @@ public class AlbumsController {
         log.debug("rest getAlbums()");
         return albumFacade.getAllAlbums();
     }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final AlbumDTO getAlbum(@PathVariable("id") long id) throws Exception {
+
+        log.debug("rest getAlbum({})", id);
+
+        //TODO: known bug - songs are listed twice
+        
+        try {
+            AlbumDTO albumDTO = albumFacade.getAlbumById(id);
+            return albumDTO;
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException();
+        }
+    }
+    
     
     
 }
