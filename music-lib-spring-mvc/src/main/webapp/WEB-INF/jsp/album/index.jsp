@@ -6,17 +6,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <own:masterpage>
-    <jsp:attribute name="title"><fmt:message key="albums.mainTitle"/></jsp:attribute>
+    <jsp:attribute name="title"><fmt:message key="albums.heading"/></jsp:attribute>
     <jsp:attribute name="body">
 
         <div class="jumbotron">
-            <h1><fmt:message key="albums.mainTitle"/></h1>
-            <p class="lead"><fmt:message key="albums.subTitle"/></p>
+            <h1><fmt:message key="albums.heading"/></h1>
+            <p class="lead"><fmt:message key="albums.subheading"/></p>
 
             <c:if test="${isAdmin}">
                 <p align="right">
                     <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/album/create" role="button">
-                        <fmt:message key="albums.create"/>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        <fmt:message key="create_new"/>
                     </a>
                 </p>
             </c:if>
@@ -26,7 +27,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th><fmt:message key="albums.num"/></th>
+                        <th><fmt:message key="num"/></th>
                         <th class="text-center"><fmt:message key="albums.albumArt"/></th>
                         <th><fmt:message key="albums.title"/></th>
                         <th><fmt:message key="albums.commentary"/></th>

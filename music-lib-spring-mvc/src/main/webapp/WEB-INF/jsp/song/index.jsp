@@ -5,7 +5,9 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<own:masterpage title="Songs">
+<own:masterpage>
+    <jsp:attribute name="title"><fmt:message key="songs.heading"/></jsp:attribute>
+
     <jsp:attribute name="body">
         <div class="jumbotron">
             <h1><fmt:message key="songs.heading"/></h1>
@@ -13,7 +15,10 @@
 
             <c:if test="${isAdmin}">
                 <p align="right">
-                    <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/song/create" role="button">Create new</a>
+                    <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/song/create" role="button">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <fmt:message key="create_new"/>
+                    </a>
                 </p>
             </c:if>
         </p>
@@ -23,10 +28,10 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Artist</th>
-                    <th>Album</th>
+                    <th><fmt:message key="num"/></th>
+                    <th><fmt:message key="songs.title"/></th>
+                    <th><fmt:message key="songs.artist"/></th>
+                    <th><fmt:message key="songs.album"/></th>
                     <th class="text-center">Genre</th>     
                         <c:if test="${isAdmin}">
                         <th class="text-center"><fmt:message key="edit"/></th>
