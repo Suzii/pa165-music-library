@@ -79,3 +79,6 @@ local.properties
 
 # IntelliJ
 /out/
+
+# echo.txt
+echo.txt
