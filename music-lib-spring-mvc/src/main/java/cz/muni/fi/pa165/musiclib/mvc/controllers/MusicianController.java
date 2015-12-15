@@ -89,7 +89,7 @@ public class MusicianController  extends BaseController{
         Long id = musicianFacade.createMusician(musicianFormBean);        
         redirectAttributes.addFlashAttribute("alert_success", "Musican with id" + id + "created");
         
-        return "redirect" + uriComponentsBuilder.path("/musician/detail/{id}").buildAndExpand(id).encode().toUriString();     
+        return "redirect:" + uriComponentsBuilder.path("/musician/detail/{id}").buildAndExpand(id).encode().toUriString();     
     }
     
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
