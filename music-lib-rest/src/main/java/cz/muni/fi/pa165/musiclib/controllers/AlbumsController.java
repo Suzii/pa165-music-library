@@ -54,6 +54,20 @@ public class AlbumsController {
         }
     }
     
+    @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public final AlbumDTO createAlbum(@RequestBody AlbumDTO album) throws Exception {
+
+        log.debug("rest createAlbum()");
+
+        try {
+            Long id = albumFacade.createAlbum(album);
+            return albumFacade.getAlbumById(id);
+        } catch (Exception ex) {
+            throw new ResourceAlreadyExistingException();
+        }
+    }
+    
     
     
 }
