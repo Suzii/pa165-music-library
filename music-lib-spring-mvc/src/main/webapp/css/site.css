@@ -32,16 +32,6 @@ and open the template in the editor.
     color: darkred;
 }
 
-th {
-    text-align: center;
-}
-
-td {
-    text-align: center;
-    vertical-align: middle;
-}
-
-
 /* Login form styles
 -------------------------------------------------- */
 .form-signin {

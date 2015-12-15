@@ -31,16 +31,16 @@
                     <h1><fmt:message key="home.heading"/></h1>
                     <p class="lead"><fmt:message key="home.subheading"/></p>
                     <p><fmt:message key="home.log_in_notice"/></p>
-            <p align="right">
-                <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/login" role="button">
-                    <fmt:message key="sign_in"/>
-                </a>
-            </p>
+                    <p align="right">
+                        <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/login" role="button">
+                            <fmt:message key="sign_in"/>
+                        </a>
+                    </p>
                 </c:otherwise>
             </c:choose> 
 
         </div>
-        
+
         TODO: display songs, albums, artists...
 
     </jsp:attribute>
