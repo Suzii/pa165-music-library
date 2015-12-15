@@ -13,11 +13,11 @@ public class UserAuthenticationDTO {
     private Long userId;
 
     @NotNull
-    @Size(min = 3, max = 50)
+    @Size(min = 1, max = 50)
     private String email;
 
     @NotNull
-    @Size(min = 3, max = 50)
+    @Size(min = 1, max = 50)
     private String password;
 
     public Long getUserId() {

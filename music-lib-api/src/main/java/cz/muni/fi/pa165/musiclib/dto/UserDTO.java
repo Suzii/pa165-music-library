@@ -12,7 +12,7 @@ public class UserDTO {
     private Long id;
     
     @NotNull
-    @Size(min=3, max=50)
+    @Size(min=5, max=50)
     private String email;
     
     private String passwordHash;
