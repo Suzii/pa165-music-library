@@ -70,6 +70,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
     public void loadData() throws IOException {
         
         user("admin@gmail.com", "admin", "admin", "admin", true);
+        user("test@test.com", "Tester99", "test", "test", false);
         user("skywalker@gmail.com", "deathStar1", "Luke", "Skywalker", false);
         user("gandalf@gmail.com", "YouShallNotPass", "Ganfalf", "Grey", false);
         user("thor@gmail.com", "mjolnir123", "Thor", "Odinsson", false);
