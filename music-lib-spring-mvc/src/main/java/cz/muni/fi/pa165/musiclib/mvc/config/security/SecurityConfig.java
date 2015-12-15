@@ -36,8 +36,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         List<UserDTO> userDTOs = userFacade.getAllUsers();
 
         for(UserDTO userDTO : userDTOs) {
-            auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())
-                    .withUser(userDTO.getEmail()).password(userDTO.getPasswordHash()).roles("USER");
+            if(userDTO.isAdmin()) {
+                auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())
+                        .withUser(userDTO.getEmail()).password(userDTO.getPasswordHash()).roles("ADMIN");
+            } else {
+                auth.inMemoryAuthentication().passwordEncoder(passwordEncoder())
+                        .withUser(userDTO.getEmail()).password(userDTO.getPasswordHash()).roles("USER");
+            }
         }
 
 //        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("USER");
@@ -49,11 +54,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
-                .antMatchers("/song/**").access("hasRole('ROLE_USER')")
-                .antMatchers("/genre/**").access("hasRole('ROLE_USER')")
-                .antMatchers("/album/**").access("hasRole('ROLE_USER')")
-                .antMatchers("/musician/**").access("hasRole('ROLE_USER')")
-                .antMatchers("/user/**").access("hasRole('ROLE_USER')")
+                .antMatchers("/song/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+                .antMatchers("/genre/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+                .antMatchers("/album/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+                .antMatchers("/musician/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+                .antMatchers("/user/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
                 .and()
                 .formLogin()
                 .loginPage("/login").loginProcessingUrl("/j_spring_security_check")
