@@ -8,8 +8,8 @@
 <own:masterpage title="Login">
     <jsp:attribute name="body">
 
-        <div clas ="row">
-            <div class="col-md-6 col-sm-12">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 ${empty param.error ? 'loginFormCenter' : ''}">
 
                 <form:form method="POST"
                            action="j_spring_security_check"
@@ -34,10 +34,10 @@
                     <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="login.submit"/></button>
                 </form:form>     
             </div>
-            <div class="col-md-6 hidden-sm">
+            <div class="col-md-6 hidden-sm hidden-xs">
 
                 <c:if test="${not empty param.error}">
-                    <img class="invalid-login-img center-block" src="${pageContext.request.contextPath}/images/you-shall-not-pass.jpg"></img>
+                    <img class="invalid-login-img center-block" src="${pageContext.request.contextPath}/images/you-shall-not-pass.jpg" />
                 </c:if>
             </div>
         </div>
