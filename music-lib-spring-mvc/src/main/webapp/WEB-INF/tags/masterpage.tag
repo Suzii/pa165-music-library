@@ -40,8 +40,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><fmt:message key="nav.music_library"/></a>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
+                <div id="navbar" class="collapse navbar-collapse pull-left">
                     <ul class="nav navbar-nav">
                         <li><a href="${pageContext.request.contextPath}/song"><fmt:message key="nav.songs"/></a></li>
                         <li><a href="${pageContext.request.contextPath}/album"><fmt:message key="nav.albums"/></a></li>
@@ -49,10 +48,33 @@
                         <li><a href="${pageContext.request.contextPath}/genre"><fmt:message key="nav.genres"/></a></li>
                         <li><a href="${pageContext.request.contextPath}/user"><fmt:message key="nav.users"/></a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="${pageContext.request.contextPath}/logout"><fmt:message key="logout"/></a></li>                        
-                    </ul>
                 </div><!--/.nav-collapse -->
+                <ul class="nav navbar-nav navbar-right pull-right">        
+                    <c:choose>
+                        <c:when test="${not empty userData}">
+                            <li class="dropdown" id="menuLogin">
+                              <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
+                                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                  <span class="userName">${userData.firstName}</span>
+                                  <span class="caret"></span>
+                              </a>
+                              <div class="dropdown-menu" style="padding:17px;">
+                                  <!--<p>Prihlaseny:</p>-->
+                                  <p><fmt:message key="logged_in"/>:&nbsp;<span class="fullName">${userData.firstName}&nbsp;${userData.lastName}</span></p>
+                                  <p>Email:&nbsp;<span class="userEmail">${userData.email}</span></p>
+                                  <p class="text-muted"><fmt:message key="admin_rights"/>: <fmt:message key="${isAdmin ? 'yes' : 'no'}"/></p>
+                                  
+                                  <a href="${pageContext.request.contextPath}/logout"><fmt:message key="logout"/></a>
+                              </div>
+                            </li>
+
+                        </c:when>
+                        <c:otherwise>
+                          <li><a href="${pageContext.request.contextPath}/login"><fmt:message key="log_in"/></a></li> 
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+                </div>
             </div>
         </nav>
 

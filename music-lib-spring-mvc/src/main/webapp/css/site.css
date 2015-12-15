@@ -94,11 +94,45 @@ body {
   background-color: #f5f5f5;
 }
 
-.container .text-muted {
+footer .container .text-muted {
   margin: 20px 0;
 }
 
 .loginFormCenter{
     margin: 0 auto;
     float: none;
+}
+
+/* Login button in navbar */
+#navLogin {
+    /*position: relative;*/
+}
+
+#navLogin .glyphicon-user {
+    position: relative;
+    top: 4px;
+    font-size: 14px;
+    left: -5px;
+}
+
+#navLogin .userName {
+    margin-right: 2px;
+}
+
+/* Navbar custom edits */
+.navbar-header {
+    width: 100%
+}
+
+.navbar-toggle{
+    margin-left: 30px;
+}
+
+#menuLogin .dropdown-menu{
+    background: #FFF;
+}
+
+
+#menuLogin .userEmail, #menuLogin .fullName {
+    font-weight: bold;
 }
