@@ -16,7 +16,8 @@
     <jsp:attribute name="body">
 
         <div class="jumbotron">
-            <h1>Welcome to your Music Library !</h1>
+            <h1>${userName}, welcome to your Music Library !</h1>
+            <p>You are <c:if test="${!isAdmin}">not</c:if> an admin.</p>
             <p class="lead">Do you feel like listening to some music? You are at the right place! </p>
         </div>
 
