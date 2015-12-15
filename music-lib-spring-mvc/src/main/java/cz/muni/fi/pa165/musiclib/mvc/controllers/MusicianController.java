@@ -17,9 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * TODO
+ * MusicianController class
  *
  * @author Milan Seman
+ * @version 14/12/2015
  */
 @Controller
 @RequestMapping(value = {"/musician"})
@@ -33,6 +34,11 @@ public class MusicianController  extends BaseController{
     @Inject
     private MessageSource messageSource;
     
+    /**
+     * Lists all musicians from library. 
+     * @param model
+     * @return 
+     */
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
         log.debug("getMusicians()");   
@@ -41,16 +47,29 @@ public class MusicianController  extends BaseController{
         return "musician/index";
     }
     
+    /**
+     * Prepares an empty musician create form.
+     * @param model
+     * @return 
+     */
     @RequestMapping(value = {"/create"}, method = RequestMethod.GET)
     public String create(Model model){
-        log.debug("create musician ()");
-        
+        log.debug("create musician ()");        
         model.addAttribute("musicianCreate", new MusicianDTO());
         model.addAttribute("male", Sex.MALE);
         model.addAttribute("female", Sex.FEMALE);
         return "musician/create";
     }
     
+        /**
+     * Handles submit of musician create form.
+     * @param musicianFormBean
+     * @param model
+     * @param bindingResult
+     * @param redirectAttributes
+     * @param uriComponentsBuilder
+     * @return 
+     */
     @RequestMapping(value = {"/create"}, method = RequestMethod.POST)
     public String create(
             @Valid @ModelAttribute("musicianCreate") MusicianDTO musicianFormBean,
@@ -67,28 +86,54 @@ public class MusicianController  extends BaseController{
             return "/musician/create";
         }
         
-        Long id = musicianFacade.createMusician(musicianFormBean);
-        
+        Long id = musicianFacade.createMusician(musicianFormBean);        
         redirectAttributes.addFlashAttribute("alert_success", "Musican with id" + id + "created");
         
-        //return "redirect" + uriComponentsBuilder.path("/musician/detail/{id}").buildAndExpand(id).encode().toUriString();     
-        return "redirect" + uriComponentsBuilder.path("/musician").build().encode().toUriString();     
+        return "redirect" + uriComponentsBuilder.path("/musician/detail/{id}").buildAndExpand(id).encode().toUriString();     
     }
     
+    @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+    public String detail(@PathVariable long id, Model model) {
+        
+        MusicianDTO musician = musicianFacade.getMusicianById(id);
+
+        model.addAttribute("musician", musician);
+        return "musician/detail";
+    }
+    
+    /**
+     * Retrieves given musician from DB and prepopulates edit form.
+     * @param model
+     * @return 
+     */
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model ) {
         
         MusicianDTO persistedMusician = musicianFacade.getMusicianById(id);
         
-        MusicianDTO musicianUpdate = new MusicianDTO();
-        musicianUpdate.setId(id);
-        musicianUpdate.setArtistName(persistedMusician.getArtistName());
-        musicianUpdate.setDateOfBirth(persistedMusician.getDateOfBirth());
+//        MusicianDTO musicianUpdate = new MusicianDTO();
+//        musicianUpdate.setId(id);
+//        musicianUpdate.setArtistName(persistedMusician.getArtistName());
+//        musicianUpdate.setSex(persistedMusician.getSex());
+//        musicianUpdate.setDateOfBirth(persistedMusician.getDateOfBirth());
         
-        model.addAttribute("musicianUpdate", musicianUpdate);
-        return "song/update";
+        model.addAttribute("male", Sex.MALE);
+        model.addAttribute("female", Sex.FEMALE);
+        
+//        model.addAttribute("musicianUpdate", musicianUpdate);
+        model.addAttribute("musicianUpdate", persistedMusician);
+        return "musician/update";
     }
     
+    /**
+     * Handles submit of musician create form.
+     * @param formBean
+     * @param model
+     * @param bindingResult
+     * @param redirectAttributes
+     * @param uriComponentsBuilder
+     * @return 
+     */
     @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
     public String update(
             @Valid @ModelAttribute("musicianUpdate") MusicianDTO musicianFormBean,
@@ -106,15 +151,14 @@ public class MusicianController  extends BaseController{
         }
         
         musicianFacade.updateMusician(musicianFormBean);
-        redirectAttributes.addFlashAttribute("alert_success", "Song " + musicianFormBean.getArtistName()+ " updated");
-        //return "redirect:" + uriComponentsBuilder.path("/update/detail/{id}").buildAndExpand(id).encode().toUriString();
-        return "redirect:" + uriComponentsBuilder.path("/update").build().encode().toUriString();
+        redirectAttributes.addFlashAttribute("alert_success", "Musician " + musicianFormBean.getArtistName()+ " updated");
+        return "redirect:" + uriComponentsBuilder.path("/update/detail/{id}").buildAndExpand(id).encode().toUriString();
     }
     
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
     public String remove(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         
-        log.debug("songController.remove()");
+        log.debug("musicianController.remove()");
         musicianFacade.removeMusician(id);
         
         redirectAttributes.addFlashAttribute("alert_success", "Musician successfully deleted.");
