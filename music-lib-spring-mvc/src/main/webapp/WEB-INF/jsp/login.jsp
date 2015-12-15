@@ -8,21 +8,39 @@
 <own:masterpage title="Login">
     <jsp:attribute name="body">
 
-        <form:form method="POST"
-                   action="j_spring_security_check"
-                   acceptCharset=""
-                   modelAttribute="user"
-                   cssClass="form-horizontal form-signin">
+        <div clas ="row">
+            <div class="col-md-6 col-sm-12">
 
-            <h2 class="form-signin-heading"><fmt:message key="login.signin"/></h2>
+                <form:form method="POST"
+                           action="j_spring_security_check"
+                           acceptCharset=""
+                           modelAttribute="user"
+                           cssClass="form-horizontal form-signin">
 
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" name="user" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required="">
-            
-            <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="login.submit"/></button>
-        </form:form>
+                    <h2 class="form-signin-heading"><fmt:message key="login.signin"/></h2>
+
+                    <c:if test="${not empty param.error}">
+                        <div class="alert alert-danger" role="alert">
+                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                            Invalid username or password.
+                        </div>
+                    </c:if>
+
+                    <label for="inputEmail" class="sr-only">Email address</label>
+                    <input type="email" name="user" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
+                    <label for="inputPassword" class="sr-only">Password</label>
+                    <input type="password" name="pass" id="inputPassword" class="form-control" placeholder="Password" required="">
+
+                    <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="login.submit"/></button>
+                </form:form>     
+            </div>
+            <div class="col-md-6 hidden-sm">
+
+                <c:if test="${not empty param.error}">
+                    <img class="invalid-login-img center-block" src="${pageContext.request.contextPath}/images/you-shall-not-pass.jpg"></img>
+                </c:if>
+            </div>
+        </div>
 
     </jsp:attribute>
 </own:masterpage>

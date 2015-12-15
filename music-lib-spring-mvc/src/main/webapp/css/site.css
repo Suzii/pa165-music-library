@@ -77,6 +77,11 @@ td {
   border-top-right-radius: 0;
 }
 
+img.invalid-login-img {
+    max-height: 200px;
+    margin-top: 6em;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
