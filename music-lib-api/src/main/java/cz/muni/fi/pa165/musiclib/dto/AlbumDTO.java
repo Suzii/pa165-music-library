@@ -15,7 +15,7 @@ public class AlbumDTO {
     private Long id;
     
     @NotNull
-    @Size(min = 3, max = 50)
+    @Size(min = 1, max = 50)
     private String title;
     
     private String commentary;

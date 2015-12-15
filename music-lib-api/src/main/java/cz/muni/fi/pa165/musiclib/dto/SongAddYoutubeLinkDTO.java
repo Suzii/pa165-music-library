@@ -19,7 +19,7 @@ public class SongAddYoutubeLinkDTO {
     private Long songId;
     
     @NotNull
-    @Size(min=3, max=50)
+    @Size(min=1, max=50)
     private String youtubeLink;
 
     public SongAddYoutubeLinkDTO() {
