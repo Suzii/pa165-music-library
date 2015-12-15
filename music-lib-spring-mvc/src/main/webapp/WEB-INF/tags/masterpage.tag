@@ -48,7 +48,9 @@
                         <li><a href="${pageContext.request.contextPath}/musician"><fmt:message key="nav.artists"/></a></li>
                         <li><a href="${pageContext.request.contextPath}/genre"><fmt:message key="nav.genres"/></a></li>
                         <li><a href="${pageContext.request.contextPath}/user"><fmt:message key="nav.users"/></a></li>
-                        <li><a href="${pageContext.request.contextPath}/logout"><fmt:message key="logout"/></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="${pageContext.request.contextPath}/logout"><fmt:message key="logout"/></a></li>                        
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
