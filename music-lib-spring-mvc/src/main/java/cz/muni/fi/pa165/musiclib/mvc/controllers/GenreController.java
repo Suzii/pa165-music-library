@@ -31,6 +31,12 @@ public class GenreController  extends BaseController{
     @Inject
     private GenreFacade genreFacade;
 
+    /**
+     * List of all genres in library
+     * 
+     * @param model
+     * @return String jsp template
+     */
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
         log.debug("getGenres()");
@@ -38,6 +44,12 @@ public class GenreController  extends BaseController{
         return "genre/index";
     }
 
+    /**
+     * Prepares form for genre creating
+     * 
+     * @param model
+     * @return String jsp template
+     */
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public String create(Model model) {
         log.debug("create genre()");
@@ -45,6 +57,16 @@ public class GenreController  extends BaseController{
         return "genre/create";
     }
 
+    /**
+     * Creates genre from form
+     * 
+     * @param genreFormBean
+     * @param bindingResult
+     * @param model
+     * @param redirectAttributes
+     * @param uriBuilder
+     * @return String redirect to genre list
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String create(
             @Valid @ModelAttribute("genreCreate") GenreDTO genreFormBean,
@@ -67,6 +89,13 @@ public class GenreController  extends BaseController{
         return "redirect:" + uriBuilder.path("/genre").build().encode().toUriString();
     }
 
+    /**
+     * Prepares form for genre updating
+     * 
+     * @param id
+     * @param model
+     * @return String jsp template
+     */
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update(@PathVariable long id, Model model) {
         log.debug("update genre()");
@@ -76,6 +105,16 @@ public class GenreController  extends BaseController{
         return "genre/update";
     }
 
+    /**
+     * Updates genre from form
+     * 
+     * @param genreFormBean
+     * @param bindingResult
+     * @param model
+     * @param redirectAttributes
+     * @param uriBuilder
+     * @return String redirect to genre list
+     */
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(
             @Valid @ModelAttribute("genreUpdate") GenreDTO genreFormBean,
@@ -100,6 +139,15 @@ public class GenreController  extends BaseController{
         return "redirect:" + uriBuilder.path("/genre").build().encode().toUriString();
     }
 
+    /**
+     * Removes genre from library
+     * 
+     * @param id
+     * @param model
+     * @param uriBuilder
+     * @param redirectAttributes
+     * @return String redirect to genre list
+     */
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
     public String remove(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder, RedirectAttributes redirectAttributes) {
         log.debug("remove()");
