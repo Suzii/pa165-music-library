@@ -7,19 +7,19 @@
 
 <own:masterpage>
     <jsp:attribute name="title"><fmt:message key="albums.mainTitle"/></jsp:attribute>
-
     <jsp:attribute name="body">
 
         <div class="jumbotron">
             <h1><fmt:message key="albums.mainTitle"/></h1>
+            <p class="lead"><fmt:message key="albums.subTitle"/></p>
 
-            <p class="leDad"><fmt:message key="albums.subTitle"/></p>
-
-            <p align="right">
-                <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/album/create" role="button">
-                    <fmt:message key="albums.create"/>
-                </a>
-            </p>
+            <c:if test="${isAdmin}">
+                <p align="right">
+                    <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/album/create" role="button">
+                        <fmt:message key="albums.create"/>
+                    </a>
+                </p>
+            </c:if>
         </div>
 
         <div class="row">

@@ -11,9 +11,11 @@
             <h1><fmt:message key="songs.heading"/></h1>
             <p class="lead"><fmt:message key="songs.subheading"/></p>
 
-            <p align="right">
-                <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/song/create" role="button">Create new</a>
-            </p>
+            <c:if test="${isAdmin}">
+                <p align="right">
+                    <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/song/create" role="button">Create new</a>
+                </p>
+            </c:if>
         </p>
     </div>
 

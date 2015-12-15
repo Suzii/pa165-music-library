@@ -5,15 +5,17 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<own:masterpage title="Musicians">
+<own:masterpage title="Artists">
     <jsp:attribute name="body">
 
         <div class="jumbotron">
             <h1><fmt:message key="musicians.heading"/></h1>
             <p class="lead"><fmt:message key="musicians.subheading"/></p>
-            <p align="right">
-                <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/musician/create" role="button"><fmt:message key="create"/></a>
-            </p>
+            <c:if test="${isAdmin}">
+                <p align="right">
+                    <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/musician/create" role="button"><fmt:message key="create"/></a>
+                </p>
+            </c:if>
         </div>
 
         <div class="row">
