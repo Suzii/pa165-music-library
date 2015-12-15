@@ -93,12 +93,15 @@
             <div class="container">
                 <jsp:invoke fragment="body"/>
             </div>
-
-            <!-- footer -->
-            <footer class="footer">
-                <p>&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;<fmt:message key="nav.footer_text"/></p>
-            </footer>
         </div>
+            
+        <!-- footer -->
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted">&copy;&nbsp;<%=java.time.Year.now().toString()%>&nbsp;<fmt:message key="nav.footer_text"/></p>
+            </div>
+        </footer>
+            
         <!-- JavaScript libraries -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
