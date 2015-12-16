@@ -3,7 +3,9 @@ package cz.muni.fi.pa165.musiclib.controllers;
 import cz.muni.fi.pa165.musiclib.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.musiclib.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
+import cz.muni.fi.pa165.musiclib.exceptions.ResourceNotModifiedException;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
+import cz.muni.fi.pa165.musiclib.facade.SongFacade;
 import java.util.List;
 import javax.inject.Inject;
 import org.slf4j.Logger;
@@ -29,14 +31,27 @@ public class AlbumsController {
     @Inject
     private AlbumFacade albumFacade;
 
+    @Inject
+    private SongFacade songFacade;
+
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final List<AlbumDTO> getAlbums(@RequestParam(value="title", required=false) String title) {
-        if (title != null){
+    public final List<AlbumDTO> getAlbums(@RequestParam(value = "title", required = false) String title) {
+
+        List<AlbumDTO> albums;
+
+        if (title != null) {
             log.debug("rest getAlbums() with title {}", title);
-            return albumFacade.getAlbumByTitle(title);
+            albums = albumFacade.getAlbumByTitle(title);
+        } else {
+            log.debug("rest getAlbums()");
+            albums = albumFacade.getAllAlbums();
         }
-        log.debug("rest getAlbums()");
-        return albumFacade.getAllAlbums();
+
+        // fix bug: songs twice
+        for (AlbumDTO album : albums) {
+            album.setSongs(songFacade.findByAlbum(album.getId()));
+        }
+        return albums;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -44,16 +59,16 @@ public class AlbumsController {
 
         log.debug("rest getAlbum({})", id);
 
-        //TODO: known bug - songs are listed twice
-        
         try {
             AlbumDTO albumDTO = albumFacade.getAlbumById(id);
+        // fix bug: songs twice
+            albumDTO.setSongs(songFacade.findByAlbum(id));
             return albumDTO;
         } catch (Exception ex) {
             throw new ResourceNotFoundException();
         }
     }
-    
+
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final AlbumDTO createAlbum(@RequestBody AlbumDTO album) throws Exception {
@@ -68,17 +83,39 @@ public class AlbumsController {
         }
     }
     
-    @RequestMapping(value="/delete/{id}", method = RequestMethod.DELETE)
-    public final void removeAlbum(@PathVariable("id") long id) throws Exception{
-        
-        log.debug("rest removeAlbum({})", id);
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public final AlbumDTO updateAlbum(@PathVariable("id") long id, @RequestBody AlbumDTO editedAlbum) throws Exception {
+
+        log.debug("rest editAlbum()");
+
+        try {
+            AlbumDTO album = albumFacade.getAlbumById(id);
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException();
+        }
         
         try{
-            albumFacade.deleteAlbum(id);
+            editedAlbum.setId(id);
+            albumFacade.update(editedAlbum);
         }catch(Exception ex){
+            throw new ResourceNotModifiedException();
+        }
+        
+        return editedAlbum;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public final void removeAlbum(@PathVariable("id") long id) throws Exception {
+
+        log.debug("rest removeAlbum({})", id);
+
+        try {
+            albumFacade.deleteAlbum(id);
+        } catch (Exception ex) {
+            log.debug(ex.toString());
             throw new ResourceNotFoundException();
         }
     }
-    
-    
+
 }
