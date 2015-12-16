@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.musiclib.mvc.controllers;
 
+import cz.muni.fi.pa165.musiclib.dto.AlbumChangeAlbumArtDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
@@ -10,11 +11,15 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import javax.inject.Inject;
@@ -33,7 +38,6 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping(value = {"/album"})
-@MultipartConfig
 public class AlbumController extends BaseController {
 
     final static Logger log = LoggerFactory.getLogger(AlbumController.class);
@@ -107,32 +111,33 @@ public class AlbumController extends BaseController {
     @RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
     public String detail(@PathVariable long id, Model model) {
 
-        AlbumDTO albumDTO= albumFacade.getAlbumById(id);
+        AlbumDTO albumDTO = albumFacade.getAlbumById(id);
 
         model.addAttribute("album", albumDTO);
         return "album/detail";
     }
-    
+
     /**
-     * Lists all songs associated with album. 
+     * Lists all songs associated with album.
+     *
      * @param albumId
      * @param model
-     * @return 
+     * @return
      */
     @RequestMapping(value = {"/songs/{albumId}"}, method = RequestMethod.GET)
     public String songs(@PathVariable long albumId, Model model) {
-                
-        AlbumDTO albumDTO= albumFacade.getAlbumById(albumId);
+
+        AlbumDTO albumDTO = albumFacade.getAlbumById(albumId);
         model.addAttribute("album", albumDTO);
-        
+
         List<SongDTO> songs = songFacade.findByAlbum(albumId);
         model.addAttribute("songs", songs);
-        
+
         return "album/albumSongs";
     }
 
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
-    public String update(@PathVariable long id, Model model ) {
+    public String update(@PathVariable long id, Model model) {
 
         AlbumDTO album = albumFacade.getAlbumById(id);
 
@@ -174,4 +179,43 @@ public class AlbumController extends BaseController {
         redirectAttributes.addFlashAttribute("alert_success", "Album " + albumDTO.getTitle() + " successfully deleted.");
         return "redirect:" + uriBuilder.path("/album").toUriString();
     }
+
+    @RequestMapping(value = "/changeImage/{id}", method = RequestMethod.GET)
+    public String changeImage(@PathVariable long id, Model model) {
+
+        AlbumDTO albumDTO = albumFacade.getAlbumById(id);
+
+        model.addAttribute("album", albumDTO);
+        return "album/image";
+    }
+
+//    @RequestMapping(value="/upload", method=RequestMethod.GET)
+//    public @ResponseBody String provideUploadInfo() {
+//        return "You can upload a file by posting to this same URL.";
+//    }
+
+
+    @RequestMapping(value = "/upload/{id}", method = RequestMethod.POST)
+    public String handleFileUpload(@PathVariable long id,
+                                   @RequestParam("file") MultipartFile file,
+                                   RedirectAttributes redirectAttributes,
+                                   UriComponentsBuilder uriComponentsBuilder) throws IOException {
+        byte[] bytes = file.getBytes();
+//                BufferedOutputStream stream =
+//                        new BufferedOutputStream(new FileOutputStream(new File(name)));
+//                stream.write(bytes);
+//                stream.close();
+
+
+        AlbumChangeAlbumArtDTO albumDTO = new AlbumChangeAlbumArtDTO();
+        albumDTO.setAlbumId(id);
+        albumDTO.setImage(bytes);
+        albumDTO.setMimeType("image/jpeg");
+
+        albumFacade.changeAlbumArt(albumDTO);
+
+        redirectAttributes.addFlashAttribute("alert_success", "Album updated");
+        return "redirect:" + uriComponentsBuilder.path("/album/detail/{id}").buildAndExpand(id).encode().toUriString();
+    }
+
 }

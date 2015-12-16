@@ -44,10 +44,18 @@
 
                         <dt><fmt:message key="albums.songs"/></dt>
                         <dd><a class="btn btn-mg btn-primary"
-                               href="${pageContext.request.contextPath}/song/index"
+                               href="${pageContext.request.contextPath}/album/songs/${album.id}"
                                role="button">
                                 <fmt:message key="albums.songList"/>
                             </a>
+                        </dd>
+
+                        <br />
+                        <dd><a class="btn btn-mg btn-primary"
+                               href="${pageContext.request.contextPath}/album/changeImage/${album.id}"
+                               role="button">
+                            <fmt:message key="albums.changeImage"/>
+                        </a>
                         </dd>
                     </dl>
                 </div>
