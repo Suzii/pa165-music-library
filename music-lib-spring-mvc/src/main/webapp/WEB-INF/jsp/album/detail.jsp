@@ -11,8 +11,18 @@
 
         <div class="column">
             <div class="row">
-                <h1><fmt:message key="albums.detail"/><b>&nbsp;${album.title}</b></h1>
-
+            
+            <a href="${pageContext.request.contextPath}/album" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>                
+                <fmt:message key="back"/>
+            </a>
+            
+            <div class="page-header">
+                <h1>
+                    <fmt:message key="albums.detail"/><b>&nbsp;${album.title}</b>
+                </h1>
+            </div>
+                
                 <div class="col-md-3">
                     <img src="${pageContext.request.contextPath}/album/albumImage/${album.id}"
                          style="max-height:200px; max-width:200px">
@@ -44,6 +54,7 @@
             </div>
 
             <br/>
+            <%--
             <form:form method="get" action="${pageContext.request.contextPath}/album" cssClass="form-horizontal">
                 <td class="col-xs-1 text-center">
                     <button class="btn btn-default" type="submit">
@@ -52,6 +63,7 @@
                     </button>
                 </td>
             </form:form>
+             --%>
         </div>
 
     </jsp:attribute>

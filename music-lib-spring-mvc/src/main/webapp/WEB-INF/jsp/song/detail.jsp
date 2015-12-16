@@ -8,7 +8,17 @@
 <own:masterpage title="Song detail">
     <jsp:attribute name="body">
         <div class="row">
-            <h1>${song.title}</h1>
+            
+            <a href="${pageContext.request.contextPath}/song" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>                
+                <fmt:message key="back"/>
+            </a>
+            
+            <div class="page-header">
+                <h1>
+                     <fmt:message key="songs.detail"/><b>&nbsp;${song.title}</b>
+                </h1>
+            </div>
 
             <div class="col-md-4">  
                 <dl class="dl-horizontal">
