@@ -54,6 +54,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()
+                .antMatchers("/song/create/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/song/update/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/song/remove/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/album/create/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/album/update/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/album/remove/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/musician/create/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/musician/update/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/musician/remove/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/genre/create/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/genre/update/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/genre/remove/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/song/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
                 .antMatchers("/genre/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
                 .antMatchers("/album/**").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
