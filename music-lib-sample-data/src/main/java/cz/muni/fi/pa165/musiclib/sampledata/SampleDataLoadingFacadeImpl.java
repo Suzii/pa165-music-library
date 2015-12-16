@@ -81,12 +81,15 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Genre electro = genre("Electro");
         log.info("Music library genres loaded.");
         
-        Musician adele = musician("Adele", new ArrayList<Song>(), Sex.FEMALE, new Date(1990, 1, 1));
-        Musician brunoMars = musician("Bruno Mars", new ArrayList<Song>(), Sex.MALE, new Date(1985, 1, 1));
-        Musician hozier = musician("Hozier", new ArrayList<Song>(), Sex.FEMALE, new Date(1980, 1, 1));
+        Calendar cal = new GregorianCalendar(2015, Calendar.JANUARY, 1);
+        cal.set(1988, Calendar.MAY, 5);
+        Musician adele = musician("Adele", new ArrayList<Song>(), Sex.FEMALE, cal.getTime());
+        cal.set(1985, Calendar.OCTOBER, 8);
+        Musician brunoMars = musician("Bruno Mars", new ArrayList<Song>(), Sex.MALE, cal.getTime());
+        cal.set(1990, Calendar.MARCH, 17);
+        Musician hozier = musician("Hozier", new ArrayList<Song>(), Sex.FEMALE, cal.getTime());
         log.info("Music library musicians loaded.");
 
-        Calendar cal = new GregorianCalendar(2015, Calendar.JANUARY, 1);
         Album jukebox = album("Jukebox", "jukebox comment", cal.getTime(), readImage("jukebox.jpg"), JPEG, new ArrayList<Song>());
         cal.set(2014, Calendar.MARCH, 24);
         Album _21 = album("21", "the best comments are empty comments", cal.getTime(), readImage("21.jpg"), JPEG, new ArrayList<Song>());
