@@ -7,17 +7,29 @@
 
 <own:masterpage title="Create Song">
     <jsp:attribute name="body">
+
+            <a href="${pageContext.request.contextPath}/song" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>                
+                <fmt:message key="back"/>
+            </a>
+
+            <div class="page-header">
+                <h1>
+                   <fmt:message key="songs.create_new_song"/>
+                </h1>
+            
+                <c:if test="${not empty album}">
+                    <p class="lead"> This song will be part of an album ${album.title}</p>
+                    <form:hidden path="albumId"/>
+                </c:if>
+            </div>
+                
         <form:form method="POST" 
                    action="${pageContext.request.contextPath}/song/create"
                    acceptCharset=""
                    modelAttribute="songCreate" 
                    cssClass="form-horizontal">
 
-            <h2><fmt:message key="songs.create_new_song"/></h2>
-            <c:if test="${not empty album}">
-                <p class="lead"> This song will be part of an album ${album.title}</p>
-                <form:hidden path="albumId"/>
-            </c:if>
 
             <div class="form-group ${title_error?'has-error':''}">
                 <form:label path="title" cssClass="col-sm-2 control-label"><fmt:message key="songs.title"/></form:label>
@@ -31,6 +43,7 @@
                 <form:label path="musicianId" cssClass="col-sm-2 control-label"><fmt:message key="songs.artist"/></form:label>
                     <div class="col-sm-10">
                     <form:select path="musicianId" cssClass="form-control">
+                        <option value="" disabled selected></option>
                         <c:forEach items="${musicians}" var="m">
                             <form:option value="${m.id}">${m.artistName}</form:option>
                         </c:forEach>
@@ -43,6 +56,7 @@
                 <form:label path="genreId" cssClass="col-sm-2 control-label"><fmt:message key="songs.genre"/></form:label>
                     <div class="col-sm-10">
                     <form:select path="genreId" cssClass="form-control">
+                        <option value="" disabled selected></option>
                         <c:forEach items="${genres}" var="g">
                             <form:option value="${g.id}">${g.title}</form:option>
                         </c:forEach>
@@ -67,7 +81,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit"><fmt:message key="create"/></button>
+            <button class="btn btn-primary createBtn center-block allow-vertical-space" type="submit"><fmt:message key="submit"/></button>
         </form:form>
     </jsp:attribute>
 </own:masterpage>

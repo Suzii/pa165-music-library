@@ -15,13 +15,24 @@
         </script>
     </jsp:attribute>
     <jsp:attribute name="body">
+
+            <a href="${pageContext.request.contextPath}/album" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>                
+                <fmt:message key="back"/>
+            </a>
+
+            <!-- title -->
+            <div class="page-header">
+                <h1>
+                   <fmt:message key="albums.create"/>
+                </h1>
+            </div>
+                
         <form:form method="POST"
                    action="${pageContext.request.contextPath}/album/create"
                    acceptCharset=""
                    modelAttribute="albumCreate"
                    cssClass="form-horizontal">
-
-            <h2><fmt:message key="albums.create"/></h2>
 
             <div class="form-group ${title_error?'has-error':''}">
                 <form:label path="title" cssClass="col-sm-2 control-label"><fmt:message key="albums.title"/></form:label>
@@ -65,7 +76,7 @@
                 <%--</div>--%>
             <%--</div>--%>
 
-            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit"><fmt:message key="create"/></button>
+            <button class="btn btn-primary createBtn center-block allow-vertical-space" type="submit"><fmt:message key="submit"/></button>
         </form:form>
     </jsp:attribute>
 </own:masterpage>
