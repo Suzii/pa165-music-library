@@ -27,7 +27,7 @@
                         <dd>${album.commentary}</dd>
 
                         <dt><fmt:message key="albums.dateOfRelease"/></dt>
-                        <dd><fmt:formatDate value="${album.dateOfRelease}" type="date" dateStyle="long"/></dd>
+                        <dd><fmt:formatDate value="${album.dateOfRelease}" type="date" dateStyle="medium"/></dd>
 
                         <dt><fmt:message key="albums.mimeType"/></dt>
                         <dd>${album.albumArtMimeType}</dd>
