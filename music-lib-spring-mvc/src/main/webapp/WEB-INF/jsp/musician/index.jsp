@@ -16,8 +16,8 @@
             <c:if test="${isAdmin}">
                 <p align="right">
                     <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/musician/create" role="button">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        <fmt:message key="create_new"/>
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    <fmt:message key="musician.createNew"/>
                     </a>
                 </p>
             </c:if>

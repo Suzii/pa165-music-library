@@ -7,7 +7,8 @@
 
 
 
-<own:masterpage title="Create a Musician">
+<own:masterpage>
+    <jsp:attribute name="title"><fmt:message key="musicians.update" /></jsp:attribute>
     <jsp:attribute name="scripts">
         <script>
             $(function () {
@@ -22,7 +23,7 @@
     <jsp:attribute name="body">
         <a href="${pageContext.request.contextPath}/musician" class="btn btn-default" role="button">
                 <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                <span>Back</span>                  
+                <fmt:message key="back"/>                  
         </a>
         
         <form:form method="POST" 
@@ -34,7 +35,7 @@
             <h2>Create a new Artist</h2>
 
             <div class="form-group ${artistName_error?'has-error':''}">
-                <form:label path="artistName" cssClass="col-sm-2 control-label">Artist Name</form:label>
+                <form:label path="artistName" cssClass="col-sm-2 control-label"><fmt:message key="musician.name"/></form:label>
                     <div class="col-sm-10">
                         <form:input path="artistName" cssClass="form-control"/>
                         <form:errors path="artistName" cssClass="help-block"/>
@@ -42,7 +43,7 @@
             </div>
 
             <div class="form-group ${dateOfBirth_error?'has-error':''}">
-                <form:label path="dateOfBirth" cssClass="col-sm-2 control-label">Date of birth</form:label>
+                <form:label path="dateOfBirth" cssClass="col-sm-2 control-label"><fmt:message key="musician.birthdate"/></form:label>
                     <div class="col-sm-10">
                         <fmt:formatDate value="${musician.dateOfBirth}" pattern="MM/dd/yyyy"/>
                         <form:input path="dateOfBirth" id="datepicker" cssClass="form-control"/>
@@ -51,15 +52,16 @@
             </div>
 
             <div class="row form-group ${sex_error?'has-error':''}">
-                <form:label path="sex" cssClass="col-sm-2 control-label">Sex</form:label>
-                    <div>                        
+                <form:label path="sex" cssClass="col-sm-2 control-label"><fmt:message key="musician.sex"/></form:label>
+                    
+                    <div class="col-sm-1"><fmt:message key="musician.male"/><form:radiobutton path="sex" value="${male}" class="radio-inline" /></div>
+                    <div class="col-sm-1"><fmt:message key="musician.female"/><form:radiobutton path="sex" value="${female}" class="radio-inline" /></div>
+                    <div class="col-sm-12">                        
                         <form:errors path="sex" cssClass="help-block"/>
                     </div>
-                    <div class="col-sm-1">Male <form:radiobutton path="sex" value="${male}" class="radio-inline" /></div>
-                    <div class="col-sm-1">Female <form:radiobutton path="sex" value="${female}" class="radio-inline" /></div>
             </div>
 
-            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit">Create</button>
+            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit"><fmt:message key="create"/></button>
         </form:form>
     </jsp:attribute>
 </own:masterpage>
