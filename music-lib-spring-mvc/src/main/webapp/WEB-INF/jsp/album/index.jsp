@@ -60,7 +60,7 @@
                                     <c:out value="${album.commentary}"/>
                                 </c:if>
                             </td>
-                            <td class="text-center"><fmt:formatDate value="${album.dateOfRelease}" pattern="yyyy-MM-dd"/></td>
+                            <td class="text-center"><fmt:formatDate value="${album.dateOfRelease}"/></td>
                             <td class="text-center"><c:out value="${album.albumArtMimeType}"/></td>
                             <td class="text-center"><a class="btn btn-mg btn-primary"
                                                        href="${pageContext.request.contextPath}/album/songs/${album.id}"
