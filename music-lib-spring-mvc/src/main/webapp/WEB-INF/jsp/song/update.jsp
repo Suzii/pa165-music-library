@@ -7,13 +7,23 @@
 
 <own:masterpage title="Create Song">
     <jsp:attribute name="body">
+        
+        <a href="${pageContext.request.contextPath}/song" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                <fmt:message key="back"/>
+        </a>
+        
         <form:form method="POST" 
                    action="${pageContext.request.contextPath}/song/update/${songUpdate.id}"
                    acceptCharset=""
                    modelAttribute="songUpdate" 
                    cssClass="form-horizontal">
 
-            <h2><fmt:message key="songs.edit_song"/></h2>
+            <div class="page-header">
+                <h1>
+                    <fmt:message key="songs.edit_song"/>
+                </h1>
+            </div>
 
             <div class="form-group ${title_error?'has-error':''}">
                 <form:label path="title" cssClass="col-sm-2 control-label"><fmt:message key="songs.title"/></form:label>
@@ -63,7 +73,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-primary col-sm-2 pull-right allow-vertical-space" type="submit"><fmt:message key="edit"/></button>
+            <button class="btn btn-primary updateBtn center-block allow-vertical-space" type="submit"><fmt:message key="edit"/></button>
         </form:form>
     </jsp:attribute>
 </own:masterpage>

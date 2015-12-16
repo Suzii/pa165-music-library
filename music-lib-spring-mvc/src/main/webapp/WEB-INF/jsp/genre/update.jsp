@@ -39,7 +39,7 @@
                     </div>
                 </div>
 
-                <button class="btn btn-primary center-block allow-vertical-space" type="submit"><fmt:message key="submit"/></button>
+                <button class="btn btn-primary updateBtn center-block allow-vertical-space" type="submit"><fmt:message key="edit"/></button>
 
             </form:form>
         </div>
