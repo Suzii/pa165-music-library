@@ -7,9 +7,18 @@
 
 <own:masterpage title="Musician detail">
     <jsp:attribute name="body">
-
         <div class="row">
-            <h1><fmt:message key="musician.detail"/><b>&nbsp;${musician.artistName}</b></h1>
+        
+            <a href="${pageContext.request.contextPath}/musician" class="btn btn-default" role="button">
+                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>                
+                <fmt:message key="back"/>
+            </a>
+
+            <div class="page-header">
+                <h1>
+                    <fmt:message key="musician.detail"/><b>&nbsp;${musician.artistName}</b>
+                </h1>
+            </div>
 
             <div class="col-md-4">  
                 <dl class="dl-horizontal">
@@ -17,7 +26,7 @@
                     <dd>${musician.artistName}</dd>
 
                     <dt><fmt:message key="musician.sex"/></dt>
-                    <dd>${musician.sex}</dd>
+                    <dd><fmt:message key="${musician.sex}"/></dd>
 
                     <dt><fmt:message key="musician.birthdate"/></dt>
                     <dd><fmt:formatDate value="${musician.dateOfBirth}" pattern="yyyy-MM-dd"/></dd>
