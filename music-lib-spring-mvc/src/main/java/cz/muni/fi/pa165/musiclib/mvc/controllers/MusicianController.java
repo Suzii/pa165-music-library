@@ -152,7 +152,7 @@ public class MusicianController  extends BaseController{
         
         musicianFacade.updateMusician(musicianFormBean);
         redirectAttributes.addFlashAttribute("alert_success", "Musician " + musicianFormBean.getArtistName()+ " updated");
-        return "redirect:" + uriComponentsBuilder.path("/update/detail/{id}").buildAndExpand(id).encode().toUriString();
+        return "redirect:" + uriComponentsBuilder.path("/musician/detail/{id}").buildAndExpand(id).encode().toUriString();
     }
     
     @RequestMapping(value = "/remove/{id}", method = RequestMethod.POST)
