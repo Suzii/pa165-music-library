@@ -43,8 +43,8 @@
                         <tr>
                             <td class="col-xs-1">${count}.</td>
                             <td class="col-xs-3"><c:out value="${musician.artistName}"/></td>
-                            <td class="col-xs-3 text-center"><c:out value="${musician.sex}"/></td>
-                            <td class="col-xs-3 text-center"><fmt:formatDate value="${musician.dateOfBirth}" /></td>
+                            <td class="col-xs-3 text-center"><fmt:message key="${musician.sex}"/></td>
+                            <td class="col-xs-3 text-center"><fmt:formatDate value="${musician.dateOfBirth}"/></td>
 
                             <c:if test="${isAdmin}">
                                 <form:form method="get" action="${pageContext.request.contextPath}/musician/update/${musician.id}" cssClass="form-horizontal">
