@@ -188,24 +188,13 @@ public class AlbumController extends BaseController {
         model.addAttribute("album", albumDTO);
         return "album/image";
     }
-
-//    @RequestMapping(value="/upload", method=RequestMethod.GET)
-//    public @ResponseBody String provideUploadInfo() {
-//        return "You can upload a file by posting to this same URL.";
-//    }
-
-
+    
     @RequestMapping(value = "/upload/{id}", method = RequestMethod.POST)
     public String handleFileUpload(@PathVariable long id,
                                    @RequestParam("file") MultipartFile file,
                                    RedirectAttributes redirectAttributes,
                                    UriComponentsBuilder uriComponentsBuilder) throws IOException {
         byte[] bytes = file.getBytes();
-//                BufferedOutputStream stream =
-//                        new BufferedOutputStream(new FileOutputStream(new File(name)));
-//                stream.write(bytes);
-//                stream.close();
-
 
         AlbumChangeAlbumArtDTO albumDTO = new AlbumChangeAlbumArtDTO();
         albumDTO.setAlbumId(id);

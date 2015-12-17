@@ -51,6 +51,7 @@
                         </dd>
 
                         <br />
+                        <dt><fmt:message key="albums.albumArt" /></dt>
                         <dd><a class="btn btn-mg btn-primary"
                                href="${pageContext.request.contextPath}/album/changeImage/${album.id}"
                                role="button">
@@ -60,18 +61,6 @@
                     </dl>
                 </div>
             </div>
-
-            <br/>
-            <%--
-            <form:form method="get" action="${pageContext.request.contextPath}/album" cssClass="form-horizontal">
-                <td class="col-xs-1 text-center">
-                    <button class="btn btn-default" type="submit">
-                        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
-                        <span class="sr-only"><fmt:message key="back"/></span>
-                    </button>
-                </td>
-            </form:form>
-             --%>
         </div>
 
     </jsp:attribute>

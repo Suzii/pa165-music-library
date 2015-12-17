@@ -23,7 +23,7 @@
                     <form method="POST" enctype="multipart/form-data"
                           action="${pageContext.request.contextPath}/album/upload/${album.id}">
                         File to upload: <input type="file" name="file"><br />
-                        <input type="submit" value="Upload"> Press here to upload the file!
+                        <button class="btn btn-primary updateBtn center-block allow-vertical-space" type="submit"><fmt:message key="submit"/></button>
                     </form>
                 </div>
 
