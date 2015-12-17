@@ -22,7 +22,7 @@ Below is examples of rest requests.
 
 ###Get albums###
 
-**API URL**
+**API URL** (GET method)
 
 ```
 /pa165/rest/albums
@@ -36,7 +36,7 @@ curl -i -X GET http://localhost:8080/pa165/rest/albums
 
 ###Get albums by title###
 
-**API URL**
+**API URL** (GET method)
 
 ```
 /pa165/rest/albums?title={title}
@@ -50,7 +50,7 @@ curl -i -X GET http://localhost:8080/pa165/rest/albums?title=Jukebox
 
 ###Create album###
 
-**API URL**
+**API URL** (POST method)
 
 ```
 /pa165/rest/albums/create
@@ -64,7 +64,7 @@ curl -i -X POST -H "Content-Type: application/json" --data '{"title":"Nazov albu
 
 ### Get album by id###
 
-**API URL**
+**API URL** (GET method)
 
 ```
 /pa165/rest/albums/{id}
@@ -78,7 +78,7 @@ curl -i -X GET http://localhost:8080/pa165/rest/albums/4
 
 ###Update album###
 
-**API URL***
+**API URL*** (PUT method)
 
 ```
 /pa165/rest/albums/{id}
@@ -92,7 +92,7 @@ curl -i -X PUT -H "Content-Type: application/json" --data '{"title":"Zmena nazvu
 
 ###Delete album###
 
-**API URL**
+**API URL** (DELETE method)
 
 ```
 /pa165/rest/albums/{id}
