@@ -42,7 +42,11 @@
                         <c:set var="count" value="${count + 1}" scope="page"/>
                         <tr>
                             <td class="col-xs-1">${count}.</td>
-                            <td class="col-xs-3"><c:out value="${musician.artistName}"/></td>
+                            <td class="col-xs-3">
+                                <a href="${pageContext.request.contextPath}/musician/detail/${musician.id}" >
+                                    <c:out value="${musician.artistName}"/>
+                                </a>
+                            </td>
                             <td class="col-xs-3 text-center"><fmt:message key="${musician.sex}"/></td>
                             <td class="col-xs-3 text-center"><fmt:formatDate value="${musician.dateOfBirth}"/></td>
 
