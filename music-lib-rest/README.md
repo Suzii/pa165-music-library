@@ -9,12 +9,13 @@ mvn tomcat7:run
 ```
 
 **Note:** If your default port (8080) is occupied e.g. by web server you can run rest module in different port by using
-**Note2:** If you use the Windows commandline you should adjust commands because of escaping
 
 ```
 mvn -Dmaven.tomcat.port=XXXX tomcat7:run  
 ```
-*(XXXX is port)*
+*(XXXX is port)* </br>
+
+**Note 2:** If you use the Windows commandline you should adjust commands because of escaping
 
 ## Album entity##
 
