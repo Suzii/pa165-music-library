@@ -11,8 +11,9 @@ mvn tomcat7:run
 **Note:** If your default port (8080) is occupied e.g. by web server you can run rest module in different port by using
 
 ```
-mvn -Dmaven.tomcat.port=XXXX tomcat7:run  (where XXXX is port)
+mvn -Dmaven.tomcat.port=XXXX tomcat7:run  
 ```
+*(XXXX is port)*
 
 ## Album entity##
 
@@ -72,7 +73,7 @@ curl -i -X POST -H "Content-Type: application/json" --data '{"title":"Nazov albu
 **Example**
 
 ```
-curl -i -X GET http://localhost:8080/pa165/rest/albums/1
+curl -i -X GET http://localhost:8080/pa165/rest/albums/4
 ```
 
 ###Update album###
