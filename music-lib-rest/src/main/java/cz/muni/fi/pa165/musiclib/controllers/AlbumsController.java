@@ -34,6 +34,13 @@ public class AlbumsController {
     @Inject
     private SongFacade songFacade;
 
+    /**
+     * Get list of all Albums 
+     * curl -i -X GET
+     * http://localhost:8080/pa165/rest/albums
+     *
+     * @return List<AlbumDTO>
+     */
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final List<AlbumDTO> getAlbums(@RequestParam(value = "title", required = false) String title) {
 
@@ -54,6 +61,15 @@ public class AlbumsController {
         return albums;
     }
 
+    /**
+     * Get single Album by identifier ID 
+     * curl -i -X GET 
+     * http://localhost:8080/pa165/rest/albums/1
+     *
+     * @param id album id
+     * @return AlbumDTO
+     * @throws ResourceNotFoundException
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final AlbumDTO getAlbum(@PathVariable("id") long id) throws Exception {
 
@@ -69,6 +85,16 @@ public class AlbumsController {
         }
     }
 
+    /**
+     * Creates new Album by POST method
+     * curl -i -X GET 
+     * http://localhost:8080/pa165/rest/albums/1
+     *
+     * @param id album id
+     * @param album AlbumDTO with required fields for creation
+     * @return AlbumDTO created album
+     * @throws ResourceAlreadyExistingException
+     */
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final AlbumDTO createAlbum(@RequestBody AlbumDTO album) throws Exception {
@@ -83,6 +109,17 @@ public class AlbumsController {
         }
     }
     
+    /**
+     * Updates album by PUT method
+     * curl -i -X PUT -H "Content-Type: application/json" 
+     * --data '{"title":"Zmena nazvu","commentary":"Iny komentar k albumu"}' 
+     * http://localhost:8080/pa165/rest/albums/4
+     *
+     * @param id album id
+     * @param album AlbumDTO with required fields for update
+     * @throws ResourceNotFoundException
+     * @throws ResourceNotModifiedException
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final AlbumDTO updateAlbum(@PathVariable("id") long id, @RequestBody AlbumDTO editedAlbum) throws Exception {
@@ -105,6 +142,14 @@ public class AlbumsController {
         return editedAlbum;
     }
 
+    /**
+     * Deletes album by ID
+     * curl -i -X DELETE 
+     * http://localhost:8080/pa165/rest/albums/4
+     *
+     * @param id album id
+     * @throws ResourceNotFoundException
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public final void removeAlbum(@PathVariable("id") long id) throws Exception {
 
