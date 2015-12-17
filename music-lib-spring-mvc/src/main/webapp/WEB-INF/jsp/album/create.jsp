@@ -21,7 +21,6 @@
                 <fmt:message key="back"/>
             </a>
 
-            <!-- title -->
             <div class="page-header">
                 <h1>
                    <fmt:message key="albums.create"/>
@@ -57,25 +56,6 @@
                     <form:errors path="dateOfRelease" cssClass="help-block"/>
                 </div>
             </div>
-
-            <%--<div class="form-group ${title_error?'has-error':''}">--%>
-                <%--<form:label path="albumArt" cssClass="col-sm-2 control-label"><fmt:message key="albums.albumArt"/></form:label>--%>
-                <%--<div class="col-sm-10">--%>
-                        <%--&lt;%&ndash;<form path="albumArt" action="UploadServlet" method="post"&ndash;%&gt;--%>
-                        <%--&lt;%&ndash;enctype="multipart/form-data">&ndash;%&gt;--%>
-                    <%--<form:input type="file" name="file" path="albumArt" cssClass="form-control"/>--%>
-                        <%--&lt;%&ndash;</form>&ndash;%&gt;--%>
-                <%--</div>--%>
-            <%--</div>--%>
-
-            <%--<div class="form-group ${title_error?'has-error':''}">--%>
-                <%--<form:label path="albumArtMimeType" cssClass="col-sm-2 control-label"><fmt:message key="albums.mimeType"/></form:label>--%>
-                <%--<div class="col-sm-10">--%>
-                    <%--<form:input path="albumArtMimeType" cssClass="form-control"/>--%>
-                    <%--<form:errors path="albumArtMimeType" cssClass="help-block"/>--%>
-                <%--</div>--%>
-            <%--</div>--%>
-
             <button class="btn btn-primary createBtn center-block allow-vertical-space" type="submit"><fmt:message key="submit"/></button>
         </form:form>
     </jsp:attribute>

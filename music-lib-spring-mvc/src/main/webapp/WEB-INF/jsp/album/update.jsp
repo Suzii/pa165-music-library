@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="form-group ${title_error?'has-error':''}">
+            <div class="form-group ${commentary_error?'has-error':''}">
                 <form:label path="commentary" cssClass="col-sm-2 control-label"><fmt:message key="albums.commentary"/></form:label>
                 <div class="col-sm-10">
                     <form:input path="commentary" cssClass="form-control"/>

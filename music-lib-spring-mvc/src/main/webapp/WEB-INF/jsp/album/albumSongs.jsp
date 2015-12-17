@@ -34,7 +34,6 @@
 
         <div class="result"></div>
 
-        <!-- song table -->
         <div class="row">
             <table class="table">
                 <thead>
@@ -81,7 +80,6 @@
                                 </td>
                             </form:form> 
                             </c:if>
-                            <!-- TODO changing position in album arrows-->
                         </tr>
                     </c:forEach>
                 </tbody>
