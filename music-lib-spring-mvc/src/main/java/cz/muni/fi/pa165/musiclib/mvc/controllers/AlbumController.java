@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
+import cz.muni.fi.pa165.musiclib.mvc.model.UploadedFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -190,10 +191,13 @@ public class AlbumController extends BaseController {
     }
     
     @RequestMapping(value = "/upload/{id}", method = RequestMethod.POST)
-    public String handleFileUpload(@PathVariable long id,
-                                   @RequestParam("file") MultipartFile file,
+    public String handleFileUpload(@ModelAttribute("uploadedFile") UploadedFile uploadedFile,
+                                   BindingResult bindingResult,
+                                   @PathVariable long id,
                                    RedirectAttributes redirectAttributes,
                                    UriComponentsBuilder uriComponentsBuilder) throws IOException {
+
+        MultipartFile file = uploadedFile.getFile();
         byte[] bytes = file.getBytes();
 
         AlbumChangeAlbumArtDTO albumDTO = new AlbumChangeAlbumArtDTO();

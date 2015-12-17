@@ -20,11 +20,19 @@
 
                 <div class="col-md-4">
 
-                    <form method="POST" enctype="multipart/form-data"
-                          action="${pageContext.request.contextPath}/album/upload/${album.id}">
-                        File to upload: <input type="file" name="file"><br />
-                        <button class="btn btn-primary updateBtn center-block allow-vertical-space" type="submit"><fmt:message key="submit"/></button>
-                    </form>
+                    <%--<form method="POST" enctype="multipart/form-data"--%>
+                          <%--action="${pageContext.request.contextPath}/album/upload/${album.id}">--%>
+                        <%--File to upload: <input type="file" name="file"><br />--%>
+                        <%--<button class="btn btn-primary updateBtn center-block allow-vertical-space" type="submit"><fmt:message key="submit"/></button>--%>
+                    <%--</form>--%>
+                        <form:form method="post" enctype="multipart/form-data"
+                                   modelAttribute="uploadedFile" action="${pageContext.request.contextPath}/album/upload/${album.id}">
+                            <form:errors path="file" />
+                            File to upload: <input type="file" name="file"><br />
+                            <button class="btn btn-primary updateBtn center-block allow-vertical-space" type="submit"><fmt:message key="submit"/></button>
+
+                            </table>
+                        </form:form>
                 </div>
 
             </div>
