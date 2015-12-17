@@ -78,7 +78,7 @@ curl -i -X GET http://localhost:8080/pa165/rest/albums/4
 
 ###Update album###
 
-**API URL*** (PUT method)
+**API URL** (PUT method)
 
 ```
 /pa165/rest/albums/{id}
