@@ -7,9 +7,6 @@
 
 <own:masterpage>
     <jsp:attribute name="title">${album.title}</jsp:attribute>
-    <jsp:attribute name="scripts">
-        console.log('todo');
-    </jsp:attribute>
     <jsp:attribute name="body">
 
         <div class="row">
@@ -31,7 +28,7 @@
 
             </div>
             <div class="col-md-3">
-                <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/create?albumId=${album.id}" role="button">Create new</a></p>
+                <p><a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/create?albumId=${album.id}" role="button"><fmt:message key="albums.add_song"/></a></p>
             </div>
         </div>
 
@@ -45,8 +42,10 @@
                         <th>Id</th>
                         <th>Title</th>
                         <th>Artist</th>
-                        <th>Genre</th>            
-                        <th class="text-center"><fmt:message key="remove"/></th>
+                        <th>Genre</th>        
+                        <c:if test="${isAdmin}">
+                            <th class="text-center"><fmt:message key="remove"/></th>
+                        </c:if>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,7 +71,7 @@
                                 <c:out value="${not empty song.genre ? song.genre.title : '-'}"/>
                             </td>
 
-                            
+                            <c:if test="${isAdmin}">
                             <form:form method="post" action="${pageContext.request.contextPath}/song/remove/${song.id}" cssClass="form-horizontal">
                                 <td class="col-xs-1 text-center">
                                     <button class="btn btn-default" type="submit">
@@ -81,7 +80,7 @@
                                     </button>
                                 </td>
                             </form:form> 
-
+                            </c:if>
                             <!-- TODO changing position in album arrows-->
                         </tr>
                     </c:forEach>
