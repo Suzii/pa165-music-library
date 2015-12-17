@@ -140,3 +140,9 @@ footer .container .text-muted {
 .updateBtn, .createBtn{
     width: 190px;
 }
+
+/* Musician radiobuttons padding */
+
+.musicianRadio {
+    padding-top: 5px;
+}

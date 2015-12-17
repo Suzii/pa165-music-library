@@ -56,11 +56,22 @@
 
             <div class="row form-group ${sex_error?'has-error':''}">
                 <form:label path="sex" cssClass="col-sm-2 control-label"><fmt:message key="musician.sex"/></form:label>
-                    <div class="col-sm-6">                        
+                     
+                <div class="col-sm-1 musicianRadio">
+                        <label for="radioMale">
+                            <fmt:message key="musician.male"/>
+                        </label>
+                        <form:radiobutton path="sex" id="radioMale" value="${male}"/>
+                    </div>
+                    <div class="col-sm-1 musicianRadio">
+                        <label for="radioFemale">
+                            <fmt:message key="musician.female"/>
+                        </label>
+                        <form:radiobutton path="sex" id="radioFemale" value="${female}"/>
+                    </div>
+                    <div class="col-sm-8">                        
                         <form:errors path="sex" cssClass="help-block"/>
                     </div>
-                    <div class="col-sm-2"><fmt:message key="musician.male"/><form:radiobutton path="sex" value="${male}" class="radio-inline" /></div>
-                    <div class="col-sm-2"><fmt:message key="musician.female"/><form:radiobutton path="sex" value="${female}" class="radio-inline" /></div>
             </div>
 
             <button class="btn btn-primary updateBtn center-block allow-vertical-space" type="submit"><fmt:message key="edit"/></button>
