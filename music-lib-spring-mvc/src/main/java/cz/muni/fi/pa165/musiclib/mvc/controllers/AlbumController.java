@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
 import cz.muni.fi.pa165.musiclib.mvc.model.UploadedFile;
+import cz.muni.fi.pa165.musiclib.mvc.validation.FileValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -51,6 +52,9 @@ public class AlbumController extends BaseController {
 
     @Inject
     private MessageSource messageSource;
+
+    @Inject
+    private FileValidator fileValidator;
 
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {

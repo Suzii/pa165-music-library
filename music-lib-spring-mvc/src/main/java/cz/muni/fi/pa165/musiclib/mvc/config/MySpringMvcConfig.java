@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.musiclib.mvc.config;
 
 import cz.muni.fi.pa165.musiclib.mvc.config.security.SecurityConfig;
+import cz.muni.fi.pa165.musiclib.mvc.validation.FileValidator;
 import cz.muni.fi.pa165.musiclib.sampledata.MusicLibSampleDataConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,6 +93,11 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
         commonsMultipartResolver.setDefaultEncoding("utf-8");
         commonsMultipartResolver.setMaxUploadSize(50000000);
         return commonsMultipartResolver;
+    }
+
+    @Bean
+    public FileValidator fileValidator() {
+        return new FileValidator();
     }
 
 }
