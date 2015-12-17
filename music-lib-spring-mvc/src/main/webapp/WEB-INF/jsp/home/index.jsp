@@ -24,7 +24,7 @@
                         </fmt:message>
                     </h1>
                     <!-- TODO remove this line -->
-                    <p>You are <c:if test="${!isAdmin}">not</c:if> an admin.</p>
+<!--                <p>You are <c:if test="${!isAdmin}">not</c:if> an admin.</p>-->
                     <p class="lead"><fmt:message key="home.subheading"/></p>
                 </c:when>
                 <c:otherwise>
