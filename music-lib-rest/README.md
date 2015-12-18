@@ -17,7 +17,7 @@ mvn -Dmaven.tomcat.port=XXXX tomcat7:run
 
 **Note 2:** If you use the Windows commandline you should adjust commands because of escaping
 
-## Main Controller Entity##
+## Main Controller##
 
 Used as the main page. Shows possible reachable entities
 

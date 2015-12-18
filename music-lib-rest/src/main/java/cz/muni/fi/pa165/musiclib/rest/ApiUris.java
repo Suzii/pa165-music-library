@@ -2,7 +2,7 @@ package cz.muni.fi.pa165.musiclib.rest;
 
 /**
  *
- * @author Milan
+ * @author Milan Seman
 **/
 
 
@@ -14,6 +14,6 @@ package cz.muni.fi.pa165.musiclib.rest;
  *
  */
 public abstract class ApiUris {
-    public static final String ROOT_URI_ALBUMS   = "/albums"; 
-    public static final String ROOT_URI_GENRES      = "/genres";
+    public static final String ROOT_URI_ALBUMS = "/albums"; 
+    public static final String ROOT_URI_GENRES = "/genres";
 }

@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.musiclib.exceptions.ResourceAlreadyExistingException;
 import cz.muni.fi.pa165.musiclib.exceptions.ResourceNotFoundException;
 import cz.muni.fi.pa165.musiclib.exceptions.ResourceNotModifiedException;
 import cz.muni.fi.pa165.musiclib.facade.GenreFacade;
+import cz.muni.fi.pa165.musiclib.rest.ApiUris;
 import java.util.List;
 import javax.inject.Inject;
 import org.slf4j.Logger;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Milan Seman
  */
 @RestController
-@RequestMapping("/genres")
+@RequestMapping(ApiUris.ROOT_URI_GENRES)
 public class GenreController {
 
     final static Logger log = LoggerFactory.getLogger(GenreController.class);

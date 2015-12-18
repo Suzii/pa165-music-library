@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.exceptions.ResourceNotModifiedException;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
+import cz.muni.fi.pa165.musiclib.rest.ApiUris;
 import java.util.List;
 import javax.inject.Inject;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author David Boron
  */
 @RestController
-@RequestMapping("/albums")
+@RequestMapping(ApiUris.ROOT_URI_ALBUMS)
 public class AlbumsController {
 
     final static Logger log = LoggerFactory.getLogger(AlbumsController.class);
