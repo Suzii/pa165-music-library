@@ -198,10 +198,18 @@ public class AlbumController extends BaseController {
     public String handleFileUpload(@ModelAttribute("uploadedFile") UploadedFile uploadedFile,
                                    BindingResult bindingResult,
                                    @PathVariable long id,
+                                   Model model,
                                    RedirectAttributes redirectAttributes,
                                    UriComponentsBuilder uriComponentsBuilder) throws IOException {
 
         MultipartFile file = uploadedFile.getFile();
+        fileValidator.validate(uploadedFile, bindingResult);
+
+        if(bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("file_error", true);
+            return "redirect:" + uriComponentsBuilder.path("/album/changeImage/{id}").buildAndExpand(id).encode().toUriString();
+        }
+
         byte[] bytes = file.getBytes();
 
         AlbumChangeAlbumArtDTO albumDTO = new AlbumChangeAlbumArtDTO();

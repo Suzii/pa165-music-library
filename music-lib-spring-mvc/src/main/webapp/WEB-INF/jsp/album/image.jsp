@@ -18,16 +18,20 @@
                          style="max-height:200px; max-width:200px">
                 </div>
 
-                <div class="col-md-4">
+                    <div class="col-md-4">
+                        <c:if test="${not empty file_error}">
+                            <div style="color: red">File cannot be empty.</div></c:if>
+
                         <form:form method="post" enctype="multipart/form-data"
-                                   modelAttribute="uploadedFile" action="${pageContext.request.contextPath}/album/upload/${album.id}">
-                            <form:errors path="file" />
-                            File to upload: <input type="file" name="file"><br />
-                            <button class="btn btn-primary updateBtn center-block allow-vertical-space" type="submit"><fmt:message key="submit"/></button>
+                                   modelAttribute="uploadedFile"
+                                   action="${pageContext.request.contextPath}/album/upload/${album.id}">
+                            File to upload: <input type="file" name="file"><br/>
+                            <button class="btn btn-primary updateBtn center-block allow-vertical-space" type="submit">
+                                <fmt:message key="submit"/></button>
 
                             </table>
                         </form:form>
-                </div>
+                    </div>
 
             </div>
         </div>
