@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/album/create/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/album/update/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/album/remove/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/album/changeImage/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/musician/create/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/musician/update/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/musician/remove/**").access("hasRole('ROLE_ADMIN')")

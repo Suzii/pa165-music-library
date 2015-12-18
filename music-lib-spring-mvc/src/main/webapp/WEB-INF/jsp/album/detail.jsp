@@ -11,53 +11,55 @@
 
         <div class="column">
             <div class="row">
-            
-            <a href="${pageContext.request.contextPath}/album" class="btn btn-default" role="button">
-                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>                
-                <fmt:message key="back"/>
-            </a>
-            
-            <div class="page-header">
-                <h1>
-                    <fmt:message key="albums.detail"/><b>&nbsp;${album.title}</b>
-                </h1>
-            </div>
-                
+
+                <a href="${pageContext.request.contextPath}/album" class="btn btn-default" role="button">
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                    <fmt:message key="back"/>
+                </a>
+
+                <div class="page-header">
+                    <h1>
+                        <fmt:message key="albums.detail"/><b>&nbsp;${album.title}</b>
+                    </h1>
+                </div>
+
                 <div class="col-md-3">
                     <img src="${pageContext.request.contextPath}/album/albumImage/${album.id}"
                          style="max-height:200px; max-width:200px">
                 </div>
 
                 <div class="col-md-4">
-                    <dl class="dl-horizontal">
-                        <dt><fmt:message key="albums.title"/></dt>
-                        <dd>${album.title}</dd>
+                    < < class="dl-horizontal">
+                    <dt><fmt:message key="albums.title"/></dt>
+                    <dd>${album.title}</dd>
 
-                        <dt><fmt:message key="albums.commentary"/></dt>
-                        <dd>${album.commentary}</dd>
+                    <dt><fmt:message key="albums.commentary"/></dt>
+                    <dd>${album.commentary}</dd>
 
-                        <dt><fmt:message key="albums.dateOfRelease"/></dt>
-                        <dd><fmt:formatDate value="${album.dateOfRelease}" type="date" dateStyle="medium"/></dd>
+                    <dt><fmt:message key="albums.dateOfRelease"/></dt>
+                    <dd><fmt:formatDate value="${album.dateOfRelease}" type="date" dateStyle="medium"/></dd>
 
-                        <dt><fmt:message key="albums.mimeType"/></dt>
-                        <dd>${album.albumArtMimeType}</dd>
+                    <dt><fmt:message key="albums.mimeType"/></dt>
+                    <dd>${album.albumArtMimeType}</dd>
 
-                        <dt><fmt:message key="albums.songs"/></dt>
-                        <dd><a class="btn btn-mg btn-primary"
-                               href="${pageContext.request.contextPath}/album/songs/${album.id}"
-                               role="button">
-                                <fmt:message key="albums.songList"/>
-                            </a>
-                        </dd>
+                    <dt><fmt:message key="albums.songs"/></dt>
+                    <dd><a class="btn btn-mg btn-primary"
+                           href="${pageContext.request.contextPath}/album/songs/${album.id}"
+                           role="button">
+                        <fmt:message key="albums.songList"/>
+                    </a>
+                    </dd>
 
-                        <br />
-                        <dt><fmt:message key="albums.albumArt" /></dt>
+                    <c:if test="${isAdmin}">
+                        <br/>
+                        <dt><fmt:message key="albums.albumArt"/></dt>
                         <dd><a class="btn btn-mg btn-primary"
                                href="${pageContext.request.contextPath}/album/changeImage/${album.id}"
                                role="button">
                             <fmt:message key="albums.changeImage"/>
                         </a>
                         </dd>
+                    </c:if>
                     </dl>
                 </div>
             </div>
