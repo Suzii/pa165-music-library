@@ -17,6 +17,22 @@ mvn -Dmaven.tomcat.port=XXXX tomcat7:run
 
 **Note 2:** If you use the Windows commandline you should adjust commands because of escaping
 
+## Main Controller Entity##
+
+Used as the main page. Shows possible reachable entities
+
+**API URL** (GET method)
+
+```
+/pa165/rest/
+```
+
+**Example**
+
+```
+curl -i -X GET http://localhost:8080/pa165/rest/
+```
+
 ## Album entity##
 
 Below are the examples of the REST requests.
