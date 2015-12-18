@@ -76,7 +76,7 @@ public class GenreController {
 
     /**
      * Creates new Genre by POST method
-     * curl -i -X GET 
+     * curl -i -X POST
      * http://localhost:8080/pa165/rest/genres/1
      *
      * @param id genre id

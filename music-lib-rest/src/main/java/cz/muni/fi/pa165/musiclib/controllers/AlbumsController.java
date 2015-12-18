@@ -87,7 +87,7 @@ public class AlbumsController {
 
     /**
      * Creates new Album by POST method
-     * curl -i -X GET 
+     * curl -i -X POST 
      * http://localhost:8080/pa165/rest/albums/1
      *
      * @param id album id
