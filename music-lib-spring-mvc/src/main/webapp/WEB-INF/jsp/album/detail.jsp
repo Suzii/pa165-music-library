@@ -29,7 +29,6 @@
                 </div>
 
                 <div class="col-md-4">
-                    < < class="dl-horizontal">
                     <dt><fmt:message key="albums.title"/></dt>
                     <dd>${album.title}</dd>
 

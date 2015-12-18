@@ -10,6 +10,16 @@ public class UploadedFile {
 
     private MultipartFile file;
 
+    private String mimeType;
+
+    public String getMimeType() {
+        return mimeType;
+    }
+
+    public void setMimeType(String mimeType) {
+        this.mimeType = mimeType;
+    }
+
     public MultipartFile getFile() {
         return file;
     }

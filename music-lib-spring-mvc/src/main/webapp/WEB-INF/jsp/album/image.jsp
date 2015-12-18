@@ -26,10 +26,11 @@
                                    modelAttribute="uploadedFile"
                                    action="${pageContext.request.contextPath}/album/upload/${album.id}">
                             File to upload: <input type="file" name="file"><br/>
+                            <fmt:message key="albums.mimeType" />: <input type="text" name="mimeType" />
+
                             <button class="btn btn-primary updateBtn center-block allow-vertical-space" type="submit">
                                 <fmt:message key="submit"/></button>
 
-                            </table>
                         </form:form>
                     </div>
 

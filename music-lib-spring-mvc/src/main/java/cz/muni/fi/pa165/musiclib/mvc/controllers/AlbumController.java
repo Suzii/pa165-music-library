@@ -215,7 +215,7 @@ public class AlbumController extends BaseController {
         AlbumChangeAlbumArtDTO albumDTO = new AlbumChangeAlbumArtDTO();
         albumDTO.setAlbumId(id);
         albumDTO.setImage(bytes);
-        albumDTO.setMimeType("image/jpeg");
+        albumDTO.setMimeType(uploadedFile.getMimeType());
 
         albumFacade.changeAlbumArt(albumDTO);
 
