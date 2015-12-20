@@ -3,8 +3,8 @@
 
 Login   Password
 -----------------------------------------------------------------------
-admin@gmail.com   admin
-test@test.com   Tester99
-skywalker@gmail.com  deathStar1
-gandalf@gmail.com   YouShallNotPass
-thor@gmail.com  mjolnir123
+admin@gmail.com   admin </br>
+test@test.com   Tester99 </br>
+skywalker@gmail.com  deathStar1 </br>
+gandalf@gmail.com   YouShallNotPass </br>
+thor@gmail.com  mjolnir123 </br>
