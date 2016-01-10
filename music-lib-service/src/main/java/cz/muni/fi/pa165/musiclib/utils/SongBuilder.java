@@ -16,6 +16,7 @@ public class SongBuilder {
     private Album album;
     private Musician musician;
     private Genre genre;
+    private String youtubeLink;
 
     public SongBuilder id(Long id) {
         this.id = id;
@@ -57,6 +58,11 @@ public class SongBuilder {
         return this;
     }
     
+    public SongBuilder youtubeLink(String youtubeLink) {
+        this.youtubeLink = youtubeLink;
+        return this;
+    }
+    
     public Song build() {
         Song s = new Song(id);
         
@@ -67,6 +73,7 @@ public class SongBuilder {
         s.setAlbum(album);
         s.setMusician(musician);
         s.setGenre(genre);
+        s.setYoutubeLink(youtubeLink);
         
         clear();
         
@@ -81,6 +88,7 @@ public class SongBuilder {
         this.musician = null;
         this.genre = null;
         this.album = null;
+        this.youtubeLink = null;
     }
 
 }
