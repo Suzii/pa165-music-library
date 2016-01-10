@@ -45,13 +45,13 @@
                     <c:forEach items="${albums}" var="album">
                         <c:set var="count" value="${count + 1}" scope="page"/>
                         <tr>
-                            <td>${count}.</td>
+                            <td class="lead-column">${count}.</td>
                             <td class="text-center">
                                 <img src="${pageContext.request.contextPath}/album/albumImage/${album.id}"
                                      style="max-height:50px; max-width:50px">
                             </td>
-                            <td><b><a href="${pageContext.request.contextPath}/album/detail/${album.id}" >
-                                        <c:out value="${album.title}"/></a></b></td>
+                            <td class="lead-column"><a href="${pageContext.request.contextPath}/album/detail/${album.id}" >
+                                        <c:out value="${album.title}"/></a></td>
                             <td>
                                 <c:if test="${empty album.commentary}">
                                     <fmt:message key="n_a"/>

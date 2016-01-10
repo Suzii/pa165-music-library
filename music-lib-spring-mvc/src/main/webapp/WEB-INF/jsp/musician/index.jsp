@@ -41,8 +41,8 @@
                     <c:forEach items="${musicians}" var="musician">
                         <c:set var="count" value="${count + 1}" scope="page"/>
                         <tr>
-                            <td class="col-xs-1">${count}.</td>
-                            <td class="col-xs-3">
+                            <td class="col-xs-1 lead-column">${count}.</td>
+                            <td class="col-xs-3 lead-column">
                                 <a href="${pageContext.request.contextPath}/musician/detail/${musician.id}" >
                                     <c:out value="${musician.artistName}"/>
                                 </a>

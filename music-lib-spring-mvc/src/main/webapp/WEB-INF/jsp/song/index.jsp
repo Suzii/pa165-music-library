@@ -16,8 +16,8 @@
             <c:if test="${isAdmin}">
                 <p align="right">
                     <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/song/create" role="button">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    <fmt:message key="create_new"/>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        <fmt:message key="create_new"/>
                     </a>
                 </p>
             </c:if>
@@ -43,14 +43,26 @@
                 <c:forEach items="${songs}" var="song">
                     <c:set var="count" value="${count + 1}" scope="page"/>
                     <tr>
-                        <td>${count}.</td>
-                        <td>
+                        <td class="lead-column">${count}.</td>
+                        <td class="lead-column">
                             <a href="${pageContext.request.contextPath}/song/detail/${song.id}">
                                 <c:out value="${song.title}"/>
                             </a>
                         </td>
-                        <td><c:out value="${not empty song.musician ? song.musician.artistName : '-'}"/></td>
-                        <td><c:out value="${not empty song.album ? song.album.title : '-'}"/></td>
+                        <td>
+                            <c:if test="${not empty song.musician}">
+                                <a href="${pageContext.request.contextPath}/musician/detail/${song.musician.id}">
+                                    <c:out value="${song.musician.artistName}"/>    
+                                </a>
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${not empty song.album}">
+                                <a href="${pageContext.request.contextPath}/album/detail/${song.album.id}">
+                                    <c:out value="${song.album.title}"/>    
+                                </a>
+                            </c:if>
+                        </td>
                         <td class="text-center"><c:out value="${not empty song.genre ? song.genre.title : '-'}"/></td>
 
                         <c:if test="${isAdmin}">

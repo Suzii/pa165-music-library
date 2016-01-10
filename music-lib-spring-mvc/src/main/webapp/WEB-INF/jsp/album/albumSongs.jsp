@@ -50,10 +50,10 @@
                 <tbody>
                     <c:forEach items="${songs}" var="song">
                         <tr>
-                            <td>${song.positionInAlbum}.</td>
-                            <td>
+                            <td class="lead-column">${song.positionInAlbum}.</td>
+                            <td class="lead-column">
                                 <a href="${pageContext.request.contextPath}/song/detail/${song.id}">
-                                    <b><c:out value="${song.title}"/></b>
+                                    <c:out value="${song.title}"/>
                                 </a>
                             </td>
 

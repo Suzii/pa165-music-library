@@ -43,7 +43,7 @@
                         <c:set var="count" value="${count + 1}" scope="page"/>
                         <tr>
                             <td class=${isAdmin? "col-xs-1":"col-xs-3"}>${count}.</td>
-                            <td class=${isAdmin? "col-xs-3":"col-xs-9"}><c:out value="${genre.title}"/></td>
+                            <td class=${isAdmin? "col-xs-3 lead-column":"col-xs-9 lead-column"}><c:out value="${genre.title}"/></td>
                             <c:if test="${isAdmin}">
                                 <form:form method="get" action="${pageContext.request.contextPath}/genre/update/${genre.id}" cssClass="form-horizontal">
                                     <td class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">

@@ -33,6 +33,10 @@ dl.dl-horizontal > dd, dt{
     line-height: 2em;
 }
 
+td.lead-column {
+    font-weight:  bolder;
+}
+
 /* Login form styles
 -------------------------------------------------- */
 .form-signin {
