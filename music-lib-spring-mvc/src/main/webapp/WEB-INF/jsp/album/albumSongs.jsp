@@ -38,7 +38,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Pos.</th>
                         <th>Title</th>
                         <th>Artist</th>
                         <th>Genre</th>        
@@ -49,9 +49,8 @@
                 </thead>
                 <tbody>
                     <c:forEach items="${songs}" var="song">
-                        <c:set var="count" value="${count + 1}" scope="page"/>
                         <tr>
-                            <td>${count}.</td>
+                            <td>${song.positionInAlbum}.</td>
                             <td>
                                 <a href="${pageContext.request.contextPath}/song/detail/${song.id}">
                                     <b><c:out value="${song.title}"/></b>

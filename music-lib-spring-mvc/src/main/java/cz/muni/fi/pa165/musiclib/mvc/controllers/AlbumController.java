@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
 import cz.muni.fi.pa165.musiclib.mvc.model.UploadedFile;
 import cz.muni.fi.pa165.musiclib.mvc.validation.FileValidator;
+import cz.muni.fi.pa165.utils.SongPositionInAlbumComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -23,6 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -136,6 +138,7 @@ public class AlbumController extends BaseController {
         model.addAttribute("album", albumDTO);
 
         List<SongDTO> songs = songFacade.findByAlbum(albumId);
+        Collections.sort(songs, new SongPositionInAlbumComparator());
         model.addAttribute("songs", songs);
 
         return "album/albumSongs";
