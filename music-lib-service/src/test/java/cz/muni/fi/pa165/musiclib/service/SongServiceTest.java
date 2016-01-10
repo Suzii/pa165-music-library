@@ -516,7 +516,16 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         assertEquals(newSong.getPositionInAlbum(), 2);
     }
 
-    
+    @Test
+    public void createAlbumAndAndFirstPositionIsFreeTest(){
+        Album blankAlbum = albumBuilder.id(5l).title("BlankAlbum").build();
+        Song song = songBuilder.id(null).title("Poor song").album(blankAlbum).positionInAlbum(3).build();
+        
+        songService.create(song);
+        assertNotNull(song);
+        assertNotNull(song.getAlbum());
+        assertEquals(song.getPositionInAlbum(), 1);
+    }
     
     @Test
     public void createPositionIsAlreadyTakenButFirstIsAssignedTest(){

@@ -25,8 +25,8 @@ public class SongServiceImpl implements SongService {
     @Inject
     private SongDao songDao;
 
-    @Inject
-    private AlbumDao albumDao;
+    @Inject // TODO not resolved by IoC
+    private AlbumService albumService;
 
     @Override
     public void create(Song song) {
@@ -37,6 +37,15 @@ public class SongServiceImpl implements SongService {
         try {
             song.setPositionInAlbum(getFirstFreePositionInAlbum(song));
             songDao.create(song);
+            if (song.getAlbum() != null) {
+                //albumService.addSong(song.getAlbum(), song);
+                // TODO temporary fix, until problem with resoving AlbumService dependency is fixed
+                song.setAlbum(song.getAlbum());
+            }
+        } catch (MusicLibServiceException ex) {
+            song.setAlbum(null);
+            song.setPositionInAlbum(0);
+            throw ex;
         } catch (IllegalArgumentException | ConstraintViolationException | PersistenceException ex) {
             throw new MusicLibDataAccessException("song create error", ex);
         }
@@ -54,10 +63,18 @@ public class SongServiceImpl implements SongService {
             } else if (song.getPositionInAlbum() == 0) {
                 int newPosition = getFirstFreePositionInAlbum(song);
                 song.setPositionInAlbum(newPosition);
+                //albumService.addSong(song.getAlbum(), song);
+                // TODO temporary fix, until problem with resoving AlbumService dependency is fixed
+                song.setAlbum(song.getAlbum());
             } else if (!isDesiredPositionFreeOnAlbum(song)) {
                 throw new MusicLibServiceException("position on album is not free");
             }
+            
             return songDao.update(song);
+        } catch (MusicLibServiceException ex) {
+            song.setAlbum(null);
+            song.setPositionInAlbum(0);
+            throw ex;
         } catch (IllegalArgumentException | ConstraintViolationException | PersistenceException ex) {
             throw new MusicLibDataAccessException("song update error", ex);
         }
@@ -110,15 +127,15 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public void remove(Song song) {
-        if(song == null) {
+        if (song == null) {
             throw new IllegalArgumentException("song cannot be null");
         }
         try {
             if (song.getAlbum() != null) {
                 song.getAlbum().removeSong(song);
             }
-            
-            if (song.getMusician()!= null) {
+
+            if (song.getMusician() != null) {
                 song.getMusician().removeSong(song);
             }
             songDao.remove(song);
@@ -128,16 +145,13 @@ public class SongServiceImpl implements SongService {
     }
 
     private int getFirstFreePositionInAlbum(Song song) {
-        if (song.getAlbum() == null) {
-            return 0;
-        }
-
-        Album album = song.getAlbum();//albumDao.findById(song.getAlbum().getId());
+        Album album = song.getAlbum();
         if (album == null) {
             return 0;
         }
-
-        boolean[] occupiedPositions = new boolean[album.getSongs().size()];
+        
+        int maxPositionInAlbum = getMaxPositionInAlbum(album);
+        boolean[] occupiedPositions = new boolean[maxPositionInAlbum];
 
         for (Song s : album.getSongs()) {
             if (s.getPositionInAlbum() > 0) {
@@ -150,11 +164,22 @@ public class SongServiceImpl implements SongService {
                 return i + 1;
             }
         }
-        return album.getSongs().size() + 1;
+        return maxPositionInAlbum + 1;
+    }
+
+    private int getMaxPositionInAlbum(Album album) {
+        int maxPosition = album.getSongs().size();
+        for(Song song : album.getSongs()) {
+            if(song.getPositionInAlbum() > maxPosition) {
+                maxPosition = song.getPositionInAlbum();
+            }
+        }
+        
+        return maxPosition;
     }
 
     private boolean isDesiredPositionFreeOnAlbum(Song song) {
-        Album album = song.getAlbum();//albumDao.findById(song.getAlbum().getId());
+        Album album = song.getAlbum();
         for (Song s : album.getSongs()) {
             if (!s.equals(song) && s.getPositionInAlbum() == song.getPositionInAlbum()) {
                 return false;
