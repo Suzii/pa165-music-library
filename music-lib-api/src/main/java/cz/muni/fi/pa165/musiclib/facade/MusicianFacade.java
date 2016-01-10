@@ -12,19 +12,19 @@ public interface MusicianFacade {
     * Creates new musician.
     *
     * @param musician entity to be created
-    * @return id of newly created song
+    * @return id of newly created musician
     */    
     Long createMusician(MusicianDTO musician);
 
     /**
-     * Updates musician 
+     * Updates musician.
      * 
-     * @param musician
+     * @param musician entity to be updated
      */
     void updateMusician (MusicianDTO musician);
 
     /**
-     * Deletes musician 
+     * Deletes musician.
      * 
      * @param musicianId
      */
@@ -38,20 +38,20 @@ public interface MusicianFacade {
     List<MusicianDTO> getAllMusicians ();
 
     /**
-     * Returns musician according to given id
+     * Returns musician according to given id.
      * 
      * @param musicianId
      * @return musician identified by unique id
-     * @throws IllegalArgumentException if musician is null
+     * @throws IllegalArgumentException if musicianId is null
      */
     MusicianDTO getMusicianById(Long musicianId);
 
     /**
-     * Finds and returns all the musicians with atrist names containing given string.
+     * Finds and returns all the musicians with artist names containing given string.
      * 
      * @param artistName
      * @return list of all the musicians whose names contain given string
-     * @throws IllegalArgumentException if the artist name si null
+     * @throws IllegalArgumentException if the artist name is null
      */
     List <MusicianDTO> getMusicianByArtistName (String artistName);
 
