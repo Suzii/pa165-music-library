@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 /**
  *
- * @author zdank
+ * @author Zuzana Dankovcikova
  * @version 26/11/2015
  */
 @Service
@@ -86,6 +86,15 @@ public class SongServiceImpl implements SongService {
             return songDao.findById(id);
         } catch (IllegalArgumentException | PersistenceException ex) {
             throw new MusicLibDataAccessException("song findById error", ex);
+        }
+    }
+
+    @Override
+    public List<Song> findByTitleFragment(String titleFragment){
+        try {
+            return songDao.findByTitleFragment(titleFragment);
+        } catch (IllegalArgumentException | PersistenceException ex) {
+            throw new MusicLibDataAccessException("song findByTitleFragment error", ex);
         }
     }
 

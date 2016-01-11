@@ -44,6 +44,14 @@ public interface SongService {
     Song findById(Long id);
 
     /**
+     * Returns all songs that contain given title fragment in their title
+     * 
+     * @param titleFragment fragment of the title to look for
+     * @return list of songs containing given fragment in their title
+     */
+    List<Song> findByTitleFragment(String titleFragment);
+    
+    /**
      * Returns all Songs.
      *
      * @return list of all song entities

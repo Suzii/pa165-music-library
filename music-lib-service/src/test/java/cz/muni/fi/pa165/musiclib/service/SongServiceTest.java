@@ -27,6 +27,7 @@ import org.mockito.InjectMocks;
 import static org.mockito.Matchers.any;
 import org.mockito.Mock;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
@@ -227,6 +228,12 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
         when(songDao.findById(null)).thenThrow(IllegalArgumentException.class);
         
         songService.findById(null);
+    }
+    
+    @Test
+    public void findByTitleFragment() {
+        songService.findByTitleFragment("a");
+        verify(songDao).findByTitleFragment("a");
     }
     
     @Test
