@@ -4,7 +4,7 @@ import cz.muni.fi.pa165.musiclib.config.ServiceConfiguration;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
-import cz.muni.fi.pa165.musiclib.dto.SongSearchDTO;
+import cz.muni.fi.pa165.musiclib.dto.SongSearchCriteriaDTO;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
@@ -212,7 +212,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
         when(songService.findAll()).thenReturn(expected);
         when(songService.findByTitleFragment("song")).thenReturn(expected);
 
-        SongSearchDTO searchCriteria = new SongSearchDTO();
+        SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
         searchCriteria.setTitle("song");
         List<SongDTO> result = songFacade.search(searchCriteria);
         assertEquals(result.size(), 3);
@@ -225,7 +225,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
         when(songService.findAll()).thenReturn(expected);
         when(songService.findByTitleFragment("song")).thenReturn(expected);
 
-        SongSearchDTO searchCriteria = new SongSearchDTO();
+        SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
         searchCriteria.setTitle("song");
         searchCriteria.setAlbumId(this.album1.getId());
         List<SongDTO> result = songFacade.search(searchCriteria);
@@ -239,7 +239,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
         List<Song> expected = Arrays.asList(new Song[]{this.song1A, this.song1B, this.song2A});
         when(songService.findAll()).thenReturn(expected);
 
-        SongSearchDTO searchCriteria = new SongSearchDTO();
+        SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
         searchCriteria.setMusicianId(this.musician2.getId());
         List<SongDTO> result = songFacade.search(searchCriteria);
 
@@ -252,7 +252,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
         List<Song> expected = Arrays.asList(new Song[]{this.song1A, this.song1B, this.song2A});
         when(songService.findAll()).thenReturn(expected);
 
-        SongSearchDTO searchCriteria = new SongSearchDTO();
+        SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
         searchCriteria.setGenreId(this.genre.getId());
         List<SongDTO> result = songFacade.search(searchCriteria);
 
@@ -266,7 +266,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
         when(songService.findAll()).thenReturn(expected);
         when(songService.findByTitleFragment("so")).thenReturn(expected);
 
-        SongSearchDTO searchCriteria = new SongSearchDTO();
+        SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
         searchCriteria.setTitle("so");
         searchCriteria.setAlbumId(this.album1.getId());
         searchCriteria.setMusicianId(this.musician.getId());
@@ -282,7 +282,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
         when(songService.findAll()).thenReturn(expected);
         when(songService.findByTitleFragment("so")).thenReturn(expected);
 
-        SongSearchDTO searchCriteria = new SongSearchDTO();
+        SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
         searchCriteria.setTitle("so");
         searchCriteria.setAlbumId(this.album1.getId());
         searchCriteria.setMusicianId(this.musician2.getId());
@@ -292,7 +292,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
         assertTrue(result.isEmpty());
     }
 
-    private void testSongsCriteria(List<SongDTO> songs, SongSearchDTO criteria) {
+    private void testSongsCriteria(List<SongDTO> songs, SongSearchCriteriaDTO criteria) {
         for (SongDTO song : songs) {
             testTitleInSong(song, null);
             testMusitianInSong(song, criteria.getMusicianId());

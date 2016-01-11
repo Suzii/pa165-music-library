@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.musiclib.facade;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
-import cz.muni.fi.pa165.musiclib.dto.SongSearchDTO;
+import cz.muni.fi.pa165.musiclib.dto.SongSearchCriteriaDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
@@ -156,7 +156,7 @@ public class SongFacadeImpl implements SongFacade {
     }
 
     @Override
-    public List<SongDTO> search(SongSearchDTO songSearch) {
+    public List<SongDTO> search(SongSearchCriteriaDTO songSearch) {
         if(songSearch == null) {
             throw new IllegalArgumentException("songSearchDTO");
         }
@@ -179,15 +179,15 @@ public class SongFacadeImpl implements SongFacade {
         return result;
     }
     
-    private static boolean testMusicianMatch(SongSearchDTO songSearch, SongDTO song) {
+    private static boolean testMusicianMatch(SongSearchCriteriaDTO songSearch, SongDTO song) {
         return songSearch.getMusicianId() == null || (song.getMusician()!= null && song.getMusician().getId().equals(songSearch.getMusicianId()));
     }
     
-    private static boolean testAlbumMatch(SongSearchDTO songSearch, SongDTO song) {
+    private static boolean testAlbumMatch(SongSearchCriteriaDTO songSearch, SongDTO song) {
         return songSearch.getAlbumId() == null || (song.getAlbum()!= null && song.getAlbum().getId().equals(songSearch.getAlbumId()));
     }
     
-    private static boolean testGenreMatch(SongSearchDTO songSearch, SongDTO song) {
+    private static boolean testGenreMatch(SongSearchCriteriaDTO songSearch, SongDTO song) {
         return songSearch.getGenreId() == null || (song.getGenre()!= null && song.getGenre().getId().equals(songSearch.getGenreId()));
     }
 }
