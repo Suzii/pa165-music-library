@@ -12,7 +12,40 @@
         <div class="jumbotron">
             <h1><fmt:message key="songs.heading"/></h1>
             <p class="lead"><fmt:message key="songs.subheading"/></p>
+            <p><fmt:message key="songs.search_intro_text"/></p>
+                
+            <form:form method="GET" 
+                   action="${pageContext.request.contextPath}/song/index"
+                   acceptCharset=""
+                   cssClass="form-inline">
 
+                <fmt:message key="title_placeholder" var="titlePlaceholder"/>
+                <input name="title" value="${param.title}" class="form-control" autocomplete="off" placeholder="${titlePlaceholder}"/>
+                   
+                <select name="musicianId" class="form-control">
+                    <option value="" display ${empty param.musicianId ? ' selected' : ''}><fmt:message key="artist_placeholder"/></option>
+                    <c:forEach items="${musicians}" var="m">
+                        <option value="${m.id}" ${param.musicianId == m.id ? ' selected' : ''}>${m.artistName}</option>
+                    </c:forEach>
+                </select>
+                
+                <select name="albumId" class="form-control">
+                    <option value="" display  ${empty param.albumId ? ' selected' : ''}><fmt:message key="album_placeholder"/></option>
+                    <c:forEach items="${albums}" var="a">
+                        <option value="${a.id}" ${param.albumId == a.id ? ' selected' : ''}>${a.title}</option>
+                    </c:forEach>
+                </select>
+                
+                <select name="genreId" class="form-control">
+                    <option value="" display  ${empty param.genreId ? ' selected' : ''}><fmt:message key="genre_placeholder"/></option>
+                    <c:forEach items="${genres}" var="g">
+                        <option value="${g.id}" ${param.genreId == g.id ? ' selected' : ''}>${g.title}</option>
+                    </c:forEach>
+                </select>                      
+                
+                    <button class="btn btn-primary search-btn" type="submit"><i class="glyphicon glyphicon-search"></i>&nbsp;<fmt:message key="search"/></button>
+            </form:form>
+                                        
             <c:if test="${isAdmin}">
                 <p align="right">
                     <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/song/create" role="button">

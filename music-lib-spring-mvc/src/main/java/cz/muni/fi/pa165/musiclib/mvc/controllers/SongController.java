@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
+import cz.muni.fi.pa165.musiclib.dto.SongSearchCriteriaDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
 import cz.muni.fi.pa165.musiclib.facade.GenreFacade;
 import cz.muni.fi.pa165.musiclib.facade.MusicianFacade;
@@ -55,9 +56,20 @@ public class SongController extends BaseController {
      * @return 
      */
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
-    public String index(Model model) {
+    public String index(
+            Model model,
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "musicianId", required = false) Long musicianId,
+            @RequestParam(value = "albumId", required = false) Long albumId,
+            @RequestParam(value = "genreId", required = false) Long genreId) {
                 
-        List<SongDTO> songs = songFacade.findAll();
+        SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
+        searchCriteria.setTitle(title);
+        searchCriteria.setMusicianId(musicianId);
+        searchCriteria.setAlbumId(albumId);
+        searchCriteria.setGenreId(genreId);
+        
+        List<SongDTO> songs = (isCriteriaEmpty(searchCriteria))? songFacade.findAll() : songFacade.search(searchCriteria);
         model.addAttribute("songs", songs);
         return "song/index";
     }
@@ -237,5 +249,13 @@ public class SongController extends BaseController {
     public void populateDropdownValues(Model model) {
         model.addAttribute("musicians", musicianFacade.getAllMusicians());
         model.addAttribute("genres", genreFacade.getAllGenres());
+        model.addAttribute("albums", albumFacade.getAllAlbums());
+    }
+
+    private boolean isCriteriaEmpty(SongSearchCriteriaDTO searchCriteria) {
+        return (searchCriteria.getTitle() == null || searchCriteria.getTitle().trim().isEmpty()) &&
+                searchCriteria.getAlbumId() == null &&
+                searchCriteria.getMusicianId() == null &&
+                searchCriteria.getGenreId() == null;
     }
 }
