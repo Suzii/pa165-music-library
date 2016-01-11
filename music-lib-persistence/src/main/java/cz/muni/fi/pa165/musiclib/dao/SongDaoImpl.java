@@ -38,8 +38,8 @@ public class SongDaoImpl implements SongDao {
     
     @Override
     public List<Song> findByTitleFragment(String titleFragment) {
-        return em.createQuery("SELECT s FROM Song s WHERE s.title LIKE '%'||:titleFragment||'%'", Song.class)
-                .setParameter("titleFragment", titleFragment)
+        return em.createQuery("SELECT s FROM Song s WHERE UPPER(s.title) LIKE '%'||:titleFragment||'%'", Song.class)
+                .setParameter("titleFragment", titleFragment.toUpperCase())
                 .getResultList();
     }
 
