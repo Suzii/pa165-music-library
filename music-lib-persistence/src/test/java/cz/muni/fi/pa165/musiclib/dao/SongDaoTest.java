@@ -28,6 +28,7 @@ import org.testng.Assert;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -119,6 +120,49 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findByIdNonexistingTest() {
         Assert.assertNull(songDao.findById(1L));
+    }
+    
+    @Test
+    public void findByTitleFragmentFullTitleTest() {
+        songDao.create(song1A);
+        songDao.create(song1B);
+        List<Song> result = songDao.findByTitleFragment("song1");
+        
+        assertNotNull(result);
+        assertEquals(result.size(), 1);
+        assertTrue(result.contains(song1A));
+    }
+    
+    @Test
+    public void findByTitleFragmentPartialTitleTest() {
+        songDao.create(song1A);
+        songDao.create(song1B);
+        List<Song> result = songDao.findByTitleFragment("song");
+        
+        assertNotNull(result);
+        assertEquals(result.size(), 2);
+        assertTrue(result.contains(song1A));
+        assertTrue(result.contains(song1B));
+    }
+    
+    @Test
+    public void findByTitleFragmentEmptyTest() {
+        songDao.create(song1A);
+        songDao.create(song1B);
+        List<Song> result = songDao.findByTitleFragment("");
+        
+        assertNotNull(result);
+        assertEquals(result.size(), 2);
+    }
+    
+    @Test
+    public void findByTitleFragmentNonMatchingTitleTest() {
+        songDao.create(song1A);
+        songDao.create(song1B);
+        List<Song> result = songDao.findByTitleFragment("aaa");
+        
+        assertNotNull(result);
+        assertEquals(result.size(), 0);
     }
     
     @Test

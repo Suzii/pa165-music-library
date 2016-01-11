@@ -35,6 +35,13 @@ public class SongDaoImpl implements SongDao {
     public Song findById(Long id) {
         return em.find(Song.class, id);
     }
+    
+    @Override
+    public List<Song> findByTitleFragment(String titleFragment) {
+        return em.createQuery("SELECT s FROM Song s WHERE s.title LIKE '%'||:titleFragment||'%'", Song.class)
+                .setParameter("titleFragment", titleFragment)
+                .getResultList();
+    }
 
     @Override
     public List<Song> findAll() {

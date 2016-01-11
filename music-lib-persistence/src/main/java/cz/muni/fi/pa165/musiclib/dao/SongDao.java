@@ -42,14 +42,22 @@ public interface SongDao {
     Song findById(Long id);
 
     /**
-     * Returns all Songs in the DV
+     * Returns all songs that contain given title fragment in their title
+     * 
+     * @param titleFragment fragment of the title to look for
+     * @return list of songs containing given fragment in their title
+     */
+    List<Song> findByTitleFragment(String titleFragment);
+    
+    /**
+     * Returns all Songs in the DB
      *
      * @return all persisted Song entities
      */
     List<Song> findAll();
 
     /**
-     * Resturns all songs for the given album
+     * Returns all songs for the given album
      *
      * @param album album to which songs belong
      * @return list of Song entities in the given album
