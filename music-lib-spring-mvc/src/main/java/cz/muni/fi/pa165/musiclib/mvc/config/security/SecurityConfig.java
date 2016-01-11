@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.musiclib.mvc.config.security;
 
 import cz.muni.fi.pa165.musiclib.dto.UserDTO;
 import cz.muni.fi.pa165.musiclib.facade.UserFacade;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

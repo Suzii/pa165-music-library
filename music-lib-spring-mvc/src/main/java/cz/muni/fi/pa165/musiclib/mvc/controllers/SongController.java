@@ -8,7 +8,6 @@ import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
 import cz.muni.fi.pa165.musiclib.facade.GenreFacade;
 import cz.muni.fi.pa165.musiclib.facade.MusicianFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
-import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +19,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 
