@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.musiclib.facade;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
+import cz.muni.fi.pa165.musiclib.dto.SongSearchCriteriaDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
 import java.util.List;
 
@@ -42,6 +43,13 @@ public interface SongFacade {
     void addYoutubeLink(SongAddYoutubeLinkDTO addYoutubeLinkDTO);
 
     /**
+     * Returns list of all songs matching given criteria.
+     * 
+     * @return list of all songs matching criteria
+     */
+    List<SongDTO> search(SongSearchCriteriaDTO songSearchDTO);
+    
+    /**
      * Returns the song entity attached to the given id.
      *
      * @param id id of the song entity to be returned
@@ -55,7 +63,7 @@ public interface SongFacade {
      * @return list of all song entities
      */
     List<SongDTO> findAll();
-
+   
     /**
      * Returns all songs for the given album
      *

@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.musiclib.facade;
 import cz.muni.fi.pa165.musiclib.dto.SongAddYoutubeLinkDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
+import cz.muni.fi.pa165.musiclib.dto.SongSearchDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
@@ -15,6 +16,7 @@ import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.GenreService;
 import cz.muni.fi.pa165.musiclib.service.MusicianService;
 import cz.muni.fi.pa165.musiclib.service.SongService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
@@ -151,5 +153,41 @@ public class SongFacadeImpl implements SongFacade {
         }
 
         return beanMappingService.mapTo(songService.findByGenre(genre), SongDTO.class);
+    }
+
+    @Override
+    public List<SongDTO> search(SongSearchDTO songSearch) {
+        if(songSearch == null) {
+            throw new IllegalArgumentException("songSearchDTO");
+        }
+        
+        List<SongDTO> filteredByTitle = (songSearch.getTitle() != null && !songSearch.getTitle().trim().isEmpty()) ? 
+                beanMappingService.mapTo(songService.findByTitleFragment(songSearch.getTitle()), SongDTO.class) : 
+                this.findAll();
+        List<SongDTO> result = new ArrayList<>(filteredByTitle);
+        
+        for(SongDTO song : filteredByTitle) {
+            if(!testMusicianMatch(songSearch, song)){
+                result.remove(song);
+            } else if(!testAlbumMatch(songSearch, song)){
+                result.remove(song);
+            } else if(!testGenreMatch(songSearch, song)){
+                result.remove(song);
+            } 
+        }
+        
+        return result;
+    }
+    
+    private static boolean testMusicianMatch(SongSearchDTO songSearch, SongDTO song) {
+        return songSearch.getMusicianId() == null || (song.getMusician()!= null && song.getMusician().getId().equals(songSearch.getMusicianId()));
+    }
+    
+    private static boolean testAlbumMatch(SongSearchDTO songSearch, SongDTO song) {
+        return songSearch.getAlbumId() == null || (song.getAlbum()!= null && song.getAlbum().getId().equals(songSearch.getAlbumId()));
+    }
+    
+    private static boolean testGenreMatch(SongSearchDTO songSearch, SongDTO song) {
+        return songSearch.getGenreId() == null || (song.getGenre()!= null && song.getGenre().getId().equals(songSearch.getGenreId()));
     }
 }
