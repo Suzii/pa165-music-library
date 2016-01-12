@@ -278,7 +278,7 @@ public class GenreServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findValidTitleTest() {
-        List<Genre> genres = genreService.findByTitle("Rock");
+        List<Genre> genres = genreService.searchByTitle("Rock");
 
         assertFalse(genres.isEmpty());
         assertEquals(genres.size(), 1);
@@ -287,16 +287,14 @@ public class GenreServiceTest extends AbstractTestNGSpringContextTests {
         assertEquals(genre.getTitle(), genre01.getTitle());
     }
 
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void findNullTitleTest() {
-        List<Genre> genre = genreService.findByTitle(null);
-
-        assertTrue(genre.isEmpty());
+        genreService.searchByTitle(null);
     }
 
     @Test
     public void findInvalidTitleTest() {
-        List<Genre> genre = genreService.findByTitle("asd");
+        List<Genre> genre = genreService.searchByTitle("asd");
 
         assertTrue(genre.isEmpty());
     }

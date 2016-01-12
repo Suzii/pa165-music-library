@@ -45,12 +45,12 @@ public interface GenreService {
     Genre findById(Long id);
 
     /**
-     * Get genre with given name
-     *
-     * @param title of genre to be found
-     * @return list of genre with given title
+     * Returns all genres containing given title fragment
+     * 
+     * @param title title fragment of genres to look for
+     * @return list of all genres entities containing given title fragment, empty if no such genre exists
      */
-    List<Genre> findByTitle(String title);
+    List<Genre> searchByTitle(String title);
 
     /**
      * Get all genres

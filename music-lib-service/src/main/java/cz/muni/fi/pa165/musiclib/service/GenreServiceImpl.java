@@ -64,7 +64,11 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Override
-    public List<Genre> findByTitle(String title) {
+    public List<Genre> searchByTitle(String title) {
+        if(title == null) {
+            throw new IllegalArgumentException("title cannot be null");
+        }
+        
         try {
             return genreDao.searchByTitle(title);
         } catch (IllegalArgumentException | NullPointerException e) {

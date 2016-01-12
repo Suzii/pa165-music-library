@@ -66,7 +66,7 @@ public class GenreFacadeTest extends AbstractTestNGSpringContextTests {
         genre02 = genreBuilder.title("Pop").id(2L).build();
 
         when(genreService.findById(1L)).thenReturn(genre01);
-        when(genreService.findByTitle(genre01.getTitle())).thenReturn(Collections.singletonList(genre01));
+        when(genreService.searchByTitle(genre01.getTitle())).thenReturn(Collections.singletonList(genre01));
         when(genreService.findById(2L)).thenReturn(genre02);
         when(genreService.findAll()).thenReturn(Arrays.asList(genre01, genre02));
     }

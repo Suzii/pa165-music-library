@@ -49,7 +49,7 @@ public interface SongService {
      * @param titleFragment fragment of the title to look for
      * @return list of songs containing given fragment in their title
      */
-    List<Song> findByTitleFragment(String titleFragment);
+    List<Song> searchByTitle(String titleFragment);
     
     /**
      * Returns all Songs.

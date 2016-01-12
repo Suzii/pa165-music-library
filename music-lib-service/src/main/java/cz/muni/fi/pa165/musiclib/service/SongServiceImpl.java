@@ -90,7 +90,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public List<Song> findByTitleFragment(String titleFragment){
+    public List<Song> searchByTitle(String titleFragment){
         try {
             return songDao.searchByTitle(titleFragment);
         } catch (IllegalArgumentException | PersistenceException ex) {

@@ -232,7 +232,7 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
     
     @Test
     public void findByTitleFragment() {
-        songService.findByTitleFragment("a");
+        songService.searchByTitle("a");
         verify(songDao).searchByTitle("a");
     }
     

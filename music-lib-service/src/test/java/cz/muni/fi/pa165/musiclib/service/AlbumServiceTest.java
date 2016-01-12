@@ -292,7 +292,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     public void findByTitleTest() {
         List<Album> expected = Arrays.asList(album1);
         when(albumDao.searchByTitle("Hooligans")).thenReturn(expected);
-        List<Album> actual = albumService.findByTitle("Hooligans");
+        List<Album> actual = albumService.searchByTitle("Hooligans");
 
         assertNotNull(actual);
         assertEquals(actual, expected);
@@ -303,7 +303,7 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     public void findByNonExistingTitleTest() {
         List<Album> expected = new ArrayList<>();
         when(albumDao.searchByTitle("Moonshine jungle")).thenReturn(expected);
-        List<Album> actual = albumService.findByTitle("Moonshine jungle");
+        List<Album> actual = albumService.searchByTitle("Moonshine jungle");
 
         assertNotNull(actual);
         assertEquals(actual.size(), 0);

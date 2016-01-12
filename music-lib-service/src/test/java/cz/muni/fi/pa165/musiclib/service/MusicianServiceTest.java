@@ -286,22 +286,21 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests {
     public void findByNameTest() {
         List<Musician> expected = Arrays.asList(musician1);
         when(musicianDao.searchByArtistName("musician name")).thenReturn(expected);
-        List<Musician> current = musicianService.findByArtistName("musician name");
+        List<Musician> current = musicianService.searchByArtistName("musician name");
 
         assertNotNull(current);
         assertEquals(current, expected);
         assertDeepEquals(current.get(0), musician1);
     }
 
-    @Test
+    @Test(expectedExceptions = IllegalArgumentException.class)
     public void findNullNameTest() {
-        List<Musician> musician = musicianService.findByArtistName(null);
-        assertTrue(musician.isEmpty());
+        musicianService.searchByArtistName(null);
     }
 
     @Test
     public void findWrongNameTest() {
-        List<Musician> musician = musicianService.findByArtistName("not existing name");
+        List<Musician> musician = musicianService.searchByArtistName("not existing name");
         assertTrue(musician.isEmpty());
     }
 

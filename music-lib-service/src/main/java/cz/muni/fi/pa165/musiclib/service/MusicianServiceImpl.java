@@ -68,7 +68,11 @@ public class MusicianServiceImpl implements MusicianService {
     }
 
     @Override
-    public List<Musician> findByArtistName(String artistName) {
+    public List<Musician> searchByArtistName(String artistName) {
+        if(artistName == null) {
+            throw new IllegalArgumentException("artistName cannot be null");
+        }
+        
         try {
         return musicianDao.searchByArtistName(artistName);
         }  catch(IllegalArgumentException ex) {

@@ -162,7 +162,7 @@ public class SongFacadeImpl implements SongFacade {
         }
         
         List<SongDTO> filteredByTitle = (songSearch.getTitle() != null && !songSearch.getTitle().trim().isEmpty()) ? 
-                beanMappingService.mapTo(songService.findByTitleFragment(songSearch.getTitle()), SongDTO.class) : 
+                beanMappingService.mapTo(songService.searchByTitle(songSearch.getTitle()), SongDTO.class) : 
                 this.findAll();
         List<SongDTO> result = new ArrayList<>(filteredByTitle);
         

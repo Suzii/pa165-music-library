@@ -89,7 +89,7 @@ public class MusicianFacadeImpl implements MusicianFacade {
 
     @Override
     public List<MusicianDTO> getMusicianByArtistName(String artistName) {
-        List<Musician> musicians = musicianService.findByArtistName(artistName);
+        List<Musician> musicians = musicianService.searchByArtistName(artistName);
         if (musicians == null) {
             throw new NoSuchEntityFoundException("No such musician exists");
         }

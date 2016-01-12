@@ -210,7 +210,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
     public void searchWithTitleTest() {
         List<Song> expected = Arrays.asList(new Song[]{this.song1A, this.song1B, this.song2A});
         when(songService.findAll()).thenReturn(expected);
-        when(songService.findByTitleFragment("song")).thenReturn(expected);
+        when(songService.searchByTitle("song")).thenReturn(expected);
 
         SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
         searchCriteria.setTitle("song");
@@ -223,7 +223,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
     public void searchWithTitleAndAlbumTest() {
         List<Song> expected = Arrays.asList(new Song[]{this.song1A, this.song1B, this.song2A});
         when(songService.findAll()).thenReturn(expected);
-        when(songService.findByTitleFragment("song")).thenReturn(expected);
+        when(songService.searchByTitle("song")).thenReturn(expected);
 
         SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
         searchCriteria.setTitle("song");
@@ -264,7 +264,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
     public void serachWithFullCriteriaTest() {
         List<Song> expected = Arrays.asList(new Song[]{this.song1A, this.song1B, this.song2A});
         when(songService.findAll()).thenReturn(expected);
-        when(songService.findByTitleFragment("so")).thenReturn(expected);
+        when(songService.searchByTitle("so")).thenReturn(expected);
 
         SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
         searchCriteria.setTitle("so");
@@ -280,7 +280,7 @@ public class SongFacadeTest extends AbstractTestNGSpringContextTests {
     public void serachWithFullCriteriaAndEmptyResultTest() {
         List<Song> expected = Arrays.asList(new Song[]{this.song1A, this.song1B, this.song2A});
         when(songService.findAll()).thenReturn(expected);
-        when(songService.findByTitleFragment("so")).thenReturn(expected);
+        when(songService.searchByTitle("so")).thenReturn(expected);
 
         SongSearchCriteriaDTO searchCriteria = new SongSearchCriteriaDTO();
         searchCriteria.setTitle("so");

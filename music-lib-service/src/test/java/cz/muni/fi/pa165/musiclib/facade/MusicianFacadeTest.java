@@ -61,7 +61,7 @@ public class MusicianFacadeTest extends AbstractTestNGSpringContextTests {
         
         when(musicianService.findById(1l)).thenReturn(musician1);
         when(musicianService.findById(2l)).thenReturn(musician2);
-        when(musicianService.findByArtistName(musician1.getArtistName())).thenReturn(Collections.singletonList(musician1));
+        when(musicianService.searchByArtistName(musician1.getArtistName())).thenReturn(Collections.singletonList(musician1));
         when(musicianService.findAll()).thenReturn(Arrays.asList(musician1, musician2));
     }
 

@@ -46,12 +46,12 @@ public interface AlbumService {
     Album findById(Long id);
     
     /**
-     * Returns all albums with given title
+     * Returns all albums containing given title fragment
      * 
-     * @param title title of albums to look for
-     * @return list of all album entities with given title, empty if no such album exists
+     * @param title title fragment of albums to look for
+     * @return list of all album entities containing given title fragment, empty if no such album exists
      */
-    List<Album> findByTitle(String title);
+    List<Album> searchByTitle(String title);
     
     /**
      * Returns all albums.

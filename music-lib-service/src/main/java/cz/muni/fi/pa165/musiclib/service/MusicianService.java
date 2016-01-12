@@ -44,12 +44,12 @@ public interface MusicianService {
     Musician findById(Long id);
     
     /**
-     * Returns all musicians according to a given artist name.
+     * Returns all musicians containing given artist name fragment in their name.
      * 
-     * @param artistName artist name of the musician
-     * @return list of the musician with given name or empty list if no artist was found
+     * @param artistName artist name fragment of the musician to look for
+     * @return list of the musician containing given name or empty list if no artist was found
      */
-    List<Musician> findByArtistName(String artistName);
+    List<Musician> searchByArtistName(String artistName);
     
     /**
      * Returns all musicians.

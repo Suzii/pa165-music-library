@@ -74,7 +74,11 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public List<Album> findByTitle(String title) {
+    public List<Album> searchByTitle(String title) {
+        if(title == null) {
+            throw new IllegalArgumentException("title cannot be null");
+        }
+        
         try {
             return albumDao.searchByTitle(title);
         } catch (IllegalArgumentException ex) {

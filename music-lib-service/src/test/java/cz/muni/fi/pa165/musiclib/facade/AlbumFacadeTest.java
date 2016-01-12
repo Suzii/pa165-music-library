@@ -99,7 +99,7 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
         when(songService.findById(2l)).thenReturn(song1B);
         
         //findByTitle
-        when(albumService.findByTitle("Hooligans")).thenReturn(Arrays.asList(album1));
+        when(albumService.searchByTitle("Hooligans")).thenReturn(Arrays.asList(album1));
         
         //findAll
         when(albumService.findAll()).thenReturn(Arrays.asList(album1));
@@ -185,6 +185,6 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
     @Test
     public void getAlbumByTitleTest() {
         albumFacade.getAlbumByTitle("Title");
-        verify(albumService).findByTitle("Title");
+        verify(albumService).searchByTitle("Title");
     }
 }
