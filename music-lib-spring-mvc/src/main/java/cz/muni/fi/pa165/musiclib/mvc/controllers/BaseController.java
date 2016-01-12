@@ -59,4 +59,8 @@ public abstract class BaseController {
     public boolean userIsAdmin(HttpServletRequest request) {
         return request.isUserInRole("ROLE_ADMIN");
     }
+    
+    protected boolean isNullOrWhiteSpace(String s) {
+        return s == null || s.trim().isEmpty();
+    }
 }

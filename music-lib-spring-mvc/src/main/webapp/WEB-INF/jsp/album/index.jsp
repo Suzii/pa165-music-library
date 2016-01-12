@@ -12,6 +12,16 @@
         <div class="jumbotron">
             <h1><fmt:message key="albums.heading"/></h1>
             <p class="lead"><fmt:message key="albums.subheading"/></p>
+            
+            <form:form method="GET" 
+                   action="${pageContext.request.contextPath}/album/index"
+                   acceptCharset=""
+                   cssClass="form-inline">
+
+                <fmt:message key="title_placeholder" var="titlePlaceholder"/>
+                <input name="title" value="${param.title}" class="form-control" autocomplete="off" placeholder="${titlePlaceholder}"/>
+                <button class="btn btn-primary search-btn" type="submit"><i class="glyphicon glyphicon-search"></i>&nbsp;<fmt:message key="search"/></button>
+            </form:form>
 
             <c:if test="${isAdmin}">
                 <p align="right">

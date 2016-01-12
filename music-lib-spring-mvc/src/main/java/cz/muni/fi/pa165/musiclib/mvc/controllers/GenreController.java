@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.musiclib.mvc.controllers;
 
 import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
 import cz.muni.fi.pa165.musiclib.facade.GenreFacade;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -35,12 +36,15 @@ public class GenreController  extends BaseController{
      * List of all genres in library
      * 
      * @param model
+     * @param title
      * @return String jsp template
      */
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
-    public String index(Model model) {
+    public String index(Model model, @RequestParam(value = "title", required = false) String title) {
         log.debug("getGenres()");
-        model.addAttribute("genres", genreFacade.getAllGenres());
+        List<GenreDTO> genres = (isNullOrWhiteSpace(title)) ? genreFacade.getAllGenres() : genreFacade.getGenreByTitle(title);
+        model.addAttribute("genres", genres);
+        
         return "genre/index";
     }
 

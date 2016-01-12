@@ -55,8 +55,9 @@ public class AlbumController extends BaseController {
     private FileValidator fileValidator;
 
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
-    public String index(Model model) {
-        List<AlbumDTO> albums = albumFacade.getAllAlbums();
+    public String index(Model model, @RequestParam(value = "title", required = false) String title) {
+        
+        List<AlbumDTO> albums = (isNullOrWhiteSpace(title)) ? albumFacade.getAllAlbums() : albumFacade.getAlbumByTitle(title);
         model.addAttribute("albums", albums);
 
         return "album/index";

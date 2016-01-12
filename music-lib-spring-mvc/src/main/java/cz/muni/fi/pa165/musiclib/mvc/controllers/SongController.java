@@ -253,7 +253,7 @@ public class SongController extends BaseController {
     }
 
     private boolean isCriteriaEmpty(SongSearchCriteriaDTO searchCriteria) {
-        return (searchCriteria.getTitle() == null || searchCriteria.getTitle().trim().isEmpty()) &&
+        return  isNullOrWhiteSpace(searchCriteria.getTitle())&&
                 searchCriteria.getAlbumId() == null &&
                 searchCriteria.getMusicianId() == null &&
                 searchCriteria.getGenreId() == null;

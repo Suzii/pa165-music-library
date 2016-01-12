@@ -13,6 +13,17 @@
         <div class="jumbotron">
             <h1><fmt:message key="musicians.heading"/></h1>
             <p class="lead"><fmt:message key="musicians.subheading"/></p>
+            
+            <form:form method="GET" 
+                   action="${pageContext.request.contextPath}/musician/index"
+                   acceptCharset=""
+                   cssClass="form-inline">
+
+                <fmt:message key="artist_name_placeholder" var="artistNamePlaceholder"/>
+                <input name="artistName" value="${param.title}" class="form-control" autocomplete="off" placeholder="${artistNamePlaceholder}"/>
+                <button class="btn btn-primary search-btn" type="submit"><i class="glyphicon glyphicon-search"></i>&nbsp;<fmt:message key="search"/></button>
+            </form:form>
+                
             <c:if test="${isAdmin}">
                 <p align="right">
                     <a class="btn btn-lg btn-success btn-jumbotron" href="${pageContext.request.contextPath}/musician/create" role="button">
