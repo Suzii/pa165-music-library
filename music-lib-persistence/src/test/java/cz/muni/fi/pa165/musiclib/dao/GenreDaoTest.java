@@ -66,25 +66,33 @@ public class GenreDaoTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test
-    public void findByTitle(){
+    public void searchByTitle(){
         genreDao.create(chillWave);
         genreDao.create(acidJazz);
-        List<Genre> genres = genreDao.findByTitle(chillWave.getTitle());
+        List<Genre> genres = genreDao.searchByTitle(chillWave.getTitle());
         Assert.assertEquals(genres.size(), 1);
         Assert.assertEquals(genres.get(0), chillWave);
         assertDeepEquals(genres.get(0), chillWave);
-
     }
     
     @Test
-    public void findByNonExistingTitle(){ 
+    public void searchByTitleFragmentTest(){
         genreDao.create(chillWave);
         genreDao.create(acidJazz);
-        List<Genre> genres = genreDao.findByTitle("Trip Hop");
-        Assert.assertEquals(genres.size(), 0);
-
+        List<Genre> genres = genreDao.searchByTitle(chillWave.getTitle().substring(0, 3));
+        Assert.assertEquals(genres.size(), 1);
+        Assert.assertEquals(genres.get(0), chillWave);
+        assertDeepEquals(genres.get(0), chillWave);
     }
-       
+    
+    @Test
+    public void searchByNonExistingTitleTest(){ 
+        genreDao.create(chillWave);
+        genreDao.create(acidJazz);
+        List<Genre> genres = genreDao.searchByTitle("Trip Hop");
+        Assert.assertEquals(genres.size(), 0);
+    }
+           
     @Test
     public void findAllTest(){
        genreDao.create(chillWave);

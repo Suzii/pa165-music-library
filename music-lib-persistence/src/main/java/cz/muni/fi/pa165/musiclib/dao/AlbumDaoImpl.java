@@ -40,9 +40,12 @@ public class AlbumDaoImpl implements AlbumDao {
     }
 
     @Override
-    public List<Album> findByTitle(String title) {
-        return em.createQuery("SELECT a FROM Album a WHERE a.title = :title", Album.class)
-                .setParameter("title", title)
+    public List<Album> searchByTitle(String titleFragment) {
+        if(titleFragment == null) {
+            throw new IllegalArgumentException("titleFragment cannot be null.");
+        }       
+        return em.createQuery("SELECT a FROM Album a WHERE UPPER(a.title) LIKE '%'||:titleFragment||'%'", Album.class)
+                .setParameter("titleFragment", titleFragment.toUpperCase())
                 .getResultList();
     }
 

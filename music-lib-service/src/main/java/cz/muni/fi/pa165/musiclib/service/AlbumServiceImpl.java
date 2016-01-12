@@ -76,7 +76,7 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public List<Album> findByTitle(String title) {
         try {
-            return albumDao.findByTitle(title);
+            return albumDao.searchByTitle(title);
         } catch (IllegalArgumentException ex) {
             throw new MusicLibDataAccessException("album find by title error", ex);
         }

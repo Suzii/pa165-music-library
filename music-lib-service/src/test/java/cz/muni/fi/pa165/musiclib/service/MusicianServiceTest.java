@@ -285,7 +285,7 @@ public class MusicianServiceTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findByNameTest() {
         List<Musician> expected = Arrays.asList(musician1);
-        when(musicianDao.findByArtistName("musician name")).thenReturn(expected);
+        when(musicianDao.searchByArtistName("musician name")).thenReturn(expected);
         List<Musician> current = musicianService.findByArtistName("musician name");
 
         assertNotNull(current);

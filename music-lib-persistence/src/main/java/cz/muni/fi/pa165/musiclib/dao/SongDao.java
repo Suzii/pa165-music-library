@@ -42,12 +42,12 @@ public interface SongDao {
     Song findById(Long id);
 
     /**
-     * Returns all songs that contain given title fragment in their title
+     * Returns all songs that contain given title fragment in their title.
      * 
      * @param titleFragment fragment of the title to look for
      * @return list of songs containing given fragment in their title
      */
-    List<Song> findByTitleFragment(String titleFragment);
+    List<Song> searchByTitle(String titleFragment);
     
     /**
      * Returns all Songs in the DB

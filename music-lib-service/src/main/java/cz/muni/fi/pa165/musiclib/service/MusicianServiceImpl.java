@@ -70,7 +70,7 @@ public class MusicianServiceImpl implements MusicianService {
     @Override
     public List<Musician> findByArtistName(String artistName) {
         try {
-        return musicianDao.findByArtistName(artistName);
+        return musicianDao.searchByArtistName(artistName);
         }  catch(IllegalArgumentException ex) {
             throw new MusicLibDataAccessException("musician find by artist name error", ex);
         }

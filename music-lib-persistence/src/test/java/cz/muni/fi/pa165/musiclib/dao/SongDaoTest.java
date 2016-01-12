@@ -123,10 +123,10 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test
-    public void findByTitleFragmentFullTitleTest() {
+    public void searchByTitleFragmentFullTitleTest() {
         songDao.create(song1A);
         songDao.create(song1B);
-        List<Song> result = songDao.findByTitleFragment("song1");
+        List<Song> result = songDao.searchByTitle("song1");
         
         assertNotNull(result);
         assertEquals(result.size(), 1);
@@ -134,10 +134,10 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test
-    public void findByTitleFragmentPartialTitleTest() {
+    public void searchByTitleFragmentPartialTitleTest() {
         songDao.create(song1A);
         songDao.create(song1B);
-        List<Song> result = songDao.findByTitleFragment("song");
+        List<Song> result = songDao.searchByTitle("song");
         
         assertNotNull(result);
         assertEquals(result.size(), 2);
@@ -146,20 +146,20 @@ public class SongDaoTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test
-    public void findByTitleFragmentEmptyTest() {
+    public void searchByTitleFragmentEmptyTest() {
         songDao.create(song1A);
         songDao.create(song1B);
-        List<Song> result = songDao.findByTitleFragment("");
+        List<Song> result = songDao.searchByTitle("");
         
         assertNotNull(result);
         assertEquals(result.size(), 2);
     }
     
     @Test
-    public void findByTitleFragmentNonMatchingTitleTest() {
+    public void searchByTitleFragmentNonMatchingTitleTest() {
         songDao.create(song1A);
         songDao.create(song1B);
-        List<Song> result = songDao.findByTitleFragment("aaa");
+        List<Song> result = songDao.searchByTitle("aaa");
         
         assertNotNull(result);
         assertEquals(result.size(), 0);

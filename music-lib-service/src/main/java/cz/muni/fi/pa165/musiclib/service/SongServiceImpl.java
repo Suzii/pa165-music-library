@@ -92,7 +92,7 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<Song> findByTitleFragment(String titleFragment){
         try {
-            return songDao.findByTitleFragment(titleFragment);
+            return songDao.searchByTitle(titleFragment);
         } catch (IllegalArgumentException | PersistenceException ex) {
             throw new MusicLibDataAccessException("song findByTitleFragment error", ex);
         }

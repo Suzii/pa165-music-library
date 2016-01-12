@@ -37,7 +37,10 @@ public class SongDaoImpl implements SongDao {
     }
     
     @Override
-    public List<Song> findByTitleFragment(String titleFragment) {
+    public List<Song> searchByTitle(String titleFragment) {
+        if(titleFragment == null) {
+            throw new IllegalArgumentException("titleFragment cannot be null.");
+        }        
         return em.createQuery("SELECT s FROM Song s WHERE UPPER(s.title) LIKE '%'||:titleFragment||'%'", Song.class)
                 .setParameter("titleFragment", titleFragment.toUpperCase())
                 .getResultList();

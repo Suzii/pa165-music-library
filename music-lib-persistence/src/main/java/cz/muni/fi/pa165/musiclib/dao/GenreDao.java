@@ -41,12 +41,12 @@ public interface GenreDao {
     Genre findById(Long id);
 
     /**
-     * Get genres with given name
+     * Returns all genres containing given title fragment in their title
      * 
-     * @param title of genre to be found
-     * @return list of genre with given title
+     * @param titleFragment title fragment of genres to look for
+     * @return list of all genre entities containing given title fragment , empty if no such genre exists
      */
-    List<Genre> findByTitle(String title);
+    List<Genre> searchByTitle(String titleFragment);
 
     /**
      * Get all genres

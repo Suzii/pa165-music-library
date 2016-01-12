@@ -45,12 +45,12 @@ public interface MusicianDao {
     Musician findById(Long id);
     
     /**
-     * Returns all artists according to a given artist name.
+     * Returns all musicians containing given artist name fragment in their name
      * 
-     * @param artistName artist name of the musician
-     * @return list of the artists with given name or empty list if no artist was found
+     * @param artistNameFragment fragment of artist name to look for
+     * @return list of all musician entities containing given artist name fragment, empty if no such musician exists
      */
-    List<Musician> findByArtistName(String artistName);
+    List<Musician> searchByArtistName(String artistNameFragment);
     
     /**
      * Returns all artists which are persisted in the database

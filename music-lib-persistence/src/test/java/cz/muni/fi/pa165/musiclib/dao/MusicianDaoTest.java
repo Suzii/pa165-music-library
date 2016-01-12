@@ -129,22 +129,33 @@ public class MusicianDaoTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test
-    public void findByArtistNameTest() {
+    public void searchByArtistNameTest() {
         musicianDao.create(musician1);
         musicianDao.create(musician2);
         
-        List<Musician> ms = musicianDao.findByArtistName(musician1.getArtistName());
+        List<Musician> ms = musicianDao.searchByArtistName(musician1.getArtistName());
         Assert.assertEquals(ms.size(), 1);
         Assert.assertEquals(ms.get(0), musician1);
         assertDeepEquals(ms.get(0), musician1);
     }
     
     @Test
-    public void findByNonExistingArtistNameTest() {
+    public void searchByNonExistingArtistNameTest() {
         musicianDao.create(musician1);
         musicianDao.create(musician2);
-        List<Musician> ms = musicianDao.findByArtistName("Madonna");
+        List<Musician> ms = musicianDao.searchByArtistName("Madonna");
         Assert.assertEquals(ms.size(), 0);
+    }
+    
+    @Test
+    public void searchByArtistNameFragmentTest() {
+        musicianDao.create(musician1);
+        musicianDao.create(musician2);
+        
+        List<Musician> ms = musicianDao.searchByArtistName(musician1.getArtistName().substring(0, 5));
+        Assert.assertEquals(ms.size(), 1);
+        Assert.assertEquals(ms.get(0), musician1);
+        assertDeepEquals(ms.get(0), musician1);
     }
     
     @Test

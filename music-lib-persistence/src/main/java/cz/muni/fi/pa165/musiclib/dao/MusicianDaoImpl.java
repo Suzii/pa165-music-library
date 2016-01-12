@@ -44,9 +44,12 @@ public class MusicianDaoImpl implements MusicianDao {
     }
 
     @Override   
-    public List<Musician> findByArtistName(String artistName) {
-        return em.createQuery("SELECT m FROM Musician m WHERE m.artistName = :artistName", Musician.class)
-                .setParameter("artistName", artistName).getResultList();
+    public List<Musician> searchByArtistName(String artistNameFragment) {
+        if(artistNameFragment == null) {
+            throw new IllegalArgumentException("artistNameFragment cannot be null.");
+        }
+        return em.createQuery("SELECT m FROM Musician m WHERE UPPER(m.artistName) LIKE '%'||:artistNameFragment||'%'", Musician.class)
+                .setParameter("artistNameFragment", artistNameFragment.toUpperCase()).getResultList();
     }
 
     @Override

@@ -142,8 +142,8 @@ public class GenreServiceTest extends AbstractTestNGSpringContextTests {
         when(genreDao.findById(1L)).thenReturn(genre01);
         when(genreDao.findById(2L)).thenReturn(genre02);
         when(genreDao.findAll()).thenReturn(Arrays.asList(genre01, genre02));
-        when(genreDao.findByTitle("Rock")).thenReturn(Collections.singletonList(genre01));
-        when(genreDao.findByTitle("Pop")).thenReturn(Collections.singletonList(genre02));
+        when(genreDao.searchByTitle("Rock")).thenReturn(Collections.singletonList(genre01));
+        when(genreDao.searchByTitle("Pop")).thenReturn(Collections.singletonList(genre02));
     }
 
     @Test

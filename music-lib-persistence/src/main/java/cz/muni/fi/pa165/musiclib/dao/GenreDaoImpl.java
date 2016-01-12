@@ -41,9 +41,12 @@ public class GenreDaoImpl implements GenreDao {
     }
 
     @Override
-    public List<Genre> findByTitle(String title) {
-        TypedQuery<Genre> q = em.createQuery("SELECT g FROM Genre g WHERE g.title = :title", Genre.class)
-                .setParameter("title", title);
+    public List<Genre> searchByTitle(String titleFragment) {
+        if(titleFragment == null) {
+            throw new IllegalArgumentException("titleFragment");
+        }       
+        TypedQuery<Genre> q = em.createQuery("SELECT g FROM Genre g WHERE UPPER(g.title) LIKE '%'||:titleFragment||'%'", Genre.class)
+                .setParameter("titleFragment", titleFragment.toUpperCase());
         return q.getResultList();
     }
 

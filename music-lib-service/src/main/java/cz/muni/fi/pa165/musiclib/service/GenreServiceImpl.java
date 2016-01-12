@@ -66,7 +66,7 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public List<Genre> findByTitle(String title) {
         try {
-            return genreDao.findByTitle(title);
+            return genreDao.searchByTitle(title);
         } catch (IllegalArgumentException | NullPointerException e) {
             throw new MusicLibDataAccessException("genre findByTitle error", e);
         }

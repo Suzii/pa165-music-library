@@ -248,28 +248,27 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void findByTitleSuccessTest() {
+    public void searchByTitleSuccessTest() {
         albumDao.create(album01);
 
-        List<Album> result = albumDao.findByTitle("The Hobbit: The Desolation of Smaug");
+        List<Album> result = albumDao.searchByTitle("The Hobbit: The Desolation of Smaug");
         assertEquals(result, Collections.singletonList(album01));
     }
 
     @Test
-    public void findByNullTitleTest() {
+    public void searchByInvalidTitleTest() {
         albumDao.create(album01);
-        albumDao.create(album02);
 
-        List<Album> result = albumDao.findByTitle(null);
+        List<Album> result = albumDao.searchByTitle("Star Wars: Episode IV");
         assertEquals(result, Collections.emptyList());
     }
-
+    
     @Test
-    public void findByInvalidTitleTest() {
+    public void searchByTitleFragmentTest() {
         albumDao.create(album01);
 
-        List<Album> result = albumDao.findByTitle("Star Wars: Episode IV");
-        assertEquals(result, Collections.emptyList());
+        List<Album> result = albumDao.searchByTitle("Hobbit");
+        assertEquals(result, Collections.singletonList(album01));
     }
 
     @Test
