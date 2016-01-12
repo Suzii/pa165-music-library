@@ -119,6 +119,22 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         artist = musicians.get("hozier");
         genre = genres.get("rock");
         song("Take me to church", "Totaly crazy about this song", 1, 1, album, artist, genre);
+        
+        album = albums.get("blackSands");
+        artist = musicians.get("bonobo");
+        genre = genres.get("electro");
+        song("Prelude", "", 1, 1, album, artist, genre, "GezIBBJkhME");
+        song("Kiara", "", 2, 1, album, artist, genre, "L-kyRh7N-kE");
+        song("Kong", "", 3, 1, album, artist, genre, "lZbgyKJkHxQ");
+        song("Eyesdown", "", 4, 1, album, artist, genre, "-6bbM5HZz5c");
+        song("We Could Forever", "", 5, 1, album, artist, genre, "urCLo4vNpzs");
+        song("1009", "", 6, 1, album, artist, genre, "2K_2LTLb5tI");
+        song("All in Forms", "", 7, 1, album, artist, genre, "9W-epjHQDZs");
+        song("The Keeper", "", 8, 1, album, artist, genre, "Q7Y4sPkTDbE");
+        song("Stay the Same", "", 9, 1, album, artist, genre, "TsxQQuIrfhQ");
+        song("Animals", "", 10, 1, album, artist, genre, "Q8RzwkyhYCg");
+        song("Black Sands", "", 11, 1, album, artist, genre, "cTjF2_-bneM");
+        
     }
 
     private void createAlbums() throws IOException {
@@ -131,6 +147,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         cal.set(2014, Calendar.FEBRUARY, 15);
         albums.put("hozier", album("Hozier", "", cal.getTime(), readImage("hozier.jpg"), JPEG, new ArrayList<Song>()));
+        
+        cal.set(2010, Calendar.MARCH, 29);
+        albums.put("blackSands", album("Black Sands", "just chill :)", cal.getTime(), readImage("blackSands.jpg"), JPEG, new ArrayList<Song>()));
         
         log.info("Music library albums loaded.");
     }
@@ -145,6 +164,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         cal.set(1990, Calendar.MARCH, 17);
         musicians.put("hozier", musician("Hozier", new ArrayList<Song>(), Sex.FEMALE, cal.getTime()));
+        
+        cal.set(1976, Calendar.MARCH, 30);
+        musicians.put("bonobo", musician("Bonobo", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
         
         log.info("Music library musicians loaded.");
     }
