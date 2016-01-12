@@ -133,7 +133,7 @@ public class AlbumFacadeImpl implements AlbumFacade {
     }
 
     @Override
-    public List<AlbumDTO> getAlbumByTitle(String title) {
+    public List<AlbumDTO> searchAlbumByTitle(String title) {
         List<Album> albums = albumService.searchByTitle(title);
         if (albums == null) {
             throw new NoSuchEntityFoundException("No such album exists");

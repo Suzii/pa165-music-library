@@ -115,7 +115,7 @@ public class GenreFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void findByTitleValidTest() {
-        List<GenreDTO> result = genreFacade.getGenreByTitle(genre01.getTitle());
+        List<GenreDTO> result = genreFacade.searchGenreByTitle(genre01.getTitle());
         assertNotNull(result);
         assertFalse(result.isEmpty());
         assertEquals(genre01.getId(), result.get(0).getId());

@@ -33,12 +33,12 @@ public interface GenreFacade {
     GenreDTO getGenreById(Long id);
 
     /**
-     * Returns list of genres with the given title
+     * Returns list of genres containing given title fragment
      *
      * @param title of searched genre
      * @return list of genres with given title
      */
-    List<GenreDTO> getGenreByTitle(String title);
+    List<GenreDTO> searchGenreByTitle(String title);
 
     /**
      * Changes title of genre

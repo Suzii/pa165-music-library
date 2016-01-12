@@ -45,9 +45,10 @@ public interface SongFacade {
     /**
      * Returns list of all songs matching given criteria.
      * 
+     * @param SongSearchCriteriaDTO search criteria
      * @return list of all songs matching criteria
      */
-    List<SongDTO> search(SongSearchCriteriaDTO songSearchDTO);
+    List<SongDTO> search(SongSearchCriteriaDTO SongSearchCriteriaDTO);
     
     /**
      * Returns the song entity attached to the given id.

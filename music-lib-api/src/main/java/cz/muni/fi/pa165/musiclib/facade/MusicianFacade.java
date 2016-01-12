@@ -53,6 +53,6 @@ public interface MusicianFacade {
      * @return list of all the musicians whose names contain given string
      * @throws IllegalArgumentException if the artist name is null
      */
-    List <MusicianDTO> getMusicianByArtistName (String artistName);
+    List <MusicianDTO> searchMusicianByArtistName (String artistName);
 
 }

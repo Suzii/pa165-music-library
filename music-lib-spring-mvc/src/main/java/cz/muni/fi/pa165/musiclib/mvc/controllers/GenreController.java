@@ -42,7 +42,7 @@ public class GenreController  extends BaseController{
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model, @RequestParam(value = "title", required = false) String title) {
         log.debug("getGenres()");
-        List<GenreDTO> genres = (isNullOrWhiteSpace(title)) ? genreFacade.getAllGenres() : genreFacade.getGenreByTitle(title);
+        List<GenreDTO> genres = (isNullOrWhiteSpace(title)) ? genreFacade.getAllGenres() : genreFacade.searchGenreByTitle(title);
         model.addAttribute("genres", genres);
         
         return "genre/index";

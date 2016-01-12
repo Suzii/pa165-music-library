@@ -43,7 +43,7 @@ public class MusicianController  extends BaseController{
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model, @RequestParam(value = "artistName", required = false) String artistName) {
         log.debug("getMusicians()");   
-        List<MusicianDTO> musicians = (isNullOrWhiteSpace(artistName)) ? musicianFacade.getAllMusicians() : musicianFacade.getMusicianByArtistName(artistName);
+        List<MusicianDTO> musicians = (isNullOrWhiteSpace(artistName)) ? musicianFacade.getAllMusicians() : musicianFacade.searchMusicianByArtistName(artistName);
         model.addAttribute("musicians", musicians);
         return "musician/index";
     }

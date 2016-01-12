@@ -49,7 +49,7 @@ public class AlbumsController {
 
         if (title != null) {
             log.debug("rest getAlbums() with title {}", title);
-            albums = albumFacade.getAlbumByTitle(title);
+            albums = albumFacade.searchAlbumByTitle(title);
         } else {
             log.debug("rest getAlbums()");
             albums = albumFacade.getAllAlbums();

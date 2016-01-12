@@ -57,7 +57,7 @@ public class AlbumController extends BaseController {
     @RequestMapping(value = {"", "/", "/index"}, method = RequestMethod.GET)
     public String index(Model model, @RequestParam(value = "title", required = false) String title) {
         
-        List<AlbumDTO> albums = (isNullOrWhiteSpace(title)) ? albumFacade.getAllAlbums() : albumFacade.getAlbumByTitle(title);
+        List<AlbumDTO> albums = (isNullOrWhiteSpace(title)) ? albumFacade.getAllAlbums() : albumFacade.searchAlbumByTitle(title);
         model.addAttribute("albums", albums);
 
         return "album/index";

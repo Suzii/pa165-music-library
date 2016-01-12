@@ -99,7 +99,7 @@ public class MusicianFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void getByNameTest() {
-        List<MusicianDTO> musician = musicianFacade.getMusicianByArtistName(musician1.getArtistName());
+        List<MusicianDTO> musician = musicianFacade.searchMusicianByArtistName(musician1.getArtistName());
         assertNotNull(musician);
         assertEquals(musician1.getId(), musician.get(0).getId());
     }

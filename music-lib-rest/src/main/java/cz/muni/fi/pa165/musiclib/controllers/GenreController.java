@@ -45,7 +45,7 @@ public class GenreController {
 
         if (title != null) {
             log.debug("rest getGenres() with title {}", title);
-            genres = genreFacade.getGenreByTitle(title);
+            genres = genreFacade.searchGenreByTitle(title);
         } else {
             log.debug("rest getGenres()");
             genres = genreFacade.getAllGenres();

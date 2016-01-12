@@ -184,7 +184,7 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
     
     @Test
     public void getAlbumByTitleTest() {
-        albumFacade.getAlbumByTitle("Title");
+        albumFacade.searchAlbumByTitle("Title");
         verify(albumService).searchByTitle("Title");
     }
 }

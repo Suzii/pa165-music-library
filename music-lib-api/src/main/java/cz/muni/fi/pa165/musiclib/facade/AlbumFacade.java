@@ -76,11 +76,11 @@ public interface AlbumFacade {
     AlbumDTO getAlbumById(Long id);
 
     /**
-     * Return album with given title.
+     * Return albums containing given title fragment
      * 
-     * @param title title of an album to be returned
-     * @return album with given title
+     * @param title title fragment of albums to be returned
+     * @return albums containing given title fragment
      * @throws IllegalArgumentException if the title is null
      */
-    List<AlbumDTO> getAlbumByTitle(String title);
+    List<AlbumDTO> searchAlbumByTitle(String title);
 }

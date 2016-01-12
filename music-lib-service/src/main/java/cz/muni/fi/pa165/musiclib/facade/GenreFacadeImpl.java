@@ -76,7 +76,7 @@ public class GenreFacadeImpl implements GenreFacade {
     }
 
     @Override
-    public List<GenreDTO> getGenreByTitle(String title) {
+    public List<GenreDTO> searchGenreByTitle(String title) {
         List<Genre> genres = genreService.searchByTitle(title);
         if (genres == null) {
             throw new NoSuchEntityFoundException("No such genre exists");
