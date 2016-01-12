@@ -36,6 +36,7 @@
                         <div class="col-sm-10">
                         <form:input path="title" cssClass="form-control"/>
                         <form:errors path="title" cssClass="help-block"/>
+                        <span class="bg-danger"><fmt:message key="genres.unique_name_warning"/></span>
                     </div>
                 </div>
 
