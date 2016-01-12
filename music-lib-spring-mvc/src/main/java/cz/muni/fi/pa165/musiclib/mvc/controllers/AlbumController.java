@@ -115,29 +115,13 @@ public class AlbumController extends BaseController {
     public String detail(@PathVariable long id, Model model) {
 
         AlbumDTO albumDTO = albumFacade.getAlbumById(id);
-
         model.addAttribute("album", albumDTO);
-        return "album/detail";
-    }
-
-    /**
-     * Lists all songs associated with album.
-     *
-     * @param albumId
-     * @param model
-     * @return
-     */
-    @RequestMapping(value = {"/songs/{albumId}"}, method = RequestMethod.GET)
-    public String songs(@PathVariable long albumId, Model model) {
-
-        AlbumDTO albumDTO = albumFacade.getAlbumById(albumId);
-        model.addAttribute("album", albumDTO);
-
-        List<SongDTO> songs = songFacade.findByAlbum(albumId);
+        
+        List<SongDTO> songs = songFacade.findByAlbum(id);
         Collections.sort(songs, new SongPositionInAlbumComparator());
         model.addAttribute("songs", songs);
-
-        return "album/albumSongs";
+        
+        return "album/detail";
     }
 
     @RequestMapping(value = {"/update/{id}"}, method = RequestMethod.GET)
