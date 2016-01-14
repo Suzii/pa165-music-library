@@ -42,22 +42,28 @@
                     <dd>${album.albumArtMimeType}</dd>
                 </div>
                 <div class="col-md-3">
-                    <dt><fmt:message key="albums.songs"/></dt>
-                    <dd><a class="btn btn-mg btn-primary"
+                    <div class="allow-vertical-space">
+                        <a class="btn btn-md btn-primary"
                            href="${pageContext.request.contextPath}/album/songs/${album.id}"
                            role="button">
                             <fmt:message key="albums.songList"/>
                         </a>
-                    </dd>
+                    </div>
 
                     <c:if test="${isAdmin}">
-                        <dt><fmt:message key="albums.albumArt"/></dt>
-                        <dd><a class="btn btn-mg btn-primary"
+                        <div class="allow-vertical-space">
+                            <a class="btn btn-md btn-primary"
                                href="${pageContext.request.contextPath}/album/changeImage/${album.id}"
                                role="button">
                                 <fmt:message key="albums.changeImage"/>
                             </a>
-                        </dd>
+                        </div>
+                        
+                        <div >
+                            <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/create?albumId=${album.id}" role="button">
+                                <fmt:message key="albums.add_song"/>
+                            </a>
+                        </div>
                     </c:if>
                 </div>
             </div>
