@@ -134,7 +134,24 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         song("Stay the Same", "", 9, 1, album, artist, genre, "TsxQQuIrfhQ");
         song("Animals", "", 10, 1, album, artist, genre, "Q8RzwkyhYCg");
         song("Black Sands", "", 11, 1, album, artist, genre, "cTjF2_-bneM");
-        
+
+
+        album = albums.get("electTheDead");
+        artist = musicians.get("serjTankian");
+        genre = genres.get("metal");
+        song("Empty Walls", "2-track promo", 1, 1, album, artist, genre, "-CxKA1uETxE");
+        song("The Unthinking Majority", "2-track promo", 2, 1, album, artist, genre, "WQeRG72E3OM");
+        song("Money", "", 3, 1, album, artist, genre, "51jYvbcrHKs");
+        song("Feed Us", "", 4, 1, album, artist, genre, "TOxnuQlF0d0");
+        song("Saving Us", "", 5, 1, album, artist, genre, "9Wk38bW8whc");
+        song("Sky Is Over", "", 6, 1, album, artist, genre, "GY9kQcWLvEM");
+        song("Baby", "", 7, 1, album, artist, genre, "P-6FLQliz84");
+        song("Honking Antelope", "", 8, 1, album, artist, genre, "XLTUOYEvddw");
+        song("Lie Lie Lie", "", 9, 1, album, artist, genre, "TkPbJIlEXow");
+        song("Praise the Lord and Pass the Ammunition", "", 10, 1, album, artist, genre, "buX2OoPrJvc");
+        song("Beethoven's Cunt", "", 11, 1, album, artist, genre, "9FPm1aDLmWA");
+        song("Elect the Dead", "", 12, 1, album, artist, genre, "PX1qZ6seZUQ");
+
     }
 
     private void createAlbums() throws IOException {
@@ -150,6 +167,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         cal.set(2010, Calendar.MARCH, 29);
         albums.put("blackSands", album("Black Sands", "just chill :)", cal.getTime(), readImage("blackSands.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(2007, Calendar.OCTOBER, 22);
+        albums.put("electTheDead", album("Elect the Dead", "debut album", cal.getTime(), readImage("electTheDead.jpg"), JPEG, new ArrayList<Song>()));
         
         log.info("Music library albums loaded.");
     }
@@ -167,6 +187,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         cal.set(1976, Calendar.MARCH, 30);
         musicians.put("bonobo", musician("Bonobo", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
+
+        cal.set(1967, Calendar.AUGUST, 21);
+        musicians.put("serjTankian", musician("Serj Tankian", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
         
         log.info("Music library musicians loaded.");
     }
