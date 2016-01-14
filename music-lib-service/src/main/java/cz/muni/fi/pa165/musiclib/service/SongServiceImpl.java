@@ -25,7 +25,7 @@ public class SongServiceImpl implements SongService {
     @Inject
     private SongDao songDao;
 
-    @Inject // TODO not resolved by IoC
+    @Inject
     private AlbumService albumService;
 
     @Override
@@ -38,9 +38,7 @@ public class SongServiceImpl implements SongService {
             song.setPositionInAlbum(getFirstFreePositionInAlbum(song));
             songDao.create(song);
             if (song.getAlbum() != null) {
-                //albumService.addSong(song.getAlbum(), song);
-                // TODO temporary fix, until problem with resoving AlbumService dependency is fixed
-                song.setAlbum(song.getAlbum());
+                albumService.addSong(song.getAlbum(), song);
             }
         } catch (MusicLibServiceException ex) {
             song.setAlbum(null);
@@ -63,9 +61,7 @@ public class SongServiceImpl implements SongService {
             } else if (song.getPositionInAlbum() == 0) {
                 int newPosition = getFirstFreePositionInAlbum(song);
                 song.setPositionInAlbum(newPosition);
-                //albumService.addSong(song.getAlbum(), song);
-                // TODO temporary fix, until problem with resoving AlbumService dependency is fixed
-                song.setAlbum(song.getAlbum());
+                albumService.addSong(song.getAlbum(), song);
             } else if (!isDesiredPositionFreeOnAlbum(song)) {
                 throw new MusicLibServiceException("position on album is not free");
             }

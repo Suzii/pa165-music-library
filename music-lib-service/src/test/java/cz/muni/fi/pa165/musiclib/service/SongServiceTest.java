@@ -63,6 +63,9 @@ public class SongServiceTest extends AbstractTestNGSpringContextTests{
 
     @Mock
     public AlbumDao albumDao;
+
+    @Mock
+    public AlbumService albumService;
     
     @InjectMocks
     private SongService songService = new SongServiceImpl();

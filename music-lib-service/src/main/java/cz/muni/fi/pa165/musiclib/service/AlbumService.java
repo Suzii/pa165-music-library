@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.musiclib.service;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @author Martin Stefanko (mstefank@redhat.com)
  * @version 21/11/2015
  */
+@Service
 public interface AlbumService {
     
     /**
