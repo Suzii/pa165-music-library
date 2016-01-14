@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.musiclib.service;
 
-import cz.muni.fi.pa165.musiclib.dao.AlbumDao;
 import cz.muni.fi.pa165.musiclib.dao.SongDao;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
@@ -35,11 +34,12 @@ public class SongServiceImpl implements SongService {
         }
 
         try {
-            song.setPositionInAlbum(getFirstFreePositionInAlbum(song));
-            songDao.create(song);
-            if (song.getAlbum() != null) {
-                albumService.addSong(song.getAlbum(), song);
+            if (song.getAlbum() == null) {
+                song.setPositionInAlbum(0);
+            } else {
+                song.setPositionInAlbum(getFirstFreePositionInAlbum(song));
             }
+            songDao.create(song);
         } catch (MusicLibServiceException ex) {
             song.setAlbum(null);
             song.setPositionInAlbum(0);
@@ -61,9 +61,8 @@ public class SongServiceImpl implements SongService {
             } else if (song.getPositionInAlbum() == 0) {
                 int newPosition = getFirstFreePositionInAlbum(song);
                 song.setPositionInAlbum(newPosition);
-                albumService.addSong(song.getAlbum(), song);
             } else if (!isDesiredPositionFreeOnAlbum(song)) {
-                throw new MusicLibServiceException("position on album is not free");
+                throw new MusicLibServiceException("Position on album is not free");
             }
             
             return songDao.update(song);
