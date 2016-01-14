@@ -110,38 +110,12 @@ public class AlbumServiceImpl implements AlbumService {
             throw new MusicLibServiceException("musician of song cannot be null");
         }
 
-        //business method #1
-        List<Song> currSongs = album.getSongs();
-        Map<Genre, Integer> genreCountMap = new HashMap<>();
-
-        for (Song s : currSongs) {
-            if (!genreCountMap.containsKey(s.getGenre())) {
-                genreCountMap.put(s.getGenre(), 1);
-            } else {
-                Genre key = s.getGenre();
-                genreCountMap.put(key, genreCountMap.get(key) + 1);
-            }
-        }
-
-        if(!genreCountMap.isEmpty()) {
-            Genre majorAlbumGenre = null;
-            for (Map.Entry<Genre, Integer> entry : genreCountMap.entrySet()) {
-                if (majorAlbumGenre == null) {
-                    majorAlbumGenre = entry.getKey();
-                } else {
-                    if (entry.getValue() > genreCountMap.get(majorAlbumGenre)) {
-                        majorAlbumGenre = entry.getKey();
-                    }
-                }
-            }
-
-            //compare if the song is suitable for this album
-            double albumMajorGenreRatio = (double)genreCountMap.get(majorAlbumGenre) / (currSongs.size() + 1);
-            if (!song.getGenre().equals(majorAlbumGenre) && albumMajorGenreRatio < 0.4) {
-                throw new MusicLibServiceException("Cannot add song to album, album contains majority "
-                    + "of songs in different genre");
-            }
-        }
+        //compare if the song is suitable for this album
+//        double albumMajorGenreRatio = (double)genreCountMap.get(majorAlbumGenre) / (currSongs.size() + 1);
+//        if (!song.getGenre().equals(majorAlbumGenre) && albumMajorGenreRatio < 0.4) {
+//            throw new MusicLibServiceException("Cannot add song to album, album contains majority "
+//                    + "of songs in different genre");
+//        }
         
         if (album.getSongs().contains(song)) {
             throw new MusicLibServiceException("Album already contains this song; Album: "
@@ -166,5 +140,60 @@ public class AlbumServiceImpl implements AlbumService {
         }
         album.removeSong(song);
         song.setAlbum(null);
+    }
+
+    @Override
+    public GenreResult getMajorGanreForAlbum(Album album) {
+        //business method #1
+        List<Song> currSongs = album.getSongs();
+        Map<Genre, Integer> genreCountMap = new HashMap<>();
+
+        for (Song s : currSongs) {
+            if (!genreCountMap.containsKey(s.getGenre())) {
+                genreCountMap.put(s.getGenre(), 1);
+            } else {
+                Genre key = s.getGenre();
+                genreCountMap.put(key, genreCountMap.get(key) + 1);
+            }
+        }
+
+        GenreResult result = new GenreResult();
+
+        if(!genreCountMap.isEmpty()) {
+            for (Map.Entry<Genre, Integer> entry : genreCountMap.entrySet()) {
+                if (result.getGenre() == null) {
+                    result.setGenre(entry.getKey());
+                } else {
+                    if (entry.getValue() > genreCountMap.get(result.getGenre())) {
+                        result.setGenre(entry.getKey());
+                    }
+                }
+            }
+
+            result.setPercentage((double)genreCountMap.get(result.getGenre()) / (currSongs.size() + 1));
+        }
+
+        return result;
+    }
+
+    public class GenreResult {
+        private Genre genre;
+        private double percentage;
+
+        public Genre getGenre() {
+            return genre;
+        }
+
+        public void setGenre(Genre genre) {
+            this.genre = genre;
+        }
+
+        public double getPercentage() {
+            return percentage;
+        }
+
+        public void setPercentage(double percentage) {
+            this.percentage = percentage;
+        }
     }
 }

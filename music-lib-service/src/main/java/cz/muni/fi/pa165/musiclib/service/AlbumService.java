@@ -80,4 +80,12 @@ public interface AlbumService {
      * @param song song to be removed
      */
     void removeSong(Album album, Song song);
+
+    /**
+     * Retrieves the major genre in given album and computes its percentage membership
+     *
+     * @param album album to be examined
+     * @return GenreResult containing actual result
+     */
+    AlbumServiceImpl.GenreResult getMajorGanreForAlbum(Album album);
 }
