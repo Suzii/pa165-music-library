@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.musiclib.mvc.controllers;
 
 import cz.muni.fi.pa165.musiclib.dto.AlbumChangeAlbumArtDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
+import cz.muni.fi.pa165.musiclib.dto.MajorAlbumGenreDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
@@ -121,6 +122,9 @@ public class AlbumController extends BaseController {
         List<SongDTO> songs = songFacade.findByAlbum(id);
         Collections.sort(songs, new SongPositionInAlbumComparator());
         model.addAttribute("songs", songs);
+        
+        MajorAlbumGenreDTO majorGenre = albumFacade.getMajorGanreForAlbum(id);
+        model.addAttribute("majorGenre", majorGenre);
         
         return "album/detail";
     }

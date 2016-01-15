@@ -38,16 +38,14 @@
                     <dt><fmt:message key="albums.dateOfRelease"/></dt>
                     <dd><fmt:formatDate value="${album.dateOfRelease}" type="date" dateStyle="medium"/></dd>
 
-                    <dt><fmt:message key="albums.mimeType"/></dt>
-                    <dd>${album.albumArtMimeType}</dd>
+                    <dt>Major genre</dt>
+                    <dd>${majorGenre.genre.title} (<fmt:formatNumber value="${majorGenre.percentage}" type="PERCENT" />)</dd>
                 </div>
+
                 <div class="col-md-3">
                     <div class="allow-vertical-space">
-                        <a class="btn btn-md btn-primary"
-                           href="${pageContext.request.contextPath}/album/songs/${album.id}"
-                           role="button">
-                            <fmt:message key="albums.songList"/>
-                        </a>
+                        <dt><fmt:message key="albums.mimeType"/></dt>
+                        <dd>${album.albumArtMimeType}</dd>
                     </div>
 
                     <c:if test="${isAdmin}">
@@ -58,7 +56,7 @@
                                 <fmt:message key="albums.changeImage"/>
                             </a>
                         </div>
-                        
+
                         <div >
                             <a class="btn btn-lg btn-success" href="${pageContext.request.contextPath}/song/create?albumId=${album.id}" role="button">
                                 <fmt:message key="albums.add_song"/>

@@ -170,7 +170,7 @@ public class AlbumServiceImpl implements AlbumService {
                 }
             }
 
-            result.setPercentage((double)genreCountMap.get(result.getGenre()) / (currSongs.size() + 1));
+            result.setPercentage((double)genreCountMap.get(result.getGenre()) / (currSongs.size()s));
         }
 
         return result;

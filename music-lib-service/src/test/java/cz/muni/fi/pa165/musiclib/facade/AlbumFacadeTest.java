@@ -187,4 +187,10 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
         albumFacade.searchAlbumByTitle("Title");
         verify(albumService).searchByTitle("Title");
     }
+    
+    @Test
+    public void getMajorGenreForAlbum() {
+        albumFacade.getMajorGanreForAlbum(1l);
+        verify(albumService).getMajorGanreForAlbum(any(Album.class));
+    }
 }
