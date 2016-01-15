@@ -87,5 +87,5 @@ public interface AlbumService {
      * @param album album to be examined
      * @return GenreResult containing actual result
      */
-    AlbumServiceImpl.GenreResult getMajorGanreForAlbum(Album album);
+    AlbumServiceImpl.GenreResult getMajorGenreForAlbum(Album album);
 }

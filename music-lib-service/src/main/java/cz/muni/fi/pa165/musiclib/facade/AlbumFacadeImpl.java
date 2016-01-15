@@ -151,7 +151,7 @@ public class AlbumFacadeImpl implements AlbumFacade {
         }
         
         return beanMappingService.mapTo(
-                albumService.getMajorGanreForAlbum(album), 
+                albumService.getMajorGenreForAlbum(album), 
                 MajorAlbumGenreDTO.class);
     }
 }

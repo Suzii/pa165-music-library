@@ -143,7 +143,7 @@ public class AlbumServiceImpl implements AlbumService {
     }
 
     @Override
-    public GenreResult getMajorGanreForAlbum(Album album) {
+    public GenreResult getMajorGenreForAlbum(Album album) {
         //business method #1
         List<Song> currSongs = album.getSongs();
         Map<Genre, Integer> genreCountMap = new HashMap<>();
@@ -170,7 +170,7 @@ public class AlbumServiceImpl implements AlbumService {
                 }
             }
 
-            result.setPercentage((double)genreCountMap.get(result.getGenre()) / (currSongs.size()s));
+            result.setPercentage((double)genreCountMap.get(result.getGenre()) / (currSongs.size()));
         }
 
         return result;
