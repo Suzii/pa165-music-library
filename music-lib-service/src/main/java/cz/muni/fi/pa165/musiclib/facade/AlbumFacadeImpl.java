@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.musiclib.facade;
 import cz.muni.fi.pa165.musiclib.dto.AlbumChangeAlbumArtDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumNewTitleDTO;
+import cz.muni.fi.pa165.musiclib.dto.MajorAlbumGenreDTO;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
@@ -140,5 +141,17 @@ public class AlbumFacadeImpl implements AlbumFacade {
         }
 
         return beanMappingService.mapTo(albums, AlbumDTO.class);
+    }
+
+    @Override
+    public MajorAlbumGenreDTO getMajorGanreForAlbum(Long albumId) {
+        Album album = albumService.findById(albumId);
+        if (album == null) {
+            throw new NoSuchEntityFoundException("No such album exists");
+        }
+        
+        return beanMappingService.mapTo(
+                albumService.getMajorGanreForAlbum(album), 
+                MajorAlbumGenreDTO.class);
     }
 }

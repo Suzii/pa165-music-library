@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.musiclib.facade;
 import cz.muni.fi.pa165.musiclib.dto.AlbumChangeAlbumArtDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumNewTitleDTO;
+import cz.muni.fi.pa165.musiclib.dto.MajorAlbumGenreDTO;
 
 import java.util.List;
 
@@ -83,4 +84,12 @@ public interface AlbumFacade {
      * @throws IllegalArgumentException if the title is null
      */
     List<AlbumDTO> searchAlbumByTitle(String title);
+    
+    /**
+     * Retrieves the major genre in given album and computes its percentage membership
+     *
+     * @param albumId id of album to be examined
+     * @return MajorAlbumGenreDTO containing actual result
+     */
+    MajorAlbumGenreDTO getMajorGanreForAlbum(Long albumId);
 }

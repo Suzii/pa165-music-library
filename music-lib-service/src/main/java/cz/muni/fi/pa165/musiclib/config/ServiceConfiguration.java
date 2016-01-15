@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.musiclib.config;
 import cz.muni.fi.pa165.musiclib.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
 import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
+import cz.muni.fi.pa165.musiclib.dto.MajorAlbumGenreDTO;
 import cz.muni.fi.pa165.musiclib.dto.MusicianDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import cz.muni.fi.pa165.musiclib.dto.UserDTO;
@@ -12,6 +13,8 @@ import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.entity.User;
 import cz.muni.fi.pa165.musiclib.facade.UserFacadeImpl;
+import cz.muni.fi.pa165.musiclib.service.AlbumService;
+import cz.muni.fi.pa165.musiclib.service.AlbumServiceImpl;
 import cz.muni.fi.pa165.musiclib.service.GenreService;
 import cz.muni.fi.pa165.musiclib.service.GenreServiceImpl;
 import org.dozer.DozerBeanMapper;
@@ -48,6 +51,7 @@ public class ServiceConfiguration {
             mapping(Musician.class, MusicianDTO.class);
             mapping(Genre.class, GenreDTO.class);
             mapping(User.class, UserDTO.class);
+            mapping(AlbumServiceImpl.GenreResult.class, MajorAlbumGenreDTO.class);
         }
     }
 }
