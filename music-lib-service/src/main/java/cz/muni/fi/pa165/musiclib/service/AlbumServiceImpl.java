@@ -180,7 +180,7 @@ public class AlbumServiceImpl implements AlbumService {
         return result;
     }
 
-    public class GenreResult {
+    public static class GenreResult {
         private Genre genre;
         private double percentage;
 

@@ -132,7 +132,7 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
         
     @Test
     public void removeSongTest() {
-        album1.setSongs(Arrays.asList(song1A,song1B));
+        album1.setSongs(Arrays.asList(song1A, song1B));
         albumFacade.removeSong(album1.getId(), song1A.getId());
         verify(albumService).removeSong(album1, song1A);
     }
@@ -189,10 +189,9 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test
-    public void getMajorGenreForAlbum() {
-        // TODO 
-//        when(albumService.getMajorGenreForAlbum(any(Album.class))).thenReturn( ... TODO instantiate GenreResult);
-//        albumFacade.getMajorGanreForAlbum(1l);
-//        verify(albumService).getMajorGenreForAlbum(any(Album.class));
+    public void getMajorGenreForAlbumTest() {
+        when(albumService.getMajorGenreForAlbum(any(Album.class))).thenReturn(new AlbumServiceImpl.GenreResult());
+        albumFacade.getMajorGanreForAlbum(1l);
+        verify(albumService).getMajorGenreForAlbum(any(Album.class));
     }
 }
