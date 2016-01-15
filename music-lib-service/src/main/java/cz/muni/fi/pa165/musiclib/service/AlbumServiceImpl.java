@@ -145,6 +145,10 @@ public class AlbumServiceImpl implements AlbumService {
     @Override
     public GenreResult getMajorGenreForAlbum(Album album) {
         //business method #1
+        if (album == null) {
+            throw new IllegalArgumentException("Album cannot be null");
+        }
+
         List<Song> currSongs = album.getSongs();
         Map<Genre, Integer> genreCountMap = new HashMap<>();
 

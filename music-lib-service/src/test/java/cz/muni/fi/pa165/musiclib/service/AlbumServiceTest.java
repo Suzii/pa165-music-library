@@ -406,7 +406,6 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         assertEquals(okSong.getAlbum(), album1);
     }
 
-    //TODO
     // 3 : 1 should allow to add song that results in 75% ratio for majority genre
     @Test
     public void addSongWithMinorityGenreGenreTest() {
@@ -465,6 +464,42 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
     public void addSongSongMusicianNullSongNullTest() {
         song2A.setMusician(null);
         albumService.addSong(album1, song2A);
+    }
+
+    //business method tests
+    @Test
+    public void getMajorGenreForAlbumValidTest() {
+        AlbumServiceImpl.GenreResult result = albumService.getMajorGenreForAlbum(album1);
+        assertGenreResult(result, genrePop, 1);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void getMajorGenreForAlbumNullTest() {
+        albumService.getMajorGenreForAlbum(null);
+    }
+
+    @Test
+    public void getMajorGenreForAlbumPercentageTest() {
+        album1.addSong(songBuilder.title("Foo").genre(genreFolk).build());
+        AlbumServiceImpl.GenreResult result = albumService.getMajorGenreForAlbum(album1);
+        assertGenreResult(result, genrePop, 2.0 / 3);
+    }
+
+    @Test
+    public void getMajorGenreForAlbumNoSongsTest() {
+        Album album = albumBuilder.title("Foo").build();
+        AlbumServiceImpl.GenreResult result = albumService.getMajorGenreForAlbum(album);
+        assertNotNull(result);
+        assertNull(result.getGenre());
+        assertEquals(result.getPercentage(), 0.0);
+    }
+
+    private void assertGenreResult(AlbumServiceImpl.GenreResult result, Genre genre, double percentage) {
+        assertNotNull(result);
+        assertNotNull(result.getGenre());
+        assertEquals(result.getGenre(), genre);
+        assertNotNull(result.getPercentage());
+        assertEquals(Double.compare(percentage, result.getPercentage()), 0);
     }
     
     private void assertDeepEquals(Album album01, Album album02) {
