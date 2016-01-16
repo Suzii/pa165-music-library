@@ -55,9 +55,9 @@
         <module>music-lib-persistence</module>
         <module>music-lib-api</module>
         <module>music-lib-service</module>
-        <module>music-lib-spring-mvc</module>
         <module>music-lib-rest</module>
         <module>music-lib-sample-data</module>
+        <module>web</module>
     </modules>
 
     <dependencies>
