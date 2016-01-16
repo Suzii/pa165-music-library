@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 
 /**
  * @author Zuzana Dankovcikova
- * @version 16/11/2015
+ * @version 15/11/16
  */
 public class AlbumDTO {
     

@@ -3,12 +3,11 @@ package cz.muni.fi.pa165.musiclib.facade;
 import cz.muni.fi.pa165.musiclib.dto.UserAuthenticationDTO;
 import cz.muni.fi.pa165.musiclib.dto.UserDTO;
 
-import java.util.Collection;
 import java.util.List;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 11/21/15
+ * @author Martin Stefanko
+ * @version 15/21/11
  */
 public interface UserFacade {
 

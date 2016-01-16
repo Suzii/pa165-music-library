@@ -2,13 +2,13 @@ package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.dto.AlbumChangeAlbumArtDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
-import cz.muni.fi.pa165.musiclib.dto.AlbumNewTitleDTO;
 import cz.muni.fi.pa165.musiclib.dto.MajorAlbumGenreDTO;
 
 import java.util.List;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
+ * @author Martin Stefanko
+ * @version 15/21/11
  */
 public interface AlbumFacade {
     

@@ -4,7 +4,7 @@ package cz.muni.fi.pa165.musiclib.exception;
  * Exception thrown when user tries to access page by entering non existing id.
  *
  * @author Zuzana Dankovcikova
- * @version 12/12/2015
+ * @version 15/12/12
  */
 public class NoSuchEntityFoundException extends RuntimeException {
 

@@ -4,8 +4,8 @@ import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import java.util.Comparator;
 
 /**
- *
  * @author Zuzana Dankovcikova
+ * @version 15/11/21
  */
 public class SongPositionInAlbumComparator implements Comparator<SongDTO> {
 

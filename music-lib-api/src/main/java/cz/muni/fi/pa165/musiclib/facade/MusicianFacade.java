@@ -4,7 +4,8 @@ import cz.muni.fi.pa165.musiclib.dto.MusicianDTO;
 import java.util.List;
 
 /**
- * @author xseman
+ * @author Milan Seman
+ * @version 15/11/21
  */
 public interface MusicianFacade {
     

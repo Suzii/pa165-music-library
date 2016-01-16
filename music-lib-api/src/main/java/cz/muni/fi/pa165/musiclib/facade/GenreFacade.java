@@ -4,7 +4,8 @@ import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
 import java.util.List;
 
 /**
- * @author David
+ * @author David Boron
+ * @version 15/11/21
  */
 public interface GenreFacade {
 

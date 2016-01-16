@@ -4,8 +4,8 @@ import java.util.Arrays;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 11/21/15
+ * @author Martin Stefanko
+ * @version 15/11/21
  */
 public class AlbumChangeAlbumArtDTO {
 

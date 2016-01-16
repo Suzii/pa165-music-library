@@ -8,8 +8,8 @@ import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
 import java.util.List;
 
 /**
- * @author zdankovc
- * @version 22/11/2015
+ * @author Zuzana Dankovcikova
+ * @version 15/11/22
  */
 public interface SongFacade {
     /**

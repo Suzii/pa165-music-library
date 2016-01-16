@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
- *
  * @author Zuzana Dankovcikova
+ * @version 15/11/16
  */
 public class SongAddYoutubeLinkDTO {
     

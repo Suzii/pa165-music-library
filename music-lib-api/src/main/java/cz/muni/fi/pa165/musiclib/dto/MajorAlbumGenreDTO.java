@@ -6,8 +6,8 @@
 package cz.muni.fi.pa165.musiclib.dto;
 
 /**
- *
- * @author zdank
+ * @author Zuzana Dankovcikova
+ * @version 15/11/16
  */
 public class MajorAlbumGenreDTO {
 

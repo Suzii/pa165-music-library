@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.musiclib.dto;
 
 /**
- *
  * @author Zuzana Dankovcikova
+ * @version 15/11/16
  */
 public class SongSearchCriteriaDTO {
     

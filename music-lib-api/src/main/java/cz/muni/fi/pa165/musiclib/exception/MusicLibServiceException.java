@@ -1,7 +1,8 @@
 package cz.muni.fi.pa165.musiclib.exception;
 
 /**
- * @author Martin Stefanko (mstefank@redhat.com)
+ * @author Martin Stefanko
+ * @version 15/12/12
  */
 public class MusicLibServiceException extends RuntimeException {
 
