@@ -152,6 +152,213 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         song("Beethoven's Cunt", "", 11, 1, album, artist, genre, "9FPm1aDLmWA");
         song("Elect the Dead", "", 12, 1, album, artist, genre, "PX1qZ6seZUQ");
 
+        
+        album = albums.get("encore");
+        artist = musicians.get("eminem");
+        genre = genres.get("rap");
+        song("Curtains Up", "", 1, 1, album, artist, genre, "");
+        song("Evil Deeds", "", 2, 1, album, artist, genre, "");
+        song("Never Enough", "", 3, 1, album, artist, genre, "");
+        song("Yellow Brick Road", "", 4, 1, album, artist, genre, "");
+        song("Like Toy Soldiers", "", 5, 1, album, artist, genre, "");
+        song("Mosh", "", 6, 1, album, artist, genre, "");
+        song("Puke", "", 7, 1, album, artist, genre, "");
+        song("My 1st Single", "", 8, 1, album, artist, genre, "");
+        song("Paul", "", 9, 1, album, artist, genre, "");
+        song("Rain Man", "", 10, 1, album, artist, genre, "");
+        song("Big Weenie", "", 11, 1, album, artist, genre, "");
+        song("Em Calls Paul", "", 12, 1, album, artist, genre, "");
+        song("Just Lose It", "", 13, 1, album, artist, genre, "");
+        song("Ass Like That", "", 14, 1, album, artist, genre, "");
+        song("Spend Some Time", "", 15, 1, album, artist, genre, "");
+        song("Mockingbird", "", 16, 1, album, artist, genre, "");
+        song("Crazy in Love", "", 17, 1, album, artist, genre, "");
+        song("One Shot 2 Shot", "", 18, 1, album, artist, genre, "");
+        song("Final Thought", "", 19, 1, album, artist, genre, "");
+        song("Encore / Curtains Down", "", 20, 1, album, artist, genre, "");
+        
+        
+        album = albums.get("relapse");
+        artist = musicians.get("eminem");
+        genre = genres.get("rap");
+        song("Dr. West (Skit) (feat. Dominic West)", "",  1 , 1, album, artist, genre, "");
+        song("3 a.m.", "",  2 , 1, album, artist, genre, "");
+        song("My Mom", "",  3 , 1, album, artist, genre, "");
+        song("Insane", "",  4 , 1, album, artist, genre, "");
+        song("Bagpipes From Baghdad", "",  5 , 1, album, artist, genre, "");
+        song("Hello", "",  6 , 1, album, artist, genre, "");
+        song("Tonya (Skit) (feat. Elizabeth Keener)", "",  7 , 1, album, artist, genre, "");
+        song("Same Song & Dance", "",  8 , 1, album, artist, genre, "");
+        song("We Made You (feat. Charmagne Tripp)", "",  9 , 1, album, artist, genre, "");
+        song("Medicine Ball", "",  10, 1, album, artist, genre, "");
+        song("Paul (Skit) (feat. Paul Rosenberg)", "",  11, 1, album, artist, genre, "");
+        song("Stay Wide Awake", "",  12, 1, album, artist, genre, "");
+        song("Old Time's Sake (feat. Dr. Dre)", "",  13, 1, album, artist, genre, "");
+        song("Must Be The Ganja", "",  14, 1, album, artist, genre, "");
+        song("Mr. Mathers (Skit) (feat. Elizabeth Keener & Matthew St. Patrick)", "", 15, 1, album, artist, genre, "");
+        song("Déjà Vu", "",  16, 1, album, artist, genre, "");
+        song("Beautiful", "",  17, 1, album, artist, genre, "");
+        song("Crack A Bottle (feat. Dr. Dre & 50 Cent)", "",  18, 1, album, artist, genre, "");
+        song("Steve Berman (Skit) (feat. Steve Berman & Angela Yee)", "",  19, 1, album, artist, genre, "");
+        song("Underground/Ken Kaniff", "",  20, 1, album, artist, genre, "");
+        song("My Darling (Deluxe Edition Bonus Track)", "",  21, 1, album, artist, genre, "");
+        song("Careful What You Wish For (Deluxe Edition Bonus Track)", "",  22, 1, album, artist, genre, "");
+        
+        
+        album = albums.get("recovery");
+        artist = musicians.get("eminem");
+        genre = genres.get("rap");
+        song("Cold Wind Blows", "", 1 , 1, album, artist, genre, "");
+        song("Talkin' 2 Myself (feat. Kobe)", "", 2 , 1, album, artist, genre, "");
+        song("On Fire", "", 3 , 1, album, artist, genre, "");
+        song("Won't Back Down (feat. Pink)", "", 4 , 1, album, artist, genre, "");
+        song("W.T.P. (White Trash Party)", "", 5 , 1, album, artist, genre, "");
+        song("Going Through Changes", "", 6 , 1, album, artist, genre, "");
+        song("Not Afraid", "", 7 , 1, album, artist, genre, "");
+        song("Seduction", "", 8 , 1, album, artist, genre, "");
+        song("No Love (feat. Lil Wayne)", "", 9 , 1, album, artist, genre, "");
+        song("Space Bound", "", 10, 1, album, artist, genre, "");
+        song("Cinderella Man", "", 11, 1, album, artist, genre, "");
+        song("25 to Life", "", 12, 1, album, artist, genre, "");
+        song("So Bad", "", 13, 1, album, artist, genre, "");
+        song("Almost Famous", "", 14, 1, album, artist, genre, "");
+        song("Love the Way You Lie", "", 15, 1, album, artist, genre, "");
+        song("You're Never Over", "", 16, 1, album, artist, genre, "");
+        song("Untitled (Hidden Track)", "", 17, 1, album, artist, genre, "");
+        
+        
+        album = albums.get("cheese");
+        artist = musicians.get("stromae");
+        genre = genres.get("electro");
+        song("Bienvenue chez moi ", "", 1 , 1, album, artist, genre, "");
+        song("Te Quiero ", "", 2 , 1, album, artist, genre, "");
+        song("Peace or Violence ", "", 3 , 1, album, artist, genre, "");
+        song("Rail de musique ", "", 4 , 1, album, artist, genre, "");
+        song("Alors on danse ", "", 5 , 1, album, artist, genre, "");
+        song("Summertime ", "", 6 , 1, album, artist, genre, "");
+        song("Dodo ", "", 7 , 1, album, artist, genre, "");
+        song("Silence ", "", 8 , 1, album, artist, genre, "");
+        song("Je Cours ", "", 9 , 1, album, artist, genre, "");
+        song("House'llelujah ", "", 10, 1, album, artist, genre, "");
+        song("Cheese ", "", 11, 1, album, artist, genre, "");
+        
+        
+        album = albums.get("racineCarree");
+        artist = musicians.get("stromae");
+        genre = genres.get("electro");
+        song("Ta fête", "", 1 , 1, album, artist, genre, "");
+        song("Papaoutai", "", 2 , 1, album, artist, genre, "");
+        song("Bâtard 	", "", 3 , 1, album, artist, genre, "");
+        song("Ave Cesaria 	", "", 4 , 1, album, artist, genre, "");
+        song("Tous les mêmes 	", "", 5 , 1, album, artist, genre, "");
+        song("Formidable 	", "", 6 , 1, album, artist, genre, "");
+        song("Moules frites 	", "", 7 , 1, album, artist, genre, "");
+        song("Carmen 	", "", 8 , 1, album, artist, genre, "");
+        song("Humain à l'eau 	", "", 9 , 1, album, artist, genre, "");
+        song("Quand c'est? 	", "", 10, 1, album, artist, genre, "");
+        song("Sommeil 	", "", 11, 1, album, artist, genre, "");
+        song("Merci 	", "", 12, 1, album, artist, genre, "");
+        song("AVF (featuring Maître Gims and Orelsan)", "", 13, 1, album, artist, genre, "");
+        song("Papaoutai (featuring Angel Haze)", "", 14, 1, album, artist, genre, "");
+        
+        
+        album = albums.get("lights");
+        artist = musicians.get("ellieGoulding");
+        genre = genres.get("pop");
+        song("Guns and Horses  ", "", 1 , 1, album, artist, genre, "");
+        song("Starry Eyed  ", "", 2 , 1, album, artist, genre, "");
+        song("This Love (Will Be Your Downfall)  ", "", 3 , 1, album, artist, genre, "");
+        song("Under the Sheets  ", "", 4 , 1, album, artist, genre, "");
+        song("The Writer  ", "", 5 , 1, album, artist, genre, "");
+        song("Every Time You Go  ", "", 6 , 1, album, artist, genre, "");
+        song("Wish I Stayed  ", "", 7 , 1, album, artist, genre, "");
+        song("Your Biggest Mistake  ", "", 8 , 1, album, artist, genre, "");
+        song("I’ll Hold My Breath  ", "", 9 , 1, album, artist, genre, "");
+        song("Salt Skin  ", "", 10, 1, album, artist, genre, "");
+
+        
+        album = albums.get("thriller");
+        artist = musicians.get("michaelJackson");
+        genre = genres.get("pop");
+        song("Wanna Be Startin' Somethin'", "", 1 , 1, album, artist, genre, "");
+        song("Baby Be Mine", "", 2 , 1, album, artist, genre, "");
+        song("The Girl Is Mine", "", 3 , 1, album, artist, genre, "");
+        song("Thriller", "", 4 , 1, album, artist, genre, "");
+        song("Beat It", "", 5 , 1, album, artist, genre, "");
+        song("Billie Jean", "", 6 , 1, album, artist, genre, "");
+        song("Human Nature", "", 7 , 1, album, artist, genre, "");
+        song("P.Y.T. (Pretty Young Thing)", "", 8 , 1, album, artist, genre, "");
+        song("The Lady in My Life", "", 9 , 1, album, artist, genre, "");
+
+        
+        album = albums.get("bad");
+        artist = musicians.get("michaelJackson");
+        genre = genres.get("pop");
+        song("Bad", "",  1 , 1, album, artist, genre, "");
+        song("The Way You Make Me Feel  ", "", 2 , 1, album, artist, genre, "");
+        song("Speed Demon  ", "", 3 , 1, album, artist, genre, "");
+        song("Liberian Girl  ", "", 4 , 1, album, artist, genre, "");
+        song("Just Good Friends  ", "", 5 , 1, album, artist, genre, "");
+        song("Another Part of Me  ", "", 6 , 1, album, artist, genre, "");
+        song("Man in the Mirror  ", "", 7 , 1, album, artist, genre, "");
+        song("I Just Can't Stop Loving You  ", "",8 , 1, album, artist, genre, "");
+        song("Dirty Diana  ", "", 9 , 1, album, artist, genre, "");
+        song("Smooth Criminal  ", "", 10, 1, album, artist, genre, "");
+        song("Leave Me Alone", "", 11, 1, album, artist, genre, "");
+        
+        album = albums.get("dangerous");
+        artist = musicians.get("michaelJackson");
+        genre = genres.get("rnb");
+        song("Jam  ", "", 1 , 1, album, artist, genre, "");
+        song("Why You Wanna Trip on Me  ", "", 2 , 1, album, artist, genre, "");
+        song("In the Closet  ", "", 3 , 1, album, artist, genre, "");
+        song("She Drives Me Wild  ", "", 4 , 1, album, artist, genre, "");
+        song("Remember the Time  ", "", 5 , 1, album, artist, genre, "");
+        song("Can't Let Her Get Away  ", "", 6 , 1, album, artist, genre, "");
+        song("Heal the World  ", "", 7 , 1, album, artist, genre, "");
+        song("Black or White  ", "", 8 , 1, album, artist, genre, "");
+        song("Who Is It  ", "", 9 , 1, album, artist, genre, "");
+        song("Give In to Me  ", "", 10, 1, album, artist, genre, "");
+        song("Will You Be There  ", "", 11, 1, album, artist, genre, "");
+        song("Keep the Faith  ", "", 12, 1, album, artist, genre, "");
+        song("Gone Too Soon  ", "", 13, 1, album, artist, genre, "");
+        song("Dangerous  ", "", 14, 1, album, artist, genre, "");
+        
+        album = albums.get("selahSue");
+        artist = musicians.get("selahSue");
+        genre = genres.get("rnb");
+        song("Title", "", 1 , 1, album, artist, genre, "");
+        song("This World  ", "", 2 , 1, album, artist, genre, "");
+        song("Peace of Mind  ", "", 3 , 1, album, artist, genre, "");
+        song("Raggamuffin  ", "", 4 , 1, album, artist, genre, "");
+        song("Crazy Vibes  ", "", 5 , 1, album, artist, genre, "");
+        song("Black Part Love  ", "", 6 , 1, album, artist, genre, "");
+        song("Mommy  ", "", 7 , 1, album, artist, genre, "");
+        song("Explanations  ", "", 8 , 1, album, artist, genre, "");
+        song("Please (feat. Cee Lo Green)", "", 9 , 1, album, artist, genre, "");
+        song("Summertime  ", "", 10, 1, album, artist, genre, "");
+        song("Crazy Sufferin Style  ", "", 11, 1, album, artist, genre, "");
+        song("Fyah Fyah  ", "", 12, 1, album, artist, genre, "");
+        song("Just Because I Do  ", "", 13, 1, album, artist, genre, "");
+        song("I Truly Loved Ya", "", 14, 1, album, artist, genre, "");
+        
+        album = albums.get("clapton");
+        artist = musicians.get("ericClapton");
+        genre = genres.get("blues");
+        song("Travelin' Alone", "", 1 , 1, album, artist, genre, "");
+        song("Rockin' Chair", "", 2 , 1, album, artist, genre, "");
+        song("River Runs Deep", "", 3 , 1, album, artist, genre, "");
+        song("Judgement Day", "", 4 , 1, album, artist, genre, "");
+        song("How Deep Is the Ocean?", "", 5 , 1, album, artist, genre, "");
+        song("My Very Good Friend the Milkman", "", 6 , 1, album, artist, genre, "");
+        song("Can't Hold Out Much Longer", "", 7 , 1, album, artist, genre, "");
+        song("That's No Way to Get Along", "", 8 , 1, album, artist, genre, "");
+        song("Everything Will Be Alright", "", 9 , 1, album, artist, genre, "");
+        song("Diamonds Made from Rain", "", 10, 1, album, artist, genre, "");
+        song("When Somebody Thinks You're Wonderful", "", 11, 1, album, artist, genre, "");
+        song("Hard Times Blues", "", 12, 1, album, artist, genre, "");
+        song("Run Back to Your Side", "", 13, 1, album, artist, genre, "");
+        song("Autumn Leaves", "", 14, 1, album, artist, genre, "");
     }
 
     private void createAlbums() throws IOException {
@@ -170,6 +377,40 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         cal.set(2007, Calendar.OCTOBER, 22);
         albums.put("electTheDead", album("Elect the Dead", "debut album", cal.getTime(), readImage("electTheDead.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(2004, Calendar.NOVEMBER, 12);
+        albums.put("encore", album("Encore", "Fifth studio album", cal.getTime(), readImage("encore.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(2009, Calendar.MAY, 19);
+        albums.put("relapse", album("Relapse", "Sixth studio album", cal.getTime(), readImage("relapse.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(2010, Calendar.JUNE, 18);
+        albums.put("recovery", album("Recovery", "Seventh studio album", cal.getTime(), readImage("recovery.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(2010, Calendar.JUNE, 14);
+        albums.put("cheese", album("Cheese", "Debut album", cal.getTime(), readImage("cheese.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(2013, Calendar.AUGUST, 16);
+        albums.put("racineCarree", album("Racine Carrée", "Second studio album", cal.getTime(), readImage("racineCarree.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(2010, Calendar.FEBRUARY, 26);
+        albums.put("lights", album("Lights ", "Debut album", cal.getTime(), readImage("lights.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(1982, Calendar.NOVEMBER, 30);
+        albums.put("thriller", album("Thriller", "Sixth studio album", cal.getTime(), readImage("thriller.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(1987, Calendar.AUGUST, 31);
+        albums.put("bad", album("Bad", "Seventh studio album", cal.getTime(), readImage("bad.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(1991, Calendar.NOVEMBER, 26);
+        albums.put("dangerous", album("Dangerous", "Eighth studio album", cal.getTime(), readImage("dangerous.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(2011, Calendar.MARCH, 4);
+        albums.put("selahSue", album("Selah sue", "Debut album", cal.getTime(), readImage("selahSue.jpg"), JPEG, new ArrayList<Song>()));
+
+        cal.set(2010, Calendar.SEPTEMBER, 27);
+        albums.put("clapton", album("Clapton", "Twentieth studio album", cal.getTime(), readImage("clapton.jpg"), JPEG, new ArrayList<Song>()));
+
         
         log.info("Music library albums loaded.");
     }
@@ -191,18 +432,51 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         cal.set(1967, Calendar.AUGUST, 21);
         musicians.put("serjTankian", musician("Serj Tankian", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
         
+        cal.set(1972, Calendar.OCTOBER, 17);
+        musicians.put("eminem", musician("Eminem", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
+
+        cal.set(1985, Calendar.MARCH, 12);
+        musicians.put("stromae", musician("Stromae", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
+
+        cal.set(1986, Calendar.DECEMBER, 30);
+        musicians.put("ellieGoulding", musician("Ellie Goulding", new ArrayList<Song>(), Sex.FEMALE, cal.getTime()));
+
+        cal.set(1958, Calendar.AUGUST, 29);
+        musicians.put("michaelJackson", musician("Michael Jackson", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
+
+        cal.set(1989, Calendar.MAY, 3);
+        musicians.put("selahSue", musician("Selah Sue", new ArrayList<Song>(), Sex.FEMALE, cal.getTime()));
+
+        cal.set(1945, Calendar.MARCH, 30);
+        musicians.put("ericClapton", musician("Eric Clapton", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
+
+        cal.set(1976, Calendar.DECEMBER, 25);
+        musicians.put("arminVanBuuren", musician("Armin van Buuren", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
+
+        cal.set(1986, Calendar.SEPTEMBER, 21);
+        musicians.put("lindseyStirling", musician("Lindsey Stirling", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
+        
         log.info("Music library musicians loaded.");
     }
 
     private void createGenres() {
-        genres.put("rock", genre("Rock"));
+        genres.put("alternativeMusic", genre("Alternative Music"));
+        genres.put("blues", genre("Blues"));
+        genres.put("classicalMusic", genre("Classical Music"));
+        genres.put("country", genre("Country"));
+        genres.put("danceMusic", genre("Dance Music"));
+        genres.put("electro", genre("Electro"));
+        genres.put("hipHop", genre("Hip Hop"));
+        genres.put("jazz", genre("Jazz"));
+        genres.put("latinMUsic", genre("Latin Music"));
+        genres.put("metal", genre("Metal"));
+        genres.put("opera", genre("Opera"));
         genres.put("pop", genre("Pop"));
         genres.put("rap", genre("Rap"));
-        genres.put("electro", genre("Electro"));
+        genres.put("reggae", genre("Reggae"));
         genres.put("rnb", genre("RnB"));
+        genres.put("rock", genre("Rock"));
         genres.put("soul", genre("Soul"));
-        genres.put("metal", genre("Metal"));
-        genres.put("country", genre("country"));
         
         log.info("Music library genres loaded.");
     }
