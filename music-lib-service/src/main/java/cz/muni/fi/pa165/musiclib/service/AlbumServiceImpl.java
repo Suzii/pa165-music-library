@@ -10,6 +10,7 @@ import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
@@ -178,6 +179,15 @@ public class AlbumServiceImpl implements AlbumService {
         }
 
         return result;
+    }
+
+    @Override
+    public List<Album> getAlbumSample(int count) {
+        if (count <= 0) {
+            throw new IllegalArgumentException("count must be a possitive number");
+        }
+
+        return albumDao.getAlbumSample(count);
     }
 
     public static class GenreResult {

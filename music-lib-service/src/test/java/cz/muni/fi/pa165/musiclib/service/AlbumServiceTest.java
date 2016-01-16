@@ -18,6 +18,7 @@ import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -31,6 +32,7 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.when;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import static org.testng.Assert.assertEquals;
@@ -116,6 +118,10 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         when(albumDao.findById(1l)).thenReturn(album1);
         when(albumDao.findById(2l)).thenReturn(album2);
         when(albumDao.findById(0l)).thenReturn(null);
+
+        //getAlbumSample
+        when(albumDao.getAlbumSample(2)).thenReturn(Arrays.asList(album1, album2));
+        when(albumDao.getAlbumSample(1)).thenReturn(Collections.singletonList(album1));
 
         //create
         doAnswer(new Answer<Object>() {
@@ -493,6 +499,26 @@ public class AlbumServiceTest extends AbstractTestNGSpringContextTests {
         assertNull(result.getGenre());
         assertEquals(result.getPercentage(), 0.0);
     }
+
+    @Test
+    public void getAlbumSampleValidTest() {
+        List<Album> result = albumService.getAlbumSample(2);
+        assertNotNull(result);
+        assertEquals(result.size(), 2);
+    }
+
+    @Test
+    public void getAlbumSampleValidLessCountTest() {
+        List<Album> result = albumService.getAlbumSample(1);
+        assertNotNull(result);
+        assertEquals(result.size(), 1);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void getAlbumSampleInvlaidCountTest() {
+        List<Album> result = albumService.getAlbumSample(0);
+    }
+
 
     private void assertGenreResult(AlbumServiceImpl.GenreResult result, Genre genre, double percentage) {
         assertNotNull(result);

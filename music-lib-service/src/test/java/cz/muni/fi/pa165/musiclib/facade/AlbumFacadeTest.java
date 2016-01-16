@@ -24,6 +24,8 @@ import org.mockito.Matchers;
 import static org.mockito.Matchers.any;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+
+import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -193,5 +195,11 @@ public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {
         when(albumService.getMajorGenreForAlbum(any(Album.class))).thenReturn(new AlbumServiceImpl.GenreResult());
         albumFacade.getMajorGanreForAlbum(1l);
         verify(albumService).getMajorGenreForAlbum(any(Album.class));
+    }
+
+    @Test
+    public void getAlbumSampleTest() {
+        albumFacade.getAlbumSample(anyInt());
+        verify(albumService).getAlbumSample(anyInt());
     }
 }

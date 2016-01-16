@@ -43,10 +43,9 @@ public class HomeController  extends BaseController{
     public String index(Model model) {
         model.addAttribute("title", "Music library");
         
-        List<AlbumDTO> albums = albumFacade.getAllAlbums();
-        Collections.shuffle(albums);
-        model.addAttribute("albums", albums.subList(0, 5));
-        
+        List<AlbumDTO> albums = albumFacade.getAlbumSample(5);
+        model.addAttribute("albums", albums);
+
         List<SongDTO> songs = songFacade.findAll();
         Collections.shuffle(songs);
         model.addAttribute("songs", songs.subList(0, 10));

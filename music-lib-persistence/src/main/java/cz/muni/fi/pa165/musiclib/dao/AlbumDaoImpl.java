@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -54,5 +55,16 @@ public class AlbumDaoImpl implements AlbumDao {
     public List<Album> findAll() {
         return em.createQuery("SELECT a FROM Album a", Album.class)
                 .getResultList();
+    }
+
+    @Override
+    public List<Album> getAlbumSample(int count) {
+        if (count <= 0) {
+            throw new IllegalArgumentException("count must be a possitive number");
+        }
+
+        TypedQuery<Album> query = em.createQuery("SELECT a FROM Album a ORDER BY RANDOM()", Album.class);
+        query.setMaxResults(count);
+        return query.getResultList();
     }
 }

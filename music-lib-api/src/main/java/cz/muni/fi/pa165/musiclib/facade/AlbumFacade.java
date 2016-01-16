@@ -92,4 +92,13 @@ public interface AlbumFacade {
      * @return MajorAlbumGenreDTO containing actual result
      */
     MajorAlbumGenreDTO getMajorGanreForAlbum(Long albumId);
+
+    /**
+     * Returns the sample of albums stored in the DB. Returns up
+     * to count albums or less if there is no sufficient ammount.
+     *
+     * @param count number of albums to return
+     * @return list of sample albums
+     */
+    List<AlbumDTO> getAlbumSample(int count);
 }

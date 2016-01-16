@@ -154,4 +154,9 @@ public class AlbumFacadeImpl implements AlbumFacade {
                 albumService.getMajorGenreForAlbum(album), 
                 MajorAlbumGenreDTO.class);
     }
+
+    @Override
+    public List<AlbumDTO> getAlbumSample(int count) {
+        return beanMappingService.mapTo(albumService.getAlbumSample(count), AlbumDTO.class);
+    }
 }

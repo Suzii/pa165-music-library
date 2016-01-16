@@ -11,6 +11,7 @@ import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
 import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
 import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -273,6 +274,11 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
         assertEquals(result, Collections.singletonList(album01));
     }
 
+    @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
+    public void searchByTitleNullTest() {
+        List<Album> result = albumDao.searchByTitle(null);
+    }
+
     @Test
     public void findAllSuccessTest() {
         albumDao.create(album01);
@@ -280,6 +286,34 @@ public class AlbumDaoTest extends AbstractTestNGSpringContextTests {
 
         List<Album> result = albumDao.findAll();
         assertEquals(result, Arrays.asList(album01, album02));
+    }
+
+    @Test
+    public void getAlbumSampleValidTest() {
+        albumDao.create(album01);
+        albumDao.create(album02);
+
+        List<Album> result = albumDao.getAlbumSample(2);
+        assertNotNull(result);
+        assertEquals(result.size(), 2);
+    }
+
+    @Test
+    public void getAlbumSampleValidLessCountTest() {
+        albumDao.create(album01);
+        albumDao.create(album02);
+
+        List<Album> result = albumDao.getAlbumSample(1);
+        assertNotNull(result);
+        assertEquals(result.size(), 1);
+    }
+
+    @Test(expectedExceptions = InvalidDataAccessApiUsageException.class)
+    public void getAlbumSampleInvlaidCountTest() {
+        albumDao.create(album01);
+        albumDao.create(album02);
+
+        List<Album> result = albumDao.getAlbumSample(0);
     }
 
     private Album getDefaultAlbum01() {
