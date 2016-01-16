@@ -1,21 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.entity.User;
-import java.util.List;
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 /**
- *
- * @author zdank
+ * @author Zuzana Dankovcikova
+ * @version 15/10/29
  */
 @Repository
 public class UserDaoImpl implements UserDao {

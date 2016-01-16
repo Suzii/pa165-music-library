@@ -9,8 +9,8 @@ import javax.validation.ConstraintViolationException;
 import java.util.List;
 
 /**
- * @author xstefank
- * @version 10/24/15
+ * @author Martin Stefanko
+ * @version 15/10/24
  */
 public interface SongDao {
 

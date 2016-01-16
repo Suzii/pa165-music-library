@@ -6,7 +6,7 @@ import javax.validation.ConstraintViolationException;
 
 /**
  * @author Zuzana Dankovcikova
- * @version 29/10/2015
+ * @version 15/10/29
  */
 public interface AlbumDao {
     

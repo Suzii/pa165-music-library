@@ -1,11 +1,15 @@
 package cz.muni.fi.pa165.musiclib.entity;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author xstefank
- * @version 10/24/15
+ * @author Martin Stefanko
+ * @version 15/10/24
  */
 @Entity
 public class Song {

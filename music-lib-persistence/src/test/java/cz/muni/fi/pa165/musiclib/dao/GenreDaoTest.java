@@ -3,13 +3,6 @@ package cz.muni.fi.pa165.musiclib.dao;
 import cz.muni.fi.pa165.musiclib.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
-import java.util.List;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import javax.validation.ConstraintViolationException;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -20,9 +13,15 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
+import java.util.List;
+
 /**
- *
- * @author Milan
+ * @author Milan Seman
+ * @version 15/10/28
  */
 @ContextConfiguration(classes = PersistenceSampleApplicationContext.class)
 @TestExecutionListeners(TransactionalTestExecutionListener.class)

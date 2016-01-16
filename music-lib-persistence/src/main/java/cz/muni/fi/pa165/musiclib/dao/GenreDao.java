@@ -4,8 +4,8 @@ import cz.muni.fi.pa165.musiclib.entity.Genre;
 import java.util.List;
 
 /**
- *
  * @author David Boron
+ * @version 15/10/15
  */
 public interface GenreDao {
 

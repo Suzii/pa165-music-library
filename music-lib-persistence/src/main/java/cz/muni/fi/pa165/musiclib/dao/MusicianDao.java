@@ -1,12 +1,13 @@
 package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.entity.Musician;
-import java.util.List;
+
 import javax.validation.ConstraintViolationException;
+import java.util.List;
 
 /**
- * @author Milan
- * @version 10/30/15
+ * @author Milan Seman
+ * @version 15/10/30
  */
 
 public interface MusicianDao {

@@ -3,8 +3,8 @@ package cz.muni.fi.pa165.musiclib.utils;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 
 /**
- *
- * @author zdank
+ * @author Zuzana Dankovcikova
+ * @version 15/10/29
  */
 public class GenreBuilder {
 

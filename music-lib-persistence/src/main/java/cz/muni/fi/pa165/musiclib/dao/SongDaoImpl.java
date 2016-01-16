@@ -12,8 +12,8 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
- * @author xstefank
- * @version 10/24/15
+ * @author Martin Stefanko
+ * @version 15/10/24
  */
 @Repository
 public class SongDaoImpl implements SongDao {

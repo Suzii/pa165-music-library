@@ -1,14 +1,15 @@
 package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.entity.Musician;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
+
 /**
- *
- * @author Milan
+ * @author Milan Seman
+ * @version 15/10/30
  */
 @Repository
 public class MusicianDaoImpl implements MusicianDao {

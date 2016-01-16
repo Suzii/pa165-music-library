@@ -9,8 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author xstefank
- * @version 10/28/15
+ * @author Martin Stefanko
+ * @version 15/10/28
  */
 public class AlbumBuilder {
 

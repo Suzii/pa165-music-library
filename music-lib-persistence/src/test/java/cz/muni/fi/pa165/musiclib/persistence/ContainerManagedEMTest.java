@@ -2,11 +2,6 @@ package cz.muni.fi.pa165.musiclib.persistence;
 
 import cz.muni.fi.pa165.musiclib.PersistenceSampleApplicationContext;
 import cz.muni.fi.pa165.musiclib.dao.SongDao;
-import cz.muni.fi.pa165.musiclib.entity.Album;
-import cz.muni.fi.pa165.musiclib.entity.Genre;
-import cz.muni.fi.pa165.musiclib.entity.Musician;
-import cz.muni.fi.pa165.musiclib.entity.Song;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTransactionalTestNGSpringContextTests;
@@ -14,13 +9,9 @@ import org.testng.annotations.Test;
 
 import javax.inject.Inject;
 
-import java.util.Date;
-
-import static org.testng.Assert.assertEquals;
-
 /**
- * @author xstefank
- * @version 10/24/15
+ * @author Martin Stefanko
+ * @version 15/10/24
  */
 @ContextConfiguration(classes=PersistenceSampleApplicationContext.class)
 @DirtiesContext(classMode= DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)

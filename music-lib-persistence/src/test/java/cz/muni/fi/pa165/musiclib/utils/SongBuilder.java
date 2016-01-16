@@ -1,10 +1,13 @@
 package cz.muni.fi.pa165.musiclib.utils;
 
-import cz.muni.fi.pa165.musiclib.entity.*;
+import cz.muni.fi.pa165.musiclib.entity.Album;
+import cz.muni.fi.pa165.musiclib.entity.Genre;
+import cz.muni.fi.pa165.musiclib.entity.Musician;
+import cz.muni.fi.pa165.musiclib.entity.Song;
 
 /**
- *
  * @author Zuzana Dankovcikova
+ * @version 15/10/29
  */
 public class SongBuilder {
 

@@ -1,15 +1,16 @@
 package cz.muni.fi.pa165.musiclib.dao;
 
 import cz.muni.fi.pa165.musiclib.entity.Genre;
-import java.util.List;
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 /**
- *
  * @author David Boron
+ * @version 15/10/15
  */
 @Repository
 public class GenreDaoImpl implements GenreDao {
