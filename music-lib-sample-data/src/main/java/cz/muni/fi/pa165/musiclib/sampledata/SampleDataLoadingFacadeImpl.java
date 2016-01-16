@@ -122,7 +122,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         
         album = albums.get("blackSands");
         artist = musicians.get("bonobo");
-        genre = genres.get("electro");
+        genre = genres.get("ambient");
         song("Prelude", "", 1, 1, album, artist, genre, "GezIBBJkhME");
         song("Kiara", "", 2, 1, album, artist, genre, "L-kyRh7N-kE");
         song("Kong", "", 3, 1, album, artist, genre, "lZbgyKJkHxQ");
@@ -135,6 +135,18 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         song("Animals", "", 10, 1, album, artist, genre, "Q8RzwkyhYCg");
         song("Black Sands", "", 11, 1, album, artist, genre, "cTjF2_-bneM");
 
+        album = albums.get("immunity");
+        artist = musicians.get("jonHopkins");
+        genre = genres.get("ambient");
+        song("We Disappear", "", 1, 1, album, artist, genre, "pbXrN6YEbdQ");
+        song("Open Eye Signal", "", 2, 1, album, artist, genre, "va4OyeQHbr8");
+        song("Breathe This Air", "", 3, 1, album, artist, genre, "IWveFZpzXsA");
+        song("Collider", "", 4, 1, album, artist, genre, "S2CXrvcsbMk");
+        song("Abandon Window", "", 5, 1, album, artist, genre, "sc1IkYwKCtM");
+        genre = genres.get("techHouse");
+        song("Form by Firelight", "", 6, 1, album, artist, genre, "9Ae4BxKC7cQ");
+        song("Sun Harmonics", "", 7, 1, album, artist, genre, "SmFQP-Oe-PQ");
+        song("Immunity", "", 8, 1, album, artist, genre, "Y8eQR5DMous");
 
         album = albums.get("electTheDead");
         artist = musicians.get("serjTankian");
@@ -410,6 +422,9 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
 
         cal.set(2010, Calendar.SEPTEMBER, 27);
         albums.put("clapton", album("Clapton", "Twentieth studio album", cal.getTime(), readImage("clapton.jpg"), JPEG, new ArrayList<Song>()));
+        
+        cal.set(2013, Calendar.JUNE, 4);
+        albums.put("immunity", album("Immunity", "awesomeness", cal.getTime(), readImage("jonHopkinsImmunityAlbumCover.jpg"), JPEG, new ArrayList<Song>()));
 
         
         log.info("Music library albums loaded.");
@@ -456,11 +471,15 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         cal.set(1986, Calendar.SEPTEMBER, 21);
         musicians.put("lindseyStirling", musician("Lindsey Stirling", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
         
+        cal.set(1979, Calendar.AUGUST, 15);
+        musicians.put("jonHopkins", musician("Jon Hopkins", new ArrayList<Song>(), Sex.MALE, cal.getTime()));
+        
         log.info("Music library musicians loaded.");
     }
 
     private void createGenres() {
         genres.put("alternativeMusic", genre("Alternative Music"));
+        genres.put("ambient", genre("Ambient"));
         genres.put("blues", genre("Blues"));
         genres.put("classicalMusic", genre("Classical Music"));
         genres.put("country", genre("Country"));
@@ -468,7 +487,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         genres.put("electro", genre("Electro"));
         genres.put("hipHop", genre("Hip Hop"));
         genres.put("jazz", genre("Jazz"));
-        genres.put("latinMUsic", genre("Latin Music"));
+        genres.put("latinMusic", genre("Latin Music"));
         genres.put("metal", genre("Metal"));
         genres.put("opera", genre("Opera"));
         genres.put("pop", genre("Pop"));
@@ -477,6 +496,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         genres.put("rnb", genre("RnB"));
         genres.put("rock", genre("Rock"));
         genres.put("soul", genre("Soul"));
+        genres.put("techHouse", genre("Tech House"));
         
         log.info("Music library genres loaded.");
     }
