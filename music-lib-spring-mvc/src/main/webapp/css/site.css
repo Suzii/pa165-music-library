@@ -150,3 +150,54 @@ footer .container .text-muted {
 .musicianRadio {
     padding-top: 5px;
 }
+
+/* XS sized displays padding */
+.jumbotron{
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.panelAlbums .panel-body a, .panelSongs .panel-body a, .panelMusicians .panel-body a{
+    display: block;
+    margin: 15px 0;
+    font-size: 1.2em;
+}
+.homepagePanels .panel{
+    min-height: 420px;
+}
+
+.panelMusicians .panel-body a, .panelSongs .panel-body a{
+    margin: 8px 0;
+}
+
+.panelAlbums .panel-body img{
+    margin-right: 15px;
+}
+
+.homepagePanels .icon.microphone{
+    width: 22px;
+}
+.homepagePanels .icon.vinyl {
+    width: 24px;
+}
+.homepagePanels .glyphicon-music {
+    font-size: 20px;
+}
+
+.homepagePanels .panel-title{
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.homepagePanels .panel-title .icon{
+    margin-right: 5px;
+}
+
+
+.homepage.jumbotron h1{
+    font-size: 53px;
+    margin-bottom: 40px;
+}
+.homepage.jumbotron .lead{
+    margin-bottom: 80px;
+}
