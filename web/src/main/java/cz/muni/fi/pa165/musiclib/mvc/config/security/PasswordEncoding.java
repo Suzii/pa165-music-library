@@ -8,8 +8,8 @@ import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 12/13/15
+ * @author Martin Stefanko
+ * @version 15/12/13
  */
 public class PasswordEncoding implements PasswordEncoder {
     @Override

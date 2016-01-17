@@ -4,7 +4,7 @@ package cz.muni.fi.pa165.musiclib.mvc.exceptions;
  * Generic exception.
  *
  * @author Zuzana Dankovcikova
- * @version 12/12/2015
+ * @version 15/12/12
  */
 public class GenericMusicLibraryException extends RuntimeException {
 

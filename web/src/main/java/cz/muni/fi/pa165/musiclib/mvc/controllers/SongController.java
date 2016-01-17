@@ -6,28 +6,33 @@ import cz.muni.fi.pa165.musiclib.dto.SongCreateDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongSearchCriteriaDTO;
 import cz.muni.fi.pa165.musiclib.dto.SongUpdateDTO;
+import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import cz.muni.fi.pa165.musiclib.facade.GenreFacade;
 import cz.muni.fi.pa165.musiclib.facade.MusicianFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
-import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
-import javax.inject.Inject;
-import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * SongController class.
  *
  * @author Zuzana Dankovcikova
- * @version 12/12/2015 
+ * @version 15/12/12
  */
 @Controller
 @RequestMapping(value = {"/song"})

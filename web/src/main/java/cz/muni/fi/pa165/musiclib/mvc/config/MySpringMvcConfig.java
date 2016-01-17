@@ -23,7 +23,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import javax.validation.Validator;
 
 /**
- * @author Martin Stefanko (mstefank@redhat.com)
+ * @author Martin Stefanko
+ * @version 15/12/11
  */
 @EnableWebMvc
 @Configuration

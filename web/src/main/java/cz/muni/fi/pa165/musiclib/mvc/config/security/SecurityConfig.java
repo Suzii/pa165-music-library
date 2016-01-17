@@ -11,13 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import javax.sql.DataSource;
 import javax.inject.Inject;
+import javax.sql.DataSource;
 import java.util.List;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 12/11/15
+ * @author Martin Stefanko
+ * @version 15/12/11
  */
 @Configuration
 @EnableWebSecurity

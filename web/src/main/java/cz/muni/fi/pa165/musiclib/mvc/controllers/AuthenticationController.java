@@ -24,8 +24,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 12/9/15
+ * @author Martin Stefanko
+ * @version 15/12/9
  */
 @Controller
 public class AuthenticationController extends BaseController{

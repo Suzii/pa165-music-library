@@ -6,20 +6,23 @@ import cz.muni.fi.pa165.musiclib.dto.SongDTO;
 import cz.muni.fi.pa165.musiclib.facade.AlbumFacade;
 import cz.muni.fi.pa165.musiclib.facade.MusicianFacade;
 import cz.muni.fi.pa165.musiclib.facade.SongFacade;
-import java.util.Collections;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import javax.inject.Inject;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Home controller of whole application. 
  *
  * @author Zuzana Dankovcikova
+ * @version 15/12/12
  */
 @Controller
 @RequestMapping(value = {"", "/", "/home"})

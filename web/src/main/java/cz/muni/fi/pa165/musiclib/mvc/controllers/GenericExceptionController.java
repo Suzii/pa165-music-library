@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.musiclib.mvc.controllers;
 
-import cz.muni.fi.pa165.musiclib.mvc.exceptions.GenericMusicLibraryException;
 import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
+import cz.muni.fi.pa165.musiclib.mvc.exceptions.GenericMusicLibraryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
  * Controller to handle all exceptions.
  *
  * @author Zuzana Dankovcikova
- * @version 12/12/2015
+ * @version 15/12/12
  */
 @ControllerAdvice
 public class GenericExceptionController {

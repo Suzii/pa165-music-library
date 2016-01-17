@@ -3,24 +3,29 @@ package cz.muni.fi.pa165.musiclib.mvc.controllers;
 import cz.muni.fi.pa165.musiclib.dto.MusicianDTO;
 import cz.muni.fi.pa165.musiclib.enums.Sex;
 import cz.muni.fi.pa165.musiclib.facade.MusicianFacade;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import javax.inject.Inject;
-import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.inject.Inject;
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * MusicianController class
  *
  * @author Milan Seman
- * @version 14/12/2015
+ * @version 15/12/14
  */
 @Controller
 @RequestMapping(value = {"/musician"})

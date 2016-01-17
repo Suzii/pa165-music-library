@@ -5,8 +5,8 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 12/18/15
+ * @author Martin Stefanko
+ * @version 15/12/18
  */
 public class FileValidator implements Validator {
     @Override

@@ -2,9 +2,6 @@ package cz.muni.fi.pa165.musiclib.mvc.controllers;
 
 import cz.muni.fi.pa165.musiclib.dto.UserDTO;
 import cz.muni.fi.pa165.musiclib.facade.UserFacade;
-import static cz.muni.fi.pa165.musiclib.mvc.controllers.SongController.log;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -15,11 +12,14 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Base controller containing common logic for all controllers.
  *
  * @author Zuzana Dankovcikova
- * @version 12/12/2015
+ * @version 15/12/12
  */
 public abstract class BaseController {
 

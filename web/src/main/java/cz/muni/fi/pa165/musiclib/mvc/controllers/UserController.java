@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.inject.Inject;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 12/6/15
+ * @author Martin Stefanko
+ * @version 15/12/6
  */
 @Controller
 @RequestMapping("/user")
