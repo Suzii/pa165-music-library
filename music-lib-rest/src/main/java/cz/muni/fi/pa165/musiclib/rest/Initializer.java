@@ -6,6 +6,10 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+/**
+ * @author Milan Seman
+ * @version 15/12/12
+ */
 public class Initializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
