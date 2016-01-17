@@ -1,14 +1,15 @@
 package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.entity.Genre;
-import java.util.List;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Genre service that provides all business logic for genre entities.
  *
- * @author zdank
- * @version 16/11/2015
+ * @author Zuzana Dankovcikova
+ * @version 15/11/16
  */
 @Service
 public interface GenreService {

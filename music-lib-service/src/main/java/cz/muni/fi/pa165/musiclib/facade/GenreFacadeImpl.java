@@ -1,18 +1,19 @@
 package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
-import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
-import cz.muni.fi.pa165.musiclib.service.GenreService;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
-
-import java.util.List;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
+import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
+import cz.muni.fi.pa165.musiclib.service.GenreService;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+import java.util.List;
+
 /**
- * @author David
+ * @author David Boron
+ * @version 15/11/19
  */
 @Service
 @Transactional

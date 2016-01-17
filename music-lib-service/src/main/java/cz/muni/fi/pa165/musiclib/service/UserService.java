@@ -8,8 +8,8 @@ import java.util.List;
 /**
  * An interface that defines a service access to the {@link User} entity.
  *
- * @author xstefank (422697@mail.muni.cz)
- * @version 11/21/15
+ * @author Martin Stefanko
+ * @version 15/11/21
  */
 @Service
 public interface UserService {

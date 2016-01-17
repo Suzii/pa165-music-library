@@ -2,46 +2,39 @@ package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.config.ServiceConfiguration;
 import cz.muni.fi.pa165.musiclib.dao.MusicianDao;
-import cz.muni.fi.pa165.musiclib.dao.AlbumDao;
-import cz.muni.fi.pa165.musiclib.dao.SongDao;
-import cz.muni.fi.pa165.musiclib.entity.Album;
-import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
-import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.enums.Sex;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
-import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
-import cz.muni.fi.pa165.musiclib.utils.AlbumBuilder;
-import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
 import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
 import cz.muni.fi.pa165.musiclib.utils.SetIdHelper;
-import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
-import static org.mockito.Matchers.any;
 import org.mockito.Mock;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertNull;
-import static org.testng.Assert.assertTrue;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
+import static org.testng.Assert.assertTrue;
+
 /**
- *
  * @author David Boron
+ * @version 15/11/26
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class MusicianServiceTest extends AbstractTestNGSpringContextTests {

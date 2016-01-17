@@ -7,16 +7,17 @@ import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
-import java.util.List;
+import org.springframework.stereotype.Service;
+
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 /**
  *
  * @author Zuzana Dankovcikova
- * @version 26/11/2015
+ * @version 15/11/26
  */
 @Service
 public class SongServiceImpl implements SongService {

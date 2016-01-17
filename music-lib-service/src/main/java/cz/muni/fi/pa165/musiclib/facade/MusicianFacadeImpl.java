@@ -6,13 +6,15 @@ import cz.muni.fi.pa165.musiclib.exception.NoSuchEntityFoundException;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.MusicianService;
 import cz.muni.fi.pa165.musiclib.service.SongService;
-import java.util.List;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+import java.util.List;
+
 /**
- * @author Milan
+ * @author Milan Seman
+ * @version 15/11/18
  */
 @Service
 @Transactional

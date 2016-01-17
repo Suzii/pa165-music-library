@@ -5,14 +5,15 @@ import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
-import java.util.List;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Song service that provides all business logic for song entities. 
- * 
- * @author zdank
- * @version 16/11/2015
+ *
+ * @author Zuzana Dankovcikova
+ * @version 15/11/16
  */
 @Service
 public interface SongService {

@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.config.ServiceConfiguration;
 import cz.muni.fi.pa165.musiclib.dao.GenreDao;
-import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
@@ -36,7 +35,8 @@ import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 /**
- * @author Martin Stefanko (mstefank@redhat.com)
+ * @author Martin Stefanko
+ * @version 15/11/26
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class GenreServiceTest extends AbstractTestNGSpringContextTests {

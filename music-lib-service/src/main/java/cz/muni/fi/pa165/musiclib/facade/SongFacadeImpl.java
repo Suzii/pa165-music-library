@@ -16,15 +16,16 @@ import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.GenreService;
 import cz.muni.fi.pa165.musiclib.service.MusicianService;
 import cz.muni.fi.pa165.musiclib.service.SongService;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Inject;
-import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * @author zdankovc
- * @version 22/11/2015
+ * @author Zuzana Dankovcikova
+ * @version 15/11/22
  */
 @Service
 @Transactional

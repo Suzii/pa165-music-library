@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cz.muni.fi.pa165.musiclib.utils;
 
-//import cz.muni.fi.pa165.musiclib.entity.Album;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
  * Inspired by http://solutiondesign.com/blog/-/blogs/protecting-your-hibernate-i-1/
- * @author zdank
+ *
+ * @author Zuzana Dankovcikova
+ * @version 15/10/28
  */
 public class SetIdHelper {
   

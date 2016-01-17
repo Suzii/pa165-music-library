@@ -13,9 +13,7 @@ import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.entity.User;
 import cz.muni.fi.pa165.musiclib.facade.UserFacadeImpl;
-import cz.muni.fi.pa165.musiclib.service.AlbumService;
 import cz.muni.fi.pa165.musiclib.service.AlbumServiceImpl;
-import cz.muni.fi.pa165.musiclib.service.GenreService;
 import cz.muni.fi.pa165.musiclib.service.GenreServiceImpl;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
@@ -27,8 +25,8 @@ import org.springframework.context.annotation.Import;
 
 /**
  *
- * @author zdank
- * @version 16/11/2015
+ * @author Zuzana Dankovcikova
+ * @version 15/11/16
  */
 @Configuration
 @Import(PersistenceSampleApplicationContext.class)

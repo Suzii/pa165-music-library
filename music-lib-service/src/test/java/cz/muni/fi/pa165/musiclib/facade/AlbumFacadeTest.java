@@ -3,11 +3,9 @@ package cz.muni.fi.pa165.musiclib.facade;
 import cz.muni.fi.pa165.musiclib.config.ServiceConfiguration;
 import cz.muni.fi.pa165.musiclib.dto.AlbumChangeAlbumArtDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
-import cz.muni.fi.pa165.musiclib.dto.AlbumNewTitleDTO;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Song;
-import cz.muni.fi.pa165.musiclib.facade.AlbumFacadeImpl;
 import cz.muni.fi.pa165.musiclib.service.AlbumServiceImpl;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingServiceImpl;
@@ -16,34 +14,32 @@ import cz.muni.fi.pa165.musiclib.utils.AlbumBuilder;
 import cz.muni.fi.pa165.musiclib.utils.GenreBuilder;
 import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
 import cz.muni.fi.pa165.musiclib.utils.SongBuilder;
-import java.util.Arrays;
-import javax.inject.Inject;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
-import org.mockito.Matchers;
-import static org.mockito.Matchers.any;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.inject.Inject;
+import java.util.Arrays;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
 /**
  *
- * @author zdank
- * @version 26/11/2015
+ * @author Zuzana Dankovcikova
+ * @version 15/11/26
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class AlbumFacadeTest extends AbstractTestNGSpringContextTests {

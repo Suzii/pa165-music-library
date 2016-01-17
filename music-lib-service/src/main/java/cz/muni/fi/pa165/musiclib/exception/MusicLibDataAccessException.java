@@ -3,8 +3,8 @@ package cz.muni.fi.pa165.musiclib.exception;
 import org.springframework.dao.DataAccessException;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 11/25/15
+ * @author Martin Stefanko
+ * @version 15/11/25
  */
 public class MusicLibDataAccessException extends DataAccessException {
 

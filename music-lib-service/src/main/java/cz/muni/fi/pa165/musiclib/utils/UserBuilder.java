@@ -1,10 +1,10 @@
 package cz.muni.fi.pa165.musiclib.utils;
 
-import cz.muni.fi.pa165.musiclib.entity.*;
+import cz.muni.fi.pa165.musiclib.entity.User;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 11/27/15
+ * @author Martin Stefanko
+ * @version 15/11/27
  */
 public class UserBuilder {
     private Long id;

@@ -5,15 +5,16 @@ import cz.muni.fi.pa165.musiclib.dao.SongDao;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
-import java.util.List;
+import org.springframework.stereotype.Service;
+
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 /**
- *
- * @author milan
+ * @author Milan Seman
+ * @version 15/11/17
  */
 @Service
 public class MusicianServiceImpl implements MusicianService {

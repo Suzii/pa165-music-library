@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.config.ServiceConfiguration;
 import cz.muni.fi.pa165.musiclib.dto.GenreDTO;
-import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingServiceImpl;
@@ -20,7 +19,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.inject.Inject;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -34,8 +32,8 @@ import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertNotNull;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 11/27/15
+ * @author Martin Stefanko
+ * @version 15/11/27
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class GenreFacadeTest extends AbstractTestNGSpringContextTests {

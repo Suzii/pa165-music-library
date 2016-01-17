@@ -10,12 +10,11 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import java.util.Collection;
 import java.util.List;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 11/21/15
+ * @author Martin Stefanko
+ * @version 15/11/21
  */
 @Service
 @Transactional
