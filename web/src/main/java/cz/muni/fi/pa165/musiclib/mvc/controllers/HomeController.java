@@ -48,11 +48,13 @@ public class HomeController  extends BaseController{
 
         List<SongDTO> songs = songFacade.findAll();
         Collections.shuffle(songs);
-        model.addAttribute("songs", songs.subList(0, 10));
+        int toIndexSongs = Math.min(10, songs.size());
+        model.addAttribute("songs", songs.subList(0, toIndexSongs));
         
         List<MusicianDTO> musicians = musicianFacade.getAllMusicians();
         Collections.shuffle(musicians);
-        model.addAttribute("musicians", musicians.subList(0, 10));
+        int toIndexMusicians = Math.min(10, musicians.size());
+        model.addAttribute("musicians", musicians.subList(0, toIndexMusicians));
         
         return "home/index";
     }

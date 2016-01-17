@@ -38,7 +38,7 @@
                     <dt><fmt:message key="albums.dateOfRelease"/></dt>
                     <dd><fmt:formatDate value="${album.dateOfRelease}" type="date" dateStyle="medium"/></dd>
 
-                    <dt>Major genre</dt>
+                    <dt><fmt:message key="albums.major_genre"/></dt>
                     <dd>${majorGenre.genre.title} (<fmt:formatNumber value="${majorGenre.percentage}" type="PERCENT" />)</dd>
                 </div>
 
