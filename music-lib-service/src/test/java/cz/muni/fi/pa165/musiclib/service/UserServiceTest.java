@@ -31,8 +31,8 @@ import static org.testng.Assert.assertNull;
 import static org.testng.Assert.assertTrue;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 11/27/15
+ * @author Martin Stefanko
+ * @version 15/11/27
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class UserServiceTest {

@@ -8,6 +8,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * Allowing all headers for XSS access
  *
  * @author David Boron
+ * @version 15/12/15
  */
 public class AllowOriginInterceptor extends HandlerInterceptorAdapter {
 

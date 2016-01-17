@@ -1,22 +1,22 @@
  package cz.muni.fi.pa165.musiclib.service;
 
-import cz.muni.fi.pa165.musiclib.dao.UserDao;
-import cz.muni.fi.pa165.musiclib.entity.User;
-import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
+ import cz.muni.fi.pa165.musiclib.dao.UserDao;
+ import cz.muni.fi.pa165.musiclib.entity.User;
+ import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
+ import org.springframework.stereotype.Service;
 
-import javax.crypto.SecretKeyFactory;
-import javax.crypto.spec.PBEKeySpec;
-import javax.inject.Inject;
-import javax.persistence.EntityExistsException;
-import javax.persistence.TransactionRequiredException;
-import java.math.BigInteger;
-import java.security.SecureRandom;
-import java.util.List;
-import org.springframework.stereotype.Service;
+ import javax.crypto.SecretKeyFactory;
+ import javax.crypto.spec.PBEKeySpec;
+ import javax.inject.Inject;
+ import javax.persistence.EntityExistsException;
+ import javax.persistence.TransactionRequiredException;
+ import java.math.BigInteger;
+ import java.security.SecureRandom;
+ import java.util.List;
 
 /**
- * @author xstefank (422697@mail.muni.cz)
- * @version 11/22/15
+ * @author Martin Stefanko
+ * @version 15/11/22
  */
  @Service
 public class UserServiceImpl implements UserService {

@@ -3,14 +3,15 @@ package cz.muni.fi.pa165.musiclib.utils;
 import cz.muni.fi.pa165.musiclib.entity.Musician;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.enums.Sex;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 /**
- *
  * @author Zuzana Dankovcikova
+ * @version 15/10/28
  */
 public class MusicianBuilder {
 

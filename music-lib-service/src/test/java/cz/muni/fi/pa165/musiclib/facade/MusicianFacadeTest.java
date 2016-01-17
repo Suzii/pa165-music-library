@@ -8,29 +8,31 @@ import cz.muni.fi.pa165.musiclib.service.BeanMappingService;
 import cz.muni.fi.pa165.musiclib.service.BeanMappingServiceImpl;
 import cz.muni.fi.pa165.musiclib.service.MusicianService;
 import cz.muni.fi.pa165.musiclib.utils.MusicianBuilder;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import javax.inject.Inject;
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
-import static org.mockito.Matchers.any;
 import org.mockito.Mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertNotNull;
+
 /**
- *
  * @author David Boron
+ * @version 15/11/29
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class MusicianFacadeTest extends AbstractTestNGSpringContextTests {

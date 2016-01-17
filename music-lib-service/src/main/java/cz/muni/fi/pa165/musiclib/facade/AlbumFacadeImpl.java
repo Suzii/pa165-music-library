@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.musiclib.facade;
 
 import cz.muni.fi.pa165.musiclib.dto.AlbumChangeAlbumArtDTO;
 import cz.muni.fi.pa165.musiclib.dto.AlbumDTO;
-import cz.muni.fi.pa165.musiclib.dto.AlbumNewTitleDTO;
 import cz.muni.fi.pa165.musiclib.dto.MajorAlbumGenreDTO;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Song;
@@ -19,7 +18,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 /**
- * @author Martin Stefanko (mstefank@redhat.com)
+ * @author Martin Stefanko
+ * @version 15/11/25
  */
 @Service
 @Transactional

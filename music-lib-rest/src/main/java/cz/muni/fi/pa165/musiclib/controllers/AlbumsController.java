@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- *
  * @author David Boron
+ * @version 15/12/12
  */
 @RestController
 @RequestMapping(ApiUris.ROOT_URI_ALBUMS)

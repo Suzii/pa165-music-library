@@ -25,6 +25,10 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+/**
+ * @author Milan Seman
+ * @version 15/12/12
+ */
 @EnableWebMvc
 @Configuration
 @Import({ServiceConfiguration.class, MusicLibSampleDataConfig.class})

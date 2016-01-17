@@ -1,26 +1,24 @@
 package cz.muni.fi.pa165.musiclib.service;
 
 import cz.muni.fi.pa165.musiclib.dao.AlbumDao;
-import cz.muni.fi.pa165.musiclib.dao.SongDao;
 import cz.muni.fi.pa165.musiclib.entity.Album;
 import cz.muni.fi.pa165.musiclib.entity.Genre;
 import cz.muni.fi.pa165.musiclib.entity.Song;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibDataAccessException;
 import cz.muni.fi.pa165.musiclib.exception.MusicLibServiceException;
+import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.IllegalFormatCodePointException;
-import java.util.List;
-import java.util.Map;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
-import org.springframework.stereotype.Service;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
- * @author Martin Stefanko (mstefank@redhat.com)
+ * @author Martin Stefanko
+ * @version 15/21/11
  */
 @Service
 public class AlbumServiceImpl implements AlbumService {

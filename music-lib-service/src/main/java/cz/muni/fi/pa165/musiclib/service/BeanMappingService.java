@@ -1,15 +1,15 @@
 package cz.muni.fi.pa165.musiclib.service;
 
+import org.dozer.Mapper;
+
 import java.util.Collection;
 import java.util.List;
-import org.dozer.Mapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Service for mapping beans.
  * 
- * @author zdank
- * @version 16/11/2015
+ * @author Zuzana Dankovcikova
+ * @version 15/11/16
  */
 public interface BeanMappingService {
     

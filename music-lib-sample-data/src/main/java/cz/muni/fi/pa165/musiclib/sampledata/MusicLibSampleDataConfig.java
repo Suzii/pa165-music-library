@@ -14,8 +14,8 @@ import java.io.IOException;
 /**
  * Adds the SampleDataLoadingFacade bean to the ServiceConfiguration.
  *
- * @author xstefank (422697@mail.muni.cz)
- * @version 12/5/15
+ * @author Martin Stefanko
+ * @version 15/12/5
  */
 @Configuration
 @Import(ServiceConfiguration.class)
