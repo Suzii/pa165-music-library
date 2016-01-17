@@ -36,8 +36,8 @@ import java.util.Map;
 /**
  * Creates and populate the database with sample data.
  *
- * @author xstefank (422697@mail.muni.cz)
- * @version 12/5/15
+ * @author Martin Stefnako
+ * @version 15/12/5
  */
 @Component
 @Transactional
